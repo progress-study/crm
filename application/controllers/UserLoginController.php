@@ -6,4 +6,25 @@ class UserLoginController extends CI_Controller {
 	{
 		$this->load->view('userlogin/index');
 	}
+
+	public function logintypical ($username, $password) {
+
+	}
+
+	public function logingoogle () {
+
+	}
+
+	public function signuptypical () {
+
+	}
+
+	public function signupgoogle () {
+
+	}
+
+	public function signout () {
+		
+	}
+
 }
