@@ -5,7 +5,11 @@ $route['default_controller'] = 'userlogincontroller';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
+// Page routes
 $route['dashboard'] = 'dashboardcontroller/index';
 $route['customerinfo'] = 'customerinfocontroller/index';
 $route['payments'] = 'paymentscontroller/index';
 $route['requireddocuments'] = 'requireddocumentscontroller/index';
+
+// Userlogin routes
+$route['logintypical'] = 'userlogincontroller/logintypical';
