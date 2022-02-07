@@ -75,6 +75,10 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
+	//'hostname' => 'localhost',
+	//'username' => 'e6524oh3xrz6',
+	//'password' => '18>=!kM{f',
+	//'database' => 'progress_study_crm',
 	'hostname' => 'localhost',
 	'username' => 'root',
 	'password' => '',
@@ -90,7 +94,7 @@ $db['default'] = array(
 	'swap_pre' => '',
 	'encrypt' => FALSE,
 	'compress' => FALSE,
-	'stricton' => FALSE,
+	'stricton' => TRUE,
 	'failover' => array(),
 	'save_queries' => TRUE
 );
