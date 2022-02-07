@@ -233,44 +233,41 @@
         <div class="col-12">
     
           <div class="card">
-            <div class="card-header">
-              <h3 class="card-title"><a href="newpayment">Add New <?php echo $title; ?></a></h3>
-            </div>
             <!-- /.card-header -->
             <div class="card-body">
-              <table id="example1" class="table table-bordered table-striped">
-                <thead>
-                <tr>
-                  <th>Payment Type</th>
-                  <th>Reference Number</th>
-                  <th>Payee Name</th>
-                  <th>Date of Payment</th>
-                  <th>Processed by</th>
-                </tr>
-                </thead>
-                <tbody>
-                <?php
-                foreach ($payments as $row) {
-                  echo "<tr>
-                    <td>".$row->paymenttype."</td>
-                    <td>".$row->referencenumber."</td>
-                    <td>".$row->client_surname.", ".$row->client_firstname."</td>
-                    <td>".$row->paymentdate."</td>
-                    <td>".$row->officer_name."</td>
-                  </tr>";
-                }
-                ?>
-                </tbody>
-                <tfoot>
-                <tr>
-                  <th>Payment Type</th>
-                  <th>Reference Number</th>
-                  <th>Payee Name</th>
-                  <th>Date of Payment</th>
-                  <th>Processed by</th>
-                </tr>
-                </tfoot>
-              </table>
+              
+              <form action="savepayment" method="post">
+                <div class="mb-3">
+                  <label for="amount" class="form-label">Payment Type</label>
+                  <select class="form-control" name="paymenttype">
+                    <option value="PO">PO</option>
+                  </select>
+                </div>
+                <div class="mb-3">
+                  <label for="amount" class="form-label">Customer</label>
+                  <select class="form-control" name="payee">
+                    <?php
+                    foreach ($clients as $row) {
+                      echo "<option value='".$row->client_id."'>".$row->client_surname.", ".$row->client_firstname." ".$row->client_middlename."</option>";
+                    }
+                    ?>
+                  </select>
+                </div>
+                <div class="mb-3">
+                  <label for="amount" class="form-label">Reference Number</label>
+                  <input type="text" class="form-control" name="referencenumber">
+                </div>
+                <div class="mb-3">
+                  <label for="amount" class="form-label">Amount</label>
+                  <input type="number" class="form-control" name="amount">
+                </div>
+                <div class="mb-3">
+                  <label for="paymentdate" class="form-label">Payment Date</label>
+                  <input type="date" class="form-control" name="paymentdate">
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </form>
+
             </div>
             <!-- /.card-body -->
           </div>

@@ -13,3 +13,7 @@ $route['requireddocuments'] = 'requireddocumentscontroller/index';
 
 // Userlogin routes
 $route['logintypical'] = 'userlogincontroller/logintypical';
+
+// Payment routes
+$route['newpayment'] = 'paymentscontroller/newpayment';
+$route['savepayment'] = 'paymentscontroller/savepayment';
