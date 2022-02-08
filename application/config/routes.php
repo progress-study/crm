@@ -17,3 +17,4 @@ $route['logintypical'] = 'userlogincontroller/logintypical';
 // Payment routes
 $route['newpayment'] = 'paymentscontroller/newpayment';
 $route['savepayment'] = 'paymentscontroller/savepayment';
+$route['archivepayment/(:any)'] = 'paymentscontroller/archivepayment/$1';

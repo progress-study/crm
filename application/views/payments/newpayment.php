@@ -18,6 +18,17 @@
   <link rel="stylesheet" href="<?php echo $asset_url; ?>dist/css/adminlte.min.css">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <style type="text/css">
+    .select2-container .select2-selection--single{
+        height:34px !important;
+    }
+    .select2-container--default .select2-selection--single{
+             border: 1px solid #ccc !important; 
+         border-radius: 0px !important; 
+    }
+  </style>
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -240,12 +251,16 @@
                 <div class="mb-3">
                   <label for="amount" class="form-label">Payment Type</label>
                   <select class="form-control" name="paymenttype">
-                    <option value="PO">PO</option>
+                    <?php
+                    foreach ($mastersetting as $row2) {
+                      echo "<option value='".$row2->id."'>".$row2->identity."</option>";
+                    }
+                    ?>
                   </select>
                 </div>
                 <div class="mb-3">
-                  <label for="amount" class="form-label">Customer</label>
-                  <select class="form-control" name="payee">
+                  <label for="payee" class="form-label">Customer</label>
+                  <select class="form-control select2" name="payee">
                     <?php
                     foreach ($clients as $row) {
                       echo "<option value='".$row->client_id."'>".$row->client_surname.", ".$row->client_firstname." ".$row->client_middlename."</option>";
@@ -310,6 +325,11 @@
 <!-- AdminLTE for demo purposes -->
 <script src="<?php echo $asset_url; ?>dist/js/demo.js"></script>
 <!-- page script -->
+
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+
 <script>
   $(function () {
     $("#example1").DataTable({
@@ -326,6 +346,9 @@
       "responsive": true,
     });
   });
+
+  $('.select2').select2();
 </script>
+
 </body>
 </html>

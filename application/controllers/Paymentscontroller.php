@@ -11,10 +11,17 @@ class PaymentsController extends CI_Controller {
 
 	public function index()
 	{
+		$officer_id = $this->session->userdata('officer_id');
 
-		$sql = "SELECT paymentid,paymenttype,referencenumber,c.client_surname,c.client_firstname,paymentdate,o.officer_name from payments p inner join client c on p.payee = c.client_id inner join officer o on o.officer_id = p.processedby";
-        $query = $this->db->query($sql);
-        $result = $query->result();
+		if($this->session->userdata('officer_role') == 'regional manager' || $this->session->userdata('officer_role') == 'manager') {
+			$sql = "SELECT paymentid,m.identity,referencenumber,c.client_surname,c.client_firstname,paymentdate,o.officer_name from payments p inner join client c on p.payee = c.client_id inner join officer o on o.officer_id = p.processedby inner join mastersetting m on p.paymenttype = m.id where p.barchived = 0";
+	        $query = $this->db->query($sql);
+	        $result = $query->result();
+		} else {
+			$sql = "SELECT paymentid,m.identity,referencenumber,c.client_surname,c.client_firstname,paymentdate,o.officer_name from payments p inner join client c on p.payee = c.client_id inner join officer o on o.officer_id = p.processedby inner join mastersetting m on p.paymenttype = m.id where p.barchived = 0 and p.processedby = $officer_id";
+	        $query = $this->db->query($sql);
+	        $result = $query->result();
+		}
 
         $asset_url = base_url()."assets/";
 		$data['title'] = "Payments";
@@ -38,7 +45,12 @@ class PaymentsController extends CI_Controller {
         $query = $this->db->query($sql);
         $result = $query->result();
 
+        $sql2 = "SELECT id,identity FROM mastersetting";
+        $query2 = $this->db->query($sql2);
+        $result2 = $query2->result();
+
         $data['clients'] = $result;
+        $data['mastersetting'] = $result2;
 		$asset_url = base_url()."assets/";
 		$data['title'] = "Payments";
 		$data['asset_url'] = $asset_url;
@@ -57,6 +69,13 @@ class PaymentsController extends CI_Controller {
 				);
 		$this->db->insert('payments', $data);
 		redirect('payments');
+	}
+
+	public function archivepayment($id) {
+		$this->db->set('barchived', 1);
+        $this->db->where('paymentid', $id);
+        $this->db->update('payments');
+        redirect('payments');
 	}
 
 }

@@ -246,17 +246,19 @@
                   <th>Payee Name</th>
                   <th>Date of Payment</th>
                   <th>Processed by</th>
+                  <th></th>
                 </tr>
                 </thead>
                 <tbody>
                 <?php
                 foreach ($payments as $row) {
                   echo "<tr>
-                    <td>".$row->paymenttype."</td>
+                    <td>".$row->identity."</td>
                     <td>".$row->referencenumber."</td>
                     <td>".$row->client_surname.", ".$row->client_firstname."</td>
                     <td>".$row->paymentdate."</td>
                     <td>".$row->officer_name."</td>
+                    <td><a href='archivepayment/".$row->paymentid."' class='btn btn-danger btn-xs'>Archive</a></td>
                   </tr>";
                 }
                 ?>
@@ -268,6 +270,7 @@
                   <th>Payee Name</th>
                   <th>Date of Payment</th>
                   <th>Processed by</th>
+                  <th></th>
                 </tr>
                 </tfoot>
               </table>
