@@ -200,6 +200,22 @@
               </p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="schools" class="nav-link<?php if($title == 'Schools and Programs'){ echo ' active';} ?>">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Schools and Programs
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="applications" class="nav-link<?php if($title == 'Applications'){ echo ' active';} ?>">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Applications
+              </p>
+            </a>
+          </li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

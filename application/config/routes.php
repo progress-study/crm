@@ -18,3 +18,10 @@ $route['logintypical'] = 'userlogincontroller/logintypical';
 $route['newpayment'] = 'paymentscontroller/newpayment';
 $route['savepayment'] = 'paymentscontroller/savepayment';
 $route['archivepayment/(:any)'] = 'paymentscontroller/archivepayment/$1';
+
+// School and Program routes
+$route['schools'] = 'schoolsprogramscontroller/schools';
+$route['programs'] = 'schoolsprogramscontroller/programs';
+
+// Applications routes
+$route['applications'] = 'applicationscontroller/index';

@@ -190,7 +190,7 @@
             <a href="customerinfo" class="nav-link<?php if($title == 'Client Information'){ echo ' active';} ?>">
               <i class="nav-icon fas fa-th"></i>
               <p>
-                Client Information
+                Students
               </p>
             </a>
           </li>
@@ -207,6 +207,22 @@
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Payments
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="schools" class="nav-link<?php if($title == 'Schools and Programs'){ echo ' active';} ?>">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Schools and Programs
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="applications" class="nav-link<?php if($title == 'Applications'){ echo ' active';} ?>">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Applications
               </p>
             </a>
           </li>

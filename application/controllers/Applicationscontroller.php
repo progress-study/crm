@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Customerinfocontroller extends CI_Controller {
+class Applicationscontroller extends CI_Controller {
 	public function __construct() {
 		parent::__construct();
 		$this->load->database();
@@ -12,19 +12,17 @@ class Customerinfocontroller extends CI_Controller {
 	public function index()
 	{
 
-		$sql = "SELECT client_surname,client_firstname,client_middlename,'' as processingofficer, '' as datecreated, '' as inquiry, '' as documents, '' as admissions, '' as school, '' as course, '' as location, 'Kim' as gteofficer, '' as gtestatus FROM client";
+		$sql = "SELECT * FROM applications a inner join schools s on a.schoolid = s.id inner join schoolprograms sp on a.schoolprogramid = sp.id inner join mastersetting m on m.id = a.paymentstatus inner join client c on c.client_id = a.clientid";
         $query = $this->db->query($sql);
         $result = $query->result();
 
         $asset_url = base_url()."assets/";
-		$data['title'] = "Client Information";
+		$data['title'] = "Applications";
 		$data['asset_url'] = $asset_url;
-		$data['clients'] = $result;
+		$data['applications'] = $result;
 
 		if(isset($this->session->officer_name)) {
-			$this->load->view('customerinfo/header', $data);
-			$this->load->view('customerinfo/index', $data);
-			$this->load->view('customerinfo/footer', $data);
+			$this->load->view('applications/index', $data);
 		} else {
 			echo "<script>alert('Please login first to CRM!')</script>";
 			$asset_url = base_url()."assets/";

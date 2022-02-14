@@ -18,17 +18,6 @@
   <link rel="stylesheet" href="<?php echo $asset_url; ?>dist/css/adminlte.min.css">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
-  <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-  <style type="text/css">
-    .select2-container .select2-selection--single{
-        height:34px !important;
-    }
-    .select2-container--default .select2-selection--single{
-             border: 1px solid #ccc !important; 
-         border-radius: 0px !important; 
-    }
-  </style>
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -213,7 +202,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="schoolsprograms" class="nav-link<?php if($title == 'Schools and Programs'){ echo ' active';} ?>">
+            <a href="schools" class="nav-link<?php if($title == 'Schools and Programs'){ echo ' active';} ?>">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Schools and Programs
@@ -260,45 +249,49 @@
         <div class="col-12">
     
           <div class="card">
+            <div class="card-header">
+              <h3 class="card-title"><a href="schools">Schools</a></h3>
+            </div>
             <!-- /.card-header -->
             <div class="card-body">
-              
-              <form action="savepayment" method="post">
-                <div class="mb-3">
-                  <label for="amount" class="form-label">Payment Type</label>
-                  <select class="form-control" name="paymenttype">
-                    <?php
-                    foreach ($mastersetting as $row2) {
-                      echo "<option value='".$row2->id."'>".$row2->identity."</option>";
-                    }
-                    ?>
-                  </select>
-                </div>
-                <div class="mb-3">
-                  <label for="payee" class="form-label">Customer</label>
-                  <select class="form-control select2" name="payee">
-                    <?php
-                    foreach ($clients as $row) {
-                      echo "<option value='".$row->client_id."'>".$row->client_surname.", ".$row->client_firstname." ".$row->client_middlename."</option>";
-                    }
-                    ?>
-                  </select>
-                </div>
-                <div class="mb-3">
-                  <label for="amount" class="form-label">Reference Number</label>
-                  <input type="text" class="form-control" name="referencenumber">
-                </div>
-                <div class="mb-3">
-                  <label for="amount" class="form-label">Amount</label>
-                  <input type="number" class="form-control" name="amount">
-                </div>
-                <div class="mb-3">
-                  <label for="paymentdate" class="form-label">Payment Date</label>
-                  <input type="date" class="form-control" name="paymentdate">
-                </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
-              </form>
-
+              <table id="example1" class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                  <th>Program</th>
+                  <th>School</th>
+                  <th>Program Type</th>
+                  <th>Application Fee</th>
+                  <th>Date Start and End</th>
+                  <th>Commission</th>
+                  <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php
+                foreach ($programs as $row) {
+                  echo "<tr>
+                    <td>".$row->program."</td>
+                    <td><img class='direct-chat-img' src='".$asset_url."images/".$row->schoolphoto."'>&nbsp&nbsp".$row->name."</td>
+                    <td>".$row->programtype."</td>
+                    <td>".$row->applicationfee."</td>
+                    <td>".$row->datestart." - ".$row->dateend."</td>
+                    <td>".$row->commission." on net tuition</td>
+                  </tr>";
+                }
+                ?>
+                </tbody>
+                <tfoot>
+                <tr>
+                  <th>Program</th>
+                  <th>School</th>
+                  <th>Program Type</th>
+                  <th>Application Fee</th>
+                  <th>Date Start and End</th>
+                  <th>Commission</th>
+                  <th></th>
+                </tr>
+                </tfoot>
+              </table>
             </div>
             <!-- /.card-body -->
           </div>
@@ -341,11 +334,6 @@
 <!-- AdminLTE for demo purposes -->
 <script src="<?php echo $asset_url; ?>dist/js/demo.js"></script>
 <!-- page script -->
-
-  <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
-
 <script>
   $(function () {
     $("#example1").DataTable({
@@ -362,9 +350,6 @@
       "responsive": true,
     });
   });
-
-  $('.select2').select2();
 </script>
-
 </body>
 </html>
