@@ -6,7 +6,7 @@
   <title><?php echo $title; ?></title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
+  <link rel="icon" type="image/png" href="<?php echo $asset_url; ?>images/logo.png"/>
   <!-- Font Awesome -->
   <link rel="stylesheet" href="<?php echo $asset_url; ?>plugins/fontawesome-free/css/all.min.css">
   <!-- Ionicons -->
@@ -258,23 +258,23 @@
                 <thead>
                 <tr>
                   <th>School</th>
-                  <th>Location</th>
-                  <th>Type</th>
-                  <th>Total Students</th>
-                  <th>International Students</th>
-                  <th>Year Founded</th>
+                  <th>Marketing Contact Name</th>
+                  <th>Admin Contact Name</th>
+                  <th>Finance Contact Name</th>
+                  <th>Mailing Address</th>
+                  <th>Actions</th>
                 </tr>
                 </thead>
                 <tbody>
                 <?php
                 foreach ($schools as $row) {
                   echo "<tr>
-                    <td><img class='direct-chat-img' src='".$asset_url."images/".$row->schoolphoto."'>&nbsp&nbsp".$row->name."</td>
-                    <td>".$row->location."</td>
-                    <td>".$row->type."</td>
-                    <td>".$row->noofstudents."</td>
-                    <td>".$row->noofintstudent."</td>
-                    <td>".$row->yearfounded."</td>
+                    <td>".$row->provider_name."</td>
+                    <td>".$row->provider_marketing_contact_name."</td>
+                    <td>".$row->provider_admin_contact_name."</td>
+                    <td>".$row->provider_finance_contact_name."</td>
+                    <td>".$row->provider_mailing_address."</td>
+                    <td><a href='#' class='btn btn-primary btn-xs'>Edit</a></td>
                   </tr>";
                 }
                 ?>
@@ -282,11 +282,11 @@
                 <tfoot>
                 <tr>
                   <th>School</th>
-                  <th>Location</th>
-                  <th>Type</th>
-                  <th>Total Students</th>
-                  <th>International Students</th>
-                  <th>Year Founded</th>
+                  <th>Marketing Contact Name</th>
+                  <th>Admin Contact Name</th>
+                  <th>Finance Contact Name</th>
+                  <th>Mailing Address</th>
+                  <th>Actions</th>
                 </tr>
                 </tfoot>
               </table>

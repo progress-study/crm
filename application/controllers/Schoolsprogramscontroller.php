@@ -11,7 +11,7 @@ class Schoolsprogramscontroller extends CI_Controller {
 
 	public function schools()
 	{
-		$sql = "SELECT * FROM schools";
+		$sql = "SELECT * FROM education_provider";
         $query = $this->db->query($sql);
         $result = $query->result();
 

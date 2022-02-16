@@ -25,3 +25,8 @@ $route['programs'] = 'schoolsprogramscontroller/programs';
 
 // Applications routes
 $route['applications'] = 'applicationscontroller/index';
+
+// Forms routes
+$route['clientform'] = 'formscontroller/clientform';
+$route['saveclientform'] = 'formscontroller/saveclientform';
+$route['success'] = 'formscontroller/success';

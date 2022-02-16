@@ -6,7 +6,7 @@
   <title><?php echo $title; ?></title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
+  <link rel="icon" type="image/png" href="<?php echo $asset_url; ?>images/logo.png"/>
   <!-- Font Awesome -->
   <link rel="stylesheet" href="<?php echo $asset_url; ?>plugins/fontawesome-free/css/all.min.css">
   <!-- Ionicons -->

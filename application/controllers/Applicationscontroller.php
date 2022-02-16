@@ -12,7 +12,7 @@ class Applicationscontroller extends CI_Controller {
 	public function index()
 	{
 
-		$sql = "SELECT * FROM applications a inner join schools s on a.schoolid = s.id inner join schoolprograms sp on a.schoolprogramid = sp.id inner join mastersetting m on m.id = a.paymentstatus inner join client c on c.client_id = a.clientid";
+		$sql = "SELECT * FROM student_application sa inner join education_provider s on sa.provider_id = s.provider_id inner join client c on c.client_id = sa.client_id";
         $query = $this->db->query($sql);
         $result = $query->result();
 

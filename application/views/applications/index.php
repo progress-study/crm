@@ -6,7 +6,7 @@
   <title><?php echo $title; ?></title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
+  <link rel="icon" type="image/png" href="<?php echo $asset_url; ?>images/logo.png"/>
   <!-- Font Awesome -->
   <link rel="stylesheet" href="<?php echo $asset_url; ?>plugins/fontawesome-free/css/all.min.css">
   <!-- Ionicons -->
@@ -260,8 +260,8 @@
                   <th>Student</th>
                   <th>School</th>
                   <th>Program</th>
-                  <th>Date Added</th>
-                  <th>Payment Status</th>
+                  <th>Date Created</th>
+                  <th>Actions</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -269,10 +269,10 @@
                 foreach ($applications as $row) {
                   echo "<tr>
                     <td>".$row->client_surname.", ".$row->client_firstname."</td>
-                    <td><img class='direct-chat-img' src='".$asset_url."images/".$row->schoolphoto."'>&nbsp&nbsp".$row->name."</td>
-                    <td>".$row->program."</td>
-                    <td>".$row->dateadded."</td>
-                    <td>".$row->identity."</td>
+                    <td>".$row->provider_name."</td>
+                    <td>".$row->studentapp_course_name."</td>
+                    <td>".$row->studentapp_record_created_date."</td>
+                    <td><a href='#' class='btn btn-primary btn-xs'>Edit</a></td>
                   </tr>";
                 }
                 ?>
@@ -282,8 +282,8 @@
                   <th>Student</th>
                   <th>School</th>
                   <th>Program</th>
-                  <th>Date Added</th>
-                  <th>Payment Status</th>
+                  <th>Date Created</th>
+                  <th>Actions</th>
                 </tr>
                 </tfoot>
               </table>
