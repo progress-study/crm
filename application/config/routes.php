@@ -25,8 +25,16 @@ $route['programs'] = 'schoolsprogramscontroller/programs';
 
 // Applications routes
 $route['applications'] = 'applicationscontroller/index';
+$route['newapplication'] = 'applicationscontroller/newapplication';
+$route['getprogramfromschool/(:any)'] = 'applicationscontroller/getprogramfromschool/$1';
 
 // Forms routes
 $route['clientform'] = 'formscontroller/clientform';
 $route['saveclientform'] = 'formscontroller/saveclientform';
 $route['success'] = 'formscontroller/success';
+
+// Admin maintenance routes
+$route['adminmaintenance'] = 'adminmaintenancecontroller/index';
+
+// Scholarship routes
+$route['scholarships'] = 'scholarshipcontroller/index';

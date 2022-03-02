@@ -31,4 +31,40 @@ class Applicationscontroller extends CI_Controller {
 			$this->load->view('userlogin/index', $data);
 		}
 	}
+
+	public function newapplication() {
+		$asset_url = base_url()."assets/";
+		$data['title'] = "New Application";
+		$data['asset_url'] = $asset_url;
+
+		$sql3 = "SELECT * FROM client";
+	    $query3 = $this->db->query($sql3);
+	    $client = $query3->result();
+
+	    $sql3 = "SELECT * FROM education_provider";
+	    $query3 = $this->db->query($sql3);
+	    $schools = $query3->result();
+
+	    $data['client'] = $client;
+		$data['schools'] = $schools;
+
+		if(isset($this->session->officer_name)) {
+			$this->load->view('applications/newapplication', $data);
+		} else {
+			echo "<script>alert('Please login first to CRM!')</script>";
+			$asset_url = base_url()."assets/";
+			$data['title'] = "User Login";
+		    $data['asset_url'] = $asset_url;
+			$this->load->view('userlogin/index', $data);
+		}
+
+	}
+
+	public function getprogramfromschool($schoolid) {
+		$sql3 = "SELECT * FROM schoolprograms where schoolid = $schoolid";
+	    $query3 = $this->db->query($sql3);
+	    $program = $query3->result();
+	    echo json_encode($program);
+	}
+
 }

@@ -227,6 +227,22 @@
               </p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="adminmaintenance" class="nav-link<?php if($title == 'Admin Maintenance'){ echo ' active';} ?>">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Admin Maintenance
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="scholarships" class="nav-link<?php if($title == 'Scholarships'){ echo ' active';} ?>">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Scholarships
+              </p>
+            </a>
+          </li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

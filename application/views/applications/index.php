@@ -217,6 +217,22 @@
               </p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="adminmaintenance" class="nav-link<?php if($title == 'Admin Maintenance'){ echo ' active';} ?>">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Admin Maintenance
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="scholarships" class="nav-link<?php if($title == 'Scholarships'){ echo ' active';} ?>">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Scholarships
+              </p>
+            </a>
+          </li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
@@ -250,7 +266,7 @@
     
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title"><a href="programs">Add New Application</a></h3>
+              <h3 class="card-title"><a href="newapplication">Add New Application</a></h3>
             </div>
             <!-- /.card-header -->
             <div class="card-body">

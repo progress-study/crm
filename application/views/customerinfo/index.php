@@ -23,25 +23,20 @@
         <div class="col-12">
     
           <div class="card">
-            <div class="card-header">
-              <h3 class="card-title"><a href="#">Add New <?php echo $title; ?></a></h3>
-            </div>
             <!-- /.card-header -->
             <div class="card-body">
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
                 <tr>
                   <th>Name</th>
-                  <th>Processing Officer</th>
-                  <th>Date Created</th>
-                  <th>Inquiry</th>
-                  <th>Documents</th>
-                  <th>Admissions</th>
-                  <th>School</th>
-                  <th>Course</th>
-                  <th>Location</th>
-                  <th>GTE/Visa Processing Officer</th>
-                  <th>GTE/Visa Status</th>
+                  <th>Email</th>
+                  <th>Mobile Number</th>
+                  <th>Phone Number</th>
+                  <th>Qualifications</th>
+                  <th>Address</th>
+                  <th>Suburb</th>
+                  <th>State</th>
+                  <th></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -50,16 +45,14 @@
                 foreach ($clients as $row) {
                   echo "<tr>
                     <td>".$row->client_surname.", ".$row->client_firstname." ".$row->client_middlename."</td>
-                    <td>".$row->processingofficer."</td>
-                    <td>".$row->datecreated."</td>
-                    <td>".$row->inquiry."</td>
-                    <td>".$row->documents."</td>
-                    <td>".$row->admissions."</td>
-                    <td>".$row->school."</td>
-                    <td>".$row->course."</td>
-                    <td>".$row->location."</td>
-                    <td>".$row->gteofficer."</td>
-                    <td>".$row->gtestatus."</td>
+                    <td>".$row->client_email."</td>
+                    <td>".$row->client_mobileno."</td>
+                    <td>".$row->client_phoneno."</td>
+                    <td>".$row->client_qualifications."</td>
+                    <td>".$row->client_address."</td>
+                    <td>".$row->client_suburb."</td>
+                    <td>".$row->client_state."</td>
+                    <td></td>
                   </tr>";
                 }
 
@@ -69,16 +62,13 @@
                 <tfoot>
                 <tr>
                   <th>Name</th>
-                  <th>Processing Officer</th>
-                  <th>Date Created</th>
-                  <th>Inquiry</th>
-                  <th>Documents</th>
-                  <th>Admissions</th>
-                  <th>School</th>
-                  <th>Course</th>
-                  <th>Location</th>
-                  <th>GTE/Visa Processing Officer</th>
-                  <th>GTE/Visa Status</th>
+                  <th>Email</th>
+                  <th>Mobile Number</th>
+                  <th>Phone Number</th>
+                  <th>Qualifications</th>
+                  <th>Address</th>
+                  <th>Suburb</th>
+                  <th>State</th>
                 </tr>
                 </tfoot>
               </table>

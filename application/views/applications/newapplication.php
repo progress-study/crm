@@ -18,6 +18,25 @@
   <link rel="stylesheet" href="<?php echo $asset_url; ?>dist/css/adminlte.min.css">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <style type="text/css">
+    .select2-container .select2-selection--single{
+        height:34px !important;
+    }
+    .select2-container--default .select2-selection--single{
+             border: 1px solid #ccc !important; 
+         border-radius: 0px !important; 
+    }
+
+    .select3-container .select3-selection--single{
+        height:34px !important;
+    }
+    .select3-container--default .select3-selection--single{
+             border: 1px solid #ccc !important; 
+         border-radius: 0px !important; 
+    }
+  </style>
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -160,7 +179,7 @@
           <img src="<?php echo $asset_url; ?>dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block"><?php echo $this->session->officer_name; ?></a>
+          <a href="#" class="d-block">Kim Ramirez</a>
         </div>
       </div>
 
@@ -202,7 +221,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="schools" class="nav-link<?php if($title == 'Schools and Programs'){ echo ' active';} ?>">
+            <a href="schoolsprograms" class="nav-link<?php if($title == 'Schools and Programs'){ echo ' active';} ?>">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Schools and Programs
@@ -239,3 +258,192 @@
     </div>
     <!-- /.sidebar -->
   </aside>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1><?php echo $title; ?></h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active"><?php echo $title; ?></li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="row">
+        <div class="col-12">
+    
+          <div class="card">
+            <!-- /.card-header -->
+            <div class="card-body">
+              
+              <form action="savepayment" method="post">
+                <div class="mb-3">
+                  <label for="amount" class="form-label">Payment Type</label>
+                  <select class="form-control" name="paymenttype">
+                    <?php
+                    foreach ($mastersetting as $row2) {
+                      echo "<option value='".$row2->id."'>".$row2->identity."</option>";
+                    }
+                    ?>
+                  </select>
+                </div>
+                <div class="mb-3">
+                  <label for="payee" class="form-label">Customer</label>
+                  <select class="form-control select2" name="school">
+                    <?php
+                    foreach ($client as $row) {
+                      echo "<option value='".$row->client_id."'>".$row->client_surname.", ".$row->client_firstname." ".$row->client_middlename."</option>";
+                    }
+                    ?>
+                  </select>
+                </div>
+                <div class="mb-3">
+                  <label for="client" class="form-label">School</label>
+                  <select class="form-control select2" name="client" id="provider" onchange="getPrograms()">
+                    <?php
+                    foreach ($schools as $row) {
+                      echo "<option value='".$row->provider_id."'>".$row->provider_name."</option>";
+                    }
+                    ?>
+                  </select>
+                </div>
+                <div class="mb-3">
+                  <label for="program" class="form-label">Program</label>
+                  <select class="form-control select2" name="program" id="programlist">
+                  </select>
+                </div>
+                <div class="mb-3">
+                  <label for="amount" class="form-label">Reference Number</label>
+                  <input type="text" class="form-control" name="referencenumber">
+                </div>
+                <div class="mb-3">
+                  <label for="amount" class="form-label">Amount</label>
+                  <input type="number" class="form-control" name="amount">
+                </div>
+                <div class="mb-3">
+                  <label for="paymentdate" class="form-label">Payment Date</label>
+                  <input type="date" class="form-control" name="paymentdate">
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </form>
+
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+  <footer class="main-footer">
+    <strong>@2022 Progress Study Consultancy CRM.</strong>
+    All rights reserved.
+    <div class="float-right d-none d-sm-inline-block">
+      <b>Version</b> 1.0.0
+    </div>
+  </footer>
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery -->
+<script src="<?php echo $asset_url; ?>plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="<?php echo $asset_url; ?>plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- DataTables -->
+<script src="<?php echo $asset_url; ?>plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="<?php echo $asset_url; ?>plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="<?php echo $asset_url; ?>plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="<?php echo $asset_url; ?>plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<!-- AdminLTE App -->
+<script src="<?php echo $asset_url; ?>dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="<?php echo $asset_url; ?>dist/js/demo.js"></script>
+<!-- page script -->
+
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+
+<script>
+  $(function () {
+    $("#example1").DataTable({
+      "responsive": true,
+      "autoWidth": false,
+    });
+    $('#example2').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false,
+      "responsive": true,
+    });
+  });
+
+  $('.select2').select2();
+
+  initialPrograms();
+  function initialPrograms() {
+    $("#programlist").empty();
+    $.ajax({
+          type: "GET",
+          url: "getprogramfromschool/1",
+          success: function(data) {
+              var obj = JSON.parse(data);
+              //alert(obj[0].program);
+              for(var i = 0; i < obj.length; i++) {
+                $("#programlist").append("<option value=" + obj[i].id + ">" + obj[i].program + "</option>");
+              }
+          },
+          error: function(error) {
+            alert("Error!");
+          }
+      });
+  }
+
+  function getPrograms() {
+    var id = document.getElementById("provider").value;
+    $("#programlist").empty();
+    $.ajax({
+          type: "GET",
+          url: "getprogramfromschool/" + id,
+          success: function(data) {
+              var obj = JSON.parse(data);
+              //alert(obj[0].program);
+              for(var i = 0; i < obj.length; i++) {
+                $("#programlist").append("<option value=" + obj[i].id + ">" + obj[i].program + "</option>");
+              }
+          },
+          error: function(error) {
+            alert("Error!");
+          }
+      });
+  }
+  
+
+</script>
+
+</body>
+</html>

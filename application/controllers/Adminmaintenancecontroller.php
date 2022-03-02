@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Customerinfocontroller extends CI_Controller {
+class Adminmaintenancecontroller extends CI_Controller {
 	public function __construct() {
 		parent::__construct();
 		$this->load->database();
@@ -11,20 +11,23 @@ class Customerinfocontroller extends CI_Controller {
 
 	public function index()
 	{
+		$sql1 = "SELECT * FROM region";
+	    $query1 = $this->db->query($sql1);
+	    $region = $query1->result();
 
-		$sql = "SELECT * FROM client";
-        $query = $this->db->query($sql);
-        $result = $query->result();
+	    $sql2 = "SELECT * FROM officer";
+	    $query2 = $this->db->query($sql2);
+	    $officer = $query2->result();
 
         $asset_url = base_url()."assets/";
-		$data['title'] = "Client Information";
+		$data['title'] = "Admin Maintenance";
 		$data['asset_url'] = $asset_url;
-		$data['clients'] = $result;
+		
+		$data['region'] = $region;
+		$data['officer'] = $officer;
 
 		if(isset($this->session->officer_name)) {
-			$this->load->view('customerinfo/header', $data);
-			$this->load->view('customerinfo/index', $data);
-			$this->load->view('customerinfo/footer', $data);
+			$this->load->view('maintenance/index', $data);
 		} else {
 			echo "<script>alert('Please login first to CRM!')</script>";
 			$asset_url = base_url()."assets/";
@@ -33,4 +36,5 @@ class Customerinfocontroller extends CI_Controller {
 			$this->load->view('userlogin/index', $data);
 		}
 	}
+
 }
