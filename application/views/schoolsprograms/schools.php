@@ -251,8 +251,9 @@
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item"><a href="dashboard">Home</a></li>
               <li class="breadcrumb-item active"><?php echo $title; ?></li>
+              <li class="breadcrumb-item active"><a href="programs">Programs</a></li>
             </ol>
           </div>
         </div>
@@ -266,7 +267,7 @@
     
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title"><a href="programs">Programs</a></h3>
+              <h3 class="card-title"><a href="newschool">Add New School</a></h3>
             </div>
             <!-- /.card-header -->
             <div class="card-body">

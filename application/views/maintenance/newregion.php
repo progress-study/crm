@@ -18,6 +18,25 @@
   <link rel="stylesheet" href="<?php echo $asset_url; ?>dist/css/adminlte.min.css">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <style type="text/css">
+    .select2-container .select2-selection--single{
+        height:34px !important;
+    }
+    .select2-container--default .select2-selection--single{
+             border: 1px solid #ccc !important; 
+         border-radius: 0px !important; 
+    }
+
+    .select3-container .select3-selection--single{
+        height:34px !important;
+    }
+    .select3-container--default .select3-selection--single{
+             border: 1px solid #ccc !important; 
+         border-radius: 0px !important; 
+    }
+  </style>
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -265,131 +284,25 @@
         <div class="col-12">
     
           <div class="card">
-            <div class="card-header">
-              <h3 class="card-title"><a href="newofficer">Add New Officer</a></h3>
-            </div>
             <!-- /.card-header -->
             <div class="card-body">
-              <table id="officer" class="table table-bordered table-striped">
-                <thead>
-                <tr>
-                  <th>Officer Name</th>
-                  <th>Email Address</th>
-                  <th>Role</th>
-                  <th>Status</th>
-                  <th>Last Login</th>
-                  <th></th>
-                </tr>
-                </thead>
-                <tbody>
-                <?php
-                foreach ($officer as $row) {
-                  echo "<tr>
-                    <td>".$row->officer_name."</td>
-                    <td>".$row->email."</td>
-                    <td>".$row->officer_role."</td>
-                    <td>".$row->officer_status."</td>
-                    <td>".$row->officer_last_logged_date."</td>
-                    <td><a href='editofficer/".$row->officer_id."' class='btn btn-primary btn-xs'>Edit</a></td>
-                  </tr>";
-                }
-                ?>
-                </tbody>
-                <tfoot>
-                <tr>
-                  <th>Officer Name</th>
-                  <th>Email Address</th>
-                  <th>Role</th>
-                  <th>Status</th>
-                  <th>Last Login</th>
-                  <th></th>
-                </tr>
-                </tfoot>
-              </table>
+              
+              <form action="saveregion" method="post">
+                <div class="mb-3">
+                  <label for="amount" class="form-label">Region Name</label>
+                  <textarea class="form-control" name="regionname" placeholder="Region Name" required></textarea>
+                </div>
+                <div class="mb-3">
+                  <label for="amount" class="form-label">Region Description</label>
+                  <textarea class="form-control" name="regiondescription" placeholder="Region Description" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </form>
+
             </div>
             <!-- /.card-body -->
           </div>
           <!-- /.card -->
-
-          <div class="card">
-            <div class="card-header">
-              <h3 class="card-title"><a href="newassignment">Add New Region Assignment</a></h3>
-            </div>
-            <!-- /.card-header -->
-            <div class="card-body">
-              <table id="assignment" class="table table-bordered table-striped">
-                <thead>
-                <tr>
-                  <th>Officer Name</th>
-                  <th>Region</th>
-                  <th>Date Created</th>
-                  <th></th>
-                </tr>
-                </thead>
-                <tbody>
-                <?php
-                foreach ($officerassignment as $row) {
-                  echo "<tr>
-                    <td>".$row->officer_name."</td>
-                    <td>".$row->region_name."</td>
-                    <td>".$row->datecreated."</td>
-                    <td><a href='editofficer/".$row->oaid."' class='btn btn-danger btn-xs'>Deactivate</a></td>
-                  </tr>";
-                }
-                ?>
-                </tbody>
-                <tfoot>
-                <tr>
-                  <th>Officer Name</th>
-                  <th>Region</th>
-                  <th>Date Created</th>
-                  <th></th>
-                </tr>
-                </tfoot>
-              </table>
-            </div>
-            <!-- /.card-body -->
-          </div>
-          <!-- /.card -->
-
-          <div class="card">
-            <div class="card-header">
-              <h3 class="card-title"><a href="newregion">Add Region</a></h3>
-            </div>
-            <!-- /.card-header -->
-            <div class="card-body">
-              <table id="region" class="table table-bordered table-striped">
-                <thead>
-                <tr>
-                  <th>Region</th>
-                  <th>Region Description</th>
-                  <th></th>
-                </tr>
-                </thead>
-                <tbody>
-                <?php
-                foreach ($region as $row2) {
-                  echo "<tr>
-                    <td>".$row2->region_name."</td>
-                    <td>".$row2->region_description."</td>
-                    <td><a href='editregion/".$row2->region_id."' class='btn btn-primary btn-xs'>Edit</a></td>
-                  </tr>";
-                }
-                ?>
-                </tbody>
-                <tfoot>
-                <tr>
-                  <th>Region</th>
-                  <th>Region Description</th>
-                  <th></th>
-                </tr>
-                </tfoot>
-              </table>
-            </div>
-            <!-- /.card-body -->
-          </div>
-          <!-- /.card -->
-
         </div>
         <!-- /.col -->
       </div>
@@ -428,17 +341,14 @@
 <!-- AdminLTE for demo purposes -->
 <script src="<?php echo $asset_url; ?>dist/js/demo.js"></script>
 <!-- page script -->
+
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+
 <script>
   $(function () {
-    $("#officer").DataTable({
-      "responsive": true,
-      "autoWidth": false,
-    });
-    $("#assignment").DataTable({
-      "responsive": true,
-      "autoWidth": false,
-    });
-    $("#region").DataTable({
+    $("#example1").DataTable({
       "responsive": true,
       "autoWidth": false,
     });
@@ -452,6 +362,8 @@
       "responsive": true,
     });
   });
+
 </script>
+
 </body>
 </html>

@@ -213,7 +213,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="schoolsprograms" class="nav-link<?php if($title == 'Schools and Programs'){ echo ' active';} ?>">
+            <a href="schools" class="nav-link<?php if($title == 'Schools and Programs'){ echo ' active';} ?>">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Schools and Programs

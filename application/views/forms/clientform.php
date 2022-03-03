@@ -175,7 +175,7 @@ label.radio input:checked+span {
             <div class="row">
                 <div class="col-sm-12">
                     <div class="form-group">
-                        <!-- <label for="name">Name</label> --> <input class="form-control" type="text" name="noofchildren" placeholder="No. of Children"> </div>
+                        <!-- <label for="name">Name</label> --> <input class="form-control" type="number" name="noofchildren" placeholder="No. of Children"> </div>
                 </div>
             </div>
             <div class="row">
@@ -188,6 +188,25 @@ label.radio input:checked+span {
                 <div class="col-sm-12">
                     <div class="form-group">
                         <!-- <label for="name">Name</label> --> <input class="form-control" type="password" name="password2" placeholder="Re-type Password" required> </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <!-- <label for="name">Name</label> --> <textarea class="form-control" name="notes" placeholder="Notes"></textarea>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <select class="form-control" name="country" required>
+                            <option>Select Address Country</option>
+                            <?php
+                                foreach ($nationality as $row1) {
+                                  echo "<option>".$row1->en_short_name."</option>";
+                                }
+                            ?>
+                        </select>
                 </div>
             </div>
             <div class=" d-flex flex-column text-center px-5 mt-3 mb-3"><small><input type="checkbox" id="confirm1"> I have read, understood and content to the Privacy Policy (clickable)</small></div>

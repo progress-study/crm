@@ -221,7 +221,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="schoolsprograms" class="nav-link<?php if($title == 'Schools and Programs'){ echo ' active';} ?>">
+            <a href="schools" class="nav-link<?php if($title == 'Schools and Programs'){ echo ' active';} ?>">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Schools and Programs
@@ -287,20 +287,10 @@
             <!-- /.card-header -->
             <div class="card-body">
               
-              <form action="savepayment" method="post">
-                <div class="mb-3">
-                  <label for="amount" class="form-label">Payment Type</label>
-                  <select class="form-control" name="paymenttype">
-                    <?php
-                    foreach ($mastersetting as $row2) {
-                      echo "<option value='".$row2->id."'>".$row2->identity."</option>";
-                    }
-                    ?>
-                  </select>
-                </div>
+              <form action="saveapplication" method="post">
                 <div class="mb-3">
                   <label for="payee" class="form-label">Customer</label>
-                  <select class="form-control select2" name="school">
+                  <select class="form-control select2" name="client" required>
                     <?php
                     foreach ($client as $row) {
                       echo "<option value='".$row->client_id."'>".$row->client_surname.", ".$row->client_firstname." ".$row->client_middlename."</option>";
@@ -310,30 +300,30 @@
                 </div>
                 <div class="mb-3">
                   <label for="client" class="form-label">School</label>
-                  <select class="form-control select2" name="client" id="provider" onchange="getPrograms()">
+                  <select class="form-control select2" name="school" id="provider" onchange="getPrograms()" required>
                     <?php
                     foreach ($schools as $row) {
                       echo "<option value='".$row->provider_id."'>".$row->provider_name."</option>";
                     }
                     ?>
-                  </select>
+                  </select> 
                 </div>
                 <div class="mb-3">
                   <label for="program" class="form-label">Program</label>
-                  <select class="form-control select2" name="program" id="programlist">
+                  <select class="form-control select2" name="program" id="programlist" required>
                   </select>
                 </div>
                 <div class="mb-3">
-                  <label for="amount" class="form-label">Reference Number</label>
-                  <input type="text" class="form-control" name="referencenumber">
+                  <label for="amount" class="form-label">Course Start Date</label>
+                  <input type="date" name="startdate" class="form-control">
                 </div>
                 <div class="mb-3">
-                  <label for="amount" class="form-label">Amount</label>
-                  <input type="number" class="form-control" name="amount">
+                  <label for="amount" class="form-label">Course End Date</label>
+                  <input type="date" name="enddate" class="form-control">
                 </div>
                 <div class="mb-3">
-                  <label for="paymentdate" class="form-label">Payment Date</label>
-                  <input type="date" class="form-control" name="paymentdate">
+                  <label for="amount" class="form-label">COE Date</label>
+                  <input type="date" name="coedate" class="form-control">
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
               </form>

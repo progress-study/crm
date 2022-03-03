@@ -252,6 +252,7 @@
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active"><a href="schools">Schools</a></li>
               <li class="breadcrumb-item active"><?php echo $title; ?></li>
             </ol>
           </div>
@@ -266,7 +267,7 @@
     
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title"><a href="schools">Schools</a></h3>
+              <h3 class="card-title"><a href="newprogram">Add New Program</a></h3>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
@@ -277,7 +278,9 @@
                   <th>School</th>
                   <th>Program Type</th>
                   <th>Application Fee</th>
-                  <th>Date Start and End</th>
+                  <th>Tuition Fee</th>
+                  <th>Cost of Living</th>
+                  <th>Currency</th>
                   <th>Commission</th>
                   <th></th>
                 </tr>
@@ -287,11 +290,14 @@
                 foreach ($programs as $row) {
                   echo "<tr>
                     <td>".$row->program."</td>
-                    <td><img class='direct-chat-img' src='".$asset_url."images/".$row->schoolphoto."'>&nbsp&nbsp".$row->name."</td>
+                    <td>".$row->provider_name."</td>
                     <td>".$row->programtype."</td>
                     <td>".$row->applicationfee."</td>
-                    <td>".$row->datestart." - ".$row->dateend."</td>
+                    <td>".$row->tuition."</td>
+                    <td>".$row->costofliving."</td>
+                    <td>".$row->currency."</td>
                     <td>".$row->commission." on net tuition</td>
+                    <td><a href='editprogram/".$row->spid."' class='btn btn-primary btn-xs'>Edit</a></td>
                   </tr>";
                 }
                 ?>
@@ -302,7 +308,9 @@
                   <th>School</th>
                   <th>Program Type</th>
                   <th>Application Fee</th>
-                  <th>Date Start and End</th>
+                  <th>Tuition Fee</th>
+                  <th>Cost of Living</th>
+                  <th>Currency</th>
                   <th>Commission</th>
                   <th></th>
                 </tr>

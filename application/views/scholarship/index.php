@@ -266,7 +266,7 @@
     
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title"><a href="programs">Add New Scholarship Allocation</a></h3>
+              <h3 class="card-title"><a href="newscholarshipallocation">Add New Scholarship Allocation</a></h3>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
@@ -312,7 +312,7 @@
 
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title"><a href="programs">Add New Scholarship File</a></h3>
+              <h3 class="card-title"><a href="newscholarshipfile">Add New Scholarship File</a></h3>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
@@ -322,6 +322,7 @@
                   <th>Description</th>
                   <th>Scholarship Type</th>
                   <th>Payment Type</th>
+                  <th>Amount</th>
                   <th>Date Created</th>
                   <th>Status</th>
                   <th></th>
@@ -338,10 +339,11 @@
                   echo "<tr>
                     <td>".$row->description."</td>
                     <td>".$row->type."</td>
-                    <td>".$row->paymenttype."</td>
+                    <td>".$row->identity."</td>
+                    <td>".$row->amount."</td>
                     <td>".$row->datecreated."</td>
                     <td>".$status."</td>
-                    <td><a href='deactivatescholarshipallocation/".$row->csid."' class='btn btn-primary btn-xs'>Deactivate</a></td>
+                    <td><a href='deactivatescholarshipallocation/".$row->scholarshipid."' class='btn btn-primary btn-xs'>Deactivate</a></td>
                   </tr>";
                 }
                 ?>
@@ -351,6 +353,7 @@
                   <th>Description</th>
                   <th>Scholarship Type</th>
                   <th>Payment Type</th>
+                  <th>Amount</th>
                   <th>Date Created</th>
                   <th>Status</th>
                   <th></th>

@@ -18,6 +18,25 @@
   <link rel="stylesheet" href="<?php echo $asset_url; ?>dist/css/adminlte.min.css">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <style type="text/css">
+    .select2-container .select2-selection--single{
+        height:34px !important;
+    }
+    .select2-container--default .select2-selection--single{
+             border: 1px solid #ccc !important; 
+         border-radius: 0px !important; 
+    }
+
+    .select3-container .select3-selection--single{
+        height:34px !important;
+    }
+    .select3-container--default .select3-selection--single{
+             border: 1px solid #ccc !important; 
+         border-radius: 0px !important; 
+    }
+  </style>
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -265,131 +284,71 @@
         <div class="col-12">
     
           <div class="card">
-            <div class="card-header">
-              <h3 class="card-title"><a href="newofficer">Add New Officer</a></h3>
-            </div>
             <!-- /.card-header -->
             <div class="card-body">
-              <table id="officer" class="table table-bordered table-striped">
-                <thead>
-                <tr>
-                  <th>Officer Name</th>
-                  <th>Email Address</th>
-                  <th>Role</th>
-                  <th>Status</th>
-                  <th>Last Login</th>
-                  <th></th>
-                </tr>
-                </thead>
-                <tbody>
-                <?php
-                foreach ($officer as $row) {
-                  echo "<tr>
-                    <td>".$row->officer_name."</td>
-                    <td>".$row->email."</td>
-                    <td>".$row->officer_role."</td>
-                    <td>".$row->officer_status."</td>
-                    <td>".$row->officer_last_logged_date."</td>
-                    <td><a href='editofficer/".$row->officer_id."' class='btn btn-primary btn-xs'>Edit</a></td>
-                  </tr>";
-                }
-                ?>
-                </tbody>
-                <tfoot>
-                <tr>
-                  <th>Officer Name</th>
-                  <th>Email Address</th>
-                  <th>Role</th>
-                  <th>Status</th>
-                  <th>Last Login</th>
-                  <th></th>
-                </tr>
-                </tfoot>
-              </table>
+              
+              <form action="saveprogram" method="post">
+                <div class="mb-3">
+                  <label for="amount" class="form-label">Program Name</label>
+                  <input type="text" class="form-control" name="program" placeholder="Program Name" required></textarea>
+                </div>
+                <div class="mb-3">
+                  <label for="amount" class="form-label">Description</label>
+                  <textarea class="form-control" name="description" placeholder="Description" required></textarea>
+                </div>
+                <div class="mb-3">
+                  <label for="payee" class="form-label">School</label>
+                  <select class="form-control select2" name="school" required>
+                    <?php
+                    foreach ($education_provider as $row) {
+                      echo "<option value='".$row->provider_id."'>".$row->provider_name."</option>";
+                    }
+                    ?>
+                  </select>
+                </div>
+                <div class="mb-3">
+                  <label for="payee" class="form-label">Program Level</label>
+                  <select class="form-control select2" name="programlevel" required>
+                    <?php
+                    foreach ($qualifications as $row) {
+                      echo "<option value='".$row->value."'>".$row->value."</option>";
+                    }
+                    ?>
+                  </select>
+                </div>
+                <div class="mb-3">
+                  <label for="amount" class="form-label">% Commision</label>
+                  <input type="number" class="form-control" name="commission" placeholder="% Commision" step=".1" required>
+                </div>
+                <div class="mb-3">
+                  <label for="amount" class="form-label">Currency</label>
+                  <select class="form-control select2" name="currency" required>
+                    <?php
+                    foreach ($currency as $row) {
+                      echo "<option value='".$row->currency."'>".$row->currency."</option>";
+                    }
+                    ?>
+                  </select>
+                </div>
+                <div class="mb-3">
+                  <label for="amount" class="form-label">Application Fee</label>
+                  <input type="number" class="form-control" name="applicationfee" placeholder="Application Fee" step=".01" required>
+                </div>
+                <div class="mb-3">
+                  <label for="amount" class="form-label">Tuition Fee</label>
+                  <input type="number" class="form-control" name="tuitionfee" placeholder="Tuition Fee" step=".01" required>
+                </div>
+                <div class="mb-3">
+                  <label for="amount" class="form-label">Cost of Living</label>
+                  <input type="number" class="form-control" name="costofliving" placeholder="Cost of Living" step=".01" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </form>
+
             </div>
             <!-- /.card-body -->
           </div>
           <!-- /.card -->
-
-          <div class="card">
-            <div class="card-header">
-              <h3 class="card-title"><a href="newassignment">Add New Region Assignment</a></h3>
-            </div>
-            <!-- /.card-header -->
-            <div class="card-body">
-              <table id="assignment" class="table table-bordered table-striped">
-                <thead>
-                <tr>
-                  <th>Officer Name</th>
-                  <th>Region</th>
-                  <th>Date Created</th>
-                  <th></th>
-                </tr>
-                </thead>
-                <tbody>
-                <?php
-                foreach ($officerassignment as $row) {
-                  echo "<tr>
-                    <td>".$row->officer_name."</td>
-                    <td>".$row->region_name."</td>
-                    <td>".$row->datecreated."</td>
-                    <td><a href='editofficer/".$row->oaid."' class='btn btn-danger btn-xs'>Deactivate</a></td>
-                  </tr>";
-                }
-                ?>
-                </tbody>
-                <tfoot>
-                <tr>
-                  <th>Officer Name</th>
-                  <th>Region</th>
-                  <th>Date Created</th>
-                  <th></th>
-                </tr>
-                </tfoot>
-              </table>
-            </div>
-            <!-- /.card-body -->
-          </div>
-          <!-- /.card -->
-
-          <div class="card">
-            <div class="card-header">
-              <h3 class="card-title"><a href="newregion">Add Region</a></h3>
-            </div>
-            <!-- /.card-header -->
-            <div class="card-body">
-              <table id="region" class="table table-bordered table-striped">
-                <thead>
-                <tr>
-                  <th>Region</th>
-                  <th>Region Description</th>
-                  <th></th>
-                </tr>
-                </thead>
-                <tbody>
-                <?php
-                foreach ($region as $row2) {
-                  echo "<tr>
-                    <td>".$row2->region_name."</td>
-                    <td>".$row2->region_description."</td>
-                    <td><a href='editregion/".$row2->region_id."' class='btn btn-primary btn-xs'>Edit</a></td>
-                  </tr>";
-                }
-                ?>
-                </tbody>
-                <tfoot>
-                <tr>
-                  <th>Region</th>
-                  <th>Region Description</th>
-                  <th></th>
-                </tr>
-                </tfoot>
-              </table>
-            </div>
-            <!-- /.card-body -->
-          </div>
-          <!-- /.card -->
-
         </div>
         <!-- /.col -->
       </div>
@@ -428,17 +387,14 @@
 <!-- AdminLTE for demo purposes -->
 <script src="<?php echo $asset_url; ?>dist/js/demo.js"></script>
 <!-- page script -->
+
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+
 <script>
   $(function () {
-    $("#officer").DataTable({
-      "responsive": true,
-      "autoWidth": false,
-    });
-    $("#assignment").DataTable({
-      "responsive": true,
-      "autoWidth": false,
-    });
-    $("#region").DataTable({
+    $("#example1").DataTable({
       "responsive": true,
       "autoWidth": false,
     });
@@ -452,6 +408,8 @@
       "responsive": true,
     });
   });
+  $('.select2').select2();
 </script>
+
 </body>
 </html>

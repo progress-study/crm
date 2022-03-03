@@ -11,7 +11,7 @@ class Formscontroller extends CI_Controller {
 
 	public function clientform()
 	{
-		$sql = "SELECT nationality FROM countries";
+		$sql = "SELECT nationality,en_short_name FROM countries";
 	    $query = $this->db->query($sql);
 	    $nationality = $query->result();
 
@@ -72,7 +72,9 @@ class Formscontroller extends CI_Controller {
 						'client_password' => $this->input->post('password'),
 						'client_noofchildren' => $this->input->post('noofchildren'),
 						'client_civilstatus' => $this->input->post('civilstatus'),
-						'client_nationality' => $this->input->post('nationality')
+						'client_nationality' => $this->input->post('nationality'),
+						'client_country' => $this->input->post('country'),
+						'client_notes' => $this->input->post('notes')
 					);
 			$this->db->insert('client', $data);
 			$this->load->view('forms/success');
