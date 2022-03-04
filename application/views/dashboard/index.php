@@ -191,7 +191,7 @@
             <a href="customerinfo" class="nav-link<?php if($title == 'Client Information'){ echo ' active';} ?>">
               <i class="nav-icon fas fa-th"></i>
               <p>
-                Students
+                Client Information
               </p>
             </a>
           </li>

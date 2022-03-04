@@ -14,6 +14,10 @@ $route['requireddocuments'] = 'requireddocumentscontroller/index';
 // Userlogin routes
 $route['logintypical'] = 'userlogincontroller/logintypical';
 
+
+// Client Information
+$route['editclientinfo/(:any)'] = 'customerinfocontroller/editclientinfo/$1';
+
 // Payment routes
 $route['newpayment'] = 'paymentscontroller/newpayment';
 $route['savepayment'] = 'paymentscontroller/savepayment';

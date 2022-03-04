@@ -52,7 +52,7 @@
                     <td>".$row->client_address."</td>
                     <td>".$row->client_suburb."</td>
                     <td>".$row->client_state."</td>
-                    <td></td>
+                    <td><a href='editclientinfo/".$row->client_id."' class='btn btn-primary btn-xs'>Edit</a></td>
                   </tr>";
                 }
 
@@ -69,6 +69,7 @@
                   <th>Address</th>
                   <th>Suburb</th>
                   <th>State</th>
+                  <th></th>
                 </tr>
                 </tfoot>
               </table>
