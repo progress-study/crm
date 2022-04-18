@@ -13,6 +13,7 @@ $route['requireddocuments'] = 'requireddocumentscontroller/index';
 
 // Userlogin routes
 $route['logintypical'] = 'userlogincontroller/logintypical';
+$route['signout'] = 'userlogincontroller/signout';
 
 
 // Client Information

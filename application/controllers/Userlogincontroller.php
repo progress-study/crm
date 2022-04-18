@@ -61,7 +61,8 @@ class UserLoginController extends CI_Controller {
 	}
 
 	public function signout () {
-		
+		$this->session->unset_userdata('officer_name','officer_role','officer_status','officer_id','email');
+		redirect('index.php');
 	}
 
 }
