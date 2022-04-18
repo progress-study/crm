@@ -33,13 +33,14 @@ $route['saveprogram'] = 'schoolsprogramscontroller/saveprogram';
 
 // Applications routes
 $route['applications'] = 'applicationscontroller/index';
-$route['newapplication'] = 'applicationscontroller/newapplication';
+$route['newapplication/(:any)'] = 'applicationscontroller/newapplication/$1';
 $route['getprogramfromschool/(:any)'] = 'applicationscontroller/getprogramfromschool/$1';
 $route['saveapplication'] = 'applicationscontroller/saveapplication';
 
 // Forms routes
 $route['clientform'] = 'formscontroller/clientform';
 $route['saveclientform'] = 'formscontroller/saveclientform';
+$route['saveinquiries'] = 'formscontroller/saveinquiries';
 $route['success'] = 'formscontroller/success';
 
 // Admin maintenance routes

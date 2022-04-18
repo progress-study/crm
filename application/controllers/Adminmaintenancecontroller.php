@@ -23,6 +23,10 @@ class Adminmaintenancecontroller extends CI_Controller {
 	    $query3 = $this->db->query($sql3);
 	    $officerassignment = $query3->result();
 
+	    $sql2 = "SELECT * FROM emailcontents LIMIT 1";
+	    $query2 = $this->db->query($sql2);
+	    $emailcontents = $query2->result();
+
         $asset_url = base_url()."assets/";
 		$data['title'] = "Admin Maintenance";
 		$data['asset_url'] = $asset_url;
@@ -30,6 +34,7 @@ class Adminmaintenancecontroller extends CI_Controller {
 		$data['region'] = $region;
 		$data['officer'] = $officer;
 		$data['officerassignment'] = $officerassignment;
+		$data['emailcontents'] = $emailcontents;
 
 		if(isset($this->session->officer_name)) {
 			$this->load->view('maintenance/index', $data);

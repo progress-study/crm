@@ -32,20 +32,20 @@ class Applicationscontroller extends CI_Controller {
 		}
 	}
 
-	public function newapplication() {
+	public function newapplication($id) {
 		$asset_url = base_url()."assets/";
 		$data['title'] = "New Application";
 		$data['asset_url'] = $asset_url;
 
-		$sql3 = "SELECT * FROM client";
-	    $query3 = $this->db->query($sql3);
-	    $client = $query3->result();
+	    $sql2 = "SELECT * FROM education_provider";
+	    $query2 = $this->db->query($sql2);
+	    $schools = $query2->result();
 
-	    $sql3 = "SELECT * FROM education_provider";
+	    $sql3 = "SELECT * FROM client where client_id = '$id'";
 	    $query3 = $this->db->query($sql3);
-	    $schools = $query3->result();
+	    $singleclient = $query3->result();
 
-	    $data['client'] = $client;
+	    $data['singleclient'] = $singleclient;
 		$data['schools'] = $schools;
 
 		if(isset($this->session->officer_name)) {
@@ -61,7 +61,7 @@ class Applicationscontroller extends CI_Controller {
 	}
 
 	public function getprogramfromschool($schoolid) {
-		$sql3 = "SELECT * FROM schoolprograms where schoolid = $schoolid";
+		$sql3 = "SELECT * FROM schoolprograms where spid = $schoolid";
 	    $query3 = $this->db->query($sql3);
 	    $program = $query3->result();
 	    echo json_encode($program);
@@ -93,7 +93,7 @@ class Applicationscontroller extends CI_Controller {
         $programs = $query->result();
 
 		$data = array(
-					'client_id' => $this->input->post('client'),
+					'client_id' => $this->input->post('clientid'),
 					'officer_id' => $this->session->userdata('officer_id'),
 					'provider_id' => $this->input->post('school'),
 					'studentapp_record_created_date' => date('Y-m-d'),

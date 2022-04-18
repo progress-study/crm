@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-                        <html>
-                            <head>
-                                <meta charset='utf-8'>
-                                <meta name='viewport' content='width=device-width, initial-scale=1'>
-                                <link rel="icon" type="image/png" href="<?php echo $asset_url; ?>images/logo.png"/>
-                                <title>e-Client Form</title>
-                                <link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css' rel='stylesheet'>
-                                <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet'>
-                                <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
-                                <style>body {
+<html>
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<link rel="icon" type="image/png" href="<?php echo $asset_url; ?>images/logo.png"/>
+<title>e-Client Form</title>
+<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css' rel='stylesheet'>
+<link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet'>
+<script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+<style>body {
     background-color: #FFEBEE
 }
 
@@ -83,7 +83,7 @@ label.radio input:checked+span {
                                 <div class="container mt-5 mb-5 d-flex justify-content-center">
     <div class="card px-1 py-4">
         <div class="card-body">
-        <form action="saveclientform" method="POST" onsubmit="checkConfirmed(event)">
+        <form action="saveinquiries" method="POST" onsubmit="checkConfirmed(event)">
             <center><img src="<?php echo $asset_url; ?>images/logo.png" alt="PSC Logo" width="40px"></center>
             <h6 class="information mt-4">Please provide following information</h6>
             <div class="row">
@@ -175,7 +175,7 @@ label.radio input:checked+span {
             <div class="row">
                 <div class="col-sm-12">
                     <div class="form-group">
-                        <!-- <label for="name">Name</label> --> <input class="form-control" type="number" name="noofchildren" placeholder="No. of Children"> </div>
+                        <!-- <label for="name">Name</label> --> <input class="form-control" type="number" name="noofdependents" placeholder="No. of Dependents"> </div>
                 </div>
             </div>
             <div class="row">
@@ -199,18 +199,17 @@ label.radio input:checked+span {
             <div class="row">
                 <div class="col-sm-12">
                     <div class="form-group">
-                        <select class="form-control" name="country" required>
-                            <option>Select Address Country</option>
-                            <?php
-                                foreach ($nationality as $row1) {
-                                  echo "<option>".$row1->en_short_name."</option>";
-                                }
-                            ?>
-                        </select>
+                        <textarea class="form-control" name="location" placeholder="Specific Location"></textarea>
                 </div>
             </div>
-            <div class=" d-flex flex-column text-center px-5 mt-3 mb-3"><small><input type="checkbox" id="confirm1"> I have read, understood and content to the Privacy Policy (clickable)</small></div>
-<div class=" d-flex flex-column text-center px-5 mt-3 mb-3"><small><input type="checkbox" id="confirm2"> I consent to receiving information and updates</small></div> <button class="btn btn-primary btn-block confirm-button" type="submit">Submit</button>
+            <div class=" d-flex flex-column text-center px-5 mt-3 mb-3"><small><input type="checkbox" id="confirm1" name="confirm1"> I have read, understood and content to the Privacy Policy (clickable)</small></div>
+<div class=" d-flex flex-column text-center px-5 mt-3 mb-3"><small><input type="checkbox" id="confirm2" name="confirm2"> I consent to receiving information and updates</small></div> 
+
+ <canvas id="captcha">captcha text</canvas>
+ <input id="textBox" type="text" class="form-control" name="captcha" placeholder="Enter CAPTCHA Here"> <button id="refreshButton" type="button" class="btn btn-primary btn-block confirm-button">Refresh</button>
+ <span id="output"></span>
+<br><br>
+<button class="btn btn-primary btn-block confirm-button" type="submit" id="submitButton">Submit</button>
         </form>
         </div>
     </div>
@@ -225,11 +224,26 @@ label.radio input:checked+span {
                 e.preventDefault();
         } 
 
+    let submitButton = document.querySelector('#submitButton');
+    submitButton.addEventListener('click', function() {
+     if (userText.value === c) {
+     output.classList.add("correctCaptcha");
+     output.innerHTML = "Correct!";
+     } else {
+     output.classList.add("incorrectCaptcha");
+     output.innerHTML = "Incorrect, please try again";
+     }
+    });
+
+/*
         if (document.getElementById('confirm2').checked != true) {
                 alert("Please confirm on consent checks!");
                 e.preventDefault();
         }
+*/
     }
+
 </script>
+<script type='text/javascript' src='<?php echo $asset_url; ?>js/captcha_script.js'></script>
 </body>
 </html>

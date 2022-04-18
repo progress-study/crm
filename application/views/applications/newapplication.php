@@ -189,7 +189,7 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item">
-            <a href="dashboard" class="nav-link<?php if($title == 'Dashboard'){ echo ' active';} ?>">
+            <a href="http://localhost/progress-study-crm/index.php/dashboard" class="nav-link<?php if($title == 'Dashboard'){ echo ' active';} ?>">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
@@ -197,7 +197,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="customerinfo" class="nav-link<?php if($title == 'Client Information'){ echo ' active';} ?>">
+            <a href="http://localhost/progress-study-crm/index.php/customerinfo" class="nav-link<?php if($title == 'Client Information'){ echo ' active';} ?>">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Client Information
@@ -205,7 +205,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="requireddocuments" class="nav-link<?php if($title == 'Required Documents'){ echo ' active';} ?>">
+            <a href="http://localhost/progress-study-crm/index.php/requireddocuments" class="nav-link<?php if($title == 'Required Documents'){ echo ' active';} ?>">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Required Documents
@@ -213,7 +213,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="payments" class="nav-link<?php if($title == 'Payments'){ echo ' active';} ?>">
+            <a href="http://localhost/progress-study-crm/index.php/payments" class="nav-link<?php if($title == 'Payments'){ echo ' active';} ?>">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Payments
@@ -221,7 +221,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="schools" class="nav-link<?php if($title == 'Schools and Programs'){ echo ' active';} ?>">
+            <a href="http://localhost/progress-study-crm/index.php/schools" class="nav-link<?php if($title == 'Schools and Programs'){ echo ' active';} ?>">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Schools and Programs
@@ -229,7 +229,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="applications" class="nav-link<?php if($title == 'Applications'){ echo ' active';} ?>">
+            <a href="http://localhost/progress-study-crm/index.php/applications" class="nav-link<?php if($title == 'Applications'){ echo ' active';} ?>">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Applications
@@ -237,7 +237,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="adminmaintenance" class="nav-link<?php if($title == 'Admin Maintenance'){ echo ' active';} ?>">
+            <a href="http://localhost/progress-study-crm/index.php/adminmaintenance" class="nav-link<?php if($title == 'Admin Maintenance'){ echo ' active';} ?>">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Admin Maintenance
@@ -245,7 +245,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="scholarships" class="nav-link<?php if($title == 'Scholarships'){ echo ' active';} ?>">
+            <a href="http://localhost/progress-study-crm/index.php/scholarships" class="nav-link<?php if($title == 'Scholarships'){ echo ' active';} ?>">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Scholarships
@@ -290,13 +290,14 @@
               <form action="saveapplication" method="post">
                 <div class="mb-3">
                   <label for="payee" class="form-label">Customer</label>
-                  <select class="form-control select2" name="client" required>
-                    <?php
-                    foreach ($client as $row) {
-                      echo "<option value='".$row->client_id."'>".$row->client_surname.", ".$row->client_firstname." ".$row->client_middlename."</option>";
+                  <?php
+                    foreach ($singleclient as $row) {
+                  ?>
+                      <input type="hidden" name="clientid" value="<?php echo $row->client_id; ?>">
+                      <input type="text" name="clientname" class="form-control" value="<?php echo $row->client_surname.", ".$row->client_firstname." ".$row->client_middlename; ?>" readonly>
+                  <?php
                     }
-                    ?>
-                  </select>
+                  ?>
                 </div>
                 <div class="mb-3">
                   <label for="client" class="form-label">School</label>
@@ -399,7 +400,7 @@
     $("#programlist").empty();
     $.ajax({
           type: "GET",
-          url: "getprogramfromschool/1",
+          url: "http://localhost/progress-study-crm/index.php/getprogramfromschool/1",
           success: function(data) {
               var obj = JSON.parse(data);
               //alert(obj[0].program);
@@ -418,7 +419,7 @@
     $("#programlist").empty();
     $.ajax({
           type: "GET",
-          url: "getprogramfromschool/" + id,
+          url: "http://localhost/progress-study-crm/index.php/getprogramfromschool/" + id,
           success: function(data) {
               var obj = JSON.parse(data);
               //alert(obj[0].program);

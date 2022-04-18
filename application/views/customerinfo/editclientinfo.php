@@ -278,7 +278,31 @@
           <div class="card">
             <!-- /.card-header -->
             <div class="card-body">
-              <form action="Adminmaintenancecontroller/do_upload" method="post" enctype="multipart/form-data">
+              
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                  <li class="nav-item">
+                    <a class="nav-link active" id="clientinfo-tab" data-toggle="tab" href="#clientinfo" role="tab" aria-controls="clientinfo" aria-selected="true">Client Information</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" id="studentapplication-tab" data-toggle="tab" href="#studentapplication" role="tab" aria-controls="studentapplication" aria-selected="false">Student Application</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Visa Applications</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Visa Expressions of Interest</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Visa Accounts</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Required Documents</a>
+                  </li>
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                  <div class="tab-pane fade show active" id="clientinfo" role="tabpanel" aria-labelledby="clientinfo-tab">
+                <br>
+                <form action="Adminmaintenancecontroller/do_upload" method="post" enctype="multipart/form-data">
                 <?php 
                     if(isset($error)) {
                 ?>
@@ -296,6 +320,7 @@
                     $dob = $row1->client_dob_year."-".$row1->client_dob_month."-".$row1->client_dob_day;
                     $ve = $row1->client_ve_year."-".$row1->client_ve_month."-".$row1->client_ve_day;
                 ?>
+
                 <div class="row">
                   <div class="col-6">
                     <a href="<?php echo base_url().'index.php/customerinfo' ?>"><i class="nav-icon fas fa-chevron-left"></i> Back</a>
@@ -379,7 +404,7 @@
                       <div class="mb-3">
                         <label for="amount" class="form-label">Qualifications</label>
                         <input type="text" class="form-control" name="qualification" value="<?php echo $row1->client_qualifications; ?>">
-                      </div> 
+                      </div>
                       <div class="mb-3">
                         <label for="amount" class="form-label">Attended Event</label>
                         <div class="row">
@@ -442,8 +467,53 @@
                     }
                   ?>
 
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary">Submit</button> 
               </form>
+
+                  </div>
+
+                  <div class="tab-pane fade" id="studentapplication" role="tabpanel" aria-labelledby="studentapplication-tab">
+                    <br>
+                    <table id="example1" class="table table-bordered table-striped">
+                      <thead>
+                      <tr>
+                        <th>Student</th>
+                        <th>School</th>
+                        <th>Program</th>
+                        <th>Date Created</th>
+                        <th>Actions</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <?php
+                      foreach ($student_application as $row) {
+                        echo "<tr>
+                          <td>".$row->client_surname.", ".$row->client_firstname."</td>
+                          <td>".$row->provider_name."</td>
+                          <td>".$row->studentapp_course_name."</td>
+                          <td>".$row->studentapp_record_created_date."</td>
+                          <td><a href='#' class='btn btn-primary btn-xs'>Edit</a></td>
+                        </tr>";
+                      }
+                      ?>
+                      </tbody>
+                      <tfoot>
+                      <tr>
+                        <th>Student</th>
+                        <th>School</th>
+                        <th>Program</th>
+                        <th>Date Created</th>
+                        <th>Actions</th>
+                      </tr>
+                      </tfoot>
+                    </table>
+                    <a href="http://localhost/progress-study-crm/index.php/newapplication/103" class="btn btn-primary">New Application</a>
+
+                  </div>
+                  <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">Ramirez</div>
+                </div>
+
+                
 
             </div>
             <!-- /.card-body -->
@@ -510,6 +580,7 @@
   });
 
   $('.select2').select2();
+
 </script>
 
 </body>

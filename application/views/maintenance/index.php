@@ -265,130 +265,205 @@
         <div class="col-12">
     
           <div class="card">
-            <div class="card-header">
-              <h3 class="card-title"><a href="newofficer">Add New Officer</a></h3>
+
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                  <li class="nav-item">
+                    <a class="nav-link active" id="officer1-tab" data-toggle="tab" href="#officer1" role="tab" aria-controls="officer1" aria-selected="true">Officers</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" id="officerassignment-tab" data-toggle="tab" href="#officerassignment" role="tab" aria-controls="officerassignment" aria-selected="false">Officer Assignment</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" id="region1-tab" data-toggle="tab" href="#region1" role="tab" aria-controls="region1" aria-selected="false">Region</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" id="events-tab" data-toggle="tab" href="#events" role="tab" aria-controls="events" aria-selected="false">Events</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" id="priviledges-tab" data-toggle="tab" href="#priviledges" role="tab" aria-controls="priviledges" aria-selected="false">Priviledges</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" id="emailcontent-tab" data-toggle="tab" href="#emailcontent" role="tab" aria-controls="emailcontent" aria-selected="false">Email Contents</a>
+                  </li>
+                </ul>
+            <div class="tab-content" id="myTabContent">
+              <div class="tab-pane fade show active" id="officer1" role="tabpanel" aria-labelledby="officer1-tab">
+                  <div class="card-header">
+                    <h3 class="card-title"><a href="newofficer">Add New Officer</a></h3>
+                  </div>
+                  <!-- /.card-header -->
+                  <div class="card-body">
+                    <table id="officer" class="table table-bordered table-striped officer1">
+                      <thead>
+                      <tr>
+                        <th>Officer Name</th>
+                        <th>Email Address</th>
+                        <th>Role</th>
+                        <th>Status</th>
+                        <th>Last Login</th>
+                        <th></th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <?php
+                      foreach ($officer as $row) {
+                        echo "<tr>
+                          <td>".$row->officer_name."</td>
+                          <td>".$row->email."</td>
+                          <td>".$row->officer_role."</td>
+                          <td>".$row->officer_status."</td>
+                          <td>".$row->officer_last_logged_date."</td>
+                          <td><a href='editofficer/".$row->officer_id."' class='btn btn-primary btn-xs'>Edit</a></td>
+                        </tr>";
+                      }
+                      ?>
+                      </tbody>
+                      <tfoot>
+                      <tr>
+                        <th>Officer Name</th>
+                        <th>Email Address</th>
+                        <th>Role</th>
+                        <th>Status</th>
+                        <th>Last Login</th>
+                        <th></th>
+                      </tr>
+                      </tfoot>
+                    </table>
+                  </div>
+                  <!-- /.card-body -->
+              </div>
+              <div class="tab-pane fade" id="officerassignment" role="tabpanel" aria-labelledby="officerassignment-tab">
+                  <div class="card-header">
+                    <h3 class="card-title"><a href="newassignment">Add New Region Assignment</a></h3>
+                  </div>
+                  <!-- /.card-header -->
+                  <div class="card-body">
+                    <table id="assignment" class="table table-bordered table-striped officerassignment">
+                      <thead>
+                      <tr>
+                        <th>Officer Name</th>
+                        <th>Region</th>
+                        <th>Date Created</th>
+                        <th></th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <?php
+                      foreach ($officerassignment as $row) {
+                        echo "<tr>
+                          <td>".$row->officer_name."</td>
+                          <td>".$row->region_name."</td>
+                          <td>".$row->datecreated."</td>
+                          <td><a href='editofficer/".$row->oaid."' class='btn btn-danger btn-xs'>Deactivate</a></td>
+                        </tr>";
+                      }
+                      ?>
+                      </tbody>
+                      <tfoot>
+                      <tr>
+                        <th>Officer Name</th>
+                        <th>Region</th>
+                        <th>Date Created</th>
+                        <th></th>
+                      </tr>
+                      </tfoot>
+                    </table>
+                  </div>
+                  <!-- /.card-body -->
+              </div>
+              <div class="tab-pane fade" id="region1" role="tabpanel" aria-labelledby="region1-tab">
+                  <div class="card-header">
+                    <h3 class="card-title"><a href="newregion">Add Region</a></h3>
+                  </div>
+                  <!-- /.card-header -->
+                  <div class="card-body">
+                    <table id="region" class="table table-bordered table-striped region1">
+                      <thead>
+                      <tr>
+                        <th>Region</th>
+                        <th>Region Description</th>
+                        <th></th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <?php
+                      foreach ($region as $row2) {
+                        echo "<tr>
+                          <td>".$row2->region_name."</td>
+                          <td>".$row2->region_description."</td>
+                          <td><a href='editregion/".$row2->region_id."' class='btn btn-primary btn-xs'>Edit</a></td>
+                        </tr>";
+                      }
+                      ?>
+                      </tbody>
+                      <tfoot>
+                      <tr>
+                        <th>Region</th>
+                        <th>Region Description</th>
+                        <th></th>
+                      </tr>
+                      </tfoot>
+                    </table>
+                  </div>
+                  <!-- /.card-body -->
+              </div>
+              <div class="tab-pane fade" id="emailcontent" role="tabpanel" aria-labelledby="emailcontent-tab">
+                  <div class="card-body">
+                     <?php
+                      foreach ($emailcontents as $row6) {
+                      ?>
+                    <form action="saveemailcontent" method="post">
+                      <h5>Inquiry Auto Response Email</h5>
+                      <div class="mb-3">
+                        <label for="iaremailheader" class="form-label">Email header</label>
+                        <textarea class="form-control" name="iaremailheader" placeholder="Email header" required><?php echo $row6->iaremailheader; ?></textarea>
+                      </div>
+                      <div class="mb-3">
+                        <label for="iaremailbody" class="form-label">Email body</label>
+                        <textarea class="form-control" name="iaremailbody" placeholder="Email body" required><?php echo $row6->iaremailbody; ?></textarea>
+                      </div>
+                      <div class="mb-3">
+                        <label for="iaremailfooter" class="form-label">Email footer</label>
+                        <textarea class="form-control" name="iaremailfooter" placeholder="Email footer" required><?php echo $row6->iaremailfooter; ?></textarea>
+                      </div>
+                      <h5>Marketing Email</h5>
+                      <div class="mb-3">
+                        <label for="memailheader" class="form-label">Email header</label>
+                        <textarea class="form-control" name="memailheader" placeholder="Email header" required><?php echo $row6->memailheader; ?></textarea>
+                      </div>
+                      <div class="mb-3">
+                        <label for="memailbody" class="form-label">Email body</label>
+                        <textarea class="form-control" name="memailbody" placeholder="Email body" required><?php echo $row6->memailbody; ?></textarea>
+                      </div>
+                      <div class="mb-3">
+                        <label for="memailfooter" class="form-label">Email footer</label>
+                        <textarea class="form-control" name="memailfooter" placeholder="Email footer" required><?php echo $row6->memailfooter; ?></textarea>
+                      </div>
+                      <h5>Reminder Email</h5>
+                      <div class="mb-3">
+                        <label for="memailheader" class="form-label">Email header</label>
+                        <textarea class="form-control" name="remailheader" placeholder="Email header" required><?php echo $row6->remailheader; ?></textarea>
+                      </div>
+                      <div class="mb-3">
+                        <label for="memailbody" class="form-label">Email body</label>
+                        <textarea class="form-control" name="remailbody" placeholder="Email body" required><?php echo $row6->remailbody; ?></textarea>
+                      </div>
+                      <div class="mb-3">
+                        <label for="memailfooter" class="form-label">Email footer</label>
+                        <textarea class="form-control" name="remailfooter" placeholder="Email footer" required><?php echo $row6->remailfooter; ?></textarea>
+                      </div>
+                      <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                    <?php
+                      }
+                      ?>
+                  </div>
+                  <!-- /.card-body -->
+              </div>
             </div>
-            <!-- /.card-header -->
-            <div class="card-body">
-              <table id="officer" class="table table-bordered table-striped">
-                <thead>
-                <tr>
-                  <th>Officer Name</th>
-                  <th>Email Address</th>
-                  <th>Role</th>
-                  <th>Status</th>
-                  <th>Last Login</th>
-                  <th></th>
-                </tr>
-                </thead>
-                <tbody>
-                <?php
-                foreach ($officer as $row) {
-                  echo "<tr>
-                    <td>".$row->officer_name."</td>
-                    <td>".$row->email."</td>
-                    <td>".$row->officer_role."</td>
-                    <td>".$row->officer_status."</td>
-                    <td>".$row->officer_last_logged_date."</td>
-                    <td><a href='editofficer/".$row->officer_id."' class='btn btn-primary btn-xs'>Edit</a></td>
-                  </tr>";
-                }
-                ?>
-                </tbody>
-                <tfoot>
-                <tr>
-                  <th>Officer Name</th>
-                  <th>Email Address</th>
-                  <th>Role</th>
-                  <th>Status</th>
-                  <th>Last Login</th>
-                  <th></th>
-                </tr>
-                </tfoot>
-              </table>
-            </div>
-            <!-- /.card-body -->
           </div>
           <!-- /.card -->
 
-          <div class="card">
-            <div class="card-header">
-              <h3 class="card-title"><a href="newassignment">Add New Region Assignment</a></h3>
-            </div>
-            <!-- /.card-header -->
-            <div class="card-body">
-              <table id="assignment" class="table table-bordered table-striped">
-                <thead>
-                <tr>
-                  <th>Officer Name</th>
-                  <th>Region</th>
-                  <th>Date Created</th>
-                  <th></th>
-                </tr>
-                </thead>
-                <tbody>
-                <?php
-                foreach ($officerassignment as $row) {
-                  echo "<tr>
-                    <td>".$row->officer_name."</td>
-                    <td>".$row->region_name."</td>
-                    <td>".$row->datecreated."</td>
-                    <td><a href='editofficer/".$row->oaid."' class='btn btn-danger btn-xs'>Deactivate</a></td>
-                  </tr>";
-                }
-                ?>
-                </tbody>
-                <tfoot>
-                <tr>
-                  <th>Officer Name</th>
-                  <th>Region</th>
-                  <th>Date Created</th>
-                  <th></th>
-                </tr>
-                </tfoot>
-              </table>
-            </div>
-            <!-- /.card-body -->
-          </div>
-          <!-- /.card -->
-
-          <div class="card">
-            <div class="card-header">
-              <h3 class="card-title"><a href="newregion">Add Region</a></h3>
-            </div>
-            <!-- /.card-header -->
-            <div class="card-body">
-              <table id="region" class="table table-bordered table-striped">
-                <thead>
-                <tr>
-                  <th>Region</th>
-                  <th>Region Description</th>
-                  <th></th>
-                </tr>
-                </thead>
-                <tbody>
-                <?php
-                foreach ($region as $row2) {
-                  echo "<tr>
-                    <td>".$row2->region_name."</td>
-                    <td>".$row2->region_description."</td>
-                    <td><a href='editregion/".$row2->region_id."' class='btn btn-primary btn-xs'>Edit</a></td>
-                  </tr>";
-                }
-                ?>
-                </tbody>
-                <tfoot>
-                <tr>
-                  <th>Region</th>
-                  <th>Region Description</th>
-                  <th></th>
-                </tr>
-                </tfoot>
-              </table>
-            </div>
-            <!-- /.card-body -->
-          </div>
-          <!-- /.card -->
 
         </div>
         <!-- /.col -->

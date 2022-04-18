@@ -48,9 +48,14 @@ class Customerinfocontroller extends CI_Controller {
         $query3 = $this->db->query($sql3);
         $events = $query3->result();
 
+        $sql4 = "SELECT * FROM student_application sa inner join education_provider s on sa.provider_id = s.provider_id inner join client c on c.client_id = sa.client_id where sa.client_id = $client_id";
+        $query4 = $this->db->query($sql4);
+        $student_application = $query4->result();
+
         $data['client'] = $client;
         $data['offices'] = $offices;
 		$data['events'] = $events;
+		$data['student_application'] = $student_application;
 
 		$asset_url = base_url()."assets/";
 		$data['title'] = "Edit/View Client Information";
