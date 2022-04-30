@@ -52,10 +52,15 @@ class Customerinfocontroller extends CI_Controller {
         $query4 = $this->db->query($sql4);
         $student_application = $query4->result();
 
+        $sql5 = "SELECT * FROM clientscholarship cs inner join client c on c.client_id = cs.clientid inner join scholarships s on s.scholarshipid = cs.scholarshipid";
+	    $query5 = $this->db->query($sql5);
+	    $clientscholarship = $query5->result();
+
         $data['client'] = $client;
         $data['offices'] = $offices;
 		$data['events'] = $events;
 		$data['student_application'] = $student_application;
+		$data['clientscholarship'] = $clientscholarship;
 
 		$asset_url = base_url()."assets/";
 		$data['title'] = "Edit/View Client Information";
@@ -63,6 +68,70 @@ class Customerinfocontroller extends CI_Controller {
 
 		if(isset($this->session->officer_name)) {
 			$this->load->view('customerinfo/editclientinfo', $data);
+		} else {
+			echo "<script>alert('Please login first to CRM!')</script>";
+			$asset_url = base_url()."assets/";
+			$data['title'] = "User Login";
+		    $data['asset_url'] = $asset_url;
+			$this->load->view('userlogin/index', $data);
+		}
+	}
+
+	public function editclientinfo2($client_id)
+	{
+		$sql1 = "SELECT * FROM client WHERE client_id = '$client_id'";
+        $query1 = $this->db->query($sql1);
+        $client = $query1->result();
+
+        $sql2 = "SELECT * FROM offices";
+        $query2 = $this->db->query($sql2);
+        $offices = $query2->result();
+
+        $sql3 = "SELECT * FROM events";
+        $query3 = $this->db->query($sql3);
+        $events = $query3->result();
+
+        $sql4 = "SELECT * FROM student_application sa inner join education_provider s on sa.provider_id = s.provider_id inner join client c on c.client_id = sa.client_id where sa.client_id = $client_id";
+        $query4 = $this->db->query($sql4);
+        $student_application = $query4->result();
+
+        $sql5 = "SELECT * FROM clientscholarship cs inner join client c on c.client_id = cs.clientid inner join scholarships s on s.scholarshipid = cs.scholarshipid";
+	    $query5 = $this->db->query($sql5);
+	    $clientscholarship = $query5->result();
+
+	    $sql6 = "SELECT * FROM visa_application va inner join client c on va.client_id = c.client_id where va.client_id = $client_id";
+	    $query6 = $this->db->query($sql6);
+	    $visa_application = $query6->result();
+
+	    $sql7 = "SELECT * FROM expression_of_interest eoi inner join client c on eoi.client_id = c.client_id where eoi.client_id = $client_id";
+	    $query7 = $this->db->query($sql7);
+	    $eoi = $query7->result();
+
+	    $sql8 = "SELECT * FROM visa_accounts vac inner join visa_application vap on vac.client_visa_id = vap.client_visa_id inner join client c on vap.client_id = c.client_id where vap.client_id = $client_id";
+	    $query8 = $this->db->query($sql8);
+	    $visa_accounts = $query8->result();
+
+	    $sql9 = "SELECT * from payments p inner join client c on p.payee = c.client_id inner join officer o on o.officer_id = p.processedby inner join mastersetting m on p.paymenttype = m.id where p.barchived = 0 and p.payee = $client_id";
+	    $query9 = $this->db->query($sql9);
+	    $payments = $query9->result();
+
+	    $data['client_id'] = $client_id;
+        $data['client'] = $client;
+        $data['offices'] = $offices;
+		$data['events'] = $events;
+		$data['student_application'] = $student_application;
+		$data['clientscholarship'] = $clientscholarship;
+		$data['visa_application'] = $visa_application;
+		$data['visa_accounts'] = $visa_accounts;
+		$data['eoi'] = $eoi;
+		$data['payments'] = $payments;
+
+		$asset_url = base_url()."assets/";
+		$data['title'] = "Edit/View Client Information";
+		$data['asset_url'] = $asset_url;
+
+		if(isset($this->session->officer_name)) {
+			$this->load->view('customerinfo/editclientinfo2', $data);
 		} else {
 			echo "<script>alert('Please login first to CRM!')</script>";
 			$asset_url = base_url()."assets/";

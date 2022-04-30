@@ -21,7 +21,7 @@ class Dashboardcontroller extends CI_Controller {
 		$query2 = $this->db->query($sql2);
 		$student_application = $query2->num_rows();
 
-		$sql3 = "SELECT * FROM pr_application WHERE visa_status = 'WIP'";
+		$sql3 = "SELECT * FROM visa_application WHERE status = 'WIP'";
 		$query3 = $this->db->query($sql3);
 		$pr_application = $query3->num_rows();
 

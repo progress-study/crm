@@ -180,9 +180,8 @@
     <section class="content">
       <div class="row">
         <div class="col-12">
-    
           <div class="card">
-
+            <div class="card-body">
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                   <li class="nav-item">
                     <a class="nav-link active" id="officer1-tab" data-toggle="tab" href="#officer1" role="tab" aria-controls="officer1" aria-selected="true">Officers</a>
@@ -376,6 +375,7 @@
                       ?>
                   </div>
                   <!-- /.card-body -->
+              </div>
               </div>
             </div>
           </div>

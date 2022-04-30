@@ -79,7 +79,6 @@
     <!-- Brand Logo -->
     <a href="index3.html" class="brand-link">
       <center><img src="<?php echo $asset_url; ?>images/logomainwhite.png" alt="PSC Logo" width="140px"></center>
-
     </a>
 
     <!-- Sidebar -->
@@ -90,7 +89,7 @@
           <img src="<?php echo $asset_url; ?>dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Kim Ramirez</a>
+          <a href="#" class="d-block"><?php echo $this->session->officer_name; ?></a>
         </div>
       </div>
 
@@ -206,16 +205,22 @@
                     <a class="nav-link" id="studentapplication-tab" data-toggle="tab" href="#studentapplication" role="tab" aria-controls="studentapplication" aria-selected="false">Student Application</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Visa Applications</a>
+                    <a class="nav-link" id="visaapplication-tab" data-toggle="tab" href="#visaapplication" role="tab" aria-controls="visaapplication" aria-selected="false">Visa Applications</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Visa Expressions of Interest</a>
+                    <a class="nav-link" id="visaeoi-tab" data-toggle="tab" href="#visaeoi" role="tab" aria-controls="visaeoi" aria-selected="false">Visa Expressions of Interest</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Visa Accounts</a>
+                    <a class="nav-link" id="visaaccount-tab" data-toggle="tab" href="#visaaccount" role="tab" aria-controls="visaaccount" aria-selected="false">Visa Accounts</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Required Documents</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" id="scholarshipallocation-tab" data-toggle="tab" href="#scholarshipallocation" role="tab" aria-controls="scholarshipallocation" aria-selected="false">Scholarship Allocation</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" id="payments-tab" data-toggle="tab" href="#payments" role="tab" aria-controls="payments" aria-selected="false">Payments</a>
                   </li>
                 </ul>
                 <div class="tab-content" id="myTabContent">
@@ -426,10 +431,204 @@
                       </tr>
                       </tfoot>
                     </table>
-                    <a href="http://localhost/progress-study-crm/index.php/newapplication/103" class="btn btn-primary">New Application</a>
-
+                    <a href="<?php echo base_url(); ?>index.php/newapplication/103" class="btn btn-primary">New Application</a>
                   </div>
                   <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">Ramirez</div>
+                  <div class="tab-pane fade" id="visaapplication" role="tabpanel" aria-labelledby="visaapplication-tab">
+                      <br>
+                      <table id="visaapplicationtable" class="table table-bordered table-striped">
+                        <thead>
+                        <tr>
+                          <th>Client</th>
+                          <th>Scholarship</th>
+                          <th>Status</th>
+                          <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <?php
+                        foreach ($clientscholarship as $row) {
+                          if($row->bactive == 1) {
+                            $status = "Active";
+                          } else {
+                            $status = "Inactive";
+                          }
+                          echo "<tr>
+                            <td>".$row->client_surname.", ".$row->client_firstname."</td>
+                            <td>".$row->description."</td>
+                            <td>".$status."</td>
+                            <td><a href='deactivatescholarshipallocation/".$row->csid."' class='btn btn-primary btn-xs'>Deactivate</a></td>
+                          </tr>";
+                        }
+                        ?>
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                          <th>Client</th>
+                          <th>Scholarship</th>
+                          <th>Status</th> 
+                          <th></th>
+                        </tr>
+                        </tfoot>
+                      </table>
+                    <a href="<?php echo base_url(); ?>index.php/newscholarshipallocation/103" class="btn btn-primary">New Scholarship Allocation</a>
+                  </div>
+                  <div class="tab-pane fade" id="visaeoi" role="tabpanel" aria-labelledby="visaeoi-tab">
+                      <br>
+                      <table id="visaeoitable" class="table table-bordered table-striped">
+                        <thead>
+                        <tr>
+                          <th>Client</th>
+                          <th>Scholarship</th>
+                          <th>Status</th>
+                          <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <?php
+                        foreach ($clientscholarship as $row) {
+                          if($row->bactive == 1) {
+                            $status = "Active";
+                          } else {
+                            $status = "Inactive";
+                          }
+                          echo "<tr>
+                            <td>".$row->client_surname.", ".$row->client_firstname."</td>
+                            <td>".$row->description."</td>
+                            <td>".$status."</td>
+                            <td><a href='deactivatescholarshipallocation/".$row->csid."' class='btn btn-primary btn-xs'>Deactivate</a></td>
+                          </tr>";
+                        }
+                        ?>
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                          <th>Client</th>
+                          <th>Scholarship</th>
+                          <th>Status</th>
+                          <th></th>
+                        </tr>
+                        </tfoot>
+                      </table>
+                    <a href="<?php echo base_url(); ?>index.php/newscholarshipallocation/103" class="btn btn-primary">New Scholarship Allocation</a>
+                  </div>
+                  <div class="tab-pane fade" id="visaaccount" role="tabpanel" aria-labelledby="visaaccount-tab">
+                      <br>
+                      <table id="visaaccounttable" class="table table-bordered table-striped">
+                        <thead>
+                        <tr>
+                          <th>Client</th>
+                          <th>Scholarship</th>
+                          <th>Status</th>
+                          <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <?php
+                        foreach ($clientscholarship as $row) {
+                          if($row->bactive == 1) {
+                            $status = "Active";
+                          } else {
+                            $status = "Inactive";
+                          }
+                          echo "<tr>
+                            <td>".$row->client_surname.", ".$row->client_firstname."</td>
+                            <td>".$row->description."</td>
+                            <td>".$status."</td>
+                            <td><a href='deactivatescholarshipallocation/".$row->csid."' class='btn btn-primary btn-xs'>Deactivate</a></td>
+                          </tr>";
+                        }
+                        ?>
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                          <th>Client</th>
+                          <th>Scholarship</th>
+                          <th>Status</th>
+                          <th></th>
+                        </tr>
+                        </tfoot>
+                      </table>
+                    <a href="<?php echo base_url(); ?>index.php/newscholarshipallocation/103" class="btn btn-primary">New Scholarship Allocation</a>
+                  </div>
+                  <div class="tab-pane fade" id="scholarshipallocation" role="tabpanel" aria-labelledby="scholarshipallocation-tab">
+                      <br>
+                      <table id="scholarshipallocationtable" class="table table-bordered table-striped">
+                        <thead>
+                        <tr>
+                          <th>Client</th>
+                          <th>Scholarship</th>
+                          <th>Status</th>
+                          <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <?php
+                        foreach ($clientscholarship as $row) {
+                          if($row->bactive == 1) {
+                            $status = "Active";
+                          } else {
+                            $status = "Inactive";
+                          }
+                          echo "<tr>
+                            <td>".$row->client_surname.", ".$row->client_firstname."</td>
+                            <td>".$row->description."</td>
+                            <td>".$status."</td>
+                            <td><a href='deactivatescholarshipallocation/".$row->csid."' class='btn btn-primary btn-xs'>Deactivate</a></td>
+                          </tr>";
+                        }
+                        ?>
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                          <th>Client</th>
+                          <th>Scholarship</th>
+                          <th>Status</th>
+                          <th></th>
+                        </tr>
+                        </tfoot>
+                      </table>
+                    <a href="<?php echo base_url(); ?>index.php/newscholarshipallocation/103" class="btn btn-primary">New Scholarship Allocation</a>
+                  </div>
+                  <div class="tab-pane fade" id="payments" role="tabpanel" aria-labelledby="payments-tab">
+                      <br>
+                      <table id="paymentstable" class="table table-bordered table-striped">
+                        <thead>
+                        <tr>
+                          <th>Client</th>
+                          <th>Scholarship</th>
+                          <th>Status</th>
+                          <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <?php
+                        foreach ($clientscholarship as $row) {
+                          if($row->bactive == 1) {
+                            $status = "Active";
+                          } else {
+                            $status = "Inactive";
+                          }
+                          echo "<tr>
+                            <td>".$row->client_surname.", ".$row->client_firstname."</td>
+                            <td>".$row->description."</td>
+                            <td>".$status."</td>
+                            <td><a href='deactivatescholarshipallocation/".$row->csid."' class='btn btn-primary btn-xs'>Deactivate</a></td>
+                          </tr>";
+                        }
+                        ?>
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                          <th>Client</th>
+                          <th>Scholarship</th>
+                          <th>Status</th>
+                          <th></th>
+                        </tr>
+                        </tfoot>
+                      </table>
+                    <a href="<?php echo base_url(); ?>index.php/newscholarshipallocation/103" class="btn btn-primary">New Scholarship Allocation</a>
+                  </div>
                 </div>
 
                 
@@ -483,19 +682,36 @@
 
 <script>
   $(function () {
+
     $("#example1").DataTable({
       "responsive": true,
       "autoWidth": false,
     });
-    $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": false,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false,
+    $("#studentapplicationtable").DataTable({
       "responsive": true,
+      "autoWidth": false,
     });
+    $("#visaapplicationtable").DataTable({
+      "responsive": true,
+      "autoWidth": false,
+    });
+    $("#visaeoitable").DataTable({
+      "responsive": true,
+      "autoWidth": false,
+    });
+    $("#visaaccounttable").DataTable({
+      "responsive": true,
+      "autoWidth": false,
+    });
+    $("#scholarshipallocationtable").DataTable({
+      "responsive": true,
+      "autoWidth": false,
+    });
+    $("#paymentstable").DataTable({
+      "responsive": true,
+      "autoWidth": false,
+    });
+
   });
 
   $('.select2').select2();

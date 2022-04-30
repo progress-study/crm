@@ -18,9 +18,10 @@ $route['signout'] = 'userlogincontroller/signout';
 
 // Client Information
 $route['editclientinfo/(:any)'] = 'customerinfocontroller/editclientinfo/$1';
+$route['editclientinfo2/(:any)'] = 'customerinfocontroller/editclientinfo2/$1';
 
 // Payment routes
-$route['newpayment'] = 'paymentscontroller/newpayment';
+$route['newpayment/(:any)'] = 'paymentscontroller/newpayment/$1';
 $route['savepayment'] = 'paymentscontroller/savepayment';
 $route['archivepayment/(:any)'] = 'paymentscontroller/archivepayment/$1';
 
@@ -57,5 +58,23 @@ $route['saveassignment'] = 'adminmaintenancecontroller/saveassignment';
 $route['scholarships'] = 'scholarshipcontroller/index';
 $route['newscholarshipfile'] = 'scholarshipcontroller/newscholarshipfile';
 $route['savescholarshipfile'] = 'scholarshipcontroller/savescholarshipfile';
-$route['newscholarshipallocation'] = 'scholarshipcontroller/newscholarshipallocation';
+$route['newscholarshipallocation/(:any)'] = 'scholarshipcontroller/newscholarshipallocation/$1';
 $route['savescholarshipallocation'] = 'scholarshipcontroller/savescholarshipallocation';
+
+// Visa routes
+$route['newvisaapplication/(:any)'] = 'visacontroller/newvisaapplication/$1';
+$route['newvisaeoi/(:any)'] = 'visacontroller/newvisaeoi/$1';
+$route['newvisaaccount/(:any)/(:any)'] = 'visacontroller/newvisaaccount/$1/$2';
+$route['savevisaapplication'] = 'visacontroller/savevisaapplication';
+$route['savevisaeoi'] = 'visacontroller/savevisaeoi';
+$route['savevisaaccount'] = 'visacontroller/savevisaaccount';
+$route['editvisaapplication/(:any)'] = 'visacontroller/editvisaapplication/$1';
+$route['editvisaeoi/(:any)'] = 'visacontroller/editvisaeoi/$1';
+$route['editvisaaccount/(:any)/(:any)'] = 'visacontroller/editvisaaccount/$1/$2';
+$route['updatevisaapplication'] = 'visacontroller/updatevisaapplication';
+$route['updatevisaeoi'] = 'visacontroller/updatevisaeoi';
+$route['updatevisaaccount'] = 'visacontroller/updatevisaaccount';
+
+// Reports routes
+$route['reports'] = 'reportscontroller/index';
+$route['generatereportdefault'] = 'reportscontroller/generatereportdefault';

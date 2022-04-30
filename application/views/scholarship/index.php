@@ -181,106 +181,111 @@
         <div class="col-12">
     
           <div class="card">
-            <div class="card-header">
-              <h3 class="card-title"><a href="newscholarshipallocation">Add New Scholarship Allocation</a></h3>
-            </div>
             <!-- /.card-header -->
             <div class="card-body">
-              <table id="example1" class="table table-bordered table-striped">
-                <thead>
-                <tr>
-                  <th>Client</th>
-                  <th>Scholarship</th>
-                  <th>Status</th>
-                  <th></th>
-                </tr>
-                </thead>
-                <tbody>
-                <?php
-                foreach ($clientscholarship as $row) {
-                  if($row->bactive == 1) {
-                    $status = "Active";
-                  } else {
-                    $status = "Inactive";
-                  }
-                  echo "<tr>
-                    <td>".$row->client_surname.", ".$row->client_firstname."</td>
-                    <td>".$row->description."</td>
-                    <td>".$status."</td>
-                    <td><a href='deactivatescholarshipallocation/".$row->csid."' class='btn btn-primary btn-xs'>Deactivate</a></td>
-                  </tr>";
-                }
-                ?>
-                </tbody>
-                <tfoot>
-                <tr>
-                  <th>Client</th>
-                  <th>Scholarship</th>
-                  <th>Status</th>
-                  <th></th>
-                </tr>
-                </tfoot>
-              </table>
+
+              <ul class="nav nav-tabs" id="myTab" role="tablist">
+                  <li class="nav-item">
+                    <a class="nav-link active" id="scholarshipfile-tab" data-toggle="tab" href="#scholarshipfile" role="tab" aria-controls="scholarshipfile" aria-selected="true">Scholarship File</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" id="scholarshipallocation-tab" data-toggle="tab" href="#scholarshipallocation" role="tab" aria-controls="scholarshipallocation" aria-selected="false">Scholarship Allocation</a>
+                  </li>
+                </ul>
+              <div class="tab-content" id="myTabContent">
+                  <div class="tab-pane fade show active" id="scholarshipfile" role="tabpanel" aria-labelledby="scholarshipfile-tab">
+                      <br>
+                      <h3 class="card-title"><a href="newscholarshipfile">Add New Scholarship File</a></h3><br>
+                      <table id="example2" class="table table-bordered table-striped">
+                        <thead>
+                        <tr>
+                          <th>Description</th>
+                          <th>Scholarship Type</th>
+                          <th>Payment Type</th>
+                          <th>Amount</th>
+                          <th>Date Created</th>
+                          <th>Status</th>
+                          <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <?php
+                        foreach ($scholarships as $row) {
+                          if($row->bactive == 1) {
+                            $status = "Active";
+                          } else {
+                            $status = "Inactive";
+                          }
+                          echo "<tr>
+                            <td>".$row->description."</td>
+                            <td>".$row->type."</td>
+                            <td>".$row->identity."</td>
+                            <td>".$row->amount."</td>
+                            <td>".$row->datecreated."</td>
+                            <td>".$status."</td>
+                            <td><a href='deactivatescholarshipallocation/".$row->scholarshipid."' class='btn btn-primary btn-xs'>Deactivate</a></td>
+                          </tr>";
+                        }
+                        ?>
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                          <th>Description</th>
+                          <th>Scholarship Type</th>
+                          <th>Payment Type</th>
+                          <th>Amount</th>
+                          <th>Date Created</th>
+                          <th>Status</th>
+                          <th></th>
+                        </tr>
+                        </tfoot>
+                      </table>
+                  </div>
+                  <div class="tab-pane fade" id="scholarshipallocation" role="tabpanel" aria-labelledby="scholarshipallocation-tab">
+                      <br>
+                      <table id="example1" class="table table-bordered table-striped">
+                        <thead>
+                        <tr>
+                          <th>Client</th>
+                          <th>Scholarship</th>
+                          <th>Status</th>
+                          <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <?php
+                        foreach ($clientscholarship as $row) {
+                          if($row->bactive == 1) {
+                            $status = "Active";
+                          } else {
+                            $status = "Inactive";
+                          }
+                          echo "<tr>
+                            <td>".$row->client_surname.", ".$row->client_firstname."</td>
+                            <td>".$row->description."</td>
+                            <td>".$status."</td>
+                            <td><a href='deactivatescholarshipallocation/".$row->csid."' class='btn btn-primary btn-xs'>Deactivate</a></td>
+                          </tr>";
+                        }
+                        ?>
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                          <th>Client</th>
+                          <th>Scholarship</th>
+                          <th>Status</th>
+                          <th></th>
+                        </tr>
+                        </tfoot>
+                      </table>
+                  </div>
+              </div>
+
+              
             </div>
             <!-- /.card-body -->
           </div>
           <!-- /.card -->
-
-          <div class="card">
-            <div class="card-header">
-              <h3 class="card-title"><a href="newscholarshipfile">Add New Scholarship File</a></h3>
-            </div>
-            <!-- /.card-header -->
-            <div class="card-body">
-              <table id="example2" class="table table-bordered table-striped">
-                <thead>
-                <tr>
-                  <th>Description</th>
-                  <th>Scholarship Type</th>
-                  <th>Payment Type</th>
-                  <th>Amount</th>
-                  <th>Date Created</th>
-                  <th>Status</th>
-                  <th></th>
-                </tr>
-                </thead>
-                <tbody>
-                <?php
-                foreach ($scholarships as $row) {
-                  if($row->bactive == 1) {
-                    $status = "Active";
-                  } else {
-                    $status = "Inactive";
-                  }
-                  echo "<tr>
-                    <td>".$row->description."</td>
-                    <td>".$row->type."</td>
-                    <td>".$row->identity."</td>
-                    <td>".$row->amount."</td>
-                    <td>".$row->datecreated."</td>
-                    <td>".$status."</td>
-                    <td><a href='deactivatescholarshipallocation/".$row->scholarshipid."' class='btn btn-primary btn-xs'>Deactivate</a></td>
-                  </tr>";
-                }
-                ?>
-                </tbody>
-                <tfoot>
-                <tr>
-                  <th>Description</th>
-                  <th>Scholarship Type</th>
-                  <th>Payment Type</th>
-                  <th>Amount</th>
-                  <th>Date Created</th>
-                  <th>Status</th>
-                  <th></th>
-                </tr>
-                </tfoot>
-              </table>
-            </div>
-            <!-- /.card-body -->
-          </div>
-          <!-- /.card -->
-
         </div>
         <!-- /.col -->
       </div>
