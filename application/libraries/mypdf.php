@@ -8,13 +8,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  *
  */
 
-use fpdf\fpdf;
-class PDF extends FPDF {
-            function Header(){
-                $this->Cell(12);
-                $this->Image('assetpics/template.png',10,10,191);
-                $this->Cell(12);
-            }
-        }
-  
+//use fpdf\fpdf;
+//require 'fpdf/fpdf.php';
+
+class MyPDF {
+	public function __construct() {
+		include APPPATH . 'third_party/fpdf/fpdf.php';
+	}
+}
 /* End of file Pdf.php */

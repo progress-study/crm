@@ -197,14 +197,16 @@
             <div class="card text-white bg-primary mb-3" style="max-width: 25rem;">
               <div class="card-header">Student Application Status</div>
               <div class="card-body">
-                <form action="" method="post">
+                <form action="student_application_report" method="post">
                   <div class="mb-3">
-                    <label for="clientvisaid" class="form-label">Date From</label>
-                    <input type="date" name="datefrom" class="form-control">
-                  </div>
-                  <div class="mb-3">
-                    <label for="clientvisaid" class="form-label">Date From</label>
-                    <input type="date" name="datefrom" class="form-control">
+                    <label for="status" class="form-label">Status</label>
+                    <select name="status" id="status" class="form-control" required="">
+                      <option value="" selected="">Status</option>
+                      <option value="Discontinue">Discontinue</option>
+                      <option value="WIP">WIP</option>
+                      <option value="Completed">Completed</option>
+                      <option value="Visa Refused">Visa Refused</option>
+                    </select>
                   </div>
                   <button type="submit" class="btn btn-success">Generate Report</button>
                 </form>
@@ -310,14 +312,17 @@
             <div class="card text-white bg-primary mb-3" style="max-width: 25rem;">
               <div class="card-header">Visa Application Status</div>
               <div class="card-body">
-                <form action="" method="post">
+                <form action="visa_application_report" method="post">
                   <div class="mb-3">
-                    <label for="clientvisaid" class="form-label">Date From</label>
-                    <input type="date" name="datefrom" class="form-control">
-                  </div>
-                  <div class="mb-3">
-                    <label for="clientvisaid" class="form-label">Date From</label>
-                    <input type="date" name="datefrom" class="form-control">
+                    <label for="status" class="form-label">Status</label>
+                    <select name="status" id="status" class="form-control" required="">
+                        <option value="">Please Select Status</option>
+                        <option value="Discontinue">Discontinue</option>
+                        <option value="WIP">WIP</option>
+                        <option value="Completed">Completed</option>
+                        <option value="Visa Refused">Visa Refused</option>
+                        <option value="Submitted">Submitted</option>
+                    </select>
                   </div>
                   <button type="submit" class="btn btn-success">Generate Report</button>
                 </form>
@@ -328,14 +333,18 @@
             <div class="card text-white bg-primary mb-3" style="max-width: 25rem;">
               <div class="card-header">Visa EOI</div>
               <div class="card-body">
-                <form action="" method="post">
+                <form action="visa_eoi" method="post">
                   <div class="mb-3">
                     <label for="clientvisaid" class="form-label">Date From</label>
-                    <input type="date" name="datefrom" class="form-control">
-                  </div>
-                  <div class="mb-3">
-                    <label for="clientvisaid" class="form-label">Date From</label>
-                    <input type="date" name="datefrom" class="form-control">
+                    <select name="status" id="status" class="form-control" required="">
+                        <option value="">Please Select Flag</option>
+                        <option value="All">All</option>
+                        <option value="Expired">Expired</option>
+                        <option value="Discontinued">Discontinued</option>
+                        <option value="Invited">Invited</option>
+                        <option value="Created">Created</option>
+                        <option value="Submitted">Submitted</option>
+                    </select>
                   </div>
                   <button type="submit" class="btn btn-success">Generate Report</button>
                 </form>
@@ -346,14 +355,14 @@
             <div class="card text-white bg-primary mb-3" style="max-width: 25rem;">
               <div class="card-header">Visa Accounts</div>
               <div class="card-body">
-                <form action="" method="post">
+                <form action="visa_account" method="post">
                   <div class="mb-3">
                     <label for="clientvisaid" class="form-label">Date From</label>
                     <input type="date" name="datefrom" class="form-control">
                   </div>
                   <div class="mb-3">
-                    <label for="clientvisaid" class="form-label">Date From</label>
-                    <input type="date" name="datefrom" class="form-control">
+                    <label for="clientvisaid" class="form-label">Date To</label>
+                    <input type="date" name="dateto" class="form-control">
                   </div>
                   <button type="submit" class="btn btn-success">Generate Report</button>
                 </form>

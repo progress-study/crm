@@ -78,3 +78,7 @@ $route['updatevisaaccount'] = 'visacontroller/updatevisaaccount';
 // Reports routes
 $route['reports'] = 'reportscontroller/index';
 $route['generatereportdefault'] = 'reportscontroller/generatereportdefault';
+$route['student_application_report'] = 'reportscontroller/student_application_report';
+$route['visa_application_report'] = 'reportscontroller/visa_application_report';
+$route['visa_eoi'] = 'reportscontroller/visa_eoi';
+$route['visa_account'] = 'reportscontroller/visa_account';
