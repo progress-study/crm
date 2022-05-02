@@ -149,6 +149,14 @@
               </p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="<?php echo base_url().'index.php/reports'; ?>" class="nav-link<?php if($title == 'Reports'){ echo ' active';} ?>">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Reports
+              </p>
+            </a>
+          </li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
