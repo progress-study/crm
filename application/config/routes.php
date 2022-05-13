@@ -82,3 +82,6 @@ $route['student_application_report'] = 'reportscontroller/student_application_re
 $route['visa_application_report'] = 'reportscontroller/visa_application_report';
 $route['visa_eoi'] = 'reportscontroller/visa_eoi';
 $route['visa_account'] = 'reportscontroller/visa_account';
+
+// Inquiries routes
+$route['inquiries'] = 'inquiriescontroller/index';

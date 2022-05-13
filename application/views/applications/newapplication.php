@@ -121,6 +121,14 @@
             </a>
           </li>
           <li class="nav-item">
+            <a href="<?php echo base_url(); ?>index.php/inquiries" class="nav-link<?php if($title == 'Inquiries'){ echo ' active';} ?>">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Inquiries
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="<?php echo base_url(); ?>index.php/requireddocuments" class="nav-link<?php if($title == 'Required Documents'){ echo ' active';} ?>">
               <i class="nav-icon fas fa-th"></i>
               <p>

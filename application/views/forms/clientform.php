@@ -8,7 +8,8 @@
 <link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css' rel='stylesheet'>
 <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet'>
 <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
-<style>body {
+<style>
+    body {
     background-color: #FFEBEE
 }
 
@@ -133,13 +134,28 @@ label.radio input:checked+span {
             <div class="row">
                 <div class="col-sm-12">
                     <div class="form-group">
-                        <select class="form-control" name="nationality" required>
-                            <option>Select Nationality</option>
+                        <select class="form-control" name="country" required>
+                            <option>Select Country</option>
                             <?php
                                 foreach ($nationality as $row1) {
-                                  echo "<option>".$row1->nationality."</option>";
+                                  echo "<option>".$row1->en_short_name."</option>";
                                 }
                             ?>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <select class="form-control" name="city" required>
+                            <option>Select City</option>
+                            <option>Jakarta</option>
+                            <option>Manila</option>
+                            <option>Melbourne</option>
+                            <option>Sydney</option>
+                            <option>Surabaya</option>
+                            <option>Other</option>
                         </select>
                     </div>
                 </div>
@@ -194,12 +210,6 @@ label.radio input:checked+span {
                 <div class="col-sm-12">
                     <div class="form-group">
                         <!-- <label for="name">Name</label> --> <textarea class="form-control" name="notes" placeholder="Notes"></textarea>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="form-group">
-                        <textarea class="form-control" name="location" placeholder="Specific Location"></textarea>
                 </div>
             </div>
             <div class=" d-flex flex-column text-center px-5 mt-3 mb-3"><small><input type="checkbox" id="confirm1" name="confirm1"> I have read, understood and content to the Privacy Policy (clickable)</small></div>

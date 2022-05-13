@@ -23,6 +23,8 @@
 <div class="wrapper">
   <!-- Navbar -->
   <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+    
+
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
       <!-- Notifications Dropdown Menu -->
@@ -66,6 +68,7 @@
     <!-- Brand Logo -->
     <a href="index3.html" class="brand-link">
       <center><img src="<?php echo $asset_url; ?>images/logomainwhite.png" alt="PSC Logo" width="140px"></center>
+
     </a>
 
     <!-- Sidebar -->
@@ -183,9 +186,8 @@
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="dashboard">Home</a></li>
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
               <li class="breadcrumb-item active"><?php echo $title; ?></li>
-              <li class="breadcrumb-item active"><a href="programs">Programs</a></li>
             </ol>
           </div>
         </div>
@@ -198,44 +200,44 @@
         <div class="col-12">
     
           <div class="card">
-            <div class="card-header">
-              <h3 class="card-title"><a href="newschool">Add New School</a></h3>
-            </div>
             <!-- /.card-header -->
             <div class="card-body">
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                  <th>School</th>
-                  <th>Marketing Contact Name</th>
-                  <th>Admin Contact Name</th>
-                  <th>Finance Contact Name</th>
-                  <th>Mailing Address</th>
-                  <th>Actions</th>
+                  <th>Inquirer Name</th>
+                  <th>Birthday</th>
+                  <th>Phone Number</th>
+                  <th>Mobile Number</th>
+                  <th>Email Address</th>
+                  <th>Address</th>
+                  <th></th>
                 </tr>
                 </thead>
                 <tbody>
                 <?php
-                foreach ($schools as $row) {
+                foreach ($inquiries as $row) {
                   echo "<tr>
-                    <td>".$row->provider_name."</td>
-                    <td>".$row->provider_marketing_contact_name."</td>
-                    <td>".$row->provider_admin_contact_name."</td>
-                    <td>".$row->provider_finance_contact_name."</td>
-                    <td>".$row->provider_mailing_address."</td>
-                    <td><a href='#' class='btn btn-primary btn-xs'>Edit</a></td>
+                    <td>".$row->inquiries_surname.", ".$row->inquiries_firstname." ".$row->inquiries_middlename."</td>
+                    <td>".$row->inquiries_dob_month."/".$row->inquiries_dob_day."/".$row->inquiries_dob_year."</td>
+                    <td>".$row->inquiries_phoneno."</td>
+                    <td>".$row->inquiries_mobileno."</td>
+                    <td>".$row->inquiries_email."</td>
+                    <td>".$row->inquiries_address."</td>
+                    <td><a href='#' class='btn btn-primary btn-xs'>View</a> <a href='#' class='btn btn-primary btn-xs'>Approve as Client</a> <a href='#' class='btn btn-primary btn-xs'>Delete</a></td>
                   </tr>";
                 }
                 ?>
                 </tbody>
                 <tfoot>
                 <tr>
-                  <th>School</th>
-                  <th>Marketing Contact Name</th>
-                  <th>Admin Contact Name</th>
-                  <th>Finance Contact Name</th>
-                  <th>Mailing Address</th>
-                  <th>Actions</th>
+                  <th>Inquirer Name</th>
+                  <th>Birthday</th>
+                  <th>Phone Number</th>
+                  <th>Mobile Number</th>
+                  <th>Email Address</th>
+                  <th>Address</th>
+                  <th></th>
                 </tr>
                 </tfoot>
               </table>
