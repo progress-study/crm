@@ -207,10 +207,10 @@
                 <tr>
                   <th>Inquirer Name</th>
                   <th>Birthday</th>
-                  <th>Phone Number</th>
                   <th>Mobile Number</th>
                   <th>Email Address</th>
                   <th>Address</th>
+                  <th>Status</th>
                   <th></th>
                 </tr>
                 </thead>
@@ -220,11 +220,11 @@
                   echo "<tr>
                     <td>".$row->inquiries_surname.", ".$row->inquiries_firstname." ".$row->inquiries_middlename."</td>
                     <td>".$row->inquiries_dob_month."/".$row->inquiries_dob_day."/".$row->inquiries_dob_year."</td>
-                    <td>".$row->inquiries_phoneno."</td>
                     <td>".$row->inquiries_mobileno."</td>
                     <td>".$row->inquiries_email."</td>
                     <td>".$row->inquiries_address."</td>
-                    <td><a href='#' class='btn btn-primary btn-xs'>View</a> <a href='#' class='btn btn-primary btn-xs'>Approve as Client</a> <a href='#' class='btn btn-primary btn-xs'>Delete</a></td>
+                    <td>".$row->inquiries_status."</td>
+                    <td><a href='#' class='btn btn-primary btn-xs'>View</a> <a href='transferinquirytoclient/".$row->inquiries_id."' class='btn btn-primary btn-xs'>Approve as Client</a> <a href='deleteinquiry/".$row->inquiries_id."' class='btn btn-danger btn-xs'>Delete</a></td>
                   </tr>";
                 }
                 ?>
@@ -233,10 +233,10 @@
                 <tr>
                   <th>Inquirer Name</th>
                   <th>Birthday</th>
-                  <th>Phone Number</th>
                   <th>Mobile Number</th>
                   <th>Email Address</th>
                   <th>Address</th>
+                  <th>Status</th>
                   <th></th>
                 </tr>
                 </tfoot>

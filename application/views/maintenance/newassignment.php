@@ -232,6 +232,17 @@
                     ?>
                   </select>
                 </div>
+                <div class="mb-3">
+                  <label for="payee" class="form-label">City</label>
+                  <select class="form-control select2" name="city">
+                            <option value="Jakarta">Jakarta</option>
+                            <option value="Manila">Manila</option>
+                            <option value="Melbourne">Melbourne</option>
+                            <option value="Sydney">Sydney</option>
+                            <option value="Surabaya">Surabaya</option>
+                            <option value="Other">Other</option>
+                  </select>
+                </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
               </form>
 

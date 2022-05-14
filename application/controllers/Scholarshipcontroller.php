@@ -15,7 +15,7 @@ class Scholarshipcontroller extends CI_Controller {
 	    $query1 = $this->db->query($sql1);
 	    $clientscholarship = $query1->result();
 
-	    $sql2 = "SELECT * FROM scholarships s inner join mastersetting m on s.paymenttype = m.id";
+	    $sql2 = "SELECT s.scholarshipid,s.description,s.type,m.identity,s.amount,s.datecreated,ep.provider_name,sp.program,s.bactive FROM scholarships s inner join mastersetting m on s.paymenttype = m.id inner join education_provider ep on s.school = ep.provider_id inner join schoolprograms sp on s.program = sp.spid";
 	    $query2 = $this->db->query($sql2);
 	    $scholarships = $query2->result();
 
@@ -49,11 +49,22 @@ class Scholarshipcontroller extends CI_Controller {
 		$data['title'] = "New Scholarship File";
 		$data['asset_url'] = $asset_url;
 
+
+	    $sql3 = "SELECT * FROM education_provider";
+	    $query3 = $this->db->query($sql3);
+	    $education_provider = $query3->result();
+
+	    $sql3 = "SELECT * FROM schoolprograms";
+	    $query3 = $this->db->query($sql3);
+	    $schoolprograms = $query3->result();
+
 		$sql2 = "SELECT * FROM mastersetting WHERE details = 'For scholarship payment type'";
 	    $query2 = $this->db->query($sql2);
 	    $mastersetting = $query2->result();
 
 	    $data['mastersetting'] = $mastersetting;
+	    $data['education_provider'] = $education_provider;
+		$data['schoolprograms'] = $schoolprograms;
 
 		if(isset($this->session->officer_name)) {
 			$this->load->view('scholarship/newscholarshipfile', $data);
@@ -75,6 +86,8 @@ class Scholarshipcontroller extends CI_Controller {
 					'paymenttype' => $this->input->post('paymenttype'),
 					'amount' => $this->input->post('amount'),
 					'datecreated' => date('Y-m-d'),
+					'school' => $this->input->post('school'),
+					'program' => $this->input->post('program'),
 					'bactive' => 1
 				);
 		$this->db->insert('scholarships', $data);

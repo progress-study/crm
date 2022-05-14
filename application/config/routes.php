@@ -53,6 +53,8 @@ $route['newofficer'] = 'adminmaintenancecontroller/newofficer';
 $route['saveofficer'] = 'adminmaintenancecontroller/saveofficer';
 $route['newassignment'] = 'adminmaintenancecontroller/newassignment';
 $route['saveassignment'] = 'adminmaintenancecontroller/saveassignment';
+$route['saveemailcontent'] = 'adminmaintenancecontroller/saveemailcontent';
+$route['saveparameters'] = 'adminmaintenancecontroller/saveparameters';
 
 // Scholarship routes
 $route['scholarships'] = 'scholarshipcontroller/index';
@@ -85,3 +87,5 @@ $route['visa_account'] = 'reportscontroller/visa_account';
 
 // Inquiries routes
 $route['inquiries'] = 'inquiriescontroller/index';
+$route['deleteinquiry/(:any)'] = 'inquiriescontroller/deleteinquiry/$1';
+$route['transferinquirytoclient/(:any)'] = 'inquiriescontroller/transferinquirytoclient/$1';

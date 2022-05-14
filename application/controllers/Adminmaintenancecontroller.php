@@ -27,6 +27,10 @@ class Adminmaintenancecontroller extends CI_Controller {
 	    $query2 = $this->db->query($sql2);
 	    $emailcontents = $query2->result();
 
+	    $sql2 = "SELECT * FROM parameters LIMIT 1";
+	    $query2 = $this->db->query($sql2);
+	    $parameters = $query2->result();
+
         $asset_url = base_url()."assets/";
 		$data['title'] = "Admin Maintenance";
 		$data['asset_url'] = $asset_url;
@@ -35,6 +39,7 @@ class Adminmaintenancecontroller extends CI_Controller {
 		$data['officer'] = $officer;
 		$data['officerassignment'] = $officerassignment;
 		$data['emailcontents'] = $emailcontents;
+		$data['parameters'] = $parameters;
 
 		if(isset($this->session->officer_name)) {
 			$this->load->view('maintenance/index', $data);
@@ -190,16 +195,48 @@ class Adminmaintenancecontroller extends CI_Controller {
 
 	public function saveassignment()
 	{
-
 		$data = array(
 					'officer_id' => $this->input->post('officer'),
 					'region_id' => $this->input->post('region'),
+					'city' => $this->input->post('city'),
 					'datecreated' => date("Y-m-d"),
 					'bactive' => 1
 				);
 		$this->db->insert('officerassignment', $data);
 		redirect('adminmaintenance');
 	}
-	
+
+	public function saveemailcontent()
+	{
+		$this->db->set('iaremailheader', $this->input->post('iaremailheader'));
+		$this->db->set('iaremailbody', $this->input->post('iaremailbody'));
+		$this->db->set('iaremailfooter', $this->input->post('iaremailfooter'));
+		$this->db->set('memailheader', $this->input->post('memailheader'));
+		$this->db->set('memailbody', $this->input->post('memailbody'));
+		$this->db->set('memailfooter', $this->input->post('memailfooter'));
+		$this->db->set('remailheader', $this->input->post('remailheader'));
+		$this->db->set('remailbody', $this->input->post('remailbody'));
+		$this->db->set('remailfooter', $this->input->post('remailfooter'));
+		$this->db->update('emailcontents');
+	}
+
+	public function saveparameters()
+	{
+		$this->db->set('account_name', $this->input->post('account_name'));
+		$this->db->set('bank_name', $this->input->post('bank_name'));
+		$this->db->set('branch_name', $this->input->post('branch_name'));
+		$this->db->set('bsb_no', $this->input->post('bsb_no'));
+		$this->db->set('account_no', $this->input->post('account_no'));
+		$this->db->set('invoice_due_day', $this->input->post('invoice_due_day'));
+		$this->db->set('invoice_prefix', $this->input->post('invoice_prefix'));
+		$this->db->set('address', $this->input->post('address'));
+		$this->db->set('phoneno', $this->input->post('phoneno'));
+		$this->db->set('faxno', $this->input->post('faxno'));
+		$this->db->set('email', $this->input->post('email'));
+		$this->db->set('abn', $this->input->post('abn'));
+		$this->db->set('redeemable_point', $this->input->post('redeemable_point'));
+		$this->db->update('parameters');
+	}
+
 
 }

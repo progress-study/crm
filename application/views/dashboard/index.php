@@ -246,6 +246,62 @@
           </div>
         </div>
 
+        <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Status Card</h3>
+            </div>
+            <div class="card-body">
+              Legend: <span class="badge badge-danger">No record</span> <span class="badge badge-warning">Partial</span> <span class="badge badge-success">Complete</span>
+              <br><br> 
+              <table id="example1" class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Inquired</th>
+                  <th>Transferred as Client</th>
+                  <th>Documents</th>
+                  <th>Visa Completed</th>
+                  <th>Payments</th>
+                  <th>Completed</th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php
+                
+                foreach ($clients as $row) {
+                  echo "<tr>
+                    <td>".$row->client_surname.", ".$row->client_firstname." ".$row->client_middlename."</td>
+                    <td style='background: #dc3545;'></td>
+                    <td style='background: #dc3545;'></td>
+                    <td style='background: #ffc107;'></td>
+                    <td style='background: #ffc107;'></td>
+                    <td style='background: #28a745;'></td>
+                    <td style='background: #28a745;'></td>
+                  </tr>";
+                }
+
+                
+                ?>
+                </tbody>
+                <tfoot>
+                <tr>
+                  <th>Name</th>
+                  <th>Inquired</th>
+                  <th>Transferred as Client</th>
+                  <th>Documents</th>
+                  <th>PR</th>
+                  <th>Payments</th>
+                  <th>Completed</th>
+                </tr>
+                </tfoot>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
         <!--
         <div class="row">
           <section class="col-lg-7 connectedSortable">

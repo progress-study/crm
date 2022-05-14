@@ -231,6 +231,26 @@
                   </select>
                 </div>
                 <div class="mb-3">
+                  <label for="program" class="form-label">School</label>
+                  <select class="form-control select2" name="school" required>
+                    <?php
+                    foreach ($education_provider as $row) {
+                      echo "<option value='".$row->provider_id."'>".$row->provider_name."</option>";
+                    }
+                    ?>
+                  </select>
+                </div>
+                <div class="mb-3">
+                  <label for="program" class="form-label">Program</label>
+                  <select class="form-control select2" name="program" required>
+                    <?php
+                    foreach ($schoolprograms as $row) {
+                      echo "<option value='".$row->spid."'>".$row->program."</option>";
+                    }
+                    ?>
+                  </select>
+                </div>
+                <div class="mb-3">
                   <label for="amount" class="form-label">Description</label>
                   <textarea class="form-control" name="description" placeholder="Description" required></textarea>
                 </div>

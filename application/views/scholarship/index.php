@@ -220,6 +220,8 @@
                           <th>Payment Type</th>
                           <th>Amount</th>
                           <th>Date Created</th>
+                          <th>School</th>
+                          <th>Program</th>
                           <th>Status</th>
                           <th></th>
                         </tr>
@@ -238,6 +240,8 @@
                             <td>".$row->identity."</td>
                             <td>".$row->amount."</td>
                             <td>".$row->datecreated."</td>
+                            <td>".$row->provider_name."</td>
+                            <td>".$row->program."</td>
                             <td>".$status."</td>
                             <td><a href='deactivatescholarshipallocation/".$row->scholarshipid."' class='btn btn-primary btn-xs'>Deactivate</a></td>
                           </tr>";
@@ -251,6 +255,8 @@
                           <th>Payment Type</th>
                           <th>Amount</th>
                           <th>Date Created</th>
+                          <th>School</th>
+                          <th>Program</th>
                           <th>Status</th>
                           <th></th>
                         </tr>

@@ -217,6 +217,9 @@
                   <li class="nav-item">
                     <a class="nav-link" id="emailcontent-tab" data-toggle="tab" href="#emailcontent" role="tab" aria-controls="emailcontent" aria-selected="false">Email Contents</a>
                   </li>
+                  <li class="nav-item">
+                    <a class="nav-link" id="parameters-tab" data-toggle="tab" href="#parameters" role="tab" aria-controls="parameters" aria-selected="false">Parameters</a>
+                  </li>
                 </ul>
             <div class="tab-content" id="myTabContent">
               <div class="tab-pane fade show active" id="officer1" role="tabpanel" aria-labelledby="officer1-tab">
@@ -275,6 +278,7 @@
                       <tr>
                         <th>Officer Name</th>
                         <th>Region</th>
+                        <th>City</th>
                         <th>Date Created</th>
                         <th></th>
                       </tr>
@@ -285,6 +289,7 @@
                         echo "<tr>
                           <td>".$row->officer_name."</td>
                           <td>".$row->region_name."</td>
+                          <td>".$row->city."</td>
                           <td>".$row->datecreated."</td>
                           <td><a href='editofficer/".$row->oaid."' class='btn btn-danger btn-xs'>Deactivate</a></td>
                         </tr>";
@@ -383,6 +388,73 @@
                       <div class="mb-3">
                         <label for="memailfooter" class="form-label">Email footer</label>
                         <textarea class="form-control" name="remailfooter" placeholder="Email footer" required><?php echo $row6->remailfooter; ?></textarea>
+                      </div>
+                      <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                    <?php
+                      }
+                      ?>
+                  </div>
+                  <!-- /.card-body -->
+              </div>
+              <div class="tab-pane fade" id="parameters" role="tabpanel" aria-labelledby="parameters-tab">
+                  <div class="card-body">
+                     <?php
+                      foreach ($parameters as $row7) {
+                      ?>
+                    <form action="saveparameters" method="post">
+                      <h5>Parameters</h5>
+                      <div class="mb-3">
+                        <label for="iaremailheader" class="form-label">Account Name</label>
+                        <textarea class="form-control" name="account_name" placeholder="Email header" required><?php echo $row7->account_name; ?></textarea>
+                      </div>
+                      <div class="mb-3">
+                        <label for="iaremailbody" class="form-label">Bank Name</label>
+                        <textarea class="form-control" name="bank_name" placeholder="Email body" required><?php echo $row7->bank_name; ?></textarea>
+                      </div>
+                      <div class="mb-3">
+                        <label for="iaremailfooter" class="form-label">Branch Name</label>
+                        <textarea class="form-control" name="branch_name" placeholder="Email footer" required><?php echo $row7->branch_name; ?></textarea>
+                      </div>
+                      <div class="mb-3">
+                        <label for="memailheader" class="form-label">BSB No</label>
+                        <textarea class="form-control" name="bsb_no" placeholder="Email header" required><?php echo $row7->bsb_no; ?></textarea>
+                      </div>
+                      <div class="mb-3">
+                        <label for="memailbody" class="form-label">Account No</label>
+                        <textarea class="form-control" name="account_no" placeholder="Email body" required><?php echo $row7->account_no; ?></textarea>
+                      </div>
+                      <div class="mb-3">
+                        <label for="memailfooter" class="form-label">Invoice Due Date</label>
+                        <textarea class="form-control" name="invoice_due_day" placeholder="Email footer" required><?php echo $row7->invoice_due_day; ?></textarea>
+                      </div>
+                      <div class="mb-3">
+                        <label for="memailheader" class="form-label">Invoice Prefix</label>
+                        <textarea class="form-control" name="invoice_prefix" placeholder="Email header" required><?php echo $row7->invoice_prefix; ?></textarea>
+                      </div>
+                      <div class="mb-3">
+                        <label for="memailbody" class="form-label">Address</label>
+                        <textarea class="form-control" name="address" placeholder="Email body" required><?php echo $row7->address; ?></textarea>
+                      </div>
+                      <div class="mb-3">
+                        <label for="memailfooter" class="form-label">Phone no</label>
+                        <textarea class="form-control" name="phoneno" placeholder="Email footer" required><?php echo $row7->phoneno; ?></textarea>
+                      </div>
+                      <div class="mb-3">
+                        <label for="memailfooter" class="form-label">Fax no</label>
+                        <textarea class="form-control" name="faxno" placeholder="Email footer" required><?php echo $row7->faxno; ?></textarea>
+                      </div>
+                      <div class="mb-3">
+                        <label for="memailheader" class="form-label">Email</label>
+                        <textarea class="form-control" name="email" placeholder="Email header" required><?php echo $row7->email; ?></textarea>
+                      </div>
+                      <div class="mb-3">
+                        <label for="memailbody" class="form-label">ABN</label>
+                        <textarea class="form-control" name="abn" placeholder="Email body" required><?php echo $row7->abn; ?></textarea>
+                      </div>
+                      <div class="mb-3">
+                        <label for="memailfooter" class="form-label">Redeemable Point</label>
+                        <textarea class="form-control" name="redeemable_point" placeholder="Email footer" required><?php echo $row7->redeemable_point; ?></textarea>
                       </div>
                       <button type="submit" class="btn btn-primary">Submit</button>
                     </form>

@@ -29,6 +29,10 @@ class Dashboardcontroller extends CI_Controller {
 		$query4 = $this->db->query($sql4);
 		$education_provider = $query4->num_rows();
 
+		$sql5 = "SELECT * FROM client";
+        $query5 = $this->db->query($sql5);
+        $client = $query5->result();
+
 		$data['title'] = "Dashboard";
 		$data['asset_url'] = $asset_url;
 
@@ -36,6 +40,7 @@ class Dashboardcontroller extends CI_Controller {
 		$data['student_application'] = $student_application;
 		$data['pr_application'] = $pr_application;
 		$data['education_provider'] = $education_provider;
+		$data['clients'] = $client;
 
 		$this->load->view('dashboard/index', $data);
 	}

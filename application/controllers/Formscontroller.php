@@ -44,9 +44,15 @@ class Formscontroller extends CI_Controller {
     	$birthday = $birthdate->format("d");
 
     	if($this->input->post('confirm2') !== "") {
-    		$confirm2 = 'off';
-    	} else {
     		$confirm2 = 'on';
+    	} else {
+    		$confirm2 = 'off';
+    	}
+
+    	if($this->input->post('confirm1') !== "") {
+    		$confirm1 = 'on';
+    	} else {
+    		$confirm1 = 'off';
     	}
 
     	if ($this->input->post('password') == $this->input->post('password2')) {
@@ -68,11 +74,12 @@ class Formscontroller extends CI_Controller {
 						'inquiries_country' => $this->input->post('country'),
 						'inquiries_city' => $this->input->post('city'),
 						'inquiries_notes' => $this->input->post('notes'),
-						'inquiries_privacy_consent' => $this->input->post('confirm1'),
-						'inquiries_info_receiving_consent' => $confirm2
+						'inquiries_privacy_consent' => $confirm1,
+						'inquiries_info_receiving_consent' => $confirm2,
+						'inquiries_status' => 'Created'
 					);
 			$this->db->insert('inquiries', $data);
-
+/*
 			$message = "
 							<!DOCTYPE html>
 							<html>
@@ -108,13 +115,13 @@ class Formscontroller extends CI_Controller {
 			$this->load->library('phpmailer_lib');
 	        $mail = $this->phpmailer_lib->load();
   
-		    $mail->SMTPDebug = 1;                    //Enable verbose debug output
-		    $mail->isSMTP();                                            //Send using SMTP
-		    $mail->Host       = 'ssl://smtp.gmail.com';                     //Set the SMTP server to send through
-		    $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-		    $mail->Username   = 'servicezeronoisemarketing@gmail.com';                     //SMTP username
-		    $mail->Password   = 'lgbnxidtxswccfzr';                               //SMTP password
-		    $mail->SMTPSecure = 'ssl';            //Enable implicit TLS encryption
+		    $mail->SMTPDebug = 1;
+		    $mail->isSMTP();
+		    $mail->Host       = 'ssl://smtp.gmail.com';            
+		    $mail->SMTPAuth   = true;                                
+		    $mail->Username   = 'servicezeronoisemarketing@gmail.com';            
+		    $mail->Password   = 'lgbnxidtxswccfzr';                     
+		    $mail->SMTPSecure = 'ssl';      
 		    $mail->Port       = 465;   
 	        
 	        $mail->setFrom("ramirezkyl@gmail.com");
@@ -125,7 +132,9 @@ class Formscontroller extends CI_Controller {
 	        $mailContent = $message;
 	        $mail->Body = $mailContent;
 	        $mail->send();
+*/
 
+	        redirect('clientform');
 			//$this->load->view('forms/success');
     	} else {
     		echo "<script>alert('Passwords are not matched!');</script>";

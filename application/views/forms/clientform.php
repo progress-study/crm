@@ -191,7 +191,7 @@ label.radio input:checked+span {
             <div class="row">
                 <div class="col-sm-12">
                     <div class="form-group">
-                        <!-- <label for="name">Name</label> --> <input class="form-control" type="number" name="noofdependents" placeholder="No. of Dependents"> </div>
+                        <!-- <label for="name">Name</label> --> <input class="form-control" type="text" name="noofdependents" placeholder="Dependents"> </div>
                 </div>
             </div>
             <div class="row">
