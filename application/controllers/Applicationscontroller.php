@@ -24,11 +24,7 @@ class Applicationscontroller extends CI_Controller {
 		if(isset($this->session->officer_name)) {
 			$this->load->view('applications/index', $data);
 		} else {
-			echo "<script>alert('Please login first to CRM!')</script>";
-			$asset_url = base_url()."assets/";
-			$data['title'] = "User Login";
-		    $data['asset_url'] = $asset_url;
-			$this->load->view('userlogin/index', $data);
+			redirect(base_url()."?error3=1");
 		}
 	}
 
@@ -51,11 +47,7 @@ class Applicationscontroller extends CI_Controller {
 		if(isset($this->session->officer_name)) {
 			$this->load->view('applications/newapplication', $data);
 		} else {
-			echo "<script>alert('Please login first to CRM!')</script>";
-			$asset_url = base_url()."assets/";
-			$data['title'] = "User Login";
-		    $data['asset_url'] = $asset_url;
-			$this->load->view('userlogin/index', $data);
+			redirect(base_url()."?error3=1");
 		}
 
 	}

@@ -4,17 +4,17 @@
 	<title>Progress Study - Login</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="icon" type="image/png" href="<?php echo $asset_url; ?>images/logo.png"/>
-	<link rel="stylesheet" type="text/css" href="<?php echo $asset_url; ?>vendor/bootstrap/css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="<?php echo $asset_url; ?>fonts/font-awesome-4.7.0/css/font-awesome.min.css">
-	<link rel="stylesheet" type="text/css" href="<?php echo $asset_url; ?>fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
-	<link rel="stylesheet" type="text/css" href="<?php echo $asset_url; ?>vendor/animate/animate.css">
-	<link rel="stylesheet" type="text/css" href="<?php echo $asset_url; ?>vendor/css-hamburgers/hamburgers.min.css">
-	<link rel="stylesheet" type="text/css" href="<?php echo $asset_url; ?>vendor/animsition/css/animsition.min.css">
-	<link rel="stylesheet" type="text/css" href="<?php echo $asset_url; ?>vendor/select2/select2.min.css">
-	<link rel="stylesheet" type="text/css" href="<?php echo $asset_url; ?>vendor/daterangepicker/daterangepicker.css">
-	<link rel="stylesheet" type="text/css" href="<?php echo $asset_url; ?>css/util.css">
-	<link rel="stylesheet" type="text/css" href="<?php echo $asset_url; ?>css/main.css">
+	<link rel="icon" type="image/png" href="<?php echo base_url(); ?>assets/images/logo.png"/>
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/vendor/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/vendor/animate/animate.css">
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/vendor/css-hamburgers/hamburgers.min.css">
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/vendor/animsition/css/animsition.min.css">
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/vendor/select2/select2.min.css">
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/vendor/daterangepicker/daterangepicker.css">
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/util.css">
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/main.css">
 </head>
 <body style="background-color: #666666;">
 	
@@ -22,12 +22,25 @@
 		<div class="container-login100">
 			<div class="wrap-login100">
 				<form class="login100-form validate-form" action="index.php/logintypical" method="post">
-					<center><img src='<?php echo $asset_url; ?>images/logomain.png' style="width: 200px;"></center><br>
+					<center><img src='<?php echo base_url(); ?>assets/images/logomain.png' style="width: 200px;"></center><br>
 					<span class="login100-form-title p-b-43">
 						Login to continue
 					</span>
-					
-					
+					<?php 
+					if (isset($_GET['error1'])) {
+					?>
+						<div class="alert alert-danger" role="alert">Incorrect email or password!</div>
+					<?php
+					} else if (isset($_GET['error2'])) {
+					?>
+					    <div class="alert alert-danger" role="alert">This user was already inactive!</div>
+					<?php
+					} else if (isset($_GET['error3'])) {
+					?>
+					    <div class="alert alert-danger" role="alert">Please login first to CRM!</div>
+					<?php
+					}
+					?>
 					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
 						<input class="input100" type="text" name="email">
 						<span class="focus-input100"></span>
@@ -76,21 +89,21 @@
 					</div>
 				</form>
 
-				<div class="login100-more" style="background-image: url('<?php echo $asset_url; ?>images/ps-background.jpg');">
+				<div class="login100-more" style="background-image: url('<?php echo base_url(); ?>assets/images/ps-background.jpg');">
 				</div>
 			</div>
 		</div>
 	</div>
 	
-	<script src="<?php echo $asset_url; ?>vendor/jquery/jquery-3.2.1.min.js"></script>
-	<script src="<?php echo $asset_url; ?>vendor/animsition/js/animsition.min.js"></script>
-	<script src="<?php echo $asset_url; ?>vendor/bootstrap/js/popper.js"></script>
-	<script src="<?php echo $asset_url; ?>vendor/bootstrap/js/bootstrap.min.js"></script>
-	<script src="<?php echo $asset_url; ?>vendor/select2/select2.min.js"></script>
-	<script src="<?php echo $asset_url; ?>vendor/daterangepicker/moment.min.js"></script>
-	<script src="<?php echo $asset_url; ?>vendor/daterangepicker/daterangepicker.js"></script>
-	<script src="<?php echo $asset_url; ?>vendor/countdowntime/countdowntime.js"></script>
-	<script src="<?php echo $asset_url; ?>js/main.js"></script>
+	<script src="<?php echo base_url(); ?>assets/vendor/jquery/jquery-3.2.1.min.js"></script>
+	<script src="<?php echo base_url(); ?>assets/vendor/animsition/js/animsition.min.js"></script>
+	<script src="<?php echo base_url(); ?>assets/vendor/bootstrap/js/popper.js"></script>
+	<script src="<?php echo base_url(); ?>assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+	<script src="<?php echo base_url(); ?>assets/vendor/select2/select2.min.js"></script>
+	<script src="<?php echo base_url(); ?>assets/vendor/daterangepicker/moment.min.js"></script>
+	<script src="<?php echo base_url(); ?>assets/vendor/daterangepicker/daterangepicker.js"></script>
+	<script src="<?php echo base_url(); ?>assets/vendor/countdowntime/countdowntime.js"></script>
+	<script src="<?php echo base_url(); ?>assets/js/main.js"></script>
 
 </body>
 </html>

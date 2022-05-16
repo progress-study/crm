@@ -17,7 +17,7 @@ class Reportscontroller extends CI_Controller {
 		if(isset($this->session->officer_name)) {
 			$this->load->view('reports/index', $data);
 		} else {
-			redirect('');
+			redirect(base_url()."?error3=1");
 		}
 	}
 

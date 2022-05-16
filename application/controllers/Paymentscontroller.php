@@ -31,11 +31,7 @@ class Paymentscontroller extends CI_Controller {
 		if(isset($this->session->officer_name)) {
 			$this->load->view('payments/index', $data);
 		} else {
-			echo "<script>alert('Please login first to CRM!')</script>";
-			$asset_url = base_url()."assets/";
-			$data['title'] = "User Login";
-		    $data['asset_url'] = $asset_url;
-			$this->load->view('userlogin/index', $data);
+			redirect(base_url()."?error3=1");
 		}
 	}
 
@@ -54,7 +50,12 @@ class Paymentscontroller extends CI_Controller {
 		$asset_url = base_url()."assets/";
 		$data['title'] = "Payments";
 		$data['asset_url'] = $asset_url;
-		$this->load->view('payments/newpayment', $data);
+		
+		if(isset($this->session->officer_name)) {
+			$this->load->view('payments/newpayment', $data);
+		} else {
+			redirect(base_url()."?error3=1");
+		}
 	}
 
 	public function savepayment()

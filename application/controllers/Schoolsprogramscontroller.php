@@ -23,11 +23,7 @@ class Schoolsprogramscontroller extends CI_Controller {
 		if(isset($this->session->officer_name)) {
 			$this->load->view('schoolsprograms/schools', $data);
 		} else {
-			echo "<script>alert('Please login first to CRM!')</script>";
-			$asset_url = base_url()."assets/";
-			$data['title'] = "User Login";
-		    $data['asset_url'] = $asset_url;
-			$this->load->view('userlogin/index', $data);
+			redirect(base_url()."?error3=1");
 		}
 	}
 
@@ -40,11 +36,7 @@ class Schoolsprogramscontroller extends CI_Controller {
 		if(isset($this->session->officer_name)) {
 			$this->load->view('schoolsprograms/newschool', $data);
 		} else {
-			echo "<script>alert('Please login first to CRM!')</script>";
-			$asset_url = base_url()."assets/";
-			$data['title'] = "User Login";
-		    $data['asset_url'] = $asset_url;
-			$this->load->view('userlogin/index', $data);
+			redirect(base_url()."?error3=1");
 		}
 	}
 
@@ -90,11 +82,7 @@ class Schoolsprogramscontroller extends CI_Controller {
 		if(isset($this->session->officer_name)) {
 			$this->load->view('schoolsprograms/programs', $data);
 		} else {
-			echo "<script>alert('Please login first to CRM!')</script>";
-			$asset_url = base_url()."assets/";
-			$data['title'] = "User Login";
-		    $data['asset_url'] = $asset_url;
-			$this->load->view('userlogin/index', $data);
+			redirect(base_url()."?error3=1");
 		}
 	}
 
@@ -123,11 +111,7 @@ class Schoolsprogramscontroller extends CI_Controller {
 		if(isset($this->session->officer_name)) {
 			$this->load->view('schoolsprograms/newprogram', $data);
 		} else {
-			echo "<script>alert('Please login first to CRM!')</script>";
-			$asset_url = base_url()."assets/";
-			$data['title'] = "User Login";
-		    $data['asset_url'] = $asset_url;
-			$this->load->view('userlogin/index', $data);
+			redirect(base_url()."?error3=1");
 		}
 	}
 

@@ -214,7 +214,7 @@
                 <h3><?php echo $activeclients; ?></h3>
                 <p>ACTIVE VIEWABLE CLIENTS</p>
               </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="customerinfo" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <div class="col-lg-3 col-6">
@@ -223,7 +223,7 @@
                 <h3><?php echo $student_application; ?></h3>
                 <p>STUDENT APPLICATIONS (WIP)</p>
               </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="applications" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <div class="col-lg-3 col-6">
@@ -240,6 +240,27 @@
               <div class="inner">
                 <h3><?php echo $education_provider; ?></h3>
                 <p>TOTAL NO. OF PROVIDERS</p>
+              </div>
+              <a href="schools" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-3 col-6">
+            <div class="small-box bg-default">
+              <div class="inner">
+                <h3>0</h3>
+                <p>CLIENTS WITH VISA CRITICAL DATES FOR THE NEXT 3 MONTHS</p>
+              </div>
+              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <div class="col-lg-3 col-6">
+            <div class="small-box bg-default">
+              <div class="inner">
+                <h3>0</h3>
+                <p>CLIENTS WITH VISA EXPIRING DATES FOR THE NEXT 3 MONTHS</p>
               </div>
               <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
@@ -271,14 +292,61 @@
                 <?php
                 
                 foreach ($clients as $row) {
+
+                  if ($row->inquiries_id == "") {
+                    $inquiredbg = "#dc3545";
+                    $inquired = "No";
+                  } else {
+                    $inquiredbg = "#28a745";
+                    $inquired = "Yes";
+                  }
+
+                  if ($row->client_inquiries_id == "0") {
+                    $transferredbg = "#dc3545";
+                    $transferred = "No";
+                  } else {
+                    $transferredbg = "#28a745";
+                    $transferred = "Yes";
+                  }
+
+                  $documentbg = "#dc3545";
+                  $document = "No documents uploaded";
+
+                  if ($row->client_visa_id == "") {
+                    $visabg = "#dc3545";
+                    $visa = "No";
+                  } else {
+                    $visabg = "#28a745";
+                    $visa = "Yes";
+                  }
+
+                  if ($row->paymentid == "") {
+                    $paymentbg = "#dc3545";
+                    $payment = "No payment record";
+                  } else {
+                    $paymentbg = "#28a745";
+                    $payment = "Paid";
+                  }
+
+                  if($inquired == "Yes" && $transferred == "Yes" && $document == "Uploaded" && $visa == "Yes" && $payment == "Paid") {
+                    $completebg = "#28a745";
+                    $complete = "Completed";
+                  } elseif($inquired == "No" && $transferred == "No" && $document == "No documents uploaded" && $visa == "No" && $payment == "No payment record") {
+                    $completebg = "#dc3545";
+                    $complete = "No movement";
+                  } else {
+                    $completebg = "#ffc107";
+                    $complete = "Partial completed";
+                  }
+
                   echo "<tr>
                     <td>".$row->client_surname.", ".$row->client_firstname." ".$row->client_middlename."</td>
-                    <td style='background: #dc3545;'></td>
-                    <td style='background: #dc3545;'></td>
-                    <td style='background: #ffc107;'></td>
-                    <td style='background: #ffc107;'></td>
-                    <td style='background: #28a745;'></td>
-                    <td style='background: #28a745;'></td>
+                    <td style='background: ".$inquiredbg."; color: white;'>".$inquired."</td>
+                    <td style='background: ".$transferredbg."; color: white;'>".$transferred."</td>
+                    <td style='background: ".$documentbg."; color: white;'>".$document."</td>
+                    <td style='background: ".$visabg."; color: white;'>".$visa."</td>
+                    <td style='background: ".$paymentbg."; color: white;'>".$payment."</td>
+                    <td style='background: ".$completebg."; color: white;'>".$complete."</td>
                   </tr>";
                 }
 

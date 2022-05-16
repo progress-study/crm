@@ -29,7 +29,18 @@ class Dashboardcontroller extends CI_Controller {
 		$query4 = $this->db->query($sql4);
 		$education_provider = $query4->num_rows();
 
-		$sql5 = "SELECT * FROM client";
+		$sql5 = "SELECT 
+				c.client_surname,
+				c.client_firstname,
+				c.client_middlename,
+				c.client_inquiries_id,
+				i.inquiries_id,
+				vap.client_visa_id,
+				p.paymentid
+				FROM client c
+				LEFT JOIN inquiries i on i.inquiries_id = c.client_inquiries_id
+				LEFT JOIN visa_application vap on vap.client_id = c.client_id
+				LEFT JOIN payments p on p.payee = c.client_id";
         $query5 = $this->db->query($sql5);
         $client = $query5->result();
 
@@ -42,6 +53,11 @@ class Dashboardcontroller extends CI_Controller {
 		$data['education_provider'] = $education_provider;
 		$data['clients'] = $client;
 
-		$this->load->view('dashboard/index', $data);
+		if(isset($this->session->officer_name)) {
+			$this->load->view('dashboard/index', $data);
+		} else {
+			redirect(base_url()."?error3=1");
+		}
+		
 	}
 }

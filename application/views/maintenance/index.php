@@ -77,7 +77,7 @@
           <img src="<?php echo $asset_url; ?>dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Kim Ramirez</a>
+          <a href="#" class="d-block"><?php echo $this->session->officer_name; ?></a>
         </div>
       </div>
 

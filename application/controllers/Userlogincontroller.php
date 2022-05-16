@@ -40,12 +40,12 @@ class UserLoginController extends CI_Controller {
 				$this->session->set_userdata($session_data);
 				redirect('dashboard');
 	    	} else {
-	    		echo "<script>alert('This user was already inactive!');</script>";
-	    		$this->returntologin();
+	    		redirect(base_url()."?error2=1");
+	    		//$this->returntologin();
 	    	}
 		} else {
-			echo "<script>alert('Incorrect email or password!');</script>";
-			$this->returntologin();
+			redirect(base_url()."?error1=1");
+			//$this->returntologin();
 		}
 	}
 
@@ -62,7 +62,7 @@ class UserLoginController extends CI_Controller {
 
 	public function signout () {
 		$this->session->unset_userdata('officer_name','officer_role','officer_status','officer_id','email');
-		redirect('index.php');
+		redirect(base_url());
 	}
 
 }
