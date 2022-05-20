@@ -229,7 +229,7 @@
                 <div class="tab-content" id="myTabContent">
                   <div class="tab-pane fade show active" id="clientinfo" role="tabpanel" aria-labelledby="clientinfo-tab">
                 <br>
-                <form action="Adminmaintenancecontroller/do_upload" method="post" enctype="multipart/form-data">
+                <form action="<?php echo base_url().'index.php/customerinfocontroller/do_upload' ?>" method="post" enctype="multipart/form-data">
                 <?php 
                     if(isset($error)) {
                 ?>
@@ -254,7 +254,7 @@
                   </div>
                   <div class="col-3">
                     <label for="amount" class="form-label">Update Photo:</label>
-                        <input type="file" class="form-control" name="clientphoto">
+                        <input type="file" class="form-control" name="userfile">
                   </div>
                   <div class="col-3">
                     <img src="<?php echo $asset_url; ?>images/<?php echo $row1->client_photo; ?>" style="width: 150px; height: 150px;">

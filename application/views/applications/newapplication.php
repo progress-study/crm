@@ -209,7 +209,7 @@
         </div>
       </div><!-- /.container-fluid -->
     </section>
-
+    <input type="hidden" id="baseurl" value="<?php echo base_url(); ?>">
     <!-- Main content -->
     <section class="content">
       <div class="row">
@@ -327,12 +327,14 @@
 
   $('.select2').select2();
 
+  var baseurl = document.getElementById("baseurl").value;
+
   initialPrograms();
   function initialPrograms() {
     $("#programlist").empty();
     $.ajax({
           type: "GET",
-          url: "http://localhost/progress-study-crm/index.php/getprogramfromschool/1",
+          url: baseurl + "index.php/getprogramfromschool/1",
           success: function(data) {
               var obj = JSON.parse(data);
               //alert(obj[0].program);
@@ -351,7 +353,7 @@
     $("#programlist").empty();
     $.ajax({
           type: "GET",
-          url: "http://localhost/progress-study-crm/index.php/getprogramfromschool/" + id,
+          url: baseurl + "index.php/getprogramfromschool/" + id,
           success: function(data) {
               var obj = JSON.parse(data);
               //alert(obj[0].program);
