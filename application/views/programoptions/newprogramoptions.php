@@ -105,7 +105,7 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item">
-            <a href="dashboard" class="nav-link<?php if($title == 'Dashboard'){ echo ' active';} ?>">
+            <a href="<?php echo base_url().'index.php/dashboard'; ?>" class="nav-link<?php if($title == 'Dashboard'){ echo ' active';} ?>">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
@@ -113,7 +113,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="customerinfo" class="nav-link<?php if($title == 'Client Information'){ echo ' active';} ?>">
+            <a href="<?php echo base_url().'index.php/customerinfo'; ?>" class="nav-link<?php if($title == 'Client Information'){ echo ' active';} ?>">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Client Information
@@ -121,7 +121,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="inquiries" class="nav-link<?php if($title == 'Inquiries'){ echo ' active';} ?>">
+            <a href="<?php echo base_url().'index.php/inquiries'; ?>" class="nav-link<?php if($title == 'Inquiries'){ echo ' active';} ?>">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Inquiries
@@ -129,7 +129,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="schools" class="nav-link<?php if($title == 'Schools and Programs'){ echo ' active';} ?>">
+            <a href="<?php echo base_url().'index.php/schools'; ?>" class="nav-link<?php if($title == 'Schools and Programs'){ echo ' active';} ?>">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Schools and Programs
@@ -137,7 +137,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="applications" class="nav-link<?php if($title == 'Applications'){ echo ' active';} ?>">
+            <a href="<?php echo base_url().'index.php/applications'; ?>" class="nav-link<?php if($title == 'Applications'){ echo ' active';} ?>">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Applications
@@ -145,7 +145,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="adminmaintenance" class="nav-link<?php if($title == 'Admin Maintenance'){ echo ' active';} ?>">
+            <a href="<?php echo base_url().'index.php/adminmaintenance'; ?>" class="nav-link<?php if($title == 'Admin Maintenance'){ echo ' active';} ?>">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Admin Maintenance
@@ -153,7 +153,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="scholarships" class="nav-link<?php if($title == 'Scholarships'){ echo ' active';} ?>">
+            <a href="<?php echo base_url().'index.php/scholarships'; ?>" class="nav-link<?php if($title == 'Scholarships'){ echo ' active';} ?>">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Scholarships
@@ -161,7 +161,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="reports" class="nav-link<?php if($title == 'Reports'){ echo ' active';} ?>">
+            <a href="<?php echo base_url().'index.php/reports'; ?>" class="nav-link<?php if($title == 'Reports'){ echo ' active';} ?>">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Reports
@@ -203,14 +203,51 @@
             <!-- /.card-header -->
             <div class="card-body">
               
-              <form action="saveregion" method="post">
+              <form action="<?php echo base_url(); ?>index.php/saveprogramoptions" method="post">
+                <input type="hidden" id="baseurl" value="<?php echo base_url(); ?>">
+                <input type="hidden" name="client_id" value="<?php echo $client_id; ?>">
                 <div class="mb-3">
-                  <label for="amount" class="form-label">Region Name</label>
-                  <textarea class="form-control" name="regionname" placeholder="Region Name" required></textarea>
+                  <label for="client" class="form-label">School</label>
+                  <select class="form-control select2" name="provider_id" id="provider" onchange="getPrograms()" required>
+                    <?php
+                    foreach ($schools as $row) {
+                      echo "<option value='".$row->provider_id."'>".$row->provider_name."</option>";
+                    }
+                    ?>
+                  </select> 
                 </div>
                 <div class="mb-3">
-                  <label for="amount" class="form-label">Region Description</label>
-                  <textarea class="form-control" name="regiondescription" placeholder="Region Description" required></textarea>
+                  <label for="program" class="form-label">Program</label>
+                  <select class="form-control select2" name="sp_id" id="programlist" required>
+                  </select>
+                </div>
+                <div class="mb-3">
+                  <label for="payee" class="form-label">Indicative Annual Cost</label>
+                  <input type="text" class="form-control" name="indicativeannualcost" placeholder="Indicative Annual Cost" required>
+                </div>
+                <div class="mb-3">
+                  <label for="payee" class="form-label">Duration</label>
+                  <input type="text" class="form-control" name="duration" placeholder="Duration" required>
+                </div>
+                <div class="mb-3">
+                  <label for="amount" class="form-label">Location</label>
+                  <input type="text" class="form-control" name="location" placeholder="Location" required>
+                </div>
+                <div class="mb-3">
+                  <label for="amount" class="form-label">English Requirement</label>
+                  <input type="text" class="form-control" name="englishrequirement" placeholder="English Requirement"" required>
+                </div>
+                <div class="mb-3">
+                  <label for="amount" class="form-label">Intake</label>
+                  <input type="text" class="form-control" name="intake" placeholder="Intake"" required>
+                </div>
+                <div class="mb-3">
+                  <label for="amount" class="form-label">Important To Consider</label>
+                  <input type="text" class="form-control" name="importanttoconsider" placeholder="Important To Consider"" required>
+                </div>
+                <div class="mb-3">
+                  <label for="amount" class="form-label">Migration Pathway</label>
+                  <input type="text" class="form-control" name="migrationpathway" placeholder="Migration Pathway"" required>
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
               </form>
@@ -278,6 +315,51 @@
       "responsive": true,
     });
   });
+  $('.select2').select2();
+</script>
+
+<script>
+
+  var baseurl = document.getElementById("baseurl").value;
+
+  initialPrograms();
+  function initialPrograms() {
+    $("#programlist").empty();
+    $.ajax({
+          type: "GET",
+          url: baseurl + "index.php/getprogramfromschool/1",
+          success: function(data) {
+              var obj = JSON.parse(data);
+              //alert(obj[0].program);
+              for(var i = 0; i < obj.length; i++) {
+                $("#programlist").append("<option value=" + obj[i].spid + ">" + obj[i].program + "</option>");
+              }
+          },
+          error: function(error) {
+            alert("Error!");
+          }
+      });
+  }
+
+  function getPrograms() {
+    var id = document.getElementById("provider").value;
+    $("#programlist").empty();
+    $.ajax({
+          type: "GET",
+          url: baseurl + "index.php/getprogramfromschool/" + id,
+          success: function(data) {
+              var obj = JSON.parse(data);
+              //alert(obj[0].program);
+              for(var i = 0; i < obj.length; i++) {
+                $("#programlist").append("<option value=" + obj[i].spid + ">" + obj[i].program + "</option>");
+              }
+          },
+          error: function(error) {
+            alert("Error!");
+          }
+      });
+  }
+  
 
 </script>
 

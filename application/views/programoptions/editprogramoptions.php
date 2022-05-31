@@ -105,7 +105,7 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item">
-            <a href="dashboard" class="nav-link<?php if($title == 'Dashboard'){ echo ' active';} ?>">
+            <a href="<?php echo base_url().'index.php/dashboard'; ?>" class="nav-link<?php if($title == 'Dashboard'){ echo ' active';} ?>">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
@@ -113,7 +113,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="customerinfo" class="nav-link<?php if($title == 'Client Information'){ echo ' active';} ?>">
+            <a href="<?php echo base_url().'index.php/customerinfo'; ?>" class="nav-link<?php if($title == 'Client Information'){ echo ' active';} ?>">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Client Information
@@ -121,7 +121,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="inquiries" class="nav-link<?php if($title == 'Inquiries'){ echo ' active';} ?>">
+            <a href="<?php echo base_url().'index.php/inquiries'; ?>" class="nav-link<?php if($title == 'Inquiries'){ echo ' active';} ?>">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Inquiries
@@ -129,7 +129,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="schools" class="nav-link<?php if($title == 'Schools and Programs'){ echo ' active';} ?>">
+            <a href="<?php echo base_url().'index.php/schools'; ?>" class="nav-link<?php if($title == 'Schools and Programs'){ echo ' active';} ?>">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Schools and Programs
@@ -137,7 +137,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="applications" class="nav-link<?php if($title == 'Applications'){ echo ' active';} ?>">
+            <a href="<?php echo base_url().'index.php/applications'; ?>" class="nav-link<?php if($title == 'Applications'){ echo ' active';} ?>">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Applications
@@ -145,7 +145,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="adminmaintenance" class="nav-link<?php if($title == 'Admin Maintenance'){ echo ' active';} ?>">
+            <a href="<?php echo base_url().'index.php/adminmaintenance'; ?>" class="nav-link<?php if($title == 'Admin Maintenance'){ echo ' active';} ?>">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Admin Maintenance
@@ -153,7 +153,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="scholarships" class="nav-link<?php if($title == 'Scholarships'){ echo ' active';} ?>">
+            <a href="<?php echo base_url().'index.php/scholarships'; ?>" class="nav-link<?php if($title == 'Scholarships'){ echo ' active';} ?>">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Scholarships
@@ -161,7 +161,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="reports" class="nav-link<?php if($title == 'Reports'){ echo ' active';} ?>">
+            <a href="<?php echo base_url().'index.php/reports'; ?>" class="nav-link<?php if($title == 'Reports'){ echo ' active';} ?>">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Reports
@@ -203,16 +203,106 @@
             <!-- /.card-header -->
             <div class="card-body">
               
-              <form action="saveregion" method="post">
+              <form action="<?php echo base_url(); ?>index.php/updateprogramoptions" method="post">
+                <input type="hidden" id="baseurl" value="<?php echo base_url(); ?>">
+                <input type="hidden" name="poid" value="<?php echo $poid; ?>">
+                <?php
+                    foreach ($programoptions as $row) {
+                ?>
                 <div class="mb-3">
-                  <label for="amount" class="form-label">Region Name</label>
-                  <textarea class="form-control" name="regionname" placeholder="Region Name" required></textarea>
+                  <input type="hidden" name="client_id" value="<?php echo $row->client_id; ?>">
+                  <label for="client" class="form-label">School</label>
+                  <select class="form-control select2" name="provider_id" id="provider" onchange="getPrograms()" required>
+                    <option value="<?php echo $row->provider_id; ?>"><?php echo $row->provider_name; ?></option>
+                    <?php
+                    foreach ($schools as $row2) {
+                      echo "<option value='".$row2->provider_id."'>".$row2->provider_name."</option>";
+                    }
+                    ?>
+                  </select> 
                 </div>
                 <div class="mb-3">
-                  <label for="amount" class="form-label">Region Description</label>
-                  <textarea class="form-control" name="regiondescription" placeholder="Region Description" required></textarea>
+                  <label for="program" class="form-label">Program</label>
+                  <select class="form-control select2" name="sp_id" id="programlist" required>
+                    <option value="<?php echo $row->sp_id; ?>"><?php echo $row->program; ?></option>
+                  </select>
                 </div>
+                <div class="mb-3">
+                  <label for="payee" class="form-label">Indicative Annual Cost</label>
+                  <input type="text" class="form-control" name="indicativeannualcost" value="<?php echo $row->indicativeannualcost; ?>" placeholder="Indicative Annual Cost" required>
+                </div>
+                <div class="mb-3">
+                  <label for="payee" class="form-label">Duration</label>
+                  <input type="text" class="form-control" name="duration" value="<?php echo $row->duration; ?>" placeholder="Duration" required>
+                </div>
+                <div class="mb-3">
+                  <label for="amount" class="form-label">Location</label>
+                  <input type="text" class="form-control" name="location" value="<?php echo $row->location; ?>" placeholder="Location" required>
+                </div>
+                <div class="mb-3">
+                  <label for="amount" class="form-label">English Requirement</label>
+                  <input type="text" class="form-control" name="englishrequirement" value="<?php echo $row->englishrequirement; ?>" placeholder="English Requirement" required>
+                </div>
+                <div class="mb-3">
+                  <label for="amount" class="form-label">Intake</label>
+                  <input type="text" class="form-control" name="intake" value="<?php echo $row->intake; ?>" placeholder="Intake" required>
+                </div>
+                <div class="mb-3">
+                  <label for="amount" class="form-label">Important To Consider</label>
+                  <input type="text" class="form-control" name="importanttoconsider" value="<?php echo $row->importanttoconsider; ?>" placeholder="Important To Consider" required>
+                </div>
+                <div class="mb-3">
+                  <label for="amount" class="form-label">Migration Pathway</label>
+                  <input type="text" class="form-control" name="migrationpathway" value="<?php echo $row->migrationpathway; ?>" placeholder="Migration Pathway" required>
+                </div>
+                <?php
+                    }
+                ?>
                 <button type="submit" class="btn btn-primary">Submit</button>
+                <br>
+                <h3>Expenses Details</h3>
+                <a href="<?php echo base_url(); ?>index.php/newprogramoptiondetails/<?php echo $poid; ?>">Add New Program Option Details</a>
+                      <table class="table table-bordered table-striped">
+                        <thead>
+                        <tr>
+                          <th>Expenses Type</th>
+                          <th>Per Person</th>
+                          <th>Amount Required</th>
+                          <th>Number of Family</th>
+                          <th>Amount to Access</th>
+                          <th>Confirm Access to Funds</th>
+                          <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <?php
+                        
+                        foreach ($programoptionsdetails as $row) {
+                          echo "<tr>
+                            <td>".$row->expensestype."</td>
+                            <td>".$row->perperson."</td>
+                            <td>".$row->amountrequired."</td>
+                            <td>".$row->numberoffamily."</td>
+                            <td>".$row->amounttoaccess."</td>
+                            <td>".$row->confirmaccesstofunds."</td>
+                            <td><a href='".base_url()."index.php/editprogramoptiondetails/".$row->podid."' class='btn btn-primary btn-xs'>Edit</a></td>
+                          </tr>";
+                        }
+                        ?>
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                          <th>Expenses Type</th>
+                          <th>Per Person</th>
+                          <th>Amount Required</th>
+                          <th>Number of Family</th>
+                          <th>Amount to Access</th>
+                          <th>Confirm Access to Funds</th>
+                          <th></th>
+                        </tr>
+                        </tfoot>
+                      </table>
+
               </form>
 
             </div>
@@ -278,6 +368,51 @@
       "responsive": true,
     });
   });
+  $('.select2').select2();
+</script>
+
+<script>
+
+  var baseurl = document.getElementById("baseurl").value;
+
+  initialPrograms();
+  function initialPrograms() {
+    $("#programlist").empty();
+    $.ajax({
+          type: "GET",
+          url: baseurl + "index.php/getprogramfromschool/1",
+          success: function(data) {
+              var obj = JSON.parse(data);
+              //alert(obj[0].program);
+              for(var i = 0; i < obj.length; i++) {
+                $("#programlist").append("<option value=" + obj[i].spid + ">" + obj[i].program + "</option>");
+              }
+          },
+          error: function(error) {
+            alert("Error!");
+          }
+      });
+  }
+
+  function getPrograms() {
+    var id = document.getElementById("provider").value;
+    $("#programlist").empty();
+    $.ajax({
+          type: "GET",
+          url: baseurl + "index.php/getprogramfromschool/" + id,
+          success: function(data) {
+              var obj = JSON.parse(data);
+              //alert(obj[0].program);
+              for(var i = 0; i < obj.length; i++) {
+                $("#programlist").append("<option value=" + obj[i].spid + ">" + obj[i].program + "</option>");
+              }
+          },
+          error: function(error) {
+            alert("Error!");
+          }
+      });
+  }
+  
 
 </script>
 

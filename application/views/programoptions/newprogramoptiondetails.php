@@ -105,7 +105,7 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item">
-            <a href="dashboard" class="nav-link<?php if($title == 'Dashboard'){ echo ' active';} ?>">
+            <a href="<?php echo base_url().'index.php/dashboard'; ?>" class="nav-link<?php if($title == 'Dashboard'){ echo ' active';} ?>">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
@@ -113,7 +113,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="customerinfo" class="nav-link<?php if($title == 'Client Information'){ echo ' active';} ?>">
+            <a href="<?php echo base_url().'index.php/customerinfo'; ?>" class="nav-link<?php if($title == 'Client Information'){ echo ' active';} ?>">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Client Information
@@ -121,7 +121,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="inquiries" class="nav-link<?php if($title == 'Inquiries'){ echo ' active';} ?>">
+            <a href="<?php echo base_url().'index.php/inquiries'; ?>" class="nav-link<?php if($title == 'Inquiries'){ echo ' active';} ?>">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Inquiries
@@ -129,7 +129,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="schools" class="nav-link<?php if($title == 'Schools and Programs'){ echo ' active';} ?>">
+            <a href="<?php echo base_url().'index.php/schools'; ?>" class="nav-link<?php if($title == 'Schools and Programs'){ echo ' active';} ?>">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Schools and Programs
@@ -137,7 +137,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="applications" class="nav-link<?php if($title == 'Applications'){ echo ' active';} ?>">
+            <a href="<?php echo base_url().'index.php/applications'; ?>" class="nav-link<?php if($title == 'Applications'){ echo ' active';} ?>">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Applications
@@ -145,7 +145,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="adminmaintenance" class="nav-link<?php if($title == 'Admin Maintenance'){ echo ' active';} ?>">
+            <a href="<?php echo base_url().'index.php/adminmaintenance'; ?>" class="nav-link<?php if($title == 'Admin Maintenance'){ echo ' active';} ?>">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Admin Maintenance
@@ -153,7 +153,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="scholarships" class="nav-link<?php if($title == 'Scholarships'){ echo ' active';} ?>">
+            <a href="<?php echo base_url().'index.php/scholarships'; ?>" class="nav-link<?php if($title == 'Scholarships'){ echo ' active';} ?>">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Scholarships
@@ -161,7 +161,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="reports" class="nav-link<?php if($title == 'Reports'){ echo ' active';} ?>">
+            <a href="<?php echo base_url().'index.php/reports'; ?>" class="nav-link<?php if($title == 'Reports'){ echo ' active';} ?>">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Reports
@@ -203,14 +203,37 @@
             <!-- /.card-header -->
             <div class="card-body">
               
-              <form action="saveregion" method="post">
+              <form action="<?php echo base_url(); ?>index.php/saveprogramoptiondetails" method="post">
+                <input type="hidden" name="poid" value="<?php echo $poid; ?>">
                 <div class="mb-3">
-                  <label for="amount" class="form-label">Region Name</label>
-                  <textarea class="form-control" name="regionname" placeholder="Region Name" required></textarea>
+                  <label for="payee" class="form-label">Expenses Type</label>
+                  <select name="expensestype" class="form-control" required>
+                    <option>Select Expenses Type</option>
+                    <option option="Travel">Travel</option>
+                    <option option="Tuition">Tuition</option>
+                    <option option="Living">Living</option>
+                    <option option="Health Insurance">Health Insurance</option>
+                  </select>
                 </div>
                 <div class="mb-3">
-                  <label for="amount" class="form-label">Region Description</label>
-                  <textarea class="form-control" name="regiondescription" placeholder="Region Description" required></textarea>
+                  <label for="payee" class="form-label">Rer Person</label>
+                  <input type="text" class="form-control" name="perperson" placeholder="Rer Person" required>
+                </div>
+                <div class="mb-3">
+                  <label for="amount" class="form-label">Amount Required</label>
+                  <input type="text" class="form-control" name="amountrequired" placeholder="Amount Required" required>
+                </div>
+                <div class="mb-3">
+                  <label for="amount" class="form-label">Number of Family</label>
+                  <input type="text" class="form-control" name="numberoffamily" placeholder="Number of Family" required>
+                </div>
+                <div class="mb-3">
+                  <label for="amount" class="form-label">Amount to Access</label>
+                  <input type="text" class="form-control" name="amounttoaccess" placeholder="Amount to Access" required>
+                </div>
+                <div class="mb-3">
+                  <label for="amount" class="form-label">Confirm Access to Funds</label>
+                  <input type="text" class="form-control" name="confirmaccesstofunds" placeholder="Confirm Access to Funds" required>
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
               </form>
@@ -278,8 +301,9 @@
       "responsive": true,
     });
   });
-
+  $('.select2').select2();
 </script>
+
 
 </body>
 </html>

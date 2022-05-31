@@ -132,4 +132,23 @@ class Schoolsprogramscontroller extends CI_Controller {
 		redirect('programs');
 	}
 
+	public function editschool($schoolid)
+	{
+        $asset_url = base_url()."assets/";
+		$data['title'] = "New School";
+		$data['asset_url'] = $asset_url;
+
+		$sql1 = "SELECT * FROM education_provider where provider_id = $schoolid";
+	    $query1 = $this->db->query($sql1);
+	    $education_provider = $query1->result();
+
+	    $data['education_provider'] = $education_provider;
+	
+		if(isset($this->session->officer_name)) {
+			$this->load->view('schoolsprograms/editschool', $data);
+		} else {
+			redirect(base_url()."?error3=1");
+		}
+	}
+
 }

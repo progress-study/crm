@@ -90,7 +90,7 @@ class Scholarshipcontroller extends CI_Controller {
 		redirect('scholarships');
 	}
 
-	public function newscholarshipallocation()
+	public function newscholarshipallocation($client_id)
 	{
 
         $asset_url = base_url()."assets/";
@@ -101,7 +101,7 @@ class Scholarshipcontroller extends CI_Controller {
 	    $query2 = $this->db->query($sql2);
 	    $scholarships = $query2->result();
 
-		$sql3 = "SELECT * FROM client";
+		$sql3 = "SELECT * FROM client where client_id = '$client_id'";
 	    $query3 = $this->db->query($sql3);
 	    $client = $query3->result();
 

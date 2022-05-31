@@ -110,22 +110,6 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="<?php echo base_url().'index.php/requireddocuments'; ?>" class="nav-link<?php if($title == 'Required Documents'){ echo ' active';} ?>">
-              <i class="nav-icon fas fa-th"></i>
-              <p>
-                Required Documents
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="<?php echo base_url().'index.php/payments'; ?>" class="nav-link<?php if($title == 'Payments'){ echo ' active';} ?>">
-              <i class="nav-icon fas fa-th"></i>
-              <p>
-                Payments
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
             <a href="<?php echo base_url().'index.php/schools'; ?>" class="nav-link<?php if($title == 'Schools and Programs'){ echo ' active';} ?>">
               <i class="nav-icon fas fa-th"></i>
               <p>
@@ -208,6 +192,9 @@
                     <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Documents</a>
                   </li>
                   <li class="nav-item">
+                    <a class="nav-link" id="programoptions-tab" data-toggle="tab" href="#programoptions" role="tab" aria-controls="programoptions" aria-selected="false">Program Options</a>
+                  </li>
+                  <li class="nav-item">
                     <a class="nav-link" id="studentapplication-tab" data-toggle="tab" href="#studentapplication" role="tab" aria-controls="studentapplication" aria-selected="false">Student Application</a>
                   </li>
                   <li class="nav-item">
@@ -222,9 +209,9 @@
                   <li class="nav-item">
                     <a class="nav-link" id="scholarshipallocation-tab" data-toggle="tab" href="#scholarshipallocation" role="tab" aria-controls="scholarshipallocation" aria-selected="false">Scholarship Allocation</a>
                   </li>
-                  <li class="nav-item">
+                  <!--<li class="nav-item">
                     <a class="nav-link" id="payments-tab" data-toggle="tab" href="#payments" role="tab" aria-controls="payments" aria-selected="false">Payments</a>
-                  </li>
+                  </li>-->
                 </ul>
                 <div class="tab-content" id="myTabContent">
                   <div class="tab-pane fade show active" id="clientinfo" role="tabpanel" aria-labelledby="clientinfo-tab">
@@ -257,7 +244,8 @@
                         <input type="file" class="form-control" name="userfile">
                   </div>
                   <div class="col-3">
-                    <img src="<?php echo $asset_url; ?>images/<?php echo $row1->client_photo; ?>" style="width: 150px; height: 150px;">
+                    <!--<img src="<?php echo $asset_url; ?>images/<?php echo $row1->client_photo; ?>" style="width: 150px; height: 150px;">-->
+                    <img src="<?php echo $asset_url; ?>images/<?php echo $row1->client_photo; ?>" alt="" class="img-circle img-fluid">
                   </div>
                 </div>
                 <div class="row">
@@ -417,12 +405,12 @@
                       <?php
                       foreach ($student_application as $row) {
                         echo "<tr>
-                          <td>".$row->client_surname.", ".$row->client_firstname."</td>
-                          <td>".$row->provider_name."</td>
-                          <td>".$row->studentapp_course_name."</td>
-                          <td>".$row->studentapp_record_created_date."</td>
-                          <td><a href='#' class='btn btn-primary btn-xs'>Edit</a></td>
-                        </tr>";
+                                <td>".$row->client_surname.", ".$row->client_firstname."</td>
+                                <td>".$row->provider_name."</td>
+                                <td>".$row->studentapp_course_name."</td>
+                                <td>".$row->studentapp_record_created_date."</td>
+                                <td><a href='".base_url()."index.php/editapplication/".$row->studentapp_id."' class='btn btn-primary btn-xs'>Edit</a></td>
+                              </tr>";
                       }
                       ?>
                       </tbody>
@@ -669,6 +657,64 @@
                         </tfoot>
                       </table>
                   </div>
+                  <div class="tab-pane fade" id="programoptions" role="tabpanel" aria-labelledby="programoptions-tab">
+                      <br>
+                      <a href="<?php echo base_url(); ?>index.php/newprogramoption/<?php echo $client_id; ?>" class="btn btn-primary">New Program Option</a>
+                      <br><br>
+                      <table id="programoptionstable" class="table table-bordered table-striped">
+                        <thead>
+                        <tr>
+                          <th>School</th>
+                          <th>Program</th>
+                          <th>Indicative Annual Cost</th>
+                          <th>Duration</th>
+                          <th>Location</th>
+                          <th>English Requirement</th>
+                          <th>Intake</th>
+                          <th>Important to Consider</th>
+                          <th>Migration Pathway</th>
+                          <th>PO Approval Link</th>
+                          <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <?php
+                        
+                        foreach ($programoptions as $row) {
+                          echo "<tr>
+                            <td>".$row->provider_name."</td>
+                            <td>".$row->program."</td>
+                            <td>".$row->indicativeannualcost."</td>
+                            <td>".$row->duration."</td>
+                            <td>".$row->location."</td>
+                            <td>".$row->englishrequirement."</td>
+                            <td>".$row->intake."</td>
+                            <td>".$row->importanttoconsider."</td>
+                            <td>".$row->migrationpathway."</td>
+                            <td><a href='".base_url()."index.php/programoptionform/".$row->poid."' target='_blank'>".base_url()."index.php/programoptionform/".$row->poid."</a></td>
+                            <td><a href='".base_url()."index.php/editprogramoptions/".$row->poid."' class='btn btn-primary btn-xs'>Edit</a></td>
+                          </tr>";
+                        }
+                        
+                        ?>
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                          <th>School</th>
+                          <th>Program</th>
+                          <th>Indicative Annual Cost</th>
+                          <th>Duration</th>
+                          <th>Location</th>
+                          <th>English Requirement</th>
+                          <th>Intake</th>
+                          <th>Important to Consider</th>
+                          <th>Migration Pathway</th>
+                          <th>PO Approval Link</th>
+                          <th></th>
+                        </tr>
+                        </tfoot>
+                      </table>
+                  </div>
                 </div>
 
                 
@@ -749,9 +795,12 @@
       "autoWidth": false,
     });
 
-  });
+    $("#programoptionstable").DataTable({
+      "responsive": true,
+      "autoWidth": false,
+    });
 
-  $('.select2').select2();
+  });
 
 </script>
 

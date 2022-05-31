@@ -110,22 +110,6 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="requireddocuments" class="nav-link<?php if($title == 'Required Documents'){ echo ' active';} ?>">
-              <i class="nav-icon fas fa-th"></i>
-              <p>
-                Required Documents
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="payments" class="nav-link<?php if($title == 'Payments'){ echo ' active';} ?>">
-              <i class="nav-icon fas fa-th"></i>
-              <p>
-                Payments
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
             <a href="schools" class="nav-link<?php if($title == 'Schools and Programs'){ echo ' active';} ?>">
               <i class="nav-icon fas fa-th"></i>
               <p>
@@ -223,7 +207,7 @@
                     <td>".$row->provider_admin_contact_name."</td>
                     <td>".$row->provider_finance_contact_name."</td>
                     <td>".$row->provider_mailing_address."</td>
-                    <td><a href='#' class='btn btn-primary btn-xs'>Edit</a></td>
+                    <td><a href='editschool/".$row->provider_id."' class='btn btn-primary btn-xs'>Edit</a></td>
                   </tr>";
                 }
                 ?>

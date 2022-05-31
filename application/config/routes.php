@@ -32,18 +32,25 @@ $route['newschool'] = 'schoolsprogramscontroller/newschool';
 $route['saveschool'] = 'schoolsprogramscontroller/saveschool';
 $route['newprogram'] = 'schoolsprogramscontroller/newprogram';
 $route['saveprogram'] = 'schoolsprogramscontroller/saveprogram';
+$route['editschool/(:any)'] = 'schoolsprogramscontroller/editschool/$1';
+$route['updateschool'] = 'schoolsprogramscontroller/updateschool';
+$route['editprogram/(:any)'] = 'schoolsprogramscontroller/editprogram/$1';
+$route['updateprogram'] = 'schoolsprogramscontroller/updateprogram';
 
 // Applications routes
 $route['applications'] = 'applicationscontroller/index';
 $route['newapplication/(:any)'] = 'applicationscontroller/newapplication/$1';
 $route['getprogramfromschool/(:any)'] = 'applicationscontroller/getprogramfromschool/$1';
 $route['saveapplication'] = 'applicationscontroller/saveapplication';
+$route['editapplication/(:any)'] = 'applicationscontroller/editapplication/$1';
+$route['updateapplication'] = 'applicationscontroller/updateapplication';
 
 // Forms routes
 $route['clientform'] = 'formscontroller/clientform';
 $route['saveclientform'] = 'formscontroller/saveclientform';
 $route['saveinquiries'] = 'formscontroller/saveinquiries';
 $route['success'] = 'formscontroller/success';
+$route['programoptionform/(:any)'] = 'formscontroller/programoptionform/$1';
 
 // Admin maintenance routes
 $route['adminmaintenance'] = 'adminmaintenancecontroller/index';
@@ -89,3 +96,13 @@ $route['visa_account'] = 'reportscontroller/visa_account';
 $route['inquiries'] = 'inquiriescontroller/index';
 $route['deleteinquiry/(:any)'] = 'inquiriescontroller/deleteinquiry/$1';
 $route['transferinquirytoclient/(:any)'] = 'inquiriescontroller/transferinquirytoclient/$1';
+
+// Program Options routes
+$route['newprogramoption/(:any)'] = 'programoptionscontroller/newprogramoption/$1';
+$route['saveprogramoptions'] = 'programoptionscontroller/saveprogramoptions';
+$route['editprogramoptions/(:any)'] = 'programoptionscontroller/editprogramoption/$1';
+$route['updateprogramoptions'] = 'programoptionscontroller/updateprogramoptions';
+$route['newprogramoptiondetails/(:any)'] = 'programoptionscontroller/newprogramoptiondetails/$1';
+$route['saveprogramoptiondetails'] = 'programoptionscontroller/saveprogramoptiondetails';
+$route['editprogramoptiondetails/(:any)'] = 'programoptionscontroller/editprogramoptiondetails/$1';
+$route['updateprogramoptiondetails'] = 'programoptionscontroller/updateprogramoptiondetails';

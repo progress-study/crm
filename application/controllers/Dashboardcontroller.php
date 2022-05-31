@@ -35,11 +35,13 @@ class Dashboardcontroller extends CI_Controller {
 				c.client_middlename,
 				c.client_inquiries_id,
 				i.inquiries_id,
+				sa.studentapp_id,
 				vap.client_visa_id,
 				p.paymentid
 				FROM client c
 				LEFT JOIN inquiries i on i.inquiries_id = c.client_inquiries_id
 				LEFT JOIN visa_application vap on vap.client_id = c.client_id
+				LEFT JOIN student_application sa on sa.client_id = c.client_id
 				LEFT JOIN payments p on p.payee = c.client_id";
         $query5 = $this->db->query($sql5);
         $client = $query5->result();

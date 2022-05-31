@@ -122,22 +122,6 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="requireddocuments" class="nav-link<?php if($title == 'Required Documents'){ echo ' active';} ?>">
-              <i class="nav-icon fas fa-th"></i>
-              <p>
-                Required Documents
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="payments" class="nav-link<?php if($title == 'Payments'){ echo ' active';} ?>">
-              <i class="nav-icon fas fa-th"></i>
-              <p>
-                Payments
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
             <a href="schools" class="nav-link<?php if($title == 'Schools and Programs'){ echo ' active';} ?>">
               <i class="nav-icon fas fa-th"></i>
               <p>
@@ -209,7 +193,7 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-lg-3 col-6">
-            <div class="small-box bg-info">
+            <div class="small-box bg-default">
               <div class="inner">
                 <h3><?php echo $activeclients; ?></h3>
                 <p>ACTIVE VIEWABLE CLIENTS</p>
@@ -218,7 +202,7 @@
             </div>
           </div>
           <div class="col-lg-3 col-6">
-            <div class="small-box bg-success">
+            <div class="small-box bg-default">
               <div class="inner">
                 <h3><?php echo $student_application; ?></h3>
                 <p>STUDENT APPLICATIONS (WIP)</p>
@@ -227,7 +211,7 @@
             </div>
           </div>
           <div class="col-lg-3 col-6">
-            <div class="small-box bg-warning">
+            <div class="small-box bg-default">
               <div class="inner">
                 <h3><?php echo $pr_application; ?></h3>
                 <p>VISA APPLICATIONS (WIP)</p>
@@ -236,7 +220,7 @@
             </div>
           </div>
           <div class="col-lg-3 col-6">
-            <div class="small-box bg-danger">
+            <div class="small-box bg-default">
               <div class="inner">
                 <h3><?php echo $education_provider; ?></h3>
                 <p>TOTAL NO. OF PROVIDERS</p>
@@ -276,13 +260,16 @@
             <div class="card-body">
               Legend: <span class="badge badge-danger">No record</span> <span class="badge badge-warning">Partial</span> <span class="badge badge-success">Complete</span>
               <br><br> 
-              <table id="example1" class="table table-bordered table-striped">
+              <table id="example1" class="table table-bordered table-striped" style="font-size: 12px;">
                 <thead>
                 <tr>
-                  <th>Name</th>
+                  <th>Client</th>
+                  <th>Process Officer</th>
                   <th>Inquired</th>
                   <th>Transferred as Client</th>
+                  <th>PO Accepted</th>
                   <th>Documents</th>
+                  <th>Admission</th>
                   <th>Visa Completed</th>
                   <th>Payments</th>
                   <th>Completed</th>
@@ -320,6 +307,14 @@
                     $visa = "Yes";
                   }
 
+                  if ($row->studentapp_id == "") {
+                    $sabg = "#dc3545";
+                    $sa = "No";
+                  } else {
+                    $sabg = "#28a745";
+                    $sa = "Yes";
+                  }
+
                   if ($row->paymentid == "") {
                     $paymentbg = "#dc3545";
                     $payment = "No payment record";
@@ -341,9 +336,12 @@
 
                   echo "<tr>
                     <td>".$row->client_surname.", ".$row->client_firstname." ".$row->client_middlename."</td>
+                    <td>amg@progress-study.com</td>
                     <td style='background: ".$inquiredbg."; color: white;'>".$inquired."</td>
                     <td style='background: ".$transferredbg."; color: white;'>".$transferred."</td>
+                    <td style='background: #dc3545; color: white;'></td>
                     <td style='background: ".$documentbg."; color: white;'>".$document."</td>
+                    <td style='background: ".$sabg."; color: white;'>".$sa."</td>
                     <td style='background: ".$visabg."; color: white;'>".$visa."</td>
                     <td style='background: ".$paymentbg."; color: white;'>".$payment."</td>
                     <td style='background: ".$completebg."; color: white;'>".$complete."</td>
@@ -355,11 +353,14 @@
                 </tbody>
                 <tfoot>
                 <tr>
-                  <th>Name</th>
+                  <th>Client</th>
+                  <th>Process Officer</th>
                   <th>Inquired</th>
                   <th>Transferred as Client</th>
+                  <th>PO Accepted</th>
                   <th>Documents</th>
-                  <th>PR</th>
+                  <th>Admission</th>
+                  <th>Visa Completed</th>
                   <th>Payments</th>
                   <th>Completed</th>
                 </tr>

@@ -129,22 +129,6 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="<?php echo base_url(); ?>index.php/requireddocuments" class="nav-link<?php if($title == 'Required Documents'){ echo ' active';} ?>">
-              <i class="nav-icon fas fa-th"></i>
-              <p>
-                Required Documents
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="<?php echo base_url(); ?>index.php/payments" class="nav-link<?php if($title == 'Payments'){ echo ' active';} ?>">
-              <i class="nav-icon fas fa-th"></i>
-              <p>
-                Payments
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
             <a href="<?php echo base_url(); ?>index.php/schools" class="nav-link<?php if($title == 'Schools and Programs'){ echo ' active';} ?>">
               <i class="nav-icon fas fa-th"></i>
               <p>
@@ -339,7 +323,7 @@
               var obj = JSON.parse(data);
               //alert(obj[0].program);
               for(var i = 0; i < obj.length; i++) {
-                $("#programlist").append("<option value=" + obj[i].id + ">" + obj[i].program + "</option>");
+                $("#programlist").append("<option value=" + obj[i].spid + ">" + obj[i].program + "</option>");
               }
           },
           error: function(error) {
@@ -358,7 +342,7 @@
               var obj = JSON.parse(data);
               //alert(obj[0].program);
               for(var i = 0; i < obj.length; i++) {
-                $("#programlist").append("<option value=" + obj[i].id + ">" + obj[i].program + "</option>");
+                $("#programlist").append("<option value=" + obj[i].spid + ">" + obj[i].program + "</option>");
               }
           },
           error: function(error) {

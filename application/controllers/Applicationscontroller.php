@@ -49,7 +49,29 @@ class Applicationscontroller extends CI_Controller {
 		} else {
 			redirect(base_url()."?error3=1");
 		}
+	}
 
+	public function editapplication($appid) {
+		$asset_url = base_url()."assets/";
+		$data['title'] = "Edit Application";
+		$data['asset_url'] = $asset_url;
+
+	    $sql2 = "SELECT * FROM education_provider";
+	    $query2 = $this->db->query($sql2);
+	    $schools = $query2->result();
+
+	    $sql3 = "SELECT * FROM student_application sa inner join client c on sa.client_id = c.client_id inner join education_provider s on s.provider_id = sa.provider_id where sa.studentapp_id = '$appid'";
+	    $query3 = $this->db->query($sql3);
+	    $application = $query3->result();
+
+	    $data['application'] = $application;
+		$data['schools'] = $schools;
+
+		if(isset($this->session->officer_name)) {
+			$this->load->view('applications/editapplication', $data);
+		} else {
+			redirect(base_url()."?error3=1");
+		}
 	}
 
 	public function getprogramfromschool($schoolid) {
@@ -80,7 +102,7 @@ class Applicationscontroller extends CI_Controller {
 		$day3 = date("d",$time3);
 
 		$program = $this->input->post('program');
-		$sql = "SELECT * FROM schoolprograms WHERE id = '$program'";
+		$sql = "SELECT * FROM schoolprograms WHERE spid = '$program'";
         $query = $this->db->query($sql);
         $programs = $query->result();
 
@@ -95,7 +117,7 @@ class Applicationscontroller extends CI_Controller {
 					'studentapp_course_end_day' => $day2,
 					'studentapp_course_end_month' => $month2,
 					'studentapp_course_end_year' => $year2,
-					'studentapp_course_name' => $this->input->post('program'),
+					'studentapp_course_name' => $programs->program,
 					'studentapp_course_level' => $programs->program_type,
 					'studentapp_coe_day' => $day3,
 					'studentapp_coe_month' => $month3,
@@ -118,7 +140,52 @@ class Applicationscontroller extends CI_Controller {
 					'studentapp_event_id' => 0
 				);
 		$this->db->insert('student_application', $data);
-		redirect('applications');
+		redirect('editclientinfo2/'.$this->input->post('client_id'));
+	}
+
+	public function updateapplication()
+	{
+		$startdate = $this->input->post('startdate');
+		$time1 = strtotime($startdate);
+		$month1 = date("m",$time1);
+		$year1 = date("Y",$time1);
+		$day1 = date("d",$time1);
+
+		$enddate = $this->input->post('enddate');
+		$time2 = strtotime($enddate);
+		$month2 = date("m",$time2);
+		$year2 = date("Y",$time2);
+		$day2 = date("d",$time2);
+
+		$coedate = $this->input->post('coedate');
+		$time3 = strtotime($coedate);
+		$month3 = date("m",$time3);
+		$year3 = date("Y",$time3);
+		$day3 = date("d",$time3);
+
+		$program = $this->input->post('program');
+		$sql = "SELECT * FROM schoolprograms WHERE spid = '$program'";
+        $query = $this->db->query($sql);
+        $programs = $query->result();
+
+		$this->db->set('provider_id', $this->input->post('school'));
+		$this->db->set('studentapp_course_starting_day', $day1);
+		$this->db->set('studentapp_course_starting_month', $month1);
+		$this->db->set('studentapp_course_starting_year', $year1);
+		$this->db->set('studentapp_course_end_day', $day2);
+		$this->db->set('studentapp_course_end_month', $month2);
+		$this->db->set('studentapp_course_end_year', $year2);
+		$this->db->set('studentapp_course_name', $programs->program);
+		$this->db->set('studentapp_course_level', $programs->program_type);
+		$this->db->set('studentapp_coe_day', $day3);
+		$this->db->set('studentapp_coe_month', $month3);
+		$this->db->set('studentapp_coe_year',$year3);
+		$this->db->set('course_starting_date', $this->input->post('state'));
+		$this->db->set('course_ending_date', $this->input->post('startdate'));
+		$this->db->where('studentapp_id', $this->input->post('clientid'));
+		$this->db->update('student_application');
+
+		redirect('editclientinfo2/'.$this->input->post('clientid'));
 	}
 
 }

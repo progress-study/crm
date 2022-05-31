@@ -183,68 +183,92 @@
           <div class="card">
             <!-- /.card-header -->
             <div class="card-body">
-                
-                <form action="<?php echo base_url().'index.php/savevisaeoi'; ?>" method="post">
+                <?php
+                      foreach ($education_provider as $row) {
+                ?>
+                <form action="<?php echo base_url().'index.php/updateschool'; ?>" method="post">
+                  <input type="hidden" name="provider_id" value="<?php echo $row->provider_id; ?>">
                   <div class="mb-3">
-                    <label for="clientname" class="form-label">Client Name</label>
-                    <?php
-                      foreach ($singleclient as $row) {
-                    ?>
-                        <input type="hidden" name="clientid" value="<?php echo $row->client_id; ?>">
-                        <input type="text" name="clientname" class="form-control" value="<?php echo $row->client_surname.', '.$row->client_firstname.' '.$row->client_middlename; ?>" readonly>
-                    <?php
-                      }
-                    ?>
+                    <label for="amount" class="form-label">School Name</label>
+                    <textarea class="form-control" name="schoolname" placeholder="School Name" required><?php echo $row->provider_name; ?></textarea>
                   </div>
                   <div class="mb-3">
-                    <label for="eoinumber" class="form-label">EOI Number</label>
-                    <input type="text" name="eoinumber" class="form-control">
+                    <label for="amount" class="form-label">Marketing Contact Name</label>
+                    <input type="text" class="form-control" name="marketingname" placeholder="Marketing Contact Name" value="<?php echo $row->provider_marketing_contact_name; ?>" required>
                   </div>
                   <div class="mb-3">
-                    <label for="occupation" class="form-label">Occupation</label>
-                    <input type="text" name="occupation" class="form-control">
+                    <label for="amount" class="form-label">Marketing Contact Phone Number</label>
+                    <input type="text" class="form-control" name="marketingphone" placeholder="Marketing Contact Phone Number" value="<?php echo $row->provider_marketing_contact_phoneno; ?>" required>
                   </div>
                   <div class="mb-3">
-                    <label for="visasubclass" class="form-label">Visa Subclass</label>
-                    <input type="text" name="visasubclass" class="form-control">
+                    <label for="amount" class="form-label">Marketing Contact Mobile Number</label>
+                    <input type="text" class="form-control" name="marketingmobile" placeholder="Marketing Contact Mobile Number" value="<?php echo $row->provider_marketing_mobileno; ?>" required>
                   </div>
                   <div class="mb-3">
-                    <label for="preferreddate" class="form-label">Preferred Date</label>
-                    <input type="date" class="form-control" name="preferreddate">
+                    <label for="amount" class="form-label">Admin Contact Name</label>
+                    <input type="text" class="form-control" name="adminname" placeholder="Admin Contact Name" value="<?php echo $row->provider_admin_contact_name; ?>" required>
                   </div>
                   <div class="mb-3">
-                    <label for="skillassessmentdate" class="form-label">Skill Assessment Date</label>
-                    <input type="date" class="form-control" name="skillassessmentdate">
+                    <label for="amount" class="form-label">Admin Contact Phone Number</label>
+                    <input type="text" class="form-control" name="adminphone" placeholder="Admin Contact Phone Number" value="<?php echo $row->provider_admin_contact_phoneno; ?>" required>
                   </div>
                   <div class="mb-3">
-                    <label for="pycompletiondate" class="form-label">PY Completion Date</label>
-                    <input type="date" class="form-control" name="pycompletiondate">
+                    <label for="amount" class="form-label">Finance Contact Name</label>
+                    <input type="text" class="form-control" name="financename" placeholder="Finance Contact Name" value="<?php echo $row->provider_finance_contact_name; ?>" required>
                   </div>
                   <div class="mb-3">
-                    <label for="englishcompetencytestdate" class="form-label">English Competency Test Date</label>
-                    <input type="date" class="form-control" name="englishcompetencytestdate">
+                    <label for="amount" class="form-label">Finance Contact Phone Number</label>
+                    <input type="text" class="form-control" name="financephone" placeholder="Finance Contact Phone Number" value="<?php echo $row->provider_finance_contact_phoneno; ?>" required>
                   </div>
                   <div class="mb-3">
-                    <label for="englishcompetencylevel" class="form-label">English Competency Level</label>
-                    <input type="text" class="form-control" name="englishcompetencylevel">
+                    <label for="amount" class="form-label">Fax No.</label>
+                    <input type="text" class="form-control" name="faxno" placeholder="Fax No." value="<?php echo $row->provider_faxno; ?>" required>
                   </div>
                   <div class="mb-3">
-                    <label for="notes" class="form-label">Notes</label>
-                    <input type="text" class="form-control" name="notes">
+                    <label for="amount" class="form-label">Mailing Address</label>
+                    <input type="text" class="form-control" name="mailingaddress" placeholder="Mailing Address" value="<?php echo $row->provider_mailing_address; ?>" required>
                   </div>
                   <div class="mb-3">
-                    <label for="flag" class="form-label">Flag</label>
-                    <select class="form-control" name="flag">
-                      <option value="Expired">Expired</option>
-                      <option value="Discontinued">Discontinued</option>
-                      <option value="Invited">Invited</option>
-                      <option value="Created">Created</option>
-                      <option value="Submitted">Submitted</option>
-                    </select>
+                    <label for="amount" class="form-label">Suburb</label>
+                    <input type="text" class="form-control" name="suburb" placeholder="Suburb" value="<?php echo $row->provider_suburb; ?>" required>
+                  </div>
+                  <div class="mb-3">
+                    <label for="amount" class="form-label">State</label>
+                    <input type="text" class="form-control" name="state" placeholder="State" value="<?php echo $row->provider_state; ?>" required>
+                  </div>
+                  <div class="mb-3">
+                    <label for="amount" class="form-label">Postcode</label>
+                    <input type="text" class="form-control" name="postcode" placeholder="Postcode" value="<?php echo $row->provider_postcode; ?>" required>
+                  </div>
+                  <div class="mb-3">
+                    <label for="amount" class="form-label">Finance Mailing Address 1</label>
+                    <input type="text" class="form-control" name="financemailing1" placeholder="Finance Mailing Address 1" value="<?php echo $row->provider_finance_mailing_address1; ?>" required>
+                  </div>
+                  <div class="mb-3">
+                    <label for="amount" class="form-label">Finance Mailing Address 2</label>
+                    <input type="text" class="form-control" name="financemailing2" placeholder="Finance Mailing Address 2" value="<?php echo $row->provider_finance_mailing_address2; ?>" required>
+                  </div>
+                  <div class="mb-3">
+                    <label for="amount" class="form-label">Finance Suburb</label>
+                    <input type="text" class="form-control" name="financesuburb" placeholder="Finance Suburb" value="<?php echo $row->provider_finance_suburb1; ?>" required>
+                  </div>
+                  <div class="mb-3">
+                    <label for="amount" class="form-label">Finance State</label>
+                    <input type="text" class="form-control" name="financestate" placeholder="Finance State" value="<?php echo $row->provider_finance_state1; ?>" required>
+                  </div>
+                  <div class="mb-3">
+                    <label for="amount" class="form-label">Finance Postcode</label>
+                    <input type="text" class="form-control" name="financepostcode" placeholder="Finance Postcode" value="<?php echo $row->provider_finance_postcode1; ?>" required>
+                  </div>
+                  <div class="mb-3">
+                    <label for="amount" class="form-label">Notes</label>
+                    <textarea class="form-control" name="notes" placeholder="Notes" required><?php echo $row->provider_notes; ?></textarea>
                   </div>
                   <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
-
+                <?php
+                      }
+                    ?>
             </div>
             <!-- /.card-body -->
           </div>

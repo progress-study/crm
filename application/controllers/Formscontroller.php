@@ -36,6 +36,26 @@ class Formscontroller extends CI_Controller {
 		$this->load->view('forms/clientform', $data);
 	}
 
+	public function programoptionform($poid)
+	{
+		$sql6 = "SELECT * FROM programoptions po inner join education_provider s on po.provider_id = s.provider_id inner join schoolprograms sp on sp.spid = po.sp_id inner join client c on po.client_id = c.client_id where po.poid = '$poid'";
+        $query6 = $this->db->query($sql6);
+        $programoptions = $query6->result();
+
+        $sql7 = "SELECT * FROM programoptionsdetails pod where poid = '$poid'";
+        $query7 = $this->db->query($sql7);
+        $programoptionsdetails = $query7->result();
+
+        $data['programoptions'] = $programoptions;
+        $data['programoptionsdetails'] = $programoptionsdetails;
+
+        $asset_url = base_url()."assets/";
+		$data['title'] = "Client Form";
+		$data['asset_url'] = $asset_url;
+
+		$this->load->view('forms/programoptionform', $data);
+	}
+
 	public function saveinquiries() 
 	{
 		$birthdate = DateTime::createFromFormat("Y-m-d", $this->input->post('birthdate'));
