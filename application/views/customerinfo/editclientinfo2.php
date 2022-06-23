@@ -17,6 +17,10 @@
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
   <link rel="stylesheet" href="<?php echo $asset_url; ?>plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+
+  <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -189,7 +193,7 @@
                     <a class="nav-link active" id="clientinfo-tab" data-toggle="tab" href="#clientinfo" role="tab" aria-controls="clientinfo" aria-selected="true">Client Information</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Documents</a>
+                    <a class="nav-link" id="documents-tab" data-toggle="tab" href="#documents" role="tab" aria-controls="documents" aria-selected="false">Documents</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" id="programoptions-tab" data-toggle="tab" href="#programoptions" role="tab" aria-controls="programoptions" aria-selected="false">Program Options</a>
@@ -425,7 +429,34 @@
                       </tfoot>
                     </table>
                   </div>
-                  <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">Ramirez</div>
+                  
+                  <div class="tab-pane fade" id="documents" role="tabpanel" aria-labelledby="documents-tab">
+                      <br>
+                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#documentModal">Upload New Document</button>
+                      <input type="hidden" id="client_id2" value="<?php echo $client_id; ?>">
+                      <input type="hidden" id="imageasseturl2" value="<?php echo $asset_url.'images/fileicon.png'; ?>"><br><br>
+                      <!--<table id="documentstable" style="font-size: 14px;">
+                        <thead>
+                          <th style="width: 20%;">Document Type</th>
+                          <th style="width: 60%;">Document File URL</th>
+                          <th style="width: 20%;">Date Uploaded</th>
+                        </thead>
+                        <tbody id="documentstabletbody"></tbody>
+                      </table>-->
+                      <div id="documentrow1">
+                        <!--
+                        <div class="col">col</div>
+                        <div class="col">col</div>
+                        <div class="col">col</div>
+                        <div class="col">col</div>
+                        <div class="col">col</div>
+                        <div class="col">col</div>
+                        <div class="col">col</div>
+                        <div class="col">col</div>
+                        <div class="col">col</div>-->
+                      </div>
+                  </div>
+                  
                   <div class="tab-pane fade" id="visaapplication" role="tabpanel" aria-labelledby="visaapplication-tab">
                       <br>
                       <a href="<?php echo base_url(); ?>index.php/newvisaapplication/<?php echo $client_id; ?>" class="btn btn-primary">New Visa Application</a>
@@ -729,6 +760,74 @@
       <!-- /.row -->
     </section>
     <!-- /.content -->
+    <!-- Button trigger modal -->
+
+    <!-- Modal -->
+    <div class="modal fade" id="documentModal" tabindex="-1" role="dialog" aria-labelledby="documentModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Upload New Document</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form id="documentForm">
+              <input type="hidden" id="baseurl1" value="<?php echo base_url(); ?>">
+              <div class="form-group">
+                <label for="client_id1">Client ID</label>
+                <input type="text" class="form-control" id="client_id1" value="<?php echo $client_id; ?>" readonly>
+              </div>
+              <div class="form-group">
+                <label for="documentype">Document Type</label>
+                <select id="documentype" class="form-control">
+                  <option>Select Document Type</option>
+                  <option value="Student requirement">Student requirement</option>
+                  <option value="Visa application requirement">Visa application requirement</option>
+                  <option value="Sponsor requirement">Sponsor requirement</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="documentfile">Document File</label>
+                <input type="file" class="form-control" id="documentfile">
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" onclick="ResetFile()" class="btn btn-primary">Reset</button> <button type="button" id="savefiletofirebase" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+<!--
+<option>Certified copies of all relevant academic transcripts, award and certificate from all
+your complete or incomplete study.</option>
+<option>IELTS result</option>
+<option>Evidence of your work experience in the form of a current resume and statements
+of employee which should be an official document from your employer
+outlining your job title, responsibilities and duration of employment.</option>
+<option>Passport/photograph of passport size</option>
+<option>Birth Certificate</option>
+<option>National Identity</option>
+<option>VAR: Passport</option>
+<option>VAR: Photograph Passport Size</option>
+<option>VAR: Birth Certificate</option>
+<option>VAR: National Identity</option>
+<option>VAR: Transcript of records</option>
+<option>VAR: Awards and Certificate</option>
+<option>VAR: Statement of purpose / Genuine Temporary Entrant (see below)</option>
+<option>VAR: Work Reference Letter (attached at least 2 reference letter)</option>
+<option>VAR: Assets Documents</option>
+<option>VAR: Medical Check-up Details</option>
+<option>Sponsor: Sponsorship declaration/Statement (write down address and phone number)</option>
+<option>Sponsor: Sponsor’s passport or National Identity</option>
+<option>Sponsor: Bank Reference</option>
+<option>Sponsor: Bank Statement (3 months before the application)</option>
+<option>Sponsor: Source of Income</option>
+-->
+
   </div>
   <!-- /.content-wrapper -->
   <footer class="main-footer">
@@ -762,6 +861,14 @@
 <script src="<?php echo $asset_url; ?>plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
 <script src="<?php echo $asset_url; ?>plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
 <script src="<?php echo $asset_url; ?>plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+
+<script src="<?php echo $asset_url; ?>google/firebase-app.js"></script>
+<script src="<?php echo $asset_url; ?>google/firebase-analytics.js"></script>
+<script src="<?php echo $asset_url; ?>google/firebase-firestore.js"></script>
+<script src="<?php echo $asset_url; ?>google/firebase-storage.js"></script>
+<script src="<?php echo $asset_url; ?>google/firebase-auth.js"></script>
+
+<script src="<?php echo $asset_url; ?>google/firebase-save.js" type="module"></script>
 
 <script>
   $(function () {
@@ -802,12 +909,10 @@
 
   });
 
-</script>
+  function ResetFile() {
+    document.getElementById("documentForm").reset();
+  }
 
-<script type="text/javascript">
-$(document).ready(function () {
-  bsCustomFileInput.init();
-});
 </script>
 </body>
 </html>

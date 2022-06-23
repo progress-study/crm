@@ -28,6 +28,14 @@
              border: 1px solid #ccc !important; 
          border-radius: 0px !important; 
     }
+
+    .select3-container .select3-selection--single{
+        height:34px !important;
+    }
+    .select3-container--default .select3-selection--single{
+             border: 1px solid #ccc !important; 
+         border-radius: 0px !important; 
+    }
   </style>
 </head>
 <body class="hold-transition sidebar-mini">
@@ -194,29 +202,79 @@
           <div class="card">
             <!-- /.card-header -->
             <div class="card-body">
-              
-              <form action="<?php echo base_url().'index.php/savescholarshipallocation'; ?>" method="post">
+              <?php
+                foreach ($schoolprograms as $row) {
+              ?>
+              <form action="<?php echo base_url().'index.php/updateprogram'; ?>" method="post">
+                <input type="hidden" name="spid" value="<?php echo $row->spid; ?>">
                 <div class="mb-3">
-                  <label for="payee" class="form-label">Customer</label>
-                    <?php
-                    foreach ($client as $row) {
-                      echo "<input type='text' name='client_id' class='form-control' value='".$row->client_surname.", ".$row->client_firstname." ".$row->client_middlename."' readonly>
-                      <input type='hidden' name='client' value='".$row->client_id."'>";                   }
-                    ?>
+                  <label for="amount" class="form-label">Program Name</label>
+                  <input type="text" class="form-control" name="program" value="<?php echo $row->program; ?>" required></textarea>
                 </div>
                 <div class="mb-3">
-                  <label for="payee" class="form-label">Scholarship</label>
-                  <select class="form-control select2" name="scholarship">
+                  <label for="amount" class="form-label">Description</label>
+                  <textarea class="form-control" name="description" placeholder="Description" required><?php echo $row->description; ?></textarea>
+                </div>
+                <div class="mb-3">
+                  <label for="payee" class="form-label">School</label>
+                  <select class="form-control select2" name="school" required>
                     <?php
-                    foreach ($scholarships as $row2) {
-                      echo "<option value='".$row2->scholarshipid."'>".$row2->description."</option>";
+                      echo "<option value='".$row->provider_id."'>".$row->provider_name."</option>";
+                    ?>
+                    <?php
+                    foreach ($education_provider as $row2) {
+                      echo "<option value='".$row2->provider_id."'>".$row2->provider_name."</option>";
                     }
                     ?>
                   </select>
                 </div>
+                <div class="mb-3">
+                  <label for="payee" class="form-label">Program Level</label>
+                  <select class="form-control select2" name="programlevel" required>
+                    <?php
+                      echo "<option value='".$row->programtype."'>".$row->programtype."</option>";
+                    ?>
+                    <?php
+                    foreach ($qualifications as $row3) {
+                      echo "<option value='".$row3->value."'>".$row3->value."</option>";
+                    }
+                    ?>
+                  </select>
+                </div>
+                <div class="mb-3">
+                  <label for="amount" class="form-label">% Commision</label>
+                  <input type="number" class="form-control" name="commission" placeholder="% Commision" step=".1" value="<?php echo $row->commission; ?>" required>
+                </div>
+                <div class="mb-3">
+                  <label for="amount" class="form-label">Currency</label>
+                  <select class="form-control select2" name="currency" required>
+                    <?php
+                      echo "<option value='".$row->currency."'>".$row->currency."</option>";
+                    ?>
+                    <?php
+                    foreach ($currency as $row4) {
+                      echo "<option value='".$row4->currency."'>".$row4->currency."</option>";
+                    }
+                    ?>
+                  </select>
+                </div>
+                <div class="mb-3">
+                  <label for="amount" class="form-label">Application Fee</label>
+                  <input type="number" class="form-control" name="applicationfee" placeholder="Application Fee" step=".01" value="<?php echo $row->applicationfee; ?>" required>
+                </div>
+                <div class="mb-3">
+                  <label for="amount" class="form-label">Tuition Fee</label>
+                  <input type="number" class="form-control" name="tuitionfee" placeholder="Tuition Fee" step=".01" value="<?php echo $row->tuition; ?>" required>
+                </div>
+                <div class="mb-3">
+                  <label for="amount" class="form-label">Cost of Living</label>
+                  <input type="number" class="form-control" name="costofliving" placeholder="Cost of Living" step=".01" value="<?php echo $row->costofliving; ?>" required>
+                </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
               </form>
-
+              <?php
+                      }
+                    ?>
             </div>
             <!-- /.card-body -->
           </div>
@@ -280,7 +338,6 @@
       "responsive": true,
     });
   });
-
   $('.select2').select2();
 </script>
 

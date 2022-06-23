@@ -44,6 +44,14 @@
       "responsive": true,
     });
   });
+
+  function putClientId(event) {
+    var string1 = event.target.id;
+    const stringArray = string1.split("_");
+    document.getElementById('clientid').value = stringArray[1];
+  }
+
+  
 </script>
 </body>
 </html>

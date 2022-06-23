@@ -19,6 +19,8 @@ $route['signout'] = 'userlogincontroller/signout';
 // Client Information
 $route['editclientinfo/(:any)'] = 'customerinfocontroller/editclientinfo/$1';
 $route['editclientinfo2/(:any)'] = 'customerinfocontroller/editclientinfo2/$1';
+$route['savefirebasefile'] = 'customerinfocontroller/savefirebasefile';
+$route['assignofficer'] = 'customerinfocontroller/assignofficer';
 
 // Payment routes
 $route['newpayment/(:any)'] = 'paymentscontroller/newpayment/$1';
@@ -62,6 +64,7 @@ $route['newassignment'] = 'adminmaintenancecontroller/newassignment';
 $route['saveassignment'] = 'adminmaintenancecontroller/saveassignment';
 $route['saveemailcontent'] = 'adminmaintenancecontroller/saveemailcontent';
 $route['saveparameters'] = 'adminmaintenancecontroller/saveparameters';
+$route['updatepriviledge'] = 'adminmaintenancecontroller/updatepriviledge';
 
 // Scholarship routes
 $route['scholarships'] = 'scholarshipcontroller/index';

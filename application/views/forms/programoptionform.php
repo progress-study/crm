@@ -108,6 +108,36 @@ label.radio input:checked+span {
             <table class="table table-bordered table-striped">
                         <thead>
                         <tr>
+                          <th>Scholarship</th>
+                          <th>Payment Type</th>
+                          <th>Amount/%</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <?php
+                        foreach ($scholarships as $row) {
+                          if ($row->identity == "PERCENTAGE") {
+                            echo "<tr>
+                            <td>".$row->description."</td>
+                            <td>".$row->identity."</td>
+                            <td>".$row->amount." %</td>
+                          </tr>";
+                            } else {
+                                echo "<tr>
+                            <td>".$row->description."</td>
+                            <td>".$row->identity."</td>
+                            <td>".$row->amount."</td>
+                          </tr>";
+                            }
+                            }
+                        ?>
+                        </tbody>
+                      </table>
+                      
+            <br>
+            <table class="table table-bordered table-striped">
+                        <thead>
+                        <tr>
                           <th>Expenses Type</th>
                           <th>Per Person</th>
                           <th>Amount Required</th>

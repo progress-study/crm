@@ -448,6 +448,221 @@
                   </div>
                   <!-- /.card-body -->
               </div>
+              <div class="tab-pane fade" id="priviledges" role="tabpanel" aria-labelledby="priviledges-tab">
+                  <div class="card-body">
+                    <form action="updatepriviledge" method="post">
+                     <table style="font-size: 10px;">
+                      <thead>
+                        <thead>
+                          <tr>
+                          <th></th> 
+                          <th>Manage Clients</th>        
+                          <th>Manage Officers</th>          
+                          <th>Manage Education Providers</th>           
+                          <th>Manage Student Applications</th>          
+                          <th>Manage Student Documents</th>           
+                          <th>Manage Commissions</th>           
+                          <th>Manage VISA Applications</th>           
+                          <th>Manage PR Documents</th>          
+                          <th>Manage PR Fee Received</th>           
+                          <th>Manage PR Fee Paid</th>           
+                          <th>Manage Reporting</th>           
+                          <th>Manage Channels</th>          
+                          <th>Manage Offices</th>           
+                          <th>Manage Parameters</th>         
+                          <th>Manage Privileges</th>          
+                          <th>Manage Database</th>          
+                          <th>View Fees</th>          
+                          <th>Staff Bonus</th>          
+                          <th>Manage Events</th>
+                          </tr> 
+                        </thead>
+                      </thead>
+                      <tbody>
+                      <?php
+                      foreach ($privilege as $row8) {
+                        if($row8->privilege_id == "1"){
+                          $name = "Admin";
+                        }
+                        elseif($row8->privilege_id == "2"){
+                          $name = "Manager";
+                        }
+                        elseif($row8->privilege_id == "3"){
+                          $name = "Staff";
+                        }
+                        elseif($row8->privilege_id == "4"){
+                          $name = "Account";
+                        }
+                        elseif($row8->privilege_id == "5"){
+                          $name = "Regional Manager";
+                        }
+
+                        if($row8->privilege_manage_clients == "1"){
+                          $privilege_manage_clients = "<input type='checkbox' name='privilege_manage_clients' checked>";
+                        }
+                        elseif($row8->privilege_manage_clients == "0"){
+                          $privilege_manage_clients = "<input type='checkbox' name='privilege_manage_clients'>";
+                        }
+
+                        if($row8->privilege_manage_officers == "1"){
+                          $privilege_manage_officers = "<input type='checkbox' name='privilege_manage_officers' checked>";
+                        }
+                        elseif($row8->privilege_manage_officers == "0"){
+                          $privilege_manage_officers = "<input type='checkbox' name='privilege_manage_officers'>";
+                        }
+
+                        if($row8->privilege_manage_providers == "1"){
+                          $privilege_manage_providers = "<input type='checkbox' name='privilege_manage_providers' checked>";
+                        }
+                        elseif($row8->privilege_manage_providers == "0"){
+                          $privilege_manage_providers = "<input type='checkbox' name='privilege_manage_providers'>";
+                        }
+
+                        if($row8->privilege_manage_studentapps == "1"){
+                          $privilege_manage_studentapps = "<input type='checkbox' name='privilege_manage_studentapps' checked>";
+                        }
+                        elseif($row8->privilege_manage_studentapps == "0"){
+                          $privilege_manage_studentapps = "<input type='checkbox' name='privilege_manage_studentapps'>";
+                        }
+
+                        if($row8->privilege_manage_studentdocs == "1"){
+                          $privilege_manage_studentdocs = "<input type='checkbox' name='privilege_manage_studentdocs' checked>";
+                        }
+                        elseif($row8->privilege_manage_studentdocs == "0"){
+                          $privilege_manage_studentdocs = "<input type='checkbox' name='privilege_manage_studentdocs'>";
+                        }
+
+                        if($row8->privilege_manage_commissions == "1"){
+                          $privilege_manage_commissions = "<input type='checkbox' name='privilege_manage_commissions' checked>";
+                        }
+                        elseif($row8->privilege_manage_commissions == "0"){
+                          $privilege_manage_commissions = "<input type='checkbox' name='privilege_manage_commissions'>";
+                        }
+
+                        if($row8->privilege_manage_prapps == "1"){
+                          $privilege_manage_prapps = "<input type='checkbox' name='privilege_manage_prapps' checked>";
+                        }
+                        elseif($row8->privilege_manage_prapps == "0"){
+                          $privilege_manage_prapps = "<input type='checkbox' name='privilege_manage_prapps'>";
+                        }
+
+                        if($row8->privilege_manage_prdocs == "1"){
+                          $privilege_manage_prdocs = "<input type='checkbox' name='privilege_manage_prdocs' checked>";
+                        }
+                        elseif($row8->privilege_manage_prdocs == "0"){
+                          $privilege_manage_prdocs = "<input type='checkbox' name='privilege_manage_prdocs'>";
+                        }
+
+                        if($row8->privilege_manage_prfeereceived == "1"){
+                          $privilege_manage_prfeereceived = "<input type='checkbox' name='privilege_manage_prfeereceived' checked>";
+                        }
+                        elseif($row8->privilege_manage_prfeereceived == "0"){
+                          $privilege_manage_prfeereceived = "<input type='checkbox' name='privilege_manage_prfeereceived'>";
+                        }
+
+                        if($row8->privilege_manage_prfeepaid == "1"){
+                          $privilege_manage_prfeepaid = "<input type='checkbox' name='privilege_manage_prfeepaid' checked>";
+                        }
+                        elseif($row8->privilege_manage_prfeepaid == "0"){
+                          $privilege_manage_prfeepaid = "<input type='checkbox' name='privilege_manage_prfeepaid'>";
+                        }
+
+                        if($row8->privilege_manage_reporting  == "1"){
+                          $privilege_manage_reporting = "<input type='checkbox' name='privilege_manage_reporting' checked>";
+                        }
+                        elseif($row8->privilege_manage_reporting  == "0"){
+                          $privilege_manage_reporting = "<input type='checkbox' name='privilege_manage_reporting'>";
+                        }
+                        if($row8->privilege_manage_channel == "1"){
+                          $privilege_manage_channel = "<input type='checkbox' name='privilege_manage_channel' checked>";
+                        }
+                        elseif($row8->privilege_manage_channel == "0"){
+                          $privilege_manage_channel = "<input type='checkbox' name='privilege_manage_channel'>";
+                        }
+
+                        if($row8->privilege_manage_parameters == "1"){
+                          $privilege_manage_parameters = "<input type='checkbox' name='privilege_manage_parameters' checked>";
+                        }
+                        elseif($row8->privilege_manage_parameters == "0"){
+                          $privilege_manage_parameters = "<input type='checkbox' name='privilege_manage_parameters'>";
+                        }
+
+                        if($row8->privilege_manage_privilege == "1"){
+                          $privilege_manage_privilege = "<input type='checkbox' name='privilege_manage_privilege' checked>";
+                        }
+                        elseif($row8->privilege_manage_privilege == "0"){
+                          $privilege_manage_privilege = "<input type='checkbox' name='privilege_manage_privilege'>";
+                        }
+
+                        if($row8->privilege_manage_database == "1"){
+                          $privilege_manage_database = "<input type='checkbox' name='privilege_manage_database' checked>";
+                        }
+                        elseif($row8->privilege_manage_database == "0"){
+                          $privilege_manage_database = "<input type='checkbox' name='privilege_manage_database'>";
+                        }
+
+                        if($row8->privilege_manage_offices == "1"){
+                          $privilege_manage_offices = "<input type='checkbox' name='privilege_manage_offices' checked>";
+                        }
+                        elseif($row8->privilege_manage_offices == "0"){
+                          $privilege_manage_offices = "<input type='checkbox' name='privilege_manage_offices'>";
+                        }
+
+                        if($row8->privilege_view_fees == "1"){
+                          $privilege_view_fees = "<input type='checkbox' name='privilege_view_fees' checked>";
+                        }
+                        elseif($row8->privilege_view_fees == "0"){
+                          $privilege_view_fees = "<input type='checkbox' name='privilege_view_fees'>";
+                        }
+
+                        if($row8->privilege_staff_bonus == "1"){
+                          $privilege_staff_bonus = "<input type='checkbox' name='privilege_staff_bonus' checked>";
+                        }
+                        elseif($row8->privilege_staff_bonus == "0"){
+                          $privilege_staff_bonus = "<input type='checkbox' name='privilege_staff_bonus'>";
+                        }
+
+                        if($row8->privilege_manage_events == "1"){
+                          $privilege_manage_events = "<input type='checkbox' name='privilege_manage_events' checked>";
+                        }
+                        elseif($row8->privilege_manage_events == "0"){
+                          $privilege_manage_events = "<input type='checkbox' name='privilege_manage_events'>";
+                        }
+
+                      ?>
+
+                        <tr>
+                          <th><?php echo $name; ?><?php echo "<input type='hidden' name='privilege_id' value='".$row8->privilege_id."'>"; ?></th>        
+                          <th><?php echo $privilege_manage_clients; ?></th>
+                          <th><?php echo $privilege_manage_officers; ?></th>
+                          <th><?php echo $privilege_manage_providers; ?></th>
+                          <th><?php echo $privilege_manage_studentapps; ?></th>
+                          <th><?php echo $privilege_manage_studentdocs; ?></th>
+                          <th><?php echo $privilege_manage_commissions; ?></th>
+                          <th><?php echo $privilege_manage_prapps; ?></th> 
+                          <th><?php echo $privilege_manage_prdocs; ?></th>  
+                          <th><?php echo $privilege_manage_prfeereceived; ?></th>  
+                          <th><?php echo $privilege_manage_prfeepaid; ?></th>  
+                          <th><?php echo $privilege_manage_reporting; ?></th> 
+                          <th><?php echo $privilege_manage_channel; ?></th>  
+                          <th><?php echo $privilege_manage_parameters; ?></th>
+                          <th><?php echo $privilege_manage_privilege; ?></th> 
+                          <th><?php echo $privilege_manage_database; ?></th> 
+                          <th><?php echo $privilege_manage_offices; ?></th> 
+                          <th><?php echo $privilege_view_fees; ?></th> 
+                          <th><?php echo $privilege_staff_bonus; ?></th>
+                          <th><?php echo $privilege_manage_events; ?></th>
+                        </tr>
+                      <?php
+                      }
+                      ?>
+                     </tbody>
+                     </table><br>
+                     <button class="btn btn-primary" type="submit">Update</button>
+                    </form>
+                  </div>
+                  <!-- /.card-body -->
+              </div>
               </div>
             </div>
           </div>

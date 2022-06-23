@@ -31,6 +31,10 @@ class Adminmaintenancecontroller extends CI_Controller {
 	    $query2 = $this->db->query($sql2);
 	    $parameters = $query2->result();
 
+	    $sql2 = "SELECT * FROM privilege";
+	    $query2 = $this->db->query($sql2);
+	    $privilege = $query2->result();
+
         $asset_url = base_url()."assets/";
 		$data['title'] = "Admin Maintenance";
 		$data['asset_url'] = $asset_url;
@@ -40,6 +44,7 @@ class Adminmaintenancecontroller extends CI_Controller {
 		$data['officerassignment'] = $officerassignment;
 		$data['emailcontents'] = $emailcontents;
 		$data['parameters'] = $parameters;
+		$data['privilege'] = $privilege;
 
 		if(isset($this->session->officer_name)) {
 			$this->load->view('maintenance/index', $data);
@@ -220,6 +225,30 @@ class Adminmaintenancecontroller extends CI_Controller {
 		$this->db->set('abn', $this->input->post('abn'));
 		$this->db->set('redeemable_point', $this->input->post('redeemable_point'));
 		$this->db->update('parameters');
+	}
+
+	public function updatepriviledge()
+	{
+		$this->db->set('privilege_manage_clients', $this->input->post('privilege_manage_clients'));
+		$this->db->set('privilege_manage_officers', $this->input->post('privilege_manage_officers'));
+		$this->db->set('privilege_manage_providers', $this->input->post('privilege_manage_providers'));
+		$this->db->set('privilege_manage_studentapps', $this->input->post('privilege_manage_studentapps'));
+		$this->db->set('privilege_manage_studentdocs', $this->input->post('privilege_manage_studentdocs'));
+		$this->db->set('privilege_manage_commissions', $this->input->post('privilege_manage_commissions'));
+		$this->db->set('privilege_manage_prapps', $this->input->post('privilege_manage_prapps'));
+		$this->db->set('privilege_manage_prdocs', $this->input->post('privilege_manage_prdocs'));
+		$this->db->set('privilege_manage_prfeereceived', $this->input->post('privilege_manage_prfeereceived'));
+		$this->db->set('privilege_manage_prfeepaid', $this->input->post('privilege_manage_prfeepaid'));
+		$this->db->set('privilege_manage_reporting', $this->input->post('privilege_manage_reporting'));
+		$this->db->set('privilege_manage_channel', $this->input->post('privilege_manage_channel'));
+		$this->db->set('privilege_manage_parameters', $this->input->post('privilege_manage_parameters'));
+		$this->db->set('privilege_manage_privilege', $this->input->post('privilege_manage_privilege'));
+		$this->db->set('privilege_manage_database', $this->input->post('privilege_manage_database'));
+		$this->db->set('$privilege_manage_offices', $this->input->post('$privilege_manage_offices'));
+		$this->db->set('$privilege_view_fees', $this->input->post('$privilege_view_fees'));
+		$this->db->set('$privilege_staff_bonus', $this->input->post('$privilege_staff_bonus'));
+		$this->db->set('privilege_manage_events', $this->input->post('privilege_manage_events'));
+		$this->db->update('privilege');
 	}
 
 

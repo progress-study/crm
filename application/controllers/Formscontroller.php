@@ -46,11 +46,16 @@ class Formscontroller extends CI_Controller {
         $query7 = $this->db->query($sql7);
         $programoptionsdetails = $query7->result();
 
+        $sql8 = "SELECT * FROM programoptions po inner join client c on po.client_id = c.client_id inner join clientscholarship csc on c.client_id = csc.clientid inner join scholarships s on s.scholarshipid = csc.scholarshipid inner join mastersetting m on s.paymenttype = m.id where po.poid = '$poid'";
+        $query8 = $this->db->query($sql8);
+        $scholarships = $query8->result();
+
         $data['programoptions'] = $programoptions;
         $data['programoptionsdetails'] = $programoptionsdetails;
+        $data['scholarships'] = $scholarships;        
 
         $asset_url = base_url()."assets/";
-		$data['title'] = "Client Form";
+		$data['title'] = "Program Options Form";
 		$data['asset_url'] = $asset_url;
 
 		$this->load->view('forms/programoptionform', $data);
