@@ -15,6 +15,10 @@ class Adminmaintenancecontroller extends CI_Controller {
 	    $query1 = $this->db->query($sql1);
 	    $region = $query1->result();
 
+	    $sql2 = "SELECT * FROM events";
+	    $query2 = $this->db->query($sql2);
+	    $events = $query2->result();
+
 	    $sql2 = "SELECT * FROM officer";
 	    $query2 = $this->db->query($sql2);
 	    $officer = $query2->result();
@@ -45,6 +49,7 @@ class Adminmaintenancecontroller extends CI_Controller {
 		$data['emailcontents'] = $emailcontents;
 		$data['parameters'] = $parameters;
 		$data['privilege'] = $privilege;
+		$data['events'] = $events;
 
 		if(isset($this->session->officer_name)) {
 			$this->load->view('maintenance/index', $data);
@@ -207,6 +212,7 @@ class Adminmaintenancecontroller extends CI_Controller {
 		$this->db->set('remailbody', $this->input->post('remailbody'));
 		$this->db->set('remailfooter', $this->input->post('remailfooter'));
 		$this->db->update('emailcontents');
+		redirect('adminmaintenance');
 	}
 
 	public function saveparameters()
@@ -250,6 +256,8 @@ class Adminmaintenancecontroller extends CI_Controller {
 		$this->db->set('privilege_manage_events', $this->input->post('privilege_manage_events'));
 		$this->db->update('privilege');
 	}
+
+	
 
 
 }

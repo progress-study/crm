@@ -28,6 +28,15 @@ class Inquiriescontroller extends CI_Controller {
 		}
 	}
 
+	public function getsingleinquiry($inquiries_id)
+	{
+
+		$sql = "SELECT * FROM inquiries WHERE inquiries_id = $inquiries_id";
+        $query = $this->db->query($sql);
+        $inquiries = $query->result();
+        echo json_encode($inquiries);
+	}
+
 	public function deleteinquiry($inquiry_id)
 	{
 		$this->db->where('inquiries_id', $inquiry_id);
@@ -75,7 +84,8 @@ class Inquiriescontroller extends CI_Controller {
 						'client_nationality' => '',
 						'client_country' => $row->inquiries_country,
 						'client_notes' => '',
-						'client_inquiries_id' => $row->inquiries_id
+						'client_inquiries_id' => $row->inquiries_id,
+						'client_officer_id' => $this->session->officer_id
 					);
 			$this->db->insert('client', $data);
 

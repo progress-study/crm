@@ -40,6 +40,7 @@ document.getElementById("savefiletofirebase").onclick = function() {
 			var today = new Date();
 			var datetoday = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
 
+/*
 		    cloudDB.collection("documents").add(
 			{
 				documentype: documentype,
@@ -57,45 +58,101 @@ document.getElementById("savefiletofirebase").onclick = function() {
 			.catch(function(error){
 				console.log(error);
 			})
+*/
+
+			$.ajax({
+			    type: "POST",
+			    url: "http://localhost/progress-study-crm/index.php/adddocuments",
+			    data: {
+			    	client_id: client_id, 
+			    	document_type: documentype, 
+			    	document_name: ImageName, 
+			    	document_link: url
+			    },
+			    success: function(data) {
+			        var obj = JSON.parse(data);
+			        alert("Successfully uploaded the new document!");
+			        //console.log(obj);
+			        setDocumentsTable2();
+			        $("#documentModal").modal("hide");
+    				ResetFile();
+			    },
+			    error: function(error) {
+			      alert("Error: "+error);
+			    }
+			});
 
 		})
 	}
 	)
 }
 
-
 function setDocumentsTable() {
     (async () => {
       var tabledata = "";
       document.getElementById("documentrow1").innerHTML = "";
+      document.getElementById("deletedocumentdiv").innerHTML = "";
 	  var clientid = document.getElementById("client_id2").value;
 	  var imageasseturl2 = document.getElementById("imageasseturl2").value;
 	  
       const arr = await getDocuments(clientid);
-      console.log(arr);
-	  for(var i = 0; i < arr.length; i++) {
+      for(var i = 0; i < arr.length; i++) {
 	  	var modi = i % 5;
 	  	if (i > 0 && modi == 0) {
-	  		console.log("Condition 1 : "+i);
 	  		tabledata += "<div class='col'><center><a href='" + arr[i].documenturl + "'><img src='" + imageasseturl2 + "' style='width: 70px; width: 65px;'><br><b>" + arr[i].documentype + "</b><br><label style='font-size: 12px;'>" + arr[i].filename + "</label></a></center></div></div><div class='row'>";
 	  	} 
 	  	else if (i == 0) {
-	  		console.log("Condition 2 : "+i);
 	  		tabledata += "<div class='row'><div class='col'><center><a href='" + arr[i].documenturl + "'><img src='" + imageasseturl2 + "' style='width: 70px; width: 65px;'><br><b>" + arr[i].documentype + "</b><br><label style='font-size: 12px;'>" + arr[i].filename + "</label></a></center></div>"
 	  	}
 	  	else if (i == (arr.length-1)) {
-	  		console.log("Condition 3 : "+i);
 	  		tabledata += "<div class='col'><center><a href='" + arr[i].documenturl + "'><img src='" + imageasseturl2 + "' style='width: 70px; width: 65px;'><br><b>" + arr[i].documentype + "</b><br><label style='font-size: 12px;'>" + arr[i].filename + "</label></a></center></div></div>"
 	  	}
 	  	else {
-	  		console.log("Condition 4 : "+i);
 	  		tabledata += "<div class='col'><center><a href='" + arr[i].documenturl + "'><img src='" + imageasseturl2 + "' style='width: 70px; width: 65px;'><br><b>" + arr[i].documentype + "</b><br><label style='font-size: 12px;'>" + arr[i].filename + "</label></a></center></div>";
 	  	}
-	  	//tabledata += "<tr style='width: 20%;'><td>" + arr[i].documentype + "</td><td style='width: 60%;'><a href='" + arr[i].documenturl + "'>" + arr[i].documenturl + "</a></td><td style='width: 20%;'>" + arr[i].dateuploaded + "</td></tr>";
-	  	
+	  	let documentdiv = document.createElement("div");
+		documentdiv.innerHTML = "<input type='checkbox' class='deleteselect'> " + arr[i].filename + " &nbsp;&nbsp;&nbsp;<input type='hidden' id='deletehiddenid-"+i+"' value='"+arr[i].filename+"'>";
+	  	document.getElementById("deletedocumentdiv").appendChild(documentdiv);
 	  }
 	  document.getElementById("documentrow1").innerHTML = tabledata;
 	})()
+}
+
+function setDocumentsTable2() {
+	var clientid = document.getElementById("client_id2").value;
+	$.ajax({
+    type: "GET",
+    url: "http://localhost/progress-study-crm/index.php/getdocuments/"+clientid,
+    success: function(data) {
+        var obj = JSON.parse(data);
+        //alert(obj[0].program);
+        console.log(obj);
+        var tabledata = "";
+	      document.getElementById("documentrow1").innerHTML = "";
+		  var clientid = document.getElementById("client_id2").value;
+		  var imageasseturl2 = document.getElementById("imageasseturl2").value;
+		  
+	      for(var i = 0; i < obj.length; i++) {
+		  	var modi = i % 5;
+		  	if (i > 0 && modi == 0) {
+		  		tabledata += "<div class='col'><center><input type='checkbox' class='deleteselect' value='"+obj[i].fbid+"'><a href='" + obj[i].document_link + "'><img src='" + imageasseturl2 + "' style='width: 70px; width: 65px;'><br><b>" + obj[i].document_type + "</b><br><label style='font-size: 12px;'>" + obj[i].document_name + "</label></a></center></div></div><div class='row'>";
+		  	} 
+		  	else if (i == 0) {
+		  		tabledata += "<div class='row'><div class='col'><center><input type='checkbox' class='deleteselect' value='"+obj[i].fbid+"'><a href='" + obj[i].document_link + "'><img src='" + imageasseturl2 + "' style='width: 70px; width: 65px;'><br><b>" + obj[i].document_type + "</b><br><label style='font-size: 12px;'>" + obj[i].document_name + "</label></a></center></div>"
+		  	}
+		  	else if (i == (obj.length-1)) {
+		  		tabledata += "<div class='col'><center><input type='checkbox' class='deleteselect' value='"+obj[i].fbid+"'><a href='" + obj[i].document_link + "'><img src='" + imageasseturl2 + "' style='width: 70px; width: 65px;'><br><b>" + obj[i].document_type + "</b><br><label style='font-size: 12px;'>" + obj[i].document_name + "</label></a></center></div></div>"
+		  	}
+		  	else {
+		  		tabledata += "<div class='col'><center><input type='checkbox' class='deleteselect' value='"+obj[i].fbid+"'><a href='" + obj[i].document_link + "'><img src='" + imageasseturl2 + "' style='width: 70px; width: 65px;'><br><b>" + obj[i].document_type + "</b><br><label style='font-size: 12px;'>" + obj[i].document_name + "</label></a></center></div>";
+		  	}
+		  }
+		  document.getElementById("documentrow1").innerHTML = tabledata;
+    },
+    error: function(error) {
+      alert("Error!");
+    }
+});
 }
 
 const getDocuments = (clientid) => {
@@ -103,7 +160,27 @@ const getDocuments = (clientid) => {
   //return cloudDB.collection('users').get().then(snapshot => snapshot.docs.map(x => x.data()));
 }
 
-setDocumentsTable();
+setDocumentsTable2();
+
+document.getElementById("deletedocumentfile").onclick = function() {
+	var deletefile = document.getElementsByClassName("deleteselect");
+	for(var i = 0; i < deletefile.length; i++) {
+		if(deletefile[i].checked == true) {
+			$.ajax({
+			    type: "GET",
+			    url: "http://localhost/progress-study-crm/index.php/deletedocuments/" + deletefile[i].value,
+			    success: function(data) {
+			    },
+			    error: function(error) {
+			      alert(error);
+			    }
+			});
+		}
+	}
+	alert("Successfully deleted the selected document/s!");
+    setDocumentsTable2();
+}
+
 
 /*
 chrome.storage.local.get(['sessionemail'], function(result) {
@@ -261,3 +338,6 @@ function logoutSet() {
 }
 
 */
+
+
+

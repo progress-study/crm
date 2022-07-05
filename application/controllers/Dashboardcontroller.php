@@ -29,20 +29,7 @@ class Dashboardcontroller extends CI_Controller {
 		$query4 = $this->db->query($sql4);
 		$education_provider = $query4->num_rows();
 
-		$sql5 = "SELECT 
-				c.client_surname,
-				c.client_firstname,
-				c.client_middlename,
-				c.client_inquiries_id,
-				i.inquiries_id,
-				sa.studentapp_id,
-				vap.client_visa_id,
-				p.paymentid
-				FROM client c
-				LEFT JOIN inquiries i on i.inquiries_id = c.client_inquiries_id
-				LEFT JOIN visa_application vap on vap.client_id = c.client_id
-				LEFT JOIN student_application sa on sa.client_id = c.client_id
-				LEFT JOIN payments p on p.payee = c.client_id";
+		$sql5 = "SELECT c.client_surname, c.client_firstname, c.client_middlename, c.client_inquiries_id, i.inquiries_id, sa.studentapp_id, vap.client_visa_id, p.paymentid, o.officer_name, (SELECT COUNT(fbid) FROM firebasefiles WHERE client_id = c.client_id) as doccount FROM client c LEFT JOIN inquiries i on i.inquiries_id = c.client_inquiries_id LEFT JOIN visa_application vap on vap.client_id = c.client_id LEFT JOIN student_application sa on sa.client_id = c.client_id LEFT JOIN officer o on o.officer_id = c.client_officer_id LEFT JOIN payments p on p.payee = c.client_id";
         $query5 = $this->db->query($sql5);
         $client = $query5->result();
 

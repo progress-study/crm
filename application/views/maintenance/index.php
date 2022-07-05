@@ -328,6 +328,60 @@
                   </div>
                   <!-- /.card-body -->
               </div>
+              <div class="tab-pane fade" id="events" role="tabpanel" aria-labelledby="events-tab">
+                  <div class="card-header">
+                    <h3 class="card-title"><a href="newevent">Add Event</a></h3>
+                  </div>
+                  <!-- /.card-header -->
+                  <div class="card-body">
+                    <table id="event" class="table table-bordered table-striped region1">
+                      <thead>
+                      <tr>
+                        <th>Event Name</th>
+                        <th>Event Date</th>
+                        <th>Event Time</th>
+                        <th>Event Location</th>
+                        <th>Event Region</th>
+                        <th>Event Info</th>
+                        <th>Event Comments</th>
+                        <th>Event Photo</th>
+                        <th></th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <?php
+                      foreach ($events as $row2) {
+                        echo "<tr>
+                          <td>".$row2->event_name."</td>
+                          <td>".$row2->event_date."</td>
+                          <td>".$row2->event_time."</td>
+                          <td>".$row2->event_location."</td>
+                          <td>".$row2->event_region."</td>
+                          <td>".$row2->event_info."</td>
+                          <td>".$row2->event_comments."</td>
+                          <td><img src='".$asset_url."images/".$row2->event_photo."' width='150px'></td>
+                          <td><a href='editregion/".$row2->event_id."' class='btn btn-primary btn-xs'>Edit</a></td>
+                        </tr>";
+                      }
+                      ?>
+                      </tbody>
+                      <tfoot>
+                      <tr>
+                        <th>Event Name</th>
+                        <th>Event Date</th>
+                        <th>Event Time</th>
+                        <th>Event Location</th>
+                        <th>Event Region</th>
+                        <th>Event Info</th>
+                        <th>Event Comments</th>
+                        <th>Event Photo</th>
+                        <th></th>
+                      </tr>
+                      </tfoot>
+                    </table>
+                  </div>
+                  <!-- /.card-body -->
+              </div>
               <div class="tab-pane fade" id="emailcontent" role="tabpanel" aria-labelledby="emailcontent-tab">
                   <div class="card-body">
                      <?php

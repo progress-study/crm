@@ -63,6 +63,7 @@ class Formscontroller extends CI_Controller {
 
 	public function saveinquiries() 
 	{
+		$message = "";
 		$birthdate = DateTime::createFromFormat("Y-m-d", $this->input->post('birthdate'));
     	$birthyear = $birthdate->format("Y");
     	$birthmonth = $birthdate->format("m");
@@ -104,36 +105,22 @@ class Formscontroller extends CI_Controller {
 						'inquiries_status' => 'Created'
 					);
 			$this->db->insert('inquiries', $data);
-/*
-			$message = "
-							<!DOCTYPE html>
-							<html>
-							<body>
-							<p>Good day!</p>
-							<p>
-							Here are the details from the e-Client form:
-							</p>
-							<p>
-							".$this->input->post('lastname')."<br>
-						    ".$this->input->post('firstname')."<br>
-						    ".$this->input->post('middlename')."<br>
-						    ".$this->input->post('birthdate')."<br>
-						    ".$this->input->post('mobile')."<br>
-						    ".$this->input->post('email')."<br>
-						    ".$this->input->post('location')."<br>
-						    ".$this->input->post('qualifications')."<br>
-						    ".$this->input->post('password')."<br>
-						    ".$this->input->post('noofdependents')."<br>
-						    ".$this->input->post('civilstatus')."<br>
-						    ".$this->input->post('nationality')."<br>
-						    ".$this->input->post('notes')."<br>
-						    Privacy Policy Consent: ".$this->input->post('confirm1')."<br>
-						    Receiving Information Consent: ".$confirm2."<br>
-							</p>
-							<p>Thank you!</p>
-							<p>Progress Connect CRM</p>
-							</body>
-							</html>
+
+			$emailquery = $this->db->query("SELECT * FROM `emailcontents`");
+			$iaremailheader = $emailquery->row()->iaremailheader;
+			$iaremailbody = $emailquery->row()->iaremailbody;
+			$iaremailfooter = $emailquery->row()->iaremailfooter;
+
+			$message .= "<!DOCTYPE html>
+						 <html>
+						 <body>";
+		    $message .= "<p>".$iaremailheader."</p>";
+		    $message .= "<br>";
+			$message .= "<p>".$iaremailbody."</p>";
+			$message .= "<br>";
+			$message .= "<p>".$iaremailfooter."</p>";
+			$message .= "</body>
+						 </html>
 						";
 			$sender = "ramirezkyl@gmail.com";
 		
@@ -157,9 +144,8 @@ class Formscontroller extends CI_Controller {
 	        $mailContent = $message;
 	        $mail->Body = $mailContent;
 	        $mail->send();
-*/
 
-	        redirect('clientform');
+	        redirect('success');
 			//$this->load->view('forms/success');
     	} else {
     		echo "<script>alert('Passwords are not matched!');</script>";
@@ -221,7 +207,11 @@ class Formscontroller extends CI_Controller {
 
 	public function success()
 	{
-		$this->load->view('forms/success');
+		$asset_url = base_url()."assets/";
+		$data['title'] = "Client Form";
+		$data['asset_url'] = $asset_url;
+
+		$this->load->view('forms/success', $data);
 	}
 
 }

@@ -121,10 +121,6 @@ class Customerinfocontroller extends CI_Controller {
         $query10 = $this->db->query($sql10);
         $programoptions = $query10->result();
 
-        $sql11 = "SELECT * FROM client_gdrive where client_id = '$client_id'";
-        $query11 = $this->db->query($sql11);
-        $client_gdrive = $query11->result();
-
         //id=2018&name=De%20Leon%20Abigail_PRApplication_127%20-2018&gdrive_id=150guQ5rBvbqw4Vo7HsAZAJJhUl6w6T3B&exist=exist
 
 	    $data['client_id'] = $client_id;
@@ -138,8 +134,7 @@ class Customerinfocontroller extends CI_Controller {
 		$data['eoi'] = $eoi;
 		$data['payments'] = $payments;
 		$data['programoptions'] = $programoptions;
-		
-		$data['client_gdrive'] = $client_gdrive;
+
 		$data['exist'] = 'exist';
 
 		$asset_url = base_url()."assets/";
@@ -152,7 +147,7 @@ class Customerinfocontroller extends CI_Controller {
 			redirect(base_url()."?error3=1");
 		}
 	}
-
+	
 	public function updateclientinfo()
 	{
 		$birthdate = DateTime::createFromFormat("Y-m-d", $this->input->post('birthdate'));

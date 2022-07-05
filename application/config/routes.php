@@ -65,6 +65,7 @@ $route['saveassignment'] = 'adminmaintenancecontroller/saveassignment';
 $route['saveemailcontent'] = 'adminmaintenancecontroller/saveemailcontent';
 $route['saveparameters'] = 'adminmaintenancecontroller/saveparameters';
 $route['updatepriviledge'] = 'adminmaintenancecontroller/updatepriviledge';
+$route['newevent'] = 'eventscontroller/newevent';
 
 // Scholarship routes
 $route['scholarships'] = 'scholarshipcontroller/index';
@@ -99,6 +100,7 @@ $route['visa_account'] = 'reportscontroller/visa_account';
 $route['inquiries'] = 'inquiriescontroller/index';
 $route['deleteinquiry/(:any)'] = 'inquiriescontroller/deleteinquiry/$1';
 $route['transferinquirytoclient/(:any)'] = 'inquiriescontroller/transferinquirytoclient/$1';
+$route['getsingleinquiry/(:any)'] = 'inquiriescontroller/getsingleinquiry/$1';
 
 // Program Options routes
 $route['newprogramoption/(:any)'] = 'programoptionscontroller/newprogramoption/$1';
@@ -109,3 +111,8 @@ $route['newprogramoptiondetails/(:any)'] = 'programoptionscontroller/newprogramo
 $route['saveprogramoptiondetails'] = 'programoptionscontroller/saveprogramoptiondetails';
 $route['editprogramoptiondetails/(:any)'] = 'programoptionscontroller/editprogramoptiondetails/$1';
 $route['updateprogramoptiondetails'] = 'programoptionscontroller/updateprogramoptiondetails';
+
+// Required documents routes
+$route['adddocuments'] = 'requireddocumentscontroller/adddocuments';
+$route['getdocuments/(:any)'] = 'requireddocumentscontroller/getdocuments/$1';
+$route['deletedocuments/(:any)'] = 'requireddocumentscontroller/deletedocuments/$1';

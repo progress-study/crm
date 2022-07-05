@@ -201,6 +201,13 @@
                 <tbody>
                 <?php
                 foreach ($inquiries as $row) {
+                  
+                  if($row->inquiries_status == "Transferred") {
+                    $transferbutton = "";
+                  } else {
+                    $transferbutton = "<a href='transferinquirytoclient/".$row->inquiries_id."' class='btn btn-primary btn-xs'>Approve as Client</a>";
+                  }
+
                   echo "<tr>
                     <td>".$row->inquiries_surname.", ".$row->inquiries_firstname." ".$row->inquiries_middlename."</td>
                     <td>".$row->inquiries_dob_month."/".$row->inquiries_dob_day."/".$row->inquiries_dob_year."</td>
@@ -208,8 +215,8 @@
                     <td>".$row->inquiries_email."</td>
                     <td>".$row->inquiries_address."</td>
                     <td>".$row->inquiries_status."</td>
-                    <td><a href='#' class='btn btn-primary btn-xs'>View</a> <a href='transferinquirytoclient/".$row->inquiries_id."' class='btn btn-primary btn-xs'>Approve as Client</a> <a href='deleteinquiry/".$row->inquiries_id."' class='btn btn-danger btn-xs'>Delete</a></td>
-                  </tr>";
+                    <td><a href='#' class='btn btn-primary btn-xs' data-toggle='modal' data-target='#viewInquiryModal' data-inquiriesid='".$row->inquiries_id."'>View</a> ".$transferbutton." <a href='deleteinquiry/".$row->inquiries_id."' class='btn btn-danger btn-xs'>Delete</a></td>
+                    </tr>";
                 }
                 ?>
                 </tbody>
@@ -235,6 +242,35 @@
       <!-- /.row -->
     </section>
     <!-- /.content -->
+    <div class="modal fade bd-example-modal-lg" id="viewInquiryModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">View Details</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            Name: <label id="inquiriesname"></label></br>
+            Birthday: <label id="inquiriesbirthday"></label></br>
+            Phone #: <label id="inquiriesphone"></label></br>
+            Mobile #: <label id="inquiriesmobile"></label></br>
+            Email Address: <label id="inquiriesemail"></label></br>
+            Qualifications: <label id="inquiriesqualifications"></label></br>
+            Dependence: <label id="inquiriesdependence"></label></br>
+            Civil Status: <label id="inquiriescivilstatus"></label></br>
+            Country: <label id="inquiriescountry"></label></br>
+            City: <label id="inquiriescity"></label></br>
+            Notes: <label id="inquiriesnotes"></label></br>
+            Status: <label id="inquiriesstatus"></label></br>
+            Nationality: <label id="inquiriesnationality"></label></br>
+            Resume: <label id="inquiriesresume"></label></br>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
   <!-- /.content-wrapper -->
   <footer class="main-footer">
@@ -283,6 +319,44 @@
       "responsive": true,
     });
   });
+
+  $('#viewInquiryModal').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget) // Button that triggered the modal
+    var inquiriesid = button.data('inquiriesid') // Extract info from data-* attributes
+    // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+    // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+    var modal = $(this)
+    //modal.find('.modal-title').text('New message to ' + recipient)
+    //modal.find('.modal-body input').val(recipient)
+    $.ajax({
+        type: "GET",
+        url: "http://localhost/progress-study-crm/index.php/getsingleinquiry/" + inquiriesid,
+        success: function(data) {
+          var obj = JSON.parse(data);
+          for (var x = 0; x < obj.length; x++) {
+              document.getElementById("inquiriesname").innerText = obj[x].inquiries_surname + ", " + obj[x].inquiries_firstname + " " + obj[x].inquiries_middlename;
+              document.getElementById("inquiriesbirthday").innerText = obj[x].inquiries_dob_month + "/" + obj[x].inquiries_dob_day + "/" + obj[x].inquiries_dob_year;
+              document.getElementById("inquiriesphone").innerText = obj[x].inquiries_phoneno;
+              document.getElementById("inquiriesmobile").innerText = obj[x].inquiries_mobileno;
+              document.getElementById("inquiriesemail").innerText = obj[x].inquiries_email;
+              document.getElementById("inquiriesqualifications").innerText = obj[x].inquiries_qualifications;
+              document.getElementById("inquiriesdependence").innerText = obj[x].inquiries_dependents;
+              document.getElementById("inquiriescivilstatus").innerText = obj[x].inquiries_civilstatus;
+              document.getElementById("inquiriescountry").innerText = obj[x].inquiries_country;
+              document.getElementById("inquiriescity").innerText = obj[x].inquiries_city;
+              document.getElementById("inquiriesnotes").innerText = obj[x].inquiries_notes;
+              document.getElementById("inquiriesstatus").innerText = obj[x].inquiries_status;
+              document.getElementById("inquiriesnationality").innerText = obj[x].inquiries_nationality;
+              document.getElementById("inquiriesresume").innerText = obj[x].inquiries_resume;
+          }
+        },
+        error: function(error) {
+          alert(error);
+        }
+    });
+
+  })
+
 </script>
 </body>
 </html>

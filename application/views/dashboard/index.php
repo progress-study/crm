@@ -296,8 +296,13 @@
                     $transferred = "Yes";
                   }
 
-                  $documentbg = "#dc3545";
-                  $document = "No documents uploaded";
+                  if ($row->doccount == "0") {
+                    $documentbg = "#dc3545";
+                    $document = "No documents uploaded";
+                  } else {
+                    $documentbg = "#28a745";
+                    $document = $row->doccount." documents";
+                  }
 
                   if ($row->client_visa_id == "") {
                     $visabg = "#dc3545";
@@ -336,7 +341,7 @@
 
                   echo "<tr>
                     <td>".$row->client_surname.", ".$row->client_firstname." ".$row->client_middlename."</td>
-                    <td>amg@progress-study.com</td>
+                    <td>".$row->officer_name."</td>
                     <td style='background: ".$inquiredbg."; color: white;'>".$inquired."</td>
                     <td style='background: ".$transferredbg."; color: white;'>".$transferred."</td>
                     <td style='background: #dc3545; color: white;'></td>

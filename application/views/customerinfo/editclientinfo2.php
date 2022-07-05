@@ -21,6 +21,14 @@
   <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
+  <script src="<?php echo $asset_url; ?>google/firebase-app.js"></script>
+  <script src="<?php echo $asset_url; ?>google/firebase-analytics.js"></script>
+  <script src="<?php echo $asset_url; ?>google/firebase-firestore.js"></script>
+  <script src="<?php echo $asset_url; ?>google/firebase-storage.js"></script>
+  <script src="<?php echo $asset_url; ?>google/firebase-auth.js"></script>
+
+  <script src="<?php echo $asset_url; ?>google/firebase-save.js" type="module"></script>
+
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -432,7 +440,7 @@
                   
                   <div class="tab-pane fade" id="documents" role="tabpanel" aria-labelledby="documents-tab">
                       <br>
-                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#documentModal">Upload New Document</button>
+                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#documentModal">Upload New Document</button> <button type="button" class="btn btn-danger" id="deletedocumentfile">Delete Document</button>
                       <input type="hidden" id="client_id2" value="<?php echo $client_id; ?>">
                       <input type="hidden" id="imageasseturl2" value="<?php echo $asset_url.'images/fileicon.png'; ?>"><br><br>
                       <!--<table id="documentstable" style="font-size: 14px;">
@@ -703,7 +711,7 @@
                           <th>English Requirement</th>
                           <th>Intake</th>
                           <th>Important to Consider</th>
-                          <th>Migration Pathway</th>
+                          <th>Outcome</th>
                           <th>PO Approval Link</th>
                           <th></th>
                         </tr>
@@ -739,7 +747,7 @@
                           <th>English Requirement</th>
                           <th>Intake</th>
                           <th>Important to Consider</th>
-                          <th>Migration Pathway</th>
+                          <th>Outcome</th>
                           <th>PO Approval Link</th>
                           <th></th>
                         </tr>
@@ -762,7 +770,7 @@
     <!-- /.content -->
     <!-- Button trigger modal -->
 
-    <!-- Modal -->
+    <!-- Add New Document Modal -->
     <div class="modal fade" id="documentModal" tabindex="-1" role="dialog" aria-labelledby="documentModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -861,14 +869,6 @@ outlining your job title, responsibilities and duration of employment.</option>
 <script src="<?php echo $asset_url; ?>plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
 <script src="<?php echo $asset_url; ?>plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
 <script src="<?php echo $asset_url; ?>plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-
-<script src="<?php echo $asset_url; ?>google/firebase-app.js"></script>
-<script src="<?php echo $asset_url; ?>google/firebase-analytics.js"></script>
-<script src="<?php echo $asset_url; ?>google/firebase-firestore.js"></script>
-<script src="<?php echo $asset_url; ?>google/firebase-storage.js"></script>
-<script src="<?php echo $asset_url; ?>google/firebase-auth.js"></script>
-
-<script src="<?php echo $asset_url; ?>google/firebase-save.js" type="module"></script>
 
 <script>
   $(function () {

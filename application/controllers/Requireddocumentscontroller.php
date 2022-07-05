@@ -21,4 +21,38 @@ class Requireddocumentscontroller extends CI_Controller {
 			redirect(base_url()."?error3=1");
 		}
 	}
+
+	public function adddocuments()
+	{
+		$client_id = $this->input->post('client_id');
+		$document_type = $this->input->post('document_type');
+		$document_name = $this->input->post('document_name');
+		$document_link = $this->input->post('document_link');
+
+		$data = array(
+					'client_id' => $client_id,
+					'document_type' => $document_type,
+					'document_link' => $document_link,
+					'date_uploaded' => date("Y-m-d"),
+					'document_name' => $document_name
+				);
+		$this->db->insert('firebasefiles', $data);
+		echo json_encode("Successfully uploaded the document!");
+	}
+
+	public function getdocuments($client_id)
+	{
+		$sql = "SELECT * FROM firebasefiles";
+	    $query = $this->db->query($sql);
+	    $firebasefiles = $query->result();
+		echo json_encode($firebasefiles);
+	}
+
+	public function deletedocuments($client_id)
+	{
+		$this->db->where('fbid', $client_id);
+		$this->db->delete('firebasefiles');
+		echo json_encode("Successfully deleted the document!");
+	}
+
 }

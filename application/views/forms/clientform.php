@@ -85,7 +85,7 @@ label.radio input:checked+span {
     <div class="card px-1 py-4">
         <div class="card-body">
         <form action="saveinquiries" method="POST" onsubmit="checkConfirmed(event)">
-            <center><img src="<?php echo $asset_url; ?>images/logo.png" alt="PSC Logo" width="40px"></center>
+            <center><img src="<?php echo $asset_url; ?>images/logomain.png" alt="PSC Logo" width="200px"></center>
             <h6 class="information mt-4">Please provide following information</h6>
             <div class="row">
                 <div class="col-sm-12">
