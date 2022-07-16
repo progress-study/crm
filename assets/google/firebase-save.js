@@ -29,7 +29,8 @@ document.getElementById("savefiletofirebase").onclick = function() {
 		console.log('Uploading ' + progress + '%');
 	},
 	function(error) {
-		alert('Error in saving the image');
+		alert('Error in saving the image: ');
+		console.log(error);
 	},
 	function() {
 		uploadTask.snapshot.ref.getDownloadURL().then(function(url){
@@ -338,6 +339,3 @@ function logoutSet() {
 }
 
 */
-
-
-

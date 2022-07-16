@@ -116,3 +116,11 @@ $route['updateprogramoptiondetails'] = 'programoptionscontroller/updateprogramop
 $route['adddocuments'] = 'requireddocumentscontroller/adddocuments';
 $route['getdocuments/(:any)'] = 'requireddocumentscontroller/getdocuments/$1';
 $route['deletedocuments/(:any)'] = 'requireddocumentscontroller/deletedocuments/$1';
+
+// Messages routes
+$route['messages'] = 'messagescontroller/index';
+$route['getconversation/(:any)'] = 'messagescontroller/getconversation/$1';
+$route['updatethreads/(:any)'] = 'messagescontroller/updatethreads/$1';
+$route['savefilechat'] = 'messagescontroller/savefilechat';
+$route['savetextchat'] = 'messagescontroller/savetextchat';
+$route['createthread'] = 'messagescontroller/createthread';
