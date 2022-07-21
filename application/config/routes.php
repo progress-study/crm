@@ -50,7 +50,7 @@ $route['updateapplication'] = 'applicationscontroller/updateapplication';
 // Forms routes
 $route['clientform'] = 'formscontroller/clientform';
 $route['saveclientform'] = 'formscontroller/saveclientform';
-$route['saveinquiries'] = 'formscontroller/saveinquiries';
+$route['do_upload'] = 'formscontroller/do_upload';
 $route['success'] = 'formscontroller/success';
 $route['programoptionform/(:any)'] = 'formscontroller/programoptionform/$1';
 

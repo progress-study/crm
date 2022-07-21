@@ -28,6 +28,11 @@
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
       <!-- Notifications Dropdown Menu -->
+      <li class="nav-item">
+        <a class="nav-link" href="<?php echo base_url(); ?>index.php/messages" title="Messages">
+          <i class="far fa-comments" aria-hidden="true"></i>
+        </a>
+      </li>
       <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#">
           <i class="far fa-bell"></i>
@@ -186,6 +191,7 @@
           <div class="card">
             <!-- /.card-header -->
             <div class="card-body">
+              <input type="hidden" value="<?php echo base_url(); ?>" id="baseurl">
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
                 <tr>
@@ -323,6 +329,7 @@
   $('#viewInquiryModal').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget) // Button that triggered the modal
     var inquiriesid = button.data('inquiriesid') // Extract info from data-* attributes
+    var baseurl = $("#baseurl").val();
     // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
     // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
     var modal = $(this)
@@ -330,7 +337,7 @@
     //modal.find('.modal-body input').val(recipient)
     $.ajax({
         type: "GET",
-        url: "http://localhost/progress-study-crm/index.php/getsingleinquiry/" + inquiriesid,
+        url: baseurl + "index.php/getsingleinquiry/" + inquiriesid,
         success: function(data) {
           var obj = JSON.parse(data);
           for (var x = 0; x < obj.length; x++) {

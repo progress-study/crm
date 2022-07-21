@@ -61,7 +61,7 @@ class Formscontroller extends CI_Controller {
 		$this->load->view('forms/programoptionform', $data);
 	}
 
-	public function saveinquiries() 
+	public function do_upload() 
 	{
 		$message = "";
 		$birthdate = DateTime::createFromFormat("Y-m-d", $this->input->post('birthdate'));
@@ -81,75 +81,165 @@ class Formscontroller extends CI_Controller {
     		$confirm1 = 'off';
     	}
 
-    	if ($this->input->post('password') == $this->input->post('password2')) {
-    		$data = array(
-						'inquiries_surname' => $this->input->post('lastname'),
-						'inquiries_firstname' => $this->input->post('firstname'),
-						'inquiries_middlename' => $this->input->post('middlename'),
-						'inquiries_dob_day' => $birthday,
-						'inquiries_dob_month' => $birthmonth,
-						'inquiries_dob_year' => $birthyear,
-						'inquiries_phoneno' => '',
-						'inquiries_mobileno' => $this->input->post('mobile'),
-						'inquiries_email' => $this->input->post('email'),
-						'inquiries_address' => $this->input->post('city'),
-						'inquiries_qualifications' => $this->input->post('qualifications'),
-						'inquiries_password' => $this->input->post('password'),
-						'inquiries_dependents' => $this->input->post('noofdependents'),
-						'inquiries_civilstatus' => $this->input->post('civilstatus'),
-						'inquiries_country' => $this->input->post('country'),
-						'inquiries_city' => $this->input->post('city'),
-						'inquiries_notes' => $this->input->post('notes'),
-						'inquiries_privacy_consent' => $confirm1,
-						'inquiries_info_receiving_consent' => $confirm2,
-						'inquiries_status' => 'Created'
-					);
-			$this->db->insert('inquiries', $data);
+    	$config['upload_path']          = './assets/resume/';
+        $config['allowed_types']        = 'jpg|png|pdf|docx';
+        $config['max_size']             = 10000;
+        $config['max_width']            = 10000;
+        $config['max_height']           = 10000;
 
-			$emailquery = $this->db->query("SELECT * FROM `emailcontents`");
-			$iaremailheader = $emailquery->row()->iaremailheader;
-			$iaremailbody = $emailquery->row()->iaremailbody;
-			$iaremailfooter = $emailquery->row()->iaremailfooter;
+        $this->load->library('upload', $config);
 
-			$message .= "<!DOCTYPE html>
-						 <html>
-						 <body>";
-		    $message .= "<p>".$iaremailheader."</p>";
-		    $message .= "<br>";
-			$message .= "<p>".$iaremailbody."</p>";
-			$message .= "<br>";
-			$message .= "<p>".$iaremailfooter."</p>";
-			$message .= "</body>
-						 </html>
-						";
-			$sender = "ramirezkyl@gmail.com";
-		
-			$this->load->library('phpmailer_lib');
-	        $mail = $this->phpmailer_lib->load();
-  
-		    $mail->SMTPDebug = 1;
-		    $mail->isSMTP();
-		    $mail->Host       = 'ssl://smtp.gmail.com';            
-		    $mail->SMTPAuth   = true;                                
-		    $mail->Username   = 'servicezeronoisemarketing@gmail.com';            
-		    $mail->Password   = 'lgbnxidtxswccfzr';                     
-		    $mail->SMTPSecure = 'ssl';      
-		    $mail->Port       = 465;   
-	        
-	        $mail->setFrom("ramirezkyl@gmail.com");
-	        //$mail->addReplyTo($sender, $this->session->userdata('companyname'));
-	        $mail->addAddress("ramirezkyl@gmail.com");
-	        $mail->Subject = 'New Inquiries';
-	        $mail->isHTML(true);
-	        $mailContent = $message;
-	        $mail->Body = $mailContent;
-	        $mail->send();
+        if (!$this->upload->do_upload('resume'))
+        {
+        	if ($this->input->post('password') == $this->input->post('password2')) {
+	    		$data = array(
+							'inquiries_surname' => $this->input->post('lastname'),
+							'inquiries_firstname' => $this->input->post('firstname'),
+							'inquiries_middlename' => $this->input->post('middlename'),
+							'inquiries_dob_day' => $birthday,
+							'inquiries_dob_month' => $birthmonth,
+							'inquiries_dob_year' => $birthyear,
+							'inquiries_phoneno' => '',
+							'inquiries_mobileno' => $this->input->post('mobile'),
+							'inquiries_email' => $this->input->post('email'),
+							'inquiries_address' => $this->input->post('city'),
+							'inquiries_qualifications' => $this->input->post('qualifications'),
+							'inquiries_password' => $this->input->post('password'),
+							'inquiries_dependents' => $this->input->post('noofdependents'),
+							'inquiries_civilstatus' => $this->input->post('civilstatus'),
+							'inquiries_country' => $this->input->post('country'),
+							'inquiries_nationality' => $this->input->post('nationality'),
+							'inquiries_city' => $this->input->post('city'),
+							'inquiries_notes' => $this->input->post('notes'),
+							'inquiries_privacy_consent' => $confirm1,
+							'inquiries_info_receiving_consent' => $confirm2,
+							'inquiries_status' => 'Created',
+							'inquiries_resume' => ''
+						);
+				$this->db->insert('inquiries', $data);
 
-	        redirect('success');
-			//$this->load->view('forms/success');
-    	} else {
-    		echo "<script>alert('Passwords are not matched!');</script>";
-    	}
+				$emailquery = $this->db->query("SELECT * FROM `emailcontents`");
+				$iaremailheader = $emailquery->row()->iaremailheader;
+				$iaremailbody = $emailquery->row()->iaremailbody;
+				$iaremailfooter = $emailquery->row()->iaremailfooter;
+
+				$message .= "<!DOCTYPE html>
+							 <html>
+							 <body>";
+			    $message .= "<p>".$iaremailheader."</p>";
+			    $message .= "<br>";
+				$message .= "<p>".$iaremailbody."</p>";
+				$message .= "<br>";
+				$message .= "<p>".$iaremailfooter."</p>";
+				$message .= "</body>
+							 </html>
+							";
+				$sender = "ramirezkyl@gmail.com";
+			
+				$this->load->library('phpmailer_lib');
+		        $mail = $this->phpmailer_lib->load();
+	  
+			    $mail->SMTPDebug = 1;
+			    $mail->isSMTP();
+			    $mail->Host       = 'ssl://smtp.gmail.com';            
+			    $mail->SMTPAuth   = true;                                
+			    $mail->Username   = 'servicezeronoisemarketing@gmail.com';            
+			    $mail->Password   = 'lgbnxidtxswccfzr';                     
+			    $mail->SMTPSecure = 'ssl';      
+			    $mail->Port       = 465;   
+		        
+		        $mail->setFrom("ramirezkyl@gmail.com");
+		        //$mail->addReplyTo($sender, $this->session->userdata('companyname'));
+		        $mail->addAddress("ramirezkyl@gmail.com");
+		        $mail->Subject = 'New Inquiries';
+		        $mail->isHTML(true);
+		        $mailContent = $message;
+		        $mail->Body = $mailContent;
+		        $mail->send();
+
+		        redirect('success');
+				//$this->load->view('forms/success');
+	    	} else {
+	    		echo "<script>alert('Passwords are not matched!');</script>";
+	    	}
+        } else {
+        	$upload_data = $this->upload->data();
+			$file_name = $upload_data['file_name'];
+
+        	if ($this->input->post('password') == $this->input->post('password2')) {
+	    		$data = array(
+							'inquiries_surname' => $this->input->post('lastname'),
+							'inquiries_firstname' => $this->input->post('firstname'),
+							'inquiries_middlename' => $this->input->post('middlename'),
+							'inquiries_dob_day' => $birthday,
+							'inquiries_dob_month' => $birthmonth,
+							'inquiries_dob_year' => $birthyear,
+							'inquiries_phoneno' => '',
+							'inquiries_mobileno' => $this->input->post('mobile'),
+							'inquiries_email' => $this->input->post('email'),
+							'inquiries_address' => $this->input->post('city'),
+							'inquiries_qualifications' => $this->input->post('qualifications'),
+							'inquiries_password' => $this->input->post('password'),
+							'inquiries_dependents' => $this->input->post('noofdependents'),
+							'inquiries_civilstatus' => $this->input->post('civilstatus'),
+							'inquiries_country' => $this->input->post('country'),
+							'inquiries_nationality' => $this->input->post('nationality'),
+							'inquiries_city' => $this->input->post('city'),
+							'inquiries_notes' => $this->input->post('notes'),
+							'inquiries_privacy_consent' => $confirm1,
+							'inquiries_info_receiving_consent' => $confirm2,
+							'inquiries_status' => 'Created',
+							'inquiries_resume' => $file_name
+						);
+				$this->db->insert('inquiries', $data);
+
+				$emailquery = $this->db->query("SELECT * FROM `emailcontents`");
+				$iaremailheader = $emailquery->row()->iaremailheader;
+				$iaremailbody = $emailquery->row()->iaremailbody;
+				$iaremailfooter = $emailquery->row()->iaremailfooter;
+
+				$message .= "<!DOCTYPE html>
+							 <html>
+							 <body>";
+			    $message .= "<p>".$iaremailheader."</p>";
+			    $message .= "<br>";
+				$message .= "<p>".$iaremailbody."</p>";
+				$message .= "<br>";
+				$message .= "<p>".$iaremailfooter."</p>";
+				$message .= "</body>
+							 </html>
+							";
+				$sender = "ramirezkyl@gmail.com";
+			
+				$this->load->library('phpmailer_lib');
+		        $mail = $this->phpmailer_lib->load();
+	  
+			    $mail->SMTPDebug = 1;
+			    $mail->isSMTP();
+			    $mail->Host       = 'ssl://smtp.gmail.com';            
+			    $mail->SMTPAuth   = true;                                
+			    $mail->Username   = 'servicezeronoisemarketing@gmail.com';            
+			    $mail->Password   = 'lgbnxidtxswccfzr';                     
+			    $mail->SMTPSecure = 'ssl';      
+			    $mail->Port       = 465;   
+		        
+		        $mail->setFrom("ramirezkyl@gmail.com");
+		        //$mail->addReplyTo($sender, $this->session->userdata('companyname'));
+		        $mail->addAddress("ramirezkyl@gmail.com");
+		        $mail->Subject = 'New Inquiries';
+		        $mail->isHTML(true);
+		        $mailContent = $message;
+		        $mail->Body = $mailContent;
+		        $mail->send();
+
+		        redirect('success');
+				//$this->load->view('forms/success');
+	    	} else {
+	    		echo "<script>alert('Passwords are not matched!');</script>";
+	    	}
+        }
+
+    	
 	}
 
 	public function saveclientform() 

@@ -38,8 +38,13 @@
     <ul class="navbar-nav ml-auto">
       
       <!-- Notifications Dropdown Menu -->
+      <li class="nav-item">
+        <a class="nav-link" href="<?php echo base_url(); ?>index.php/messages" title="Messages">
+          <i class="far fa-comments" aria-hidden="true"></i>
+        </a>
+      </li>
       <li class="nav-item dropdown">
-        <a class="nav-link" data-toggle="dropdown" href="#">
+        <a class="nav-link" data-toggle="dropdown" href="#" title="Notifications">
           <i class="far fa-bell"></i>
           <span class="badge badge-warning navbar-badge">15</span>
         </a>
@@ -65,7 +70,7 @@
         </div>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="<?php echo base_url(); ?>index.php/signout">
+        <a class="nav-link" href="<?php echo base_url(); ?>index.php/signout" title="Sign out">
           <i class="fas fa-power-off"></i>
         </a>
       </li>

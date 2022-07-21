@@ -63,7 +63,7 @@ document.getElementById("savefiletofirebase").onclick = function() {
 
 			$.ajax({
 			    type: "POST",
-			    url: "http://localhost/progress-study-crm/index.php/adddocuments",
+			    url: baseurl + "index.php/adddocuments",
 			    data: {
 			    	client_id: client_id, 
 			    	document_type: documentype, 
@@ -121,9 +121,10 @@ function setDocumentsTable() {
 
 function setDocumentsTable2() {
 	var clientid = document.getElementById("client_id2").value;
+	var baseurl = document.getElementById("baseurl1").value;
 	$.ajax({
     type: "GET",
-    url: "http://localhost/progress-study-crm/index.php/getdocuments/"+clientid,
+    url: baseurl + "index.php/getdocuments/"+clientid,
     success: function(data) {
         var obj = JSON.parse(data);
         //alert(obj[0].program);

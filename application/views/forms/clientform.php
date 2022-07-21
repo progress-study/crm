@@ -84,7 +84,7 @@ label.radio input:checked+span {
                                 <div class="container mt-5 mb-5 d-flex justify-content-center">
     <div class="card px-1 py-4">
         <div class="card-body">
-        <form action="saveinquiries" method="POST" onsubmit="checkConfirmed(event)">
+        <form action="do_upload" method="POST" onsubmit="checkConfirmed(event)" enctype="multipart/form-data">
             <center><img src="<?php echo $asset_url; ?>images/logomain.png" alt="PSC Logo" width="200px"></center>
             <h6 class="information mt-4">Please provide following information</h6>
             <div class="row">
@@ -139,6 +139,20 @@ label.radio input:checked+span {
                             <?php
                                 foreach ($nationality as $row1) {
                                   echo "<option>".$row1->en_short_name."</option>";
+                                }
+                            ?>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <select class="form-control" name="nationality" required>
+                            <option>Select Nationality</option>
+                            <?php
+                                foreach ($nationality as $row1) {
+                                  echo "<option>".$row1->nationality."</option>";
                                 }
                             ?>
                         </select>
@@ -206,6 +220,15 @@ label.radio input:checked+span {
                         <!-- <label for="name">Name</label> --> <input class="form-control" type="password" name="password2" placeholder="Re-type Password" required> </div>
                 </div>
             </div>
+            <br>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label for="resume" class="form-label">Resume</label>
+                        <input class="form-control" type="file" name="resume" required> 
+                    </div>
+                </div>
+            </div>
             <div class="row">
                 <div class="col-sm-12">
                     <div class="form-group">
@@ -225,8 +248,6 @@ label.radio input:checked+span {
     </div>
 </div>
 <script type='text/javascript' src='https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js'></script>
-<script type='text/javascript' src=''></script>
-<script type='text/javascript' src=''></script>
 <script type='text/Javascript'>
     function checkConfirmed(e) {
         if (document.getElementById('confirm1').checked != true) {
