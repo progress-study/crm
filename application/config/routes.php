@@ -124,3 +124,4 @@ $route['updatethreads/(:any)'] = 'messagescontroller/updatethreads/$1';
 $route['savefilechat'] = 'messagescontroller/savefilechat';
 $route['savetextchat'] = 'messagescontroller/savetextchat';
 $route['createthread'] = 'messagescontroller/createthread';
+$route['savetoclientdocuments'] = 'messagescontroller/savetoclientdocuments';

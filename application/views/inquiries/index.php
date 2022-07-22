@@ -117,6 +117,9 @@
               </p>
             </a>
           </li>
+          <?php
+  if ($privilege_manage_providers == "1") {
+?>
           <li class="nav-item">
             <a href="schools" class="nav-link<?php if($title == 'Schools and Programs'){ echo ' active';} ?>">
               <i class="nav-icon fas fa-th"></i>
@@ -125,6 +128,12 @@
               </p>
             </a>
           </li>
+          <?php
+  }
+?>
+          <?php
+  if ($privilege_manage_studentapps == "1") {
+?>
           <li class="nav-item">
             <a href="applications" class="nav-link<?php if($title == 'Applications'){ echo ' active';} ?>">
               <i class="nav-icon fas fa-th"></i>
@@ -133,6 +142,9 @@
               </p>
             </a>
           </li>
+          <?php
+  }
+?>
           <li class="nav-item">
             <a href="adminmaintenance" class="nav-link<?php if($title == 'Admin Maintenance'){ echo ' active';} ?>">
               <i class="nav-icon fas fa-th"></i>
@@ -149,6 +161,9 @@
               </p>
             </a>
           </li>
+          <?php
+  if ($privilege_manage_reporting == "1") {
+?>
           <li class="nav-item">
             <a href="reports" class="nav-link<?php if($title == 'Reports'){ echo ' active';} ?>">
               <i class="nav-icon fas fa-th"></i>
@@ -157,6 +172,9 @@
               </p>
             </a>
           </li>
+          <?php
+  }
+?>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
@@ -201,6 +219,7 @@
                   <th>Email Address</th>
                   <th>Address</th>
                   <th>Status</th>
+                  <th>Resume</th>
                   <th></th>
                 </tr>
                 </thead>
@@ -214,6 +233,12 @@
                     $transferbutton = "<a href='transferinquirytoclient/".$row->inquiries_id."' class='btn btn-primary btn-xs'>Approve as Client</a>";
                   }
 
+                  if($row->inquiries_resume != "") {
+                    $filedata = "<a href='".$asset_url."resume/".$row->inquiries_resume."'><img src='".$asset_url."images/fileicon.png' style='width: 20px;'> ".$row->inquiries_resume."</a>";
+                  } else {
+                    $filedata = "";
+                  }
+
                   echo "<tr>
                     <td>".$row->inquiries_surname.", ".$row->inquiries_firstname." ".$row->inquiries_middlename."</td>
                     <td>".$row->inquiries_dob_month."/".$row->inquiries_dob_day."/".$row->inquiries_dob_year."</td>
@@ -221,6 +246,7 @@
                     <td>".$row->inquiries_email."</td>
                     <td>".$row->inquiries_address."</td>
                     <td>".$row->inquiries_status."</td>
+                    <td>".$filedata."</td>
                     <td><a href='#' class='btn btn-primary btn-xs' data-toggle='modal' data-target='#viewInquiryModal' data-inquiriesid='".$row->inquiries_id."'>View</a> ".$transferbutton." <a href='deleteinquiry/".$row->inquiries_id."' class='btn btn-danger btn-xs'>Delete</a></td>
                     </tr>";
                 }
@@ -234,6 +260,7 @@
                   <th>Email Address</th>
                   <th>Address</th>
                   <th>Status</th>
+                  <th>Resume</th>
                   <th></th>
                 </tr>
                 </tfoot>

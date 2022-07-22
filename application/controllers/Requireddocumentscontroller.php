@@ -15,10 +15,14 @@ class Requireddocumentscontroller extends CI_Controller {
 		$data['title'] = "Required Documents";
 		$data['asset_url'] = $asset_url;
 		
-		if(isset($this->session->officer_name)) {
-			$this->load->view('requireddocuments/index', $data);
+		if($this->session->officer_role == "") {
+			redirect(base_url()."index.php/messages");
 		} else {
-			redirect(base_url()."?error3=1");
+			if(isset($this->session->officer_name)) {
+				$this->load->view('requireddocuments/index', $data);
+			} else {
+				redirect(base_url()."?error3=1");
+			}
 		}
 	}
 
@@ -42,7 +46,7 @@ class Requireddocumentscontroller extends CI_Controller {
 
 	public function getdocuments($client_id)
 	{
-		$sql = "SELECT * FROM firebasefiles";
+		$sql = "SELECT * FROM firebasefiles where client_id = '$client_id'";
 	    $query = $this->db->query($sql);
 	    $firebasefiles = $query->result();
 		echo json_encode($firebasefiles);

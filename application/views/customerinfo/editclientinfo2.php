@@ -126,6 +126,9 @@
               </p>
             </a>
           </li>
+          <?php
+            if ($privilege_manage_providers == "1") {
+          ?>
           <li class="nav-item">
             <a href="<?php echo base_url().'index.php/schools'; ?>" class="nav-link<?php if($title == 'Schools and Programs'){ echo ' active';} ?>">
               <i class="nav-icon fas fa-th"></i>
@@ -134,6 +137,12 @@
               </p>
             </a>
           </li>
+          <?php
+            }
+          ?>
+          <?php
+            if ($privilege_manage_studentapps == "1") {
+          ?>
           <li class="nav-item">
             <a href="<?php echo base_url().'index.php/applications'; ?>" class="nav-link<?php if($title == 'Applications'){ echo ' active';} ?>">
               <i class="nav-icon fas fa-th"></i>
@@ -142,6 +151,9 @@
               </p>
             </a>
           </li>
+          <?php
+            }
+          ?>
           <li class="nav-item">
             <a href="<?php echo base_url().'index.php/adminmaintenance'; ?>" class="nav-link<?php if($title == 'Admin Maintenance'){ echo ' active';} ?>">
               <i class="nav-icon fas fa-th"></i>
@@ -158,6 +170,9 @@
               </p>
             </a>
           </li>
+          <?php
+            if ($privilege_manage_reporting == "1") {
+          ?>
           <li class="nav-item">
             <a href="<?php echo base_url().'index.php/reports'; ?>" class="nav-link<?php if($title == 'Reports'){ echo ' active';} ?>">
               <i class="nav-icon fas fa-th"></i>
@@ -166,6 +181,9 @@
               </p>
             </a>
           </li>
+          <?php
+            }
+          ?>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
@@ -202,30 +220,66 @@
             <div class="card-body">
               
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
+                  <?php
+                    if ($privilege_manage_clients == "1") {
+                  ?>
                   <li class="nav-item">
                     <a class="nav-link active" id="clientinfo-tab" data-toggle="tab" href="#clientinfo" role="tab" aria-controls="clientinfo" aria-selected="true">Client Information</a>
                   </li>
+                  <?php
+                    }
+                  ?>
+                  <?php
+                    if ($privilege_manage_studentdocs == "1") {
+                  ?>
                   <li class="nav-item">
                     <a class="nav-link" id="documents-tab" data-toggle="tab" href="#documents" role="tab" aria-controls="documents" aria-selected="false">Documents</a>
                   </li>
+                  <?php
+                    }
+                  ?>
                   <li class="nav-item">
                     <a class="nav-link" id="programoptions-tab" data-toggle="tab" href="#programoptions" role="tab" aria-controls="programoptions" aria-selected="false">Program Options</a>
                   </li>
+                  <?php
+                    if ($privilege_manage_studentapps == "1") {
+                  ?>
                   <li class="nav-item">
                     <a class="nav-link" id="studentapplication-tab" data-toggle="tab" href="#studentapplication" role="tab" aria-controls="studentapplication" aria-selected="false">Student Application</a>
                   </li>
+                  <?php
+                    }
+                  ?>
+                  <?php
+                    if ($privilege_manage_prapps == "1" && $privilege_manage_prdocs == "1") {
+                  ?>
                   <li class="nav-item">
                     <a class="nav-link" id="visaapplication-tab" data-toggle="tab" href="#visaapplication" role="tab" aria-controls="visaapplication" aria-selected="false">Visa Applications</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" id="visaeoi-tab" data-toggle="tab" href="#visaeoi" role="tab" aria-controls="visaeoi" aria-selected="false">Visa EOI</a>
                   </li>
+                  <?php
+                    }
+                  ?>
+                  <?php
+                    if ($privilege_manage_prfeereceived == "1" && $privilege_manage_prfeepaid == "1") {
+                  ?>
                   <li class="nav-item">
                     <a class="nav-link" id="visaaccount-tab" data-toggle="tab" href="#visaaccount" role="tab" aria-controls="visaaccount" aria-selected="false">Visa Accounts</a>
                   </li>
+                  <?php
+                    }
+                  ?>
+                  <?php
+                    if ($privilege_manage_studentapps == "1") {
+                  ?>
                   <li class="nav-item">
                     <a class="nav-link" id="scholarshipallocation-tab" data-toggle="tab" href="#scholarshipallocation" role="tab" aria-controls="scholarshipallocation" aria-selected="false">Scholarship Allocation</a>
                   </li>
+                  <?php
+                    }
+                  ?>
                   <!--<li class="nav-item">
                     <a class="nav-link" id="payments-tab" data-toggle="tab" href="#payments" role="tab" aria-controls="payments" aria-selected="false">Payments</a>
                   </li>-->

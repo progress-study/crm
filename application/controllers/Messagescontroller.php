@@ -14,7 +14,7 @@ class Messagescontroller extends CI_Controller {
 		$sql1 = 
 		"SELECT officer_id as contactid, officer_name as contactname, 'officer' as contacttype FROM `officer` 
 		UNION
-		SELECT inquiries_id as contactid, CONCAT(inquiries_firstname, ' ', inquiries_surname) as contactname, 'inquiries' as contacttype FROM `inquiries`";
+		SELECT client_id as contactid, CONCAT(client_firstname, ' ', client_surname) as contactname, 'inquiries' as contacttype FROM `client`";
 	    $query1 = $this->db->query($sql1);
 	    $officer = $query1->result();
 
@@ -27,18 +27,18 @@ class Messagescontroller extends CI_Controller {
 	    	off1.officer_name as sendername,
 	    	off2.officer_name as receivername,
 	    	off2.officer_id as receiverid,
-	    	inq1.inquiries_id as inqsenderid,
-	    	CONCAT(inq1.inquiries_firstname, ' ', inq1.inquiries_surname) as inqsendername,
-	    	inq2.inquiries_id as inqreceiverid,
-	    	CONCAT(inq2.inquiries_firstname, ' ', inq2.inquiries_surname) as inqreceivername,
+	    	inq1.client_id as inqsenderid,
+	    	CONCAT(inq1.client_firstname, ' ', inq1.client_surname) as inqsendername,
+	    	inq2.client_id as inqreceiverid,
+	    	CONCAT(inq2.client_firstname, ' ', inq2.client_surname) as inqreceivername,
 	    	(SELECT message FROM thread_conversations WHERE thread_id = th.thread_id ORDER BY thread_convo_id DESC LIMIT 1) as recentmessage,
 	    	(SELECT message_from FROM thread_conversations WHERE thread_id = th.thread_id ORDER BY thread_convo_id DESC LIMIT 1) as recentmessagefrom,
 	    	(SELECT message_date_time FROM thread_conversations WHERE thread_id = th.thread_id ORDER BY thread_convo_id DESC LIMIT 1) as recentmessagedatetime
 	    	FROM thread th 
 	    	LEFT JOIN officer off1 ON th.sender_id = off1.officer_id 
 	    	LEFT JOIN officer off2 ON th.receiver_id = off2.officer_id
-	    	LEFT JOIN inquiries inq1 ON th.sender_id = inq1.inquiries_id 
-	    	LEFT JOIN inquiries inq2 ON th.receiver_id = inq2.inquiries_id  
+	    	LEFT JOIN client inq1 ON th.sender_id = inq1.client_id 
+	    	LEFT JOIN client inq2 ON th.receiver_id = inq2.client_id 
 	    	WHERE (th.sender_id = '$officer_id' OR th.receiver_id = '$officer_id')
 	    	ORDER BY recentmessagedatetime DESC";
         $query2 = $this->db->query($sql2);
@@ -72,18 +72,18 @@ class Messagescontroller extends CI_Controller {
 	    	off1.officer_name as sendername,
 	    	off2.officer_name as receivername,
 	    	off2.officer_id as receiverid,
-	    	inq1.inquiries_id as inqsenderid,
-	    	inq1.inquiries_surname + ' ' + inq1.inquiries_firstname as inqsendername,
-	    	inq2.inquiries_id as inqreceiverid,
-	    	inq2.inquiries_surname + ' ' + inq2.inquiries_firstname as inqreceivername,
+	    	inq1.client_id as inqsenderid,
+	    	inq1.client_surname + ' ' + inq1.client_firstname as inqsendername,
+	    	inq2.client_id as inqreceiverid,
+	    	inq2.client_surname + ' ' + inq2.client_firstname as inqreceivername,
 	    	(SELECT message FROM thread_conversations WHERE thread_id = th.thread_id ORDER BY thread_convo_id DESC LIMIT 1) as recentmessage,
 	    	(SELECT message_from FROM thread_conversations WHERE thread_id = th.thread_id ORDER BY thread_convo_id DESC LIMIT 1) as recentmessagefrom,
 	    	(SELECT message_date_time FROM thread_conversations WHERE thread_id = th.thread_id ORDER BY thread_convo_id DESC LIMIT 1) as recentmessagedatetime
 	    	FROM thread th 
 	    	LEFT JOIN officer off1 ON th.sender_id = off1.officer_id 
 	    	LEFT JOIN officer off2 ON th.receiver_id = off2.officer_id
-	    	LEFT JOIN inquiries inq1 ON th.sender_id = inq1.inquiries_id 
-	    	LEFT JOIN inquiries inq2 ON th.receiver_id = inq2.inquiries_id  
+	    	LEFT JOIN client inq1 ON th.sender_id = inq1.client_id 
+	    	LEFT JOIN client inq2 ON th.receiver_id = inq2.client_id  
 	    	WHERE (th.sender_id = '$officer_id' OR th.receiver_id = '$officer_id')
 	    	ORDER BY recentmessagedatetime DESC";
 	    $query = $this->db->query($sql);
@@ -155,6 +155,24 @@ class Messagescontroller extends CI_Controller {
 			'chattype' => $savetype
 		);
 		$this->db->insert('thread', $data);
+		echo json_encode("Successfully uploaded the document!");
+	}
+
+	public function savetoclientdocuments()
+	{
+		$client_id = $this->input->post('client_id');
+		$document_type = $this->input->post('document_type');
+		$document_link = $this->input->post('document_link');
+		$document_name = $this->input->post('document_name');
+
+		$data = array(
+			'client_id' => $client_id,
+			'document_type' => $document_type,
+			'document_link' => $document_link,
+			'date_uploaded' => date("Y-m-d"),
+			'document_name' => $document_name
+		);
+		$this->db->insert('firebasefiles', $data);
 		echo json_encode("Successfully uploaded the document!");
 	}
 

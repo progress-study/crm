@@ -115,6 +115,9 @@
               </p>
             </a>
           </li>
+          <?php
+  if ($privilege_manage_providers == "1") {
+?>
           <li class="nav-item">
             <a href="schools" class="nav-link<?php if($title == 'Schools and Programs'){ echo ' active';} ?>">
               <i class="nav-icon fas fa-th"></i>
@@ -123,6 +126,12 @@
               </p>
             </a>
           </li>
+          <?php
+  }
+?>
+          <?php
+  if ($privilege_manage_studentapps == "1") {
+?>
           <li class="nav-item">
             <a href="applications" class="nav-link<?php if($title == 'Applications'){ echo ' active';} ?>">
               <i class="nav-icon fas fa-th"></i>
@@ -131,6 +140,9 @@
               </p>
             </a>
           </li>
+          <?php
+  }
+?>
           <li class="nav-item">
             <a href="adminmaintenance" class="nav-link<?php if($title == 'Admin Maintenance'){ echo ' active';} ?>">
               <i class="nav-icon fas fa-th"></i>
@@ -147,6 +159,9 @@
               </p>
             </a>
           </li>
+          <?php
+  if ($privilege_manage_reporting == "1") {
+?>
           <li class="nav-item">
             <a href="reports" class="nav-link<?php if($title == 'Reports'){ echo ' active';} ?>">
               <i class="nav-icon fas fa-th"></i>
@@ -155,6 +170,9 @@
               </p>
             </a>
           </li>
+          <?php
+  }
+?>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
@@ -188,6 +206,9 @@
           <div class="card">
             <div class="card-body">
             <ul class="nav nav-tabs" id="myTab" role="tablist">
+                  <?php
+                    if ($privilege_manage_officers == "1") {
+                  ?>
                   <li class="nav-item">
                     <a class="nav-link active" id="officer1-tab" data-toggle="tab" href="#officer1" role="tab" aria-controls="officer1" aria-selected="true">Officers</a>
                   </li>
@@ -197,21 +218,42 @@
                   <li class="nav-item">
                     <a class="nav-link" id="region1-tab" data-toggle="tab" href="#region1" role="tab" aria-controls="region1" aria-selected="false">Region</a>
                   </li>
+                  <?php
+                    }
+                  ?>
+                  <?php
+                    if ($privilege_manage_events == "1") {
+                  ?>
                   <li class="nav-item">
                     <a class="nav-link" id="events-tab" data-toggle="tab" href="#events" role="tab" aria-controls="events" aria-selected="false">Events</a>
                   </li>
+                  <?php
+                    }
+                  ?>
+                  <?php
+                    if ($privilege_manage_privilege == "1") {
+                  ?>
                   <li class="nav-item">
                     <a class="nav-link" id="priviledges-tab" data-toggle="tab" href="#priviledges" role="tab" aria-controls="priviledges" aria-selected="false">Priviledges</a>
                   </li>
+                  <?php
+                    }
+                  ?>
+                  <?php
+                    if ($privilege_manage_parameters == "1") {
+                  ?>
                   <li class="nav-item">
                     <a class="nav-link" id="emailcontent-tab" data-toggle="tab" href="#emailcontent" role="tab" aria-controls="emailcontent" aria-selected="false">Email Contents</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" id="parameters-tab" data-toggle="tab" href="#parameters" role="tab" aria-controls="parameters" aria-selected="false">Parameters</a>
                   </li>
+                  <?php
+                    }
+                  ?>
                 </ul>
             <div class="tab-content" id="myTabContent">
-              <div class="tab-pane fade show active" id="officer1" role="tabpanel" aria-labelledby="officer1-tab">
+              <div class="tab-pane fade show" id="officer1" role="tabpanel" aria-labelledby="officer1-tab">
                   <div class="card-header">
                     <h3 class="card-title"><a href="newofficer">Add New Officer</a></h3>
                   </div>
@@ -356,6 +398,11 @@
                       <tbody>
                       <?php
                       foreach ($events as $row2) {
+                        if ($row2->event_photo != "") {
+                          $photo = "<img src='".$asset_url."images/".$row2->event_photo."' width='150px'>";
+                        } else {
+                          $photo = "";
+                        }
                         echo "<tr>
                           <td>".$row2->event_name."</td>
                           <td>".$row2->event_date."</td>
@@ -364,7 +411,7 @@
                           <td>".$row2->event_region."</td>
                           <td>".$row2->event_info."</td>
                           <td>".$row2->event_comments."</td>
-                          <td><img src='".$asset_url."images/".$row2->event_photo."' width='150px'></td>
+                          <td>".$photo."</td>
                           <td><a href='editregion/".$row2->event_id."' class='btn btn-primary btn-xs'>Edit</a></td>
                         </tr>";
                       }

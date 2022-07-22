@@ -31,14 +31,24 @@ class Scholarshipcontroller extends CI_Controller {
 		$data['scholarships'] = $scholarships;
 		$data['client'] = $client;
 
-		if(isset($this->session->officer_name)) {
-			$this->load->view('scholarship/index', $data);
+		$this->db->where('privilege_id', $this->session->officer_role_id);
+        $query3 = $this->db->get('privilege');
+
+		foreach ($query3->result() as $row3)
+		{
+		        $data['privilege_manage_providers'] = $row3->privilege_manage_providers;
+		        $data['privilege_manage_reporting'] = $row3->privilege_manage_reporting;
+		        $data['privilege_manage_studentapps'] = $row3->privilege_manage_studentapps;
+		}
+
+		if($this->session->officer_role == "") {
+			redirect(base_url()."index.php/messages");
 		} else {
-			echo "<script>alert('Please login first to CRM!')</script>";
-			$asset_url = base_url()."assets/";
-			$data['title'] = "User Login";
-		    $data['asset_url'] = $asset_url;
-			$this->load->view('userlogin/index', $data);
+			if(isset($this->session->officer_name)) {
+				$this->load->view('scholarship/index', $data);
+			} else {
+				redirect(base_url()."?error3=1");
+			}
 		}
 	}
 
@@ -66,10 +76,24 @@ class Scholarshipcontroller extends CI_Controller {
 	    $data['education_provider'] = $education_provider;
 		$data['schoolprograms'] = $schoolprograms;
 
-		if(isset($this->session->officer_name)) {
-			$this->load->view('scholarship/newscholarshipfile', $data);
+		$this->db->where('privilege_id', $this->session->officer_role_id);
+        $query3 = $this->db->get('privilege');
+
+		foreach ($query3->result() as $row3)
+		{
+		        $data['privilege_manage_providers'] = $row3->privilege_manage_providers;
+		        $data['privilege_manage_reporting'] = $row3->privilege_manage_reporting;
+		        $data['privilege_manage_studentapps'] = $row3->privilege_manage_studentapps;
+		}
+
+		if($this->session->officer_role == "") {
+			redirect(base_url()."index.php/messages");
 		} else {
-			redirect(base_url()."?error3=1");
+			if(isset($this->session->officer_name)) {
+				$this->load->view('scholarship/newscholarshipfile', $data);
+			} else {
+				redirect(base_url()."?error3=1");
+			}
 		}
 	}
 
@@ -105,13 +129,27 @@ class Scholarshipcontroller extends CI_Controller {
 	    $query3 = $this->db->query($sql3);
 	    $client = $query3->result();
 
+	    $this->db->where('privilege_id', $this->session->officer_role_id);
+        $query3 = $this->db->get('privilege');
+
+		foreach ($query3->result() as $row3)
+		{
+		        $data['privilege_manage_providers'] = $row3->privilege_manage_providers;
+		        $data['privilege_manage_reporting'] = $row3->privilege_manage_reporting;
+		        $data['privilege_manage_studentapps'] = $row3->privilege_manage_studentapps;
+		}
+
 	    $data['client'] = $client;
 	    $data['scholarships'] = $scholarships;
 
-		if(isset($this->session->officer_name)) {
-			$this->load->view('scholarship/newscholarshipallocation', $data);
+		if($this->session->officer_role == "") {
+			redirect(base_url()."index.php/messages");
 		} else {
-			redirect(base_url()."?error3=1");
+			if(isset($this->session->officer_name)) {
+				$this->load->view('scholarship/newscholarshipallocation', $data);
+			} else {
+				redirect(base_url()."?error3=1");
+			}
 		}
 	}
 

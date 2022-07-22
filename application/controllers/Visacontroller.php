@@ -20,10 +20,24 @@ class Visacontroller extends CI_Controller {
 
 	    $data['singleclient'] = $singleclient;
 
-		if(isset($this->session->officer_name)) {
-			$this->load->view('visa/newvisaapplication', $data);
+	    $this->db->where('privilege_id', $this->session->officer_role_id);
+        $query3 = $this->db->get('privilege');
+
+		foreach ($query3->result() as $row3)
+		{
+		        $data['privilege_manage_providers'] = $row3->privilege_manage_providers;
+		        $data['privilege_manage_reporting'] = $row3->privilege_manage_reporting;
+		        $data['privilege_manage_studentapps'] = $row3->privilege_manage_studentapps;
+		}
+
+		if($this->session->officer_role == "") {
+			redirect(base_url()."index.php/messages");
 		} else {
-			redirect(base_url()."?error3=1");
+			if(isset($this->session->officer_name)) {
+				$this->load->view('visa/newvisaapplication', $data);
+			} else {
+				redirect(base_url()."?error3=1");
+			}
 		}
 
 	}
@@ -39,10 +53,24 @@ class Visacontroller extends CI_Controller {
 
 	    $data['singleclient'] = $singleclient;
 
-		if(isset($this->session->officer_name)) {
-			$this->load->view('visa/newvisaeoi', $data);
+	    $this->db->where('privilege_id', $this->session->officer_role_id);
+        $query3 = $this->db->get('privilege');
+
+		foreach ($query3->result() as $row3)
+		{
+		        $data['privilege_manage_providers'] = $row3->privilege_manage_providers;
+		        $data['privilege_manage_reporting'] = $row3->privilege_manage_reporting;
+		        $data['privilege_manage_studentapps'] = $row3->privilege_manage_studentapps;
+		}
+
+		if($this->session->officer_role == "") {
+			redirect(base_url()."index.php/messages");
 		} else {
-			redirect(base_url()."?error3=1");
+			if(isset($this->session->officer_name)) {
+				$this->load->view('visa/newvisaeoi', $data);
+			} else {
+				redirect(base_url()."?error3=1");
+			}
 		}
 
 	}
@@ -55,10 +83,24 @@ class Visacontroller extends CI_Controller {
 	    $data['client_visa_id'] = $id;
 	    $data['client_id'] = $client_id;
 
-		if(isset($this->session->officer_name)) {
-			$this->load->view('visa/newvisaaccount', $data);
+	    $this->db->where('privilege_id', $this->session->officer_role_id);
+        $query3 = $this->db->get('privilege');
+
+		foreach ($query3->result() as $row3)
+		{
+		        $data['privilege_manage_providers'] = $row3->privilege_manage_providers;
+		        $data['privilege_manage_reporting'] = $row3->privilege_manage_reporting;
+		        $data['privilege_manage_studentapps'] = $row3->privilege_manage_studentapps;
+		}
+
+		if($this->session->officer_role == "") {
+			redirect(base_url()."index.php/messages");
 		} else {
-			redirect(base_url()."?error3=1");
+			if(isset($this->session->officer_name)) {
+				$this->load->view('visa/newvisaaccount', $data);
+			} else {
+				redirect(base_url()."?error3=1");
+			}
 		}
 	}
 
@@ -183,10 +225,24 @@ class Visacontroller extends CI_Controller {
 
 	    $data['visa_application'] = $visa_application;
 
-		if(isset($this->session->officer_name)) {
-			$this->load->view('visa/editvisaapplication', $data);
+	    $this->db->where('privilege_id', $this->session->officer_role_id);
+        $query3 = $this->db->get('privilege');
+
+		foreach ($query3->result() as $row3)
+		{
+		        $data['privilege_manage_providers'] = $row3->privilege_manage_providers;
+		        $data['privilege_manage_reporting'] = $row3->privilege_manage_reporting;
+		        $data['privilege_manage_studentapps'] = $row3->privilege_manage_studentapps;
+		}
+
+		if($this->session->officer_role == "") {
+			redirect(base_url()."index.php/messages");
 		} else {
-			redirect(base_url()."?error3=1");
+			if(isset($this->session->officer_name)) {
+				$this->load->view('visa/editvisaapplication', $data);
+			} else {
+				redirect(base_url()."?error3=1");
+			}
 		}
 	}
 
@@ -201,10 +257,24 @@ class Visacontroller extends CI_Controller {
 
 	    $data['eoi'] = $eoi;
 
-		if(isset($this->session->officer_name)) {
-			$this->load->view('visa/editvisaeoi', $data);
+	    $this->db->where('privilege_id', $this->session->officer_role_id);
+        $query3 = $this->db->get('privilege');
+
+		foreach ($query3->result() as $row3)
+		{
+		        $data['privilege_manage_providers'] = $row3->privilege_manage_providers;
+		        $data['privilege_manage_reporting'] = $row3->privilege_manage_reporting;
+		        $data['privilege_manage_studentapps'] = $row3->privilege_manage_studentapps;
+		}
+
+		if($this->session->officer_role == "") {
+			redirect(base_url()."index.php/messages");
 		} else {
-			redirect(base_url()."?error3=1");
+			if(isset($this->session->officer_name)) {
+				$this->load->view('visa/editvisaeoi', $data);
+			} else {
+				redirect(base_url()."?error3=1");
+			}
 		}
 	}
 
@@ -220,10 +290,24 @@ class Visacontroller extends CI_Controller {
 	    $data['visa_accounts'] = $visa_accounts;
 	    $data['client_id'] = $client_id;
 
-		if(isset($this->session->officer_name)) {
-			$this->load->view('visa/editvisaaccount', $data);
+	    $this->db->where('privilege_id', $this->session->officer_role_id);
+        $query3 = $this->db->get('privilege');
+
+		foreach ($query3->result() as $row3)
+		{
+		        $data['privilege_manage_providers'] = $row3->privilege_manage_providers;
+		        $data['privilege_manage_reporting'] = $row3->privilege_manage_reporting;
+		        $data['privilege_manage_studentapps'] = $row3->privilege_manage_studentapps;
+		}
+
+		if($this->session->officer_role == "") {
+			redirect(base_url()."index.php/messages");
 		} else {
-			redirect(base_url()."?error3=1");
+			if(isset($this->session->officer_name)) {
+				$this->load->view('visa/editvisaaccount', $data);
+			} else {
+				redirect(base_url()."?error3=1");
+			}
 		}
 	}
 

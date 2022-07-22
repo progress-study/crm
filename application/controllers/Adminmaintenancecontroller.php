@@ -39,6 +39,25 @@ class Adminmaintenancecontroller extends CI_Controller {
 	    $query2 = $this->db->query($sql2);
 	    $privilege = $query2->result();
 
+	    $this->db->where('privilege_id', $this->session->officer_role_id);
+        $query3 = $this->db->get('privilege');
+
+		foreach ($query3->result() as $row3)
+		{
+		        $data['privilege_manage_officers'] = $row3->privilege_manage_officers;
+		        $data['privilege_manage_commissions'] = $row3->privilege_manage_commissions;
+		        $data['privilege_manage_channel'] = $row3->privilege_manage_channel;
+		        $data['privilege_manage_parameters'] = $row3->privilege_manage_parameters;
+		        $data['privilege_manage_privilege'] = $row3->privilege_manage_privilege;
+		        $data['privilege_manage_database'] = $row3->privilege_manage_database;
+		        $data['privilege_manage_offices'] = $row3->privilege_manage_offices;
+		        $data['privilege_staff_bonus'] = $row3->privilege_staff_bonus;
+		        $data['privilege_manage_events'] = $row3->privilege_manage_events;
+		        $data['privilege_manage_providers'] = $row3->privilege_manage_providers;
+		        $data['privilege_manage_reporting'] = $row3->privilege_manage_reporting;
+		        $data['privilege_manage_studentapps'] = $row3->privilege_manage_studentapps;
+		}
+
         $asset_url = base_url()."assets/";
 		$data['title'] = "Admin Maintenance";
 		$data['asset_url'] = $asset_url;
@@ -51,11 +70,16 @@ class Adminmaintenancecontroller extends CI_Controller {
 		$data['privilege'] = $privilege;
 		$data['events'] = $events;
 
-		if(isset($this->session->officer_name)) {
-			$this->load->view('maintenance/index', $data);
+		if($this->session->officer_role == "") {
+			redirect(base_url()."index.php/messages");
 		} else {
-			redirect(base_url()."?error3=1");
+			if(isset($this->session->officer_name)) {
+			$this->load->view('maintenance/index', $data);
+			} else {
+				redirect(base_url()."?error3=1");
+			}
 		}
+		
 	}
 
 	public function newregion()
@@ -64,10 +88,24 @@ class Adminmaintenancecontroller extends CI_Controller {
 		$data['title'] = "New Region";
 		$data['asset_url'] = $asset_url;
 
-		if(isset($this->session->officer_name)) {
-			$this->load->view('maintenance/newregion', $data);
+		$this->db->where('privilege_id', $this->session->officer_role_id);
+        $query3 = $this->db->get('privilege');
+
+		foreach ($query3->result() as $row3)
+		{
+		        $data['privilege_manage_providers'] = $row3->privilege_manage_providers;
+		        $data['privilege_manage_reporting'] = $row3->privilege_manage_reporting;
+		        $data['privilege_manage_studentapps'] = $row3->privilege_manage_studentapps;
+		}
+
+		if($this->session->officer_role == "") {
+			redirect(base_url()."index.php/messages");
 		} else {
-			redirect(base_url()."?error3=1");
+			if(isset($this->session->officer_name)) {
+			$this->load->view('maintenance/newregion', $data);
+			} else {
+				redirect(base_url()."?error3=1");
+			}
 		}
 	}
 
@@ -100,14 +138,28 @@ class Adminmaintenancecontroller extends CI_Controller {
 	    $query3 = $this->db->query($sql3);
 	    $mastersetting = $query3->result();
 
+	    $this->db->where('privilege_id', $this->session->officer_role_id);
+        $query3 = $this->db->get('privilege');
+
+		foreach ($query3->result() as $row3)
+		{
+		        $data['privilege_manage_providers'] = $row3->privilege_manage_providers;
+		        $data['privilege_manage_reporting'] = $row3->privilege_manage_reporting;
+		        $data['privilege_manage_studentapps'] = $row3->privilege_manage_studentapps;
+		}
+
 	    $data['offices'] = $offices;
 	    $data['region'] = $region;
 	    $data['mastersetting'] = $mastersetting;
 
-		if(isset($this->session->officer_name)) {
-			$this->load->view('maintenance/newofficer', $data);
+		if($this->session->officer_role == "") {
+			redirect(base_url()."index.php/messages");
 		} else {
-			redirect(base_url()."?error3=1");
+			if(isset($this->session->officer_name)) {
+				$this->load->view('maintenance/newofficer', $data);
+			} else {
+				redirect(base_url()."?error3=1");
+			}
 		}
 	}
 
@@ -180,10 +232,24 @@ class Adminmaintenancecontroller extends CI_Controller {
 	    $data['officer'] = $officer;
 	    $data['region'] = $region;
 
-		if(isset($this->session->officer_name)) {
-			$this->load->view('maintenance/newassignment', $data);
+	    $this->db->where('privilege_id', $this->session->officer_role_id);
+        $query3 = $this->db->get('privilege');
+
+		foreach ($query3->result() as $row3)
+		{
+		        $data['privilege_manage_providers'] = $row3->privilege_manage_providers;
+		        $data['privilege_manage_reporting'] = $row3->privilege_manage_reporting;
+		        $data['privilege_manage_studentapps'] = $row3->privilege_manage_studentapps;
+		}
+
+		if($this->session->officer_role == "") {
+			redirect(base_url()."index.php/messages");
 		} else {
-			redirect(base_url()."?error3=1");
+			if(isset($this->session->officer_name)) {
+				$this->load->view('maintenance/newassignment', $data);
+			} else {
+				redirect(base_url()."?error3=1");
+			}
 		}
 	}
 

@@ -40,7 +40,7 @@ fileSelector2.addEventListener('change', (event) => {
 			    url: baseurl + "index.php/savefilechat",
 			    data: {
 			    	thread_id: selectedthreadid, 
-			    	message: "<a href='" + url + "'>" + FileDesc + "</a>", 
+			    	message: "<a href='" + url + "' target='_blank' class='filetosavetodocuments'>" + FileDesc + "</a>", 
 			    	message_from: officer_id_session, 
 			    	message_type: "file",
 			    	message_status: "Sent"

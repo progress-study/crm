@@ -26,6 +26,16 @@ class Customerinfocontroller extends CI_Controller {
 		$data['clients'] = $result;
 		$data['officer'] = $result2;
 
+		$this->db->where('privilege_id', $this->session->officer_role_id);
+        $query3 = $this->db->get('privilege');
+
+		foreach ($query3->result() as $row3)
+		{
+		        $data['privilege_manage_providers'] = $row3->privilege_manage_providers;
+		        $data['privilege_manage_reporting'] = $row3->privilege_manage_reporting;
+		        $data['privilege_manage_studentapps'] = $row3->privilege_manage_studentapps;
+		}
+
 		if(isset($this->session->officer_name)) {
 			$this->load->view('customerinfo/header', $data);
 			$this->load->view('customerinfo/index', $data);
@@ -33,6 +43,7 @@ class Customerinfocontroller extends CI_Controller {
 		} else {
 			redirect(base_url()."?error3=1");
 		}
+
 	}
 
 	public function editclientinfo($client_id) 
@@ -72,10 +83,14 @@ class Customerinfocontroller extends CI_Controller {
 		$data['title'] = "Edit/View Client Information";
 		$data['asset_url'] = $asset_url;
 
-		if(isset($this->session->officer_name)) {
-			$this->load->view('customerinfo/editclientinfo', $data);
+		if($this->session->officer_role == "") {
+			redirect(base_url()."index.php/messages");
 		} else {
-			redirect(base_url()."?error3=1");
+			if(isset($this->session->officer_name)) {
+				$this->load->view('customerinfo/editclientinfo', $data);
+			} else {
+				redirect(base_url()."?error3=1");
+			}
 		}
 	}
 
@@ -121,6 +136,22 @@ class Customerinfocontroller extends CI_Controller {
         $query10 = $this->db->query($sql10);
         $programoptions = $query10->result();
 
+        $this->db->where('privilege_id', $this->session->officer_role_id);
+        $query3 = $this->db->get('privilege');
+
+		foreach ($query3->result() as $row3)
+		{
+		        $data['privilege_manage_clients'] = $row3->privilege_manage_clients;
+		        $data['privilege_manage_studentapps'] = $row3->privilege_manage_studentapps;
+		        $data['privilege_manage_studentdocs'] = $row3->privilege_manage_studentdocs;
+		        $data['privilege_manage_prapps'] = $row3->privilege_manage_prapps;
+		        $data['privilege_manage_prdocs'] = $row3->privilege_manage_prdocs;
+		        $data['privilege_manage_prfeereceived'] = $row3->privilege_manage_prfeereceived;
+		        $data['privilege_manage_prfeepaid'] = $row3->privilege_manage_prfeepaid;
+		        $data['privilege_manage_providers'] = $row3->privilege_manage_providers;
+		        $data['privilege_manage_reporting'] = $row3->privilege_manage_reporting;
+		}
+
         //id=2018&name=De%20Leon%20Abigail_PRApplication_127%20-2018&gdrive_id=150guQ5rBvbqw4Vo7HsAZAJJhUl6w6T3B&exist=exist
 
 	    $data['client_id'] = $client_id;
@@ -141,10 +172,14 @@ class Customerinfocontroller extends CI_Controller {
 		$data['title'] = "Edit/View Client Information";
 		$data['asset_url'] = $asset_url;
 
-		if(isset($this->session->officer_name)) {
-			$this->load->view('customerinfo/editclientinfo2', $data);
+		if($this->session->officer_role == "") {
+			redirect(base_url()."index.php/messages");
 		} else {
-			redirect(base_url()."?error3=1");
+			if(isset($this->session->officer_name)) {
+				$this->load->view('customerinfo/editclientinfo2', $data);
+			} else {
+				redirect(base_url()."?error3=1");
+			}
 		}
 	}
 	

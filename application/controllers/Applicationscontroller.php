@@ -21,10 +21,24 @@ class Applicationscontroller extends CI_Controller {
 		$data['asset_url'] = $asset_url;
 		$data['applications'] = $result;
 
-		if(isset($this->session->officer_name)) {
-			$this->load->view('applications/index', $data);
+		$this->db->where('privilege_id', $this->session->officer_role_id);
+        $query3 = $this->db->get('privilege');
+
+		foreach ($query3->result() as $row3)
+		{
+		        $data['privilege_manage_providers'] = $row3->privilege_manage_providers;
+		        $data['privilege_manage_reporting'] = $row3->privilege_manage_reporting;
+		        $data['privilege_manage_studentapps'] = $row3->privilege_manage_studentapps;
+		}
+
+		if($this->session->officer_role == "") {
+			redirect(base_url()."index.php/messages");
 		} else {
-			redirect(base_url()."?error3=1");
+			if(isset($this->session->officer_name)) {
+				$this->load->view('applications/index', $data);
+			} else {
+				redirect(base_url()."?error3=1");
+			}
 		}
 	}
 
@@ -44,10 +58,24 @@ class Applicationscontroller extends CI_Controller {
 	    $data['singleclient'] = $singleclient;
 		$data['schools'] = $schools;
 
-		if(isset($this->session->officer_name)) {
-			$this->load->view('applications/newapplication', $data);
+		$this->db->where('privilege_id', $this->session->officer_role_id);
+        $query3 = $this->db->get('privilege');
+
+		foreach ($query3->result() as $row3)
+		{
+		        $data['privilege_manage_providers'] = $row3->privilege_manage_providers;
+		        $data['privilege_manage_reporting'] = $row3->privilege_manage_reporting;
+		        $data['privilege_manage_studentapps'] = $row3->privilege_manage_studentapps;
+		}
+
+		if($this->session->officer_role == "") {
+			redirect(base_url()."index.php/messages");
 		} else {
-			redirect(base_url()."?error3=1");
+			if(isset($this->session->officer_name)) {
+				$this->load->view('applications/newapplication', $data);
+			} else {
+				redirect(base_url()."?error3=1");
+			}
 		}
 	}
 
@@ -67,10 +95,24 @@ class Applicationscontroller extends CI_Controller {
 	    $data['application'] = $application;
 		$data['schools'] = $schools;
 
-		if(isset($this->session->officer_name)) {
-			$this->load->view('applications/editapplication', $data);
+		$this->db->where('privilege_id', $this->session->officer_role_id);
+        $query3 = $this->db->get('privilege');
+
+		foreach ($query3->result() as $row3)
+		{
+		        $data['privilege_manage_providers'] = $row3->privilege_manage_providers;
+		        $data['privilege_manage_reporting'] = $row3->privilege_manage_reporting;
+		        $data['privilege_manage_studentapps'] = $row3->privilege_manage_studentapps;
+		}
+
+		if($this->session->officer_role == "") {
+			redirect(base_url()."index.php/messages");
 		} else {
-			redirect(base_url()."?error3=1");
+			if(isset($this->session->officer_name)) {
+				$this->load->view('applications/editapplication', $data);
+			} else {
+				redirect(base_url()."?error3=1");
+			}
 		}
 	}
 

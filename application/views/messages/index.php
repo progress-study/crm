@@ -106,6 +106,13 @@ img{ max-width:100%;}
   display: none;
 }
 
+#fileform {
+  float: left;
+  padding: 30px 15px 0 25px;
+  width: 20%;
+  display: none;
+}
+
  .sent_msg p {
   background: #05728f none repeat scroll 0 0;
   border-radius: 3px;
@@ -160,6 +167,9 @@ img{ max-width:100%;}
   height: 516px;
   overflow-y: auto;
 }
+.sent_msg p a {
+  color: yellow;
+}
 </style>
 <!------ Include the above in your HEAD tag ---------->
 </head>
@@ -169,6 +179,7 @@ img{ max-width:100%;}
 <input type="hidden" id="baseurl" value="<?php echo base_url(); ?>">
 <input type="hidden" id="selectedthreadid">
 <input type="hidden" id="officer_id_session" value="<?php echo $this->session->officer_id; ?>">
+<input type="hidden" id="client_receiver_id">
 <div class="messaging">
       <div class="inbox_msg">
         <div class="inbox_people">
@@ -176,7 +187,20 @@ img{ max-width:100%;}
             <div class="recent_heading">
               <img src="<?php echo $asset_url; ?>images/logomain.png" alt="PSC Logo" width="150px">
               <h4>CRM Messenger</h4>
+              <?php
+                if ($this->session->officer_role != "") {
+              ?>
               <a href="dashboard">< Back to Dashboard</a>
+              <?php
+                }
+              ?>
+              <?php
+                if ($this->session->officer_role == "") {
+              ?>
+              <a href="signout">Sign out</a>
+              <?php
+                }
+              ?>
             </div>
             <div class="srch_bar">
               <div class="stylish-input-group">
@@ -221,9 +245,11 @@ img{ max-width:100%;}
                         if($row->senderid == $this->session->officer_id) {
                           echo $row->inqreceivername;
                           $othername = $row->inqreceivername;
+                          echo "<input type='hidden' value='".$row->inqreceiverid."' id='inqreceiverid_".$thread_index."'>";
                         } elseif($row->inqreceiverid == $this->session->officer_id) {
                           echo $row->sendername;
                           $othername = $row->sendername;
+                          echo "<input type='hidden' value='".$row->inqreceiverid."' id='inqreceiverid_".$thread_index."'>";
                         }
                       }
                     ?> 
@@ -277,7 +303,7 @@ img{ max-width:100%;}
             <div class="input_msg_write">
               <input type="text" class="write_msg" id="write_msg" placeholder="Type a message" />
               <input type="file" id="attachfile" style="display: none;" />
-              <button type="button" id="upload" onclick="document.getElementById('attachfile').click()"><i class="fa fa-upload" aria-hidden="true"></i></button>
+              <button type="button" id="upload" onclick="checkThreadForUpload();"><i class="fa fa-upload" aria-hidden="true"></i></button>
               <?php
                 if ($this->session->officer_role != "") {
               ?>
@@ -285,7 +311,7 @@ img{ max-width:100%;}
               <?php
                 }
               ?>
-              <button class="msg_send_btn" type="button" onclick="sendMessage();"><i class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
+              <button class="msg_send_btn" type="button" onclick="checkThreadForSending();"><i class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
             </div>
           </div>
         </div>
@@ -300,6 +326,19 @@ img{ max-width:100%;}
               $contactindex++;
             }
           ?>
+        </div>
+        <div class="fileform" id="fileform">
+          <input type="hidden" id="fileindicator" value="hiddendiv">
+          File Name: <input type="text" name="filename" id="filename" readonly><br>
+          File URL: <input type="text" name="fileinput" id="fileinput" readonly><br>
+          Client ID: <input type="text" name="clientid" id="clientid" readonly><br>
+          Document Type: <select id="documentype" class="form-control">
+            <option>Select Document Type</option>
+            <option value="Student requirement">Student requirement</option>
+            <option value="Visa application requirement">Visa application requirement</option>
+            <option value="Sponsor requirement">Sponsor requirement</option>
+          </select><br>
+          <button id="savetoclientdocuments" style="background: #05728f; border: none; color: white;">Save to Client Documents</button>
         </div>
       </div>
     </div>
@@ -322,10 +361,25 @@ img{ max-width:100%;}
     }
   }
 
+  function opencloseFilePanel() {
+    if (document.getElementById("fileindicator").value == "hiddendiv") {
+      document.getElementById("fileform").style.display = "block";
+      document.getElementById("mesgs").style.width = "40%";
+      document.getElementById("fileindicator").value = "showndiv";
+    } else if (document.getElementById("fileindicator").value == "showndiv") {
+      document.getElementById("fileform").style.display = "none";
+      document.getElementById("mesgs").style.width = "60%";
+      document.getElementById("fileindicator").value = "hiddendiv";
+    }
+  }
+
+
   function OpenConvo(index) {
     var id = document.getElementById("threadid_"+index).value;
     var baseurl = document.getElementById("baseurl").value;
     var officer_id_session = document.getElementById("officer_id_session").value;
+    var inqreceiverid = document.getElementById("inqreceiverid_"+index).value;
+    document.getElementById("client_receiver_id").value = inqreceiverid;
     var dynamichtml = "";
     $("#msg_history").empty();
     $.ajax({
@@ -356,11 +410,26 @@ img{ max-width:100%;}
           }
 
           document.getElementById("selectedthreadid").value = id;
+          setTheClassClickEvent();
       },
       error: function(error) {
         alert("Error!");
       }
     });
+  }
+
+  function setTheClassClickEvent() {
+    const nodeList = document.querySelectorAll(".filetosavetodocuments");
+    for (let i = 0; i < nodeList.length; i++) {
+      nodeList[i].onclick = function() {
+        //alert(nodeList[i].getAttribute("href"));
+        opencloseFilePanel();
+        var client_receiver_id = document.getElementById("client_receiver_id").value;
+        document.getElementById("clientid").value = client_receiver_id;
+        document.getElementById("fileinput").value = nodeList[i].getAttribute("href");
+        document.getElementById("filename").value = nodeList[i].innerHTML;
+      }
+    }
   }
 
   function OpenConvo2() {
@@ -460,6 +529,50 @@ img{ max-width:100%;}
         });
       }
     }
+  }
+
+  function checkThreadForUpload() {
+    if(document.getElementById("selectedthreadid").value == "") {
+      alert("Select by clicking a thread first before selecting a file!");
+    } else {
+      document.getElementById('attachfile').click();
+    }
+  }
+
+  function checkThreadForSending() {
+    if(document.getElementById("selectedthreadid").value == "") {
+      alert("Select by clicking a thread first before sending a message!");
+    } else {
+      sendMessage();
+    }
+  }
+
+  document.getElementById("savetoclientdocuments").onclick = function() {
+        var clientid = document.getElementById("clientid").value;
+        var fileinput = document.getElementById("fileinput").value;
+        var filename = document.getElementById("filename").value;
+        var documentype = document.getElementById("documentype").value;
+        var baseurl3 = document.getElementById("baseurl").value;
+        $.ajax({
+            type: "POST",
+            url: baseurl3 + "index.php/savetoclientdocuments",
+            data: {
+              client_id: clientid, 
+              document_type: documentype, 
+              document_link: fileinput,
+              document_name: filename
+            },
+            success: function(data) {
+                var obj = JSON.parse(data);
+                alert("Successfully save the file to client's documents!");
+                location.reload();
+            },
+            error: function(error) {
+              alert("Error: "+error);
+              console.log(error);
+            }
+        });
+
   }
 
 </script>

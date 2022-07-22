@@ -36,9 +36,26 @@ class UserLoginController extends CI_Controller {
 	    
 	    if ($password == $row->officer_password) {
 	    	if ($row->officer_status == "active") {
+	    		if($row->officer_role == "admin"){
+                  $roleid = "1";
+                }
+                elseif($row->officer_role == "manager"){
+                  $roleid = "2";
+                }
+                elseif($row->officer_role == "staff"){
+                  $roleid = "3";
+                }
+                elseif($row->officer_role == "account"){
+                  $roleid = "4";
+                }
+                elseif($row->officer_role == "regional manager"){
+                  $roleid = "5";
+                }
+
 	    		$session_data = array(
 				   	'officer_name' => $row->officer_name,
 					'officer_role' => $row->officer_role,
+					'officer_role_id' => $roleid,
 				   	'officer_status' => $row->officer_status,
 					'officer_id' => $row->officer_id,
 					'email' => $email
@@ -54,6 +71,7 @@ class UserLoginController extends CI_Controller {
 	    		$session_data = array(
 				   	'officer_name' => $clientrow->client_firstname." ".$clientrow->client_surname,
 					'officer_role' => '',
+					'officer_role_id' => '',
 				   	'officer_status' => $clientrow->client_flag,
 					'officer_id' => $clientrow->client_id,
 					'email' => $clientrow_client_email

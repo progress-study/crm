@@ -20,11 +20,25 @@ class Inquiriescontroller extends CI_Controller {
 		$data['title'] = "Inquiries";
 		$data['asset_url'] = $asset_url;
 		$data['inquiries'] = $inquiries;
+		
+		$this->db->where('privilege_id', $this->session->officer_role_id);
+        $query3 = $this->db->get('privilege');
 
-		if(isset($this->session->officer_name)) {
-			$this->load->view('inquiries/index', $data);
+		foreach ($query3->result() as $row3)
+		{
+		        $data['privilege_manage_providers'] = $row3->privilege_manage_providers;
+		        $data['privilege_manage_reporting'] = $row3->privilege_manage_reporting;
+		        $data['privilege_manage_studentapps'] = $row3->privilege_manage_studentapps;
+		}
+
+		if($this->session->officer_role == "") {
+			redirect(base_url()."index.php/messages");
 		} else {
-			redirect(base_url()."?error3=1");
+			if(isset($this->session->officer_name)) {
+				$this->load->view('inquiries/index', $data);
+			} else {
+				redirect(base_url()."?error3=1");
+			}
 		}
 	}
 

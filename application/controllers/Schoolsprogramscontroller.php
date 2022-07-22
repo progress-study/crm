@@ -20,10 +20,24 @@ class Schoolsprogramscontroller extends CI_Controller {
 		$data['asset_url'] = $asset_url;
 		$data['schools'] = $result;
 
-		if(isset($this->session->officer_name)) {
-			$this->load->view('schoolsprograms/schools', $data);
+		$this->db->where('privilege_id', $this->session->officer_role_id);
+        $query3 = $this->db->get('privilege');
+
+		foreach ($query3->result() as $row3)
+		{
+		        $data['privilege_manage_providers'] = $row3->privilege_manage_providers;
+		        $data['privilege_manage_reporting'] = $row3->privilege_manage_reporting;
+		        $data['privilege_manage_studentapps'] = $row3->privilege_manage_studentapps;
+		}
+
+		if($this->session->officer_role == "") {
+			redirect(base_url()."index.php/messages");
 		} else {
-			redirect(base_url()."?error3=1");
+			if(isset($this->session->officer_name)) {
+				$this->load->view('schoolsprograms/schools', $data);
+			} else {
+				redirect(base_url()."?error3=1");
+			}
 		}
 	}
 
@@ -32,11 +46,25 @@ class Schoolsprogramscontroller extends CI_Controller {
         $asset_url = base_url()."assets/";
 		$data['title'] = "New School";
 		$data['asset_url'] = $asset_url;
+
+		$this->db->where('privilege_id', $this->session->officer_role_id);
+        $query3 = $this->db->get('privilege');
+
+		foreach ($query3->result() as $row3)
+		{
+		        $data['privilege_manage_providers'] = $row3->privilege_manage_providers;
+		        $data['privilege_manage_reporting'] = $row3->privilege_manage_reporting;
+		        $data['privilege_manage_studentapps'] = $row3->privilege_manage_studentapps;
+		}
 	
-		if(isset($this->session->officer_name)) {
-			$this->load->view('schoolsprograms/newschool', $data);
+		if($this->session->officer_role == "") {
+			redirect(base_url()."index.php/messages");
 		} else {
-			redirect(base_url()."?error3=1");
+			if(isset($this->session->officer_name)) {
+				$this->load->view('schoolsprograms/newschool', $data);
+			} else {
+				redirect(base_url()."?error3=1");
+			}
 		}
 	}
 
@@ -79,10 +107,24 @@ class Schoolsprogramscontroller extends CI_Controller {
 		$data['asset_url'] = $asset_url;
 		$data['programs'] = $result;
 
-		if(isset($this->session->officer_name)) {
-			$this->load->view('schoolsprograms/programs', $data);
+		$this->db->where('privilege_id', $this->session->officer_role_id);
+        $query3 = $this->db->get('privilege');
+
+		foreach ($query3->result() as $row3)
+		{
+		        $data['privilege_manage_providers'] = $row3->privilege_manage_providers;
+		        $data['privilege_manage_reporting'] = $row3->privilege_manage_reporting;
+		        $data['privilege_manage_studentapps'] = $row3->privilege_manage_studentapps;
+		}
+
+		if($this->session->officer_role == "") {
+			redirect(base_url()."index.php/messages");
 		} else {
-			redirect(base_url()."?error3=1");
+			if(isset($this->session->officer_name)) {
+				$this->load->view('schoolsprograms/programs', $data);
+			} else {
+				redirect(base_url()."?error3=1");
+			}
 		}
 	}
 
@@ -107,11 +149,25 @@ class Schoolsprogramscontroller extends CI_Controller {
         $data['qualifications'] = $qualifications; 
         $data['education_provider'] = $education_provider;
         $data['currency'] = $currency;
+
+        $this->db->where('privilege_id', $this->session->officer_role_id);
+        $query3 = $this->db->get('privilege');
+
+		foreach ($query3->result() as $row3)
+		{
+		        $data['privilege_manage_providers'] = $row3->privilege_manage_providers;
+		        $data['privilege_manage_reporting'] = $row3->privilege_manage_reporting;
+		        $data['privilege_manage_studentapps'] = $row3->privilege_manage_studentapps;
+		}
 	
-		if(isset($this->session->officer_name)) {
-			$this->load->view('schoolsprograms/newprogram', $data);
+		if($this->session->officer_role == "") {
+			redirect(base_url()."index.php/messages");
 		} else {
-			redirect(base_url()."?error3=1");
+			if(isset($this->session->officer_name)) {
+				$this->load->view('schoolsprograms/newprogram', $data);
+			} else {
+				redirect(base_url()."?error3=1");
+			}
 		}
 	}
 
@@ -143,11 +199,25 @@ class Schoolsprogramscontroller extends CI_Controller {
 	    $education_provider = $query1->result();
 
 	    $data['education_provider'] = $education_provider;
+
+	    $this->db->where('privilege_id', $this->session->officer_role_id);
+        $query3 = $this->db->get('privilege');
+
+		foreach ($query3->result() as $row3)
+		{
+		        $data['privilege_manage_providers'] = $row3->privilege_manage_providers;
+		        $data['privilege_manage_reporting'] = $row3->privilege_manage_reporting;
+		        $data['privilege_manage_studentapps'] = $row3->privilege_manage_studentapps;
+		}
 	
-		if(isset($this->session->officer_name)) {
-			$this->load->view('schoolsprograms/editschool', $data);
+		if($this->session->officer_role == "") {
+			redirect(base_url()."index.php/messages");
 		} else {
-			redirect(base_url()."?error3=1");
+			if(isset($this->session->officer_name)) {
+				$this->load->view('schoolsprograms/editschool', $data);
+			} else {
+				redirect(base_url()."?error3=1");
+			}
 		}
 	}
 
@@ -177,11 +247,25 @@ class Schoolsprogramscontroller extends CI_Controller {
         $data['education_provider'] = $education_provider;
         $data['currency'] = $currency;
 	    $data['schoolprograms'] = $schoolprograms;
+
+	    $this->db->where('privilege_id', $this->session->officer_role_id);
+        $query3 = $this->db->get('privilege');
+
+		foreach ($query3->result() as $row3)
+		{
+		        $data['privilege_manage_providers'] = $row3->privilege_manage_providers;
+		        $data['privilege_manage_reporting'] = $row3->privilege_manage_reporting;
+		        $data['privilege_manage_studentapps'] = $row3->privilege_manage_studentapps;
+		}
 	
-		if(isset($this->session->officer_name)) {
-			$this->load->view('schoolsprograms/editprogram', $data);
+		if($this->session->officer_role == "") {
+			redirect(base_url()."index.php/messages");
 		} else {
-			redirect(base_url()."?error3=1");
+			if(isset($this->session->officer_name)) {
+				$this->load->view('schoolsprograms/editprogram', $data);
+			} else {
+				redirect(base_url()."?error3=1");
+			}
 		}
 	}
 

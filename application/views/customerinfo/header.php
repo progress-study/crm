@@ -124,6 +124,9 @@
               </p>
             </a>
           </li>
+          <?php
+            if ($privilege_manage_providers == "1") {
+          ?>
           <li class="nav-item">
             <a href="schools" class="nav-link<?php if($title == 'Schools and Programs'){ echo ' active';} ?>">
               <i class="nav-icon fas fa-th"></i>
@@ -132,6 +135,12 @@
               </p>
             </a>
           </li>
+          <?php
+            }
+          ?>
+          <?php
+            if ($privilege_manage_studentapps == "1") {
+          ?>
           <li class="nav-item">
             <a href="applications" class="nav-link<?php if($title == 'Applications'){ echo ' active';} ?>">
               <i class="nav-icon fas fa-th"></i>
@@ -140,6 +149,9 @@
               </p>
             </a>
           </li>
+          <?php
+            }
+          ?>
           <li class="nav-item">
             <a href="adminmaintenance" class="nav-link<?php if($title == 'Admin Maintenance'){ echo ' active';} ?>">
               <i class="nav-icon fas fa-th"></i>
@@ -156,6 +168,9 @@
               </p>
             </a>
           </li>
+          <?php
+            if ($privilege_manage_reporting == "1") {
+          ?>
           <li class="nav-item">
             <a href="reports" class="nav-link<?php if($title == 'Reports'){ echo ' active';} ?>">
               <i class="nav-icon fas fa-th"></i>
@@ -164,6 +179,9 @@
               </p>
             </a>
           </li>
+          <?php
+            }
+          ?>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
