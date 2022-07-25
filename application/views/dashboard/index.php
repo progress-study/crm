@@ -245,24 +245,15 @@
           <div class="col-lg-3 col-6">
             <div class="small-box bg-default">
               <div class="inner">
-                <h3><?php echo $education_provider; ?></h3>
-                <p>TOTAL NO. OF PROVIDERS</p>
-              </div>
-              <a href="schools" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-lg-3 col-6">
-            <div class="small-box bg-default">
-              <div class="inner">
                 <h3>0</h3>
                 <p>CLIENTS WITH VISA CRITICAL DATES FOR THE NEXT 3 MONTHS</p>
               </div>
               <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
+        </div>
+
+        <div class="row">
           <div class="col-lg-3 col-6">
             <div class="small-box bg-default">
               <div class="inner">

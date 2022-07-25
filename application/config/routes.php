@@ -125,3 +125,6 @@ $route['savefilechat'] = 'messagescontroller/savefilechat';
 $route['savetextchat'] = 'messagescontroller/savetextchat';
 $route['createthread'] = 'messagescontroller/createthread';
 $route['savetoclientdocuments'] = 'messagescontroller/savetoclientdocuments';
+
+// Userlogin routes
+$route['clientlogin'] = 'clientlogincontroller/index';
