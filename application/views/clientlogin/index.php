@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Progress Study - Login</title>
+	<title>Progress Study e-Client Form / Login Page</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="icon" type="image/png" href="<?php echo base_url(); ?>assets/images/logo.png"/>
@@ -13,18 +13,42 @@
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/vendor/animsition/css/animsition.min.css">
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/vendor/select2/select2.min.css">
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/vendor/daterangepicker/daterangepicker.css">
+
+<style>
+.login {
+float: right;
+position: relative;
+border: 1px solid black;
+padding: 10px 10px 10px 10px;
+height: 450px;
+border-radius: 25px;
+background: #F4F4F4;
+top: 200px;
+left: 50px;
+}
+</style>
+
 </head>
 <body>
 	<br><br>
 	<div class="container">
 		<div class="row">
 			<div class="col-6">
+				<center><img src='<?php echo base_url(); ?>assets/images/logo-new.png' style="width: 200px;">
 				<video width="420" height="240" controls autoplay="on" id="vid">
 				  <source src="<?php echo $asset_url."videos/PSCregvideo.mp4"; ?>" type="video/mp4">
 				</video>
-
+				</center>
 				<form action="do_upload" method="POST" onsubmit="checkConfirmed(event)" enctype="multipart/form-data">
-		            <h3 class="information mt-4">E-Client Registration Form</h3>
+		            <center><h3 class="information mt-4">Register</h3></center><br/>
+		            <div class="row">
+		            	<div class="col-sm-12">
+		                   <div class="form-group">	
+		                   	<h4>THANK YOU FOR EXPRESSING YOUR INTEREST</h4><br/><br/>
+		                   	PLEASE FILL OUT THE DETAILS SO WE CAN ASSIST YOU FURTHER
+		                   </div>
+		               </div>
+		            </div>
 		            <div class="row">
 		                <div class="col-sm-12">
 		                    <div class="form-group">
@@ -181,16 +205,17 @@
 		 <input id="textBox" type="text" class="form-control" name="captcha" placeholder="Enter CAPTCHA Here"> <button id="refreshButton" type="button" class="btn btn-primary btn-block confirm-button">Refresh</button>
 		 <span id="output"></span>
 		<br><br>
-		<button class="btn btn-primary btn-block confirm-button" type="submit" id="submitButton">Submit</button>
+		<button class="btn btn-primary btn-block confirm-button" type="submit" id="submitButton">Register</button>
 		        </form>
 				
 			</div>
 			
-			<div class="col-6">
+			<div class="login">
 				<form class="login100-form validate-form" action="index.php/clientlogintypical" method="post">
-					<center><img src='<?php echo base_url(); ?>assets/images/logomain.png' style="width: 200px;"></center><br>
+					<br>
 					<span class="login100-form-title p-b-43">
-						<h3>Login to continue</h3>
+						<h3>Login</h3><br><br>
+						<h3>Already a PSC member? Login Here</h3>
 					</span><br>
 					<?php 
 					if (isset($_GET['error1'])) {
