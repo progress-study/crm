@@ -13,153 +13,236 @@
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/vendor/animsition/css/animsition.min.css">
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/vendor/select2/select2.min.css">
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/vendor/daterangepicker/daterangepicker.css">
-	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/util.css">
-	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/main.css">
 </head>
 <body>
-	
-	<div class="limiter">
-		<div class="container-login100">
-			<div class="wrap-login100">
-				<form class="login100-form validate-form" action="index.php/logintypical" method="post">
-					<center><img src='<?php echo base_url(); ?>assets/images/logomain.png' style="width: 200px;"></center><br>
-					<span class="login100-form-title p-b-43">
-						Login to continue
-					</span>
-					<?php 
-					if (isset($_GET['error1'])) {
-					?>
-						<div class="alert alert-danger" role="alert">Incorrect email or password!</div>
-					<?php
-					} else if (isset($_GET['error2'])) {
-					?>
-					    <div class="alert alert-danger" role="alert">This user was already inactive!</div>
-					<?php
-					} else if (isset($_GET['error3'])) {
-					?>
-					    <div class="alert alert-danger" role="alert">Please login first to CRM!</div>
-					<?php
-					}
-					?>
-					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
-						<input class="input100" type="text" name="email">
-						<span class="focus-input100"></span>
-						<span class="label-input100">Email</span>
-					</div>
-					
-					
-					<div class="wrap-input100 validate-input" data-validate="Password is required">
-						<input class="input100" type="password" name="password">
-						<span class="focus-input100"></span>
-						<span class="label-input100">Password</span>
-					</div>
+	<br><br>
+	<div class="container">
+		<div class="row">
+			<div class="col-6">
+				<video width="420" height="240" controls autoplay="on" id="vid">
+				  <source src="<?php echo $asset_url."videos/PSCregvideo.mp4"; ?>" type="video/mp4">
+				</video>
 
-					<div class="flex-sb-m w-full p-t-3 p-b-32">
-						<div class="contact100-form-checkbox">
-							<input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
-							<label class="label-checkbox100" for="ckb1">
-								Remember me
-							</label>
-						</div>
+				<form action="do_upload" method="POST" onsubmit="checkConfirmed(event)" enctype="multipart/form-data">
+		            <h3 class="information mt-4">E-Client Registration Form</h3>
+		            <div class="row">
+		                <div class="col-sm-12">
+		                    <div class="form-group">
+		                        <!-- <label for="name">Name</label> --> <input class="form-control" type="text" name="firstname" placeholder="First Name"> </div>
+		                </div>
+		            </div>
+		            <div class="row">
+		                <div class="col-sm-12">
+		                    <div class="form-group">
+		                        <!-- <label for="name">Name</label> --> <input class="form-control" type="text" name="lastname" placeholder="Last Name" required> </div>
+		                </div>
+		            </div>
+		            <div class="row">
+		                <div class="col-sm-12">
+		                    <div class="form-group">
+		                        <!-- <label for="name">Name</label> --> <input class="form-control" type="text" name="middlename" placeholder="Middle Name"> </div>
+		                </div>
+		            </div>
+		            <div class="row">
+		                <div class="col-sm-12">
+		                    <div class="form-group">
+		                        <div class="input-group"> <input class="form-control" type="text" name="mobile" placeholder="Mobile" required> </div>
+		                    </div>
+		                </div>
+		            </div>
+		            <div class="row">
+		                <div class="col-sm-12">
+		                    <div class="form-group">
+		                        <div class="input-group"> <input class="form-control" type="text" name="email" placeholder="Email Address" required> </div>
+		                    </div>
+		                </div>
+		            </div>
+		            <br>
+		            <div class="row">
+		                <div class="col-sm-12">
+		                    <div class="form-group">
 
-						<div>
-							<a href="#" class="txt1">
-								Forgot Password?
-							</a>
-						</div>
-					</div>
-			
+		                            <div class="mb-3">
+		                              <label for="exampleFormControlInput1" class="form-label">Birth date</label>
+		                              <input type="date" name="birthdate" class="form-control" id="exampleFormControlInput1" required>
+		                            </div>
+		                    </div>
+		                </div>
+		            </div>
+		            <div class="row">
+		                <div class="col-sm-12">
+		                    <div class="form-group">
+		                        <select class="form-control" name="country" required>
+		                            <option>Select Country</option>
+		                            <?php
+		                                foreach ($nationality as $row1) {
+		                                  echo "<option>".$row1->en_short_name."</option>";
+		                                }
+		                            ?>
+		                        </select>
+		                    </div>
+		                </div>
+		            </div>
+		            <div class="row">
+		                <div class="col-sm-12">
+		                    <div class="form-group">
+		                        <select class="form-control" name="nationality" required>
+		                            <option>Select Nationality</option>
+		                            <?php
+		                                foreach ($nationality as $row1) {
+		                                  echo "<option>".$row1->nationality."</option>";
+		                                }
+		                            ?>
+		                        </select>
+		                    </div>
+		                </div>
+		            </div>
+		            <div class="row">
+		                <div class="col-sm-12">
+		                    <div class="form-group">
+		                        <select class="form-control" name="city" required>
+		                            <option>Select City</option>
+		                            <option>Jakarta</option>
+		                            <option>Manila</option>
+		                            <option>Melbourne</option>
+		                            <option>Sydney</option>
+		                            <option>Surabaya</option>
+		                            <option>Other</option>
+		                        </select>
+		                    </div>
+		                </div>
+		            </div>
+		            <div class="row">
+		                <div class="col-sm-12">
+		                    <div class="form-group">
+		                        <select class="form-control" name="qualifications" required>
+		                            <option>Select Qualifications</option>
+		                            <?php
+		                                foreach ($qualifications as $row2) {
+		                                  echo "<option>".$row2->value."</option>";
+		                                }
+		                            ?>
+		                        </select>
+		                    </div>
+		                </div>
+		            </div>
+		            <div class="row">
+		                <div class="col-sm-12">
+		                    <div class="form-group">
+		                        <select class="form-control" name="civilstatus" required>
+		                            <option>Select Civil Status</option>
+		                            <?php
+		                                foreach ($civilstatus as $row3) {
+		                                  echo "<option>".$row3->value."</option>";
+		                                }
+		                            ?>
+		                        </select>
+		                    </div>
+		                </div>
+		            </div>
+		            <div class="row">
+		                <div class="col-sm-12">
+		                    <div class="form-group">
+		                        <!-- <label for="name">Name</label> --> <input class="form-control" type="text" name="noofdependents" placeholder="Dependents"> </div>
+		                </div>
+		            </div>
+		            <div class="row">
+		                <div class="col-sm-12">
+		                    <div class="form-group">
+		                        <!-- <label for="name">Name</label> --> <input class="form-control" type="password" name="password"  placeholder="Password" required> </div>
+		                </div>
+		            </div>
+		            <div class="row">
+		                <div class="col-sm-12">
+		                    <div class="form-group">
+		                        <!-- <label for="name">Name</label> --> <input class="form-control" type="password" name="password2" placeholder="Re-type Password" required> </div>
+		                </div>
+		            </div>
+		            <br>
+		            <div class="row">
+		                <div class="col-sm-12">
+		                    <div class="form-group">
+		                        <label for="resume" class="form-label">Resume</label>
+		                        <input class="form-control" type="file" name="resume" required> 
+		                    </div>
+		                </div>
+		            </div>
+		            <div class="row">
+		                <div class="col-sm-12">
+		                    <div class="form-group">
+		                        <!-- <label for="name">Name</label> --> <textarea class="form-control" name="notes" placeholder="Notes"></textarea>
+		                    </div>
+		                </div>
+		            </div>
+		            <div class=" d-flex flex-column text-center px-5 mt-3 mb-3"><small><input type="checkbox" id="confirm1" name="confirm1"> I have read, understood and content to the Privacy Policy (clickable)</small></div>
+		<div class=" d-flex flex-column text-center px-5 mt-3 mb-3"><small><input type="checkbox" id="confirm2" name="confirm2"> I consent to receiving information and updates</small></div> 
 
-					<div class="container-login100-form-btn">
-						<button class="login100-form-btn">
-							Login
-						</button>
-					</div>
-					
-					<div class="text-center p-t-46 p-b-20">
-						<span class="txt2">
-							or sign in using
-						</span>
-					</div>
-
-					<div class="login100-form-social flex-c-m">
-						<a href="#" class="login100-form-social-item flex-c-m bg1 m-r-5">
-							<i class="fa fa-google" aria-hidden="true"></i>
-						</a>
-					</div>
-				</form>
-
-				<div class="login100-more">
-					<form class="login100-form validate-form" action="index.php/logintypical" method="post">
-					<center><img src='<?php echo base_url(); ?>assets/images/logomain.png' style="width: 200px;"></center><br>
-					<span class="login100-form-title p-b-43">
-						Login to continue
-					</span>
-					<?php 
-					if (isset($_GET['error1'])) {
-					?>
-						<div class="alert alert-danger" role="alert">Incorrect email or password!</div>
-					<?php
-					} else if (isset($_GET['error2'])) {
-					?>
-					    <div class="alert alert-danger" role="alert">This user was already inactive!</div>
-					<?php
-					} else if (isset($_GET['error3'])) {
-					?>
-					    <div class="alert alert-danger" role="alert">Please login first to CRM!</div>
-					<?php
-					}
-					?>
-					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
-						<input class="input100" type="text" name="email">
-						<span class="focus-input100"></span>
-						<span class="label-input100">Email</span>
-					</div>
-					
-					
-					<div class="wrap-input100 validate-input" data-validate="Password is required">
-						<input class="input100" type="password" name="password">
-						<span class="focus-input100"></span>
-						<span class="label-input100">Password</span>
-					</div>
-
-					<div class="flex-sb-m w-full p-t-3 p-b-32">
-						<div class="contact100-form-checkbox">
-							<input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
-							<label class="label-checkbox100" for="ckb1">
-								Remember me
-							</label>
-						</div>
-
-						<div>
-							<a href="#" class="txt1">
-								Forgot Password?
-							</a>
-						</div>
-					</div>
-			
-
-					<div class="container-login100-form-btn">
-						<button class="login100-form-btn">
-							Login
-						</button>
-					</div>
-					
-					<div class="text-center p-t-46 p-b-20">
-						<span class="txt2">
-							or sign in using
-						</span>
-					</div>
-
-					<div class="login100-form-social flex-c-m">
-						<a href="#" class="login100-form-social-item flex-c-m bg1 m-r-5">
-							<i class="fa fa-google" aria-hidden="true"></i>
-						</a>
-					</div>
-				</form>
-				</div>
+		 <canvas id="captcha">captcha text</canvas>
+		 <input id="textBox" type="text" class="form-control" name="captcha" placeholder="Enter CAPTCHA Here"> <button id="refreshButton" type="button" class="btn btn-primary btn-block confirm-button">Refresh</button>
+		 <span id="output"></span>
+		<br><br>
+		<button class="btn btn-primary btn-block confirm-button" type="submit" id="submitButton">Submit</button>
+		        </form>
+				
 			</div>
-		</div>
+			
+			<div class="col-6">
+				<form class="login100-form validate-form" action="index.php/clientlogintypical" method="post">
+					<center><img src='<?php echo base_url(); ?>assets/images/logomain.png' style="width: 200px;"></center><br>
+					<span class="login100-form-title p-b-43">
+						<h3>Login to continue</h3>
+					</span><br>
+					<?php 
+					if (isset($_GET['error1'])) {
+					?>
+						<div class="alert alert-danger" role="alert">Incorrect email or password!</div>
+					<?php
+					} else if (isset($_GET['error2'])) {
+					?>
+					    <div class="alert alert-danger" role="alert">This user was already inactive!</div>
+					<?php
+					} else if (isset($_GET['error3'])) {
+					?>
+					    <div class="alert alert-danger" role="alert">Please login first to CRM!</div>
+					<?php
+					}
+					?>
+					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+						<span class="label-input100">Email</span> 
+						<input class="form-control" type="text" name="email">
+						<span class="focus-input100"></span>
+					</div>
+					
+					<div class="wrap-input100 validate-input" data-validate="Password is required">
+						<span class="label-input100">Password</span> 
+						<input class="form-control" type="password" name="password">
+					</div>
+
+					<div class="flex-sb-m w-full p-t-3 p-b-32">
+						<div class="contact100-form-checkbox">
+							<input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
+							<label class="label-checkbox100" for="ckb1">
+								Remember me
+							</label>
+						</div>
+
+						<div>
+							<a href="#" class="txt1">
+								Forgot Password?
+							</a>
+						</div>
+					</div>
+			
+
+					<div class="container-login100-form-btn">
+						<button class="btn btn-primary">
+							Login
+						</button>
+					</div>
+					
+				</form>
+			</div>
+		</div><br>
 	</div>
 	
 	<script src="<?php echo base_url(); ?>assets/vendor/jquery/jquery-3.2.1.min.js"></script>

@@ -33,6 +33,15 @@ class Dashboardcontroller extends CI_Controller {
         $query5 = $this->db->query($sql5);
         $client = $query5->result();
 
+        $sql6 = "SELECT * FROM inquiries where inquiries_status = 'Created'";
+		$query6 = $this->db->query($sql6);
+		$inquiries = $query6->result();
+
+		$officerid = $this->session->officer_id;
+		$sql7 = "SELECT * FROM tasklist where officer_id = '$officerid' and (status = 'Created' OR status = 'Done')";
+		$query7 = $this->db->query($sql7);
+		$tasklist = $query7->result();
+
 		$data['title'] = "Dashboard";
 		$data['asset_url'] = $asset_url;
 
@@ -41,6 +50,8 @@ class Dashboardcontroller extends CI_Controller {
 		$data['pr_application'] = $pr_application;
 		$data['education_provider'] = $education_provider;
 		$data['clients'] = $client;
+		$data['inquiries'] = $inquiries;
+		$data['tasklist'] = $tasklist;
 
 		$this->db->where('privilege_id', $this->session->officer_role_id);
         $query3 = $this->db->get('privilege');
@@ -63,4 +74,19 @@ class Dashboardcontroller extends CI_Controller {
 		}
 		
 	}
+
+	public function archivetasklist($tlid) {
+		$this->db->set('status', 'Archived');
+		$this->db->where('tlid', $tlid);
+		$this->db->update('tasklist');
+		echo json_encode("Successfully archived the task!");
+	}
+
+	public function donetasklist($tlid) {
+		$this->db->set('status', 'Done');
+		$this->db->where('tlid', $tlid);
+		$this->db->update('tasklist');
+		echo json_encode("Successfully done the task!");
+	}
+
 }

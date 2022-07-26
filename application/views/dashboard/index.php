@@ -213,6 +213,7 @@
 
     <!-- Main content -->
     <section class="content">
+      <input type="hidden" id="baseurl" value="<?php echo base_url(); ?>">
       <div class="container-fluid">
         <div class="row">
           <div class="col-lg-3 col-6">
@@ -269,121 +270,49 @@
         <div class="col-12">
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title">Status Card</h3>
+              <h3 class="card-title">Today's Tasks</h3>
             </div>
             <div class="card-body">
-              Legend: <span class="badge badge-danger">No record</span> <span class="badge badge-warning">Partial</span> <span class="badge badge-success">Complete</span>
-              <br><br> 
-              <table id="example1" class="table table-bordered table-striped" style="font-size: 12px;">
-                <thead>
+              <button class='btn btn-primary btn-xs' onclick='donetasklist();'>Tag selected as Done</button> <button class='btn btn-danger btn-xs' onclick='archivetasklist();'>Archive selected</button><br>
+              <table style='width: 100%;'>
+              <?php
+                $i = 0;
+                foreach ($tasklist as $row) {
+
+              ?>
                 <tr>
-                  <th>Client</th>
-                  <th>Process Officer</th>
-                  <th>Inquired</th>
-                  <th>Transferred as Client</th>
-                  <th>PO Accepted</th>
-                  <th>Documents</th>
-                  <th>Admission</th>
-                  <th>Visa Completed</th>
-                  <th>Payments</th>
-                  <th>Completed</th>
-                </tr>
-                </thead>
-                <tbody>
-                <?php
-                
-                foreach ($clients as $row) {
-
-                  if ($row->inquiries_id == "") {
-                    $inquiredbg = "#dc3545";
-                    $inquired = "No";
-                  } else {
-                    $inquiredbg = "#28a745";
-                    $inquired = "Yes";
-                  }
-
-                  if ($row->client_inquiries_id == "0") {
-                    $transferredbg = "#dc3545";
-                    $transferred = "No";
-                  } else {
-                    $transferredbg = "#28a745";
-                    $transferred = "Yes";
-                  }
-
-                  if ($row->doccount == "0") {
-                    $documentbg = "#dc3545";
-                    $document = "No documents uploaded";
-                  } else {
-                    $documentbg = "#28a745";
-                    $document = $row->doccount." documents";
-                  }
-
-                  if ($row->client_visa_id == "") {
-                    $visabg = "#dc3545";
-                    $visa = "No";
-                  } else {
-                    $visabg = "#28a745";
-                    $visa = "Yes";
-                  }
-
-                  if ($row->studentapp_id == "") {
-                    $sabg = "#dc3545";
-                    $sa = "No";
-                  } else {
-                    $sabg = "#28a745";
-                    $sa = "Yes";
-                  }
-
-                  if ($row->paymentid == "") {
-                    $paymentbg = "#dc3545";
-                    $payment = "No payment record";
-                  } else {
-                    $paymentbg = "#28a745";
-                    $payment = "Paid";
-                  }
-
-                  if($inquired == "Yes" && $transferred == "Yes" && $document == "Uploaded" && $visa == "Yes" && $payment == "Paid") {
-                    $completebg = "#28a745";
-                    $complete = "Completed";
-                  } elseif($inquired == "No" && $transferred == "No" && $document == "No documents uploaded" && $visa == "No" && $payment == "No payment record") {
-                    $completebg = "#dc3545";
-                    $complete = "No movement";
-                  } else {
-                    $completebg = "#ffc107";
-                    $complete = "Partial completed";
-                  }
-
-                  echo "<tr>
-                    <td>".$row->client_surname.", ".$row->client_firstname." ".$row->client_middlename."</td>
-                    <td>".$row->officer_name."</td>
-                    <td style='background: ".$inquiredbg."; color: white;'>".$inquired."</td>
-                    <td style='background: ".$transferredbg."; color: white;'>".$transferred."</td>
-                    <td style='background: #dc3545; color: white;'></td>
-                    <td style='background: ".$documentbg."; color: white;'>".$document."</td>
-                    <td style='background: ".$sabg."; color: white;'>".$sa."</td>
-                    <td style='background: ".$visabg."; color: white;'>".$visa."</td>
-                    <td style='background: ".$paymentbg."; color: white;'>".$payment."</td>
-                    <td style='background: ".$completebg."; color: white;'>".$complete."</td>
-                  </tr>";
+                  <td style='width: 80%;'><input type="checkbox" id="tasklistdata_<?php echo $i; ?>" class="tasklistdata" value="<?php echo $row->tlid;?>"> &nbsp;<?php echo $row->details; ?> <small><b>started <?php echo $row->datetime_created; ?></b></small></td>
+                  <?php
+                    if($row->status == 'Created') {
+                      echo "<td style='width: 20%;'><span class='badge badge-success'>".$row->status."</span></td>";
+                    } else {
+                      echo "<td style='width: 20%;'><span class='badge badge-primary'>".$row->status."</span></td>";
+                    }
+                  ?>
+                <tr>
+              <?php
+                $i++;
                 }
-
-                
-                ?>
-                </tbody>
-                <tfoot>
+              ?>
+              </table>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Approval Tasks</h3>
+            </div>
+            <div class="card-body">
+              <table style='width: 100%;'>
+              <?php
+                foreach ($inquiries as $row) {
+              ?>
                 <tr>
-                  <th>Client</th>
-                  <th>Process Officer</th>
-                  <th>Inquired</th>
-                  <th>Transferred as Client</th>
-                  <th>PO Accepted</th>
-                  <th>Documents</th>
-                  <th>Admission</th>
-                  <th>Visa Completed</th>
-                  <th>Payments</th>
-                  <th>Completed</th>
-                </tr>
-                </tfoot>
+                  <td style='width: 80%;'><?php echo $row->inquiries_firstname." ".$row->inquiries_middlename." ".$row->inquiries_surname; ?></td>
+                  <td style='width: 20%;'><a href="transferinquirytoclient/<?php echo $row->inquiries_id; ?>" class='btn btn-primary btn-xs'>Approve as Client</a></td>
+                <tr>
+              <?php
+                }
+              ?>
               </table>
             </div>
           </div>
@@ -888,5 +817,54 @@
 <script src="<?php echo $asset_url; ?>dist/js/pages/dashboard.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="<?php echo $asset_url; ?>dist/js/demo.js"></script>
+
+<script type="text/javascript">
+  function archivetasklist() {
+      var baseurl = document.getElementById("baseurl").value;
+      var tasklistdata = document.getElementsByClassName("tasklistdata");
+      var tasklistdataid = "";
+      for(var h = 0; h < tasklistdata.length; h++) {
+          //alert(document.getElementById("tasklistdata_"+h).value);
+          if(document.getElementById("tasklistdata_"+h).checked == true) {
+            tasklistdataid = document.getElementById("tasklistdata_"+h).value;
+            $.ajax({
+                type: "GET",
+                url: baseurl + "index.php/archivetasklist/" + tasklistdataid,
+                success: function(data) {
+                  alert("Successfully archived Task ID # " + tasklistdataid);
+                  location.reload();
+                },
+                error: function(error) {
+                  alert(error);
+                }
+            });
+          }
+      }
+  }
+
+  function donetasklist() {
+      var baseurl = document.getElementById("baseurl").value;
+      var tasklistdata = document.getElementsByClassName("tasklistdata");
+      var tasklistdataid = "";
+      for(var h = 0; h < tasklistdata.length; h++) {
+          //alert(document.getElementById("tasklistdata_"+h).value);
+          if(document.getElementById("tasklistdata_"+h).checked == true) {
+            tasklistdataid = document.getElementById("tasklistdata_"+h).value;
+            $.ajax({
+                type: "GET",
+                url: baseurl + "index.php/donetasklist/" + tasklistdataid,
+                success: function(data) {
+                  alert("Successfully done Task ID # " + tasklistdataid);
+                  location.reload();
+                },
+                error: function(error) {
+                  alert(error);
+                }
+            });
+          }
+      }
+  }
+</script>
+
 </body>
 </html>
