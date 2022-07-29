@@ -279,6 +279,34 @@ left: 50px;
 	<script src="<?php echo base_url(); ?>assets/vendor/daterangepicker/daterangepicker.js"></script>
 	<script src="<?php echo base_url(); ?>assets/vendor/countdowntime/countdowntime.js"></script>
 	<script src="<?php echo base_url(); ?>assets/js/main.js"></script>
+	<script type='text/Javascript'>
+    function checkConfirmed(e) {
+        if (document.getElementById('confirm1').checked != true) {
+                alert("Please confirm on policy checks!");
+                e.preventDefault();
+        } 
+
+    let submitButton = document.querySelector('#submitButton');
+    submitButton.addEventListener('click', function() {
+     if (userText.value === c) {
+     output.classList.add("correctCaptcha");
+     output.innerHTML = "Correct!";
+     } else {
+     output.classList.add("incorrectCaptcha");
+     output.innerHTML = "Incorrect, please try again";
+     }
+    });
+
+/*
+        if (document.getElementById('confirm2').checked != true) {
+                alert("Please confirm on consent checks!");
+                e.preventDefault();
+        }
+*/
+    }
+
+</script>
+<script type='text/javascript' src='<?php echo $asset_url; ?>js/captcha_script.js'></script>
 
 </body>
 </html>
