@@ -130,8 +130,9 @@ $route['savetextchat'] = 'messagescontroller/savetextchat';
 $route['createthread'] = 'messagescontroller/createthread';
 $route['savetoclientdocuments'] = 'messagescontroller/savetoclientdocuments';
 
-// Userlogin routes
+// Client routes
 $route['clientlogin'] = 'clientlogincontroller/index';
+$route['clientlogintypical'] = 'clientlogincontroller/clientlogintypical';
 
 // Dashboard routes
 $route['archivetasklist/(:any)'] = 'dashboardcontroller/archivetasklist/$1';

@@ -42,6 +42,10 @@ class Dashboardcontroller extends CI_Controller {
 		$query7 = $this->db->query($sql7);
 		$tasklist = $query7->result();
 
+		$sql8 = "SELECT * FROM visa_application";
+		$query8 = $this->db->query($sql8);
+		$prapplicationforchecking = $query8->result();
+
 		$data['title'] = "Dashboard";
 		$data['asset_url'] = $asset_url;
 
@@ -52,6 +56,7 @@ class Dashboardcontroller extends CI_Controller {
 		$data['clients'] = $client;
 		$data['inquiries'] = $inquiries;
 		$data['tasklist'] = $tasklist;
+		$data['prapplicationforchecking'] = $prapplicationforchecking;
 
 		$this->db->where('privilege_id', $this->session->officer_role_id);
         $query3 = $this->db->get('privilege');

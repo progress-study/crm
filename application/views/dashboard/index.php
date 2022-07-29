@@ -215,12 +215,25 @@
     <section class="content">
       <input type="hidden" id="baseurl" value="<?php echo base_url(); ?>">
       <div class="container-fluid">
+        <?php
+          $vedcounter = 0;
+          foreach ($prapplicationforchecking as $row1) {
+              //$date1=date_create("2022-08-01");
+              $date1=date_create(date("Y-m-d"));
+              $date2=date_create($row1->visa_expiry_year."-".$row1->visa_expiry_month."-".$row1->visa_expiry_day);
+              $diff=date_diff($date1,$date2);
+              if((int) $diff->format("%a") < 92) {
+                $vedcounter++;
+              }
+              //echo $row1;
+          }
+        ?>
         <div class="row">
           <div class="col-lg-3 col-6">
             <div class="small-box bg-default">
               <div class="inner">
-                <h3>0</h3>
-                <p>CLIENTS WITH VISA EXPIRING DATES FOR THE NEXT 3 MONTHS</p>
+                <h3><?php echo $vedcounter; ?></h3>
+                <p>VISA EXPIRING DATES FOR THE NEXT 3 MONTHS</p>
               </div>
               <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
@@ -243,11 +256,24 @@
               <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
+          <?php
+            $vcdcounter = 0;
+            foreach ($prapplicationforchecking as $row1) {
+                //$date1=date_create("2022-08-01");
+                $date1=date_create(date("Y-m-d"));
+                $date2=date_create($row1->visa_critical_year."-".$row1->visa_critical_month."-".$row1->visa_critical_day);
+                $diff=date_diff($date1,$date2);
+                if((int) $diff->format("%a") < 92) {
+                  $vcdcounter++;
+                }
+                //echo $row1;
+            }
+          ?>
           <div class="col-lg-3 col-6">
             <div class="small-box bg-default">
               <div class="inner">
-                <h3>0</h3>
-                <p>CLIENTS WITH VISA CRITICAL DATES FOR THE NEXT 3 MONTHS</p>
+                <h3><?php echo $vcdcounter; ?></h3>
+                <p>VISA CRITICAL DATES FOR THE NEXT 3 MONTHS</p>
               </div>
               <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>

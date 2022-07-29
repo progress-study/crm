@@ -11,10 +11,59 @@ class ClientLoginController extends CI_Controller {
 
 	public function index()
 	{
+		$sql = "SELECT nationality,en_short_name FROM countries";
+	    $query = $this->db->query($sql);
+	    $nationality = $query->result();
+
+	    $sql2 = "SELECT value FROM qualifications";
+	    $query2 = $this->db->query($sql2);
+	    $qualifications = $query2->result();
+
+	    $sql3 = "SELECT value FROM civilstatus";
+	    $query3 = $this->db->query($sql3);
+	    $civilstat = $query3->result();
+
+	    $data['nationality'] = $nationality;
+		$data['qualifications'] = $qualifications;
+		$data['civilstatus'] = $civilstat;
+
 		$asset_url = base_url()."assets/";
 		$data['title'] = "Client Login";
 		$data['asset_url'] = $asset_url;
 		$this->load->view('clientlogin/index',$data);
+	}
+
+	public function clientlogintypical() {
+		$email = $this->input->post('email');
+		$password = $this->input->post('password');
+
+        $this->db->select('*');
+        $this->db->from('client');
+        $this->db->where('client_email', $email);
+        $query = $this->db->get();
+        $clientrow = $query->row();
+	    
+	    if ($password == $clientrow->client_password) {
+	    	if ($clientrow->client_flag == "active") {
+	    		$session_data = array(
+				   	'officer_name' => $clientrow->client_firstname." ".$clientrow->client_surname,
+					'officer_role' => '',
+					'officer_role_id' => '',
+				   	'officer_status' => $clientrow->client_flag,
+					'officer_id' => $clientrow->client_id,
+					'email' => $clientrow_client_email
+				);
+				$this->session->set_userdata($session_data);
+				redirect(base_url()."index.php/messages");
+	    	} else {
+	    		redirect(base_url()."index.php/clientlogin.php?error2=1");
+	    		//$this->returntologin();
+	    	}
+		} else {
+			redirect(base_url()."index.php/clientlogin.php?error1=1");
+			//$this->returntologin();
+		}
+
 	}
 
 }

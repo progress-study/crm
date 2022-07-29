@@ -106,7 +106,7 @@ class Formscontroller extends CI_Controller {
 							'inquiries_address' => $this->input->post('city'),
 							'inquiries_qualifications' => $this->input->post('qualifications'),
 							'inquiries_password' => $this->input->post('password'),
-							'inquiries_dependents' => $this->input->post('noofdependents'),
+							'inquiries_dependents' => '',
 							'inquiries_civilstatus' => $this->input->post('civilstatus'),
 							'inquiries_country' => $this->input->post('country'),
 							'inquiries_nationality' => $this->input->post('nationality'),
@@ -115,7 +115,9 @@ class Formscontroller extends CI_Controller {
 							'inquiries_privacy_consent' => $confirm1,
 							'inquiries_info_receiving_consent' => $confirm2,
 							'inquiries_status' => 'Created',
-							'inquiries_resume' => ''
+							'inquiries_resume' => '',
+							'inquiries_visaexpdate' => $this->input->post('visaexpdate'),
+							'inquiries_visaheld' => $this->input->post('visaheld')
 						);
 				$this->db->insert('inquiries', $data);
 
@@ -140,6 +142,7 @@ class Formscontroller extends CI_Controller {
 				$this->load->library('phpmailer_lib');
 		        $mail = $this->phpmailer_lib->load();
 	  
+	  /*
 			    $mail->SMTPDebug = 1;
 			    $mail->isSMTP();
 			    $mail->Host       = 'ssl://smtp.gmail.com';            
@@ -148,7 +151,14 @@ class Formscontroller extends CI_Controller {
 			    $mail->Password   = 'lgbnxidtxswccfzr';                     
 			    $mail->SMTPSecure = 'ssl';      
 			    $mail->Port       = 465;   
-		        
+		*/
+
+			    $mail->isSMTP();
+				$mail->Host = 'localhost';
+				$mail->SMTPAuth = false;
+				$mail->SMTPAutoTLS = false; 
+				$mail->Port = 25; 
+
 		        $mail->setFrom("ramirezkyl@gmail.com");
 		        //$mail->addReplyTo($sender, $this->session->userdata('companyname'));
 		        $mail->addAddress("ramirezkyl@gmail.com");
@@ -181,7 +191,7 @@ class Formscontroller extends CI_Controller {
 							'inquiries_address' => $this->input->post('city'),
 							'inquiries_qualifications' => $this->input->post('qualifications'),
 							'inquiries_password' => $this->input->post('password'),
-							'inquiries_dependents' => $this->input->post('noofdependents'),
+							'inquiries_dependents' => '',
 							'inquiries_civilstatus' => $this->input->post('civilstatus'),
 							'inquiries_country' => $this->input->post('country'),
 							'inquiries_nationality' => $this->input->post('nationality'),
@@ -190,7 +200,9 @@ class Formscontroller extends CI_Controller {
 							'inquiries_privacy_consent' => $confirm1,
 							'inquiries_info_receiving_consent' => $confirm2,
 							'inquiries_status' => 'Created',
-							'inquiries_resume' => $file_name
+							'inquiries_resume' => $file_name,
+							'inquiries_visaexpdate' => $this->input->post('visaexpdate'),
+							'inquiries_visaheld' => $this->input->post('visaheld')
 						);
 				$this->db->insert('inquiries', $data);
 
@@ -214,7 +226,8 @@ class Formscontroller extends CI_Controller {
 			
 				$this->load->library('phpmailer_lib');
 		        $mail = $this->phpmailer_lib->load();
-	  
+	    
+	  /*
 			    $mail->SMTPDebug = 1;
 			    $mail->isSMTP();
 			    $mail->Host       = 'ssl://smtp.gmail.com';            
@@ -223,7 +236,14 @@ class Formscontroller extends CI_Controller {
 			    $mail->Password   = 'lgbnxidtxswccfzr';                     
 			    $mail->SMTPSecure = 'ssl';      
 			    $mail->Port       = 465;   
-		        
+		*/
+
+			    $mail->isSMTP();
+				$mail->Host = 'localhost';
+				$mail->SMTPAuth = false;
+				$mail->SMTPAutoTLS = false; 
+				$mail->Port = 25; 
+   
 		        $mail->setFrom("ramirezkyl@gmail.com");
 		        //$mail->addReplyTo($sender, $this->session->userdata('companyname'));
 		        $mail->addAddress("ramirezkyl@gmail.com");

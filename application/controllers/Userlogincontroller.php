@@ -27,12 +27,6 @@ class UserLoginController extends CI_Controller {
         $this->db->where('email', $email);
         $query = $this->db->get();
         $row = $query->row();
-
-        $this->db->select('*');
-        $this->db->from('client');
-        $this->db->where('client_email', $email);
-        $query = $this->db->get();
-        $clientrow = $query->row();
 	    
 	    if ($password == $row->officer_password) {
 	    	if ($row->officer_status == "active") {
@@ -62,22 +56,6 @@ class UserLoginController extends CI_Controller {
 				);
 				$this->session->set_userdata($session_data);
 				redirect('dashboard');
-	    	} else {
-	    		redirect(base_url()."?error2=1");
-	    		//$this->returntologin();
-	    	}
-		} else if ($password == $clientrow->client_password) {
-	    	if ($clientrow->client_flag == "active") {
-	    		$session_data = array(
-				   	'officer_name' => $clientrow->client_firstname." ".$clientrow->client_surname,
-					'officer_role' => '',
-					'officer_role_id' => '',
-				   	'officer_status' => $clientrow->client_flag,
-					'officer_id' => $clientrow->client_id,
-					'email' => $clientrow_client_email
-				);
-				$this->session->set_userdata($session_data);
-				redirect('messages');
 	    	} else {
 	    		redirect(base_url()."?error2=1");
 	    		//$this->returntologin();

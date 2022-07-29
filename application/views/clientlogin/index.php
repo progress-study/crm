@@ -96,7 +96,7 @@ left: 50px;
 		            <div class="row">
 		                <div class="col-sm-12">
 		                    <div class="form-group">
-		                        <select class="form-control" name="country" required>
+		                        <select class="form-control" name="country" id="country" required onchange="EnableOrDisableVisa();">
 		                            <option>Select Country</option>
 		                            <?php
 		                                foreach ($nationality as $row1) {
@@ -105,6 +105,24 @@ left: 50px;
 		                            ?>
 		                        </select>
 		                    </div>
+		                </div>
+		            </div>
+		            <br>
+		            <div class="row" id="visaexpdate" style="display: none;">
+		                <div class="col-sm-12">
+		                    <div class="form-group">
+
+		                            <div class="mb-3">
+		                              <label for="exampleFormControlInput1" class="form-label">Visa Expiration date</label>
+		                              <input type="date" name="visaexpdate" class="form-control" id="exampleFormControlInput1" required>
+		                            </div>
+		                    </div>
+		                </div>
+		            </div>
+		            <div class="row" id="visaheld" style="display: none;">
+		                <div class="col-sm-12">
+		                    <div class="form-group">
+		                        <!-- <label for="name">Name</label> --> <input class="form-control" type="text" name="visaheld" placeholder="Current Visa Held"> </div>
 		                </div>
 		            </div>
 		            <div class="row">
@@ -167,12 +185,6 @@ left: 50px;
 		            <div class="row">
 		                <div class="col-sm-12">
 		                    <div class="form-group">
-		                        <!-- <label for="name">Name</label> --> <input class="form-control" type="text" name="noofdependents" placeholder="Dependents"> </div>
-		                </div>
-		            </div>
-		            <div class="row">
-		                <div class="col-sm-12">
-		                    <div class="form-group">
 		                        <!-- <label for="name">Name</label> --> <input class="form-control" type="password" name="password"  placeholder="Password" required> </div>
 		                </div>
 		            </div>
@@ -211,7 +223,7 @@ left: 50px;
 			</div>
 			
 			<div class="login">
-				<form class="login100-form validate-form" action="index.php/clientlogintypical" method="post">
+				<form class="login100-form validate-form" action="clientlogintypical" method="post">
 					<br>
 					<span class="login100-form-title p-b-43">
 						<h3>Login</h3><br><br>
@@ -296,7 +308,6 @@ left: 50px;
      output.innerHTML = "Incorrect, please try again";
      }
     });
-
 /*
         if (document.getElementById('confirm2').checked != true) {
                 alert("Please confirm on consent checks!");
@@ -307,6 +318,16 @@ left: 50px;
 
 </script>
 <script type='text/javascript' src='<?php echo $asset_url; ?>js/captcha_script.js'></script>
-
+<script type="text/javascript">
+	function EnableOrDisableVisa() {
+    	if(document.getElementById("country").value == "Australia") {
+    		document.getElementById("visaexpdate").style.display = "block";
+    		document.getElementById("visaheld").style.display = "block";
+    	} else {
+    		document.getElementById("visaexpdate").style.display = "none";
+    		document.getElementById("visaheld").style.display = "none";
+    	}
+    }
+</script>
 </body>
 </html>
