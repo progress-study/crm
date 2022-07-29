@@ -111,6 +111,10 @@ $route['newprogramoptiondetails/(:any)'] = 'programoptionscontroller/newprogramo
 $route['saveprogramoptiondetails'] = 'programoptionscontroller/saveprogramoptiondetails';
 $route['editprogramoptiondetails/(:any)'] = 'programoptionscontroller/editprogramoptiondetails/$1';
 $route['updateprogramoptiondetails'] = 'programoptionscontroller/updateprogramoptiondetails';
+$route['acceptpo'] = 'programoptionscontroller/acceptpo';
+$route['rejectpo/(:any)'] = 'programoptionscontroller/rejectpo/$1';
+$route['posuccess'] = 'programoptionscontroller/posuccess';
+$route['saveclientfeedback'] = 'programoptionscontroller/saveclientfeedback';
 
 // Required documents routes
 $route['adddocuments'] = 'requireddocumentscontroller/adddocuments';

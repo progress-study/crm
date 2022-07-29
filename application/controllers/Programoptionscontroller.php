@@ -59,7 +59,9 @@ class Programoptionscontroller extends CI_Controller {
 					'prepby' => $this->session->officer_id,
 					'prepdate' => date("Y-m-d"),
 					'client_id' => $this->input->post('client_id'),
-					'status' => ''
+					'status' => 'Created',
+					'others' => $this->input->post('others'),
+					'clientfeedback' => ''
 				);
 		$this->db->insert('programoptions', $data);
 		redirect('editclientinfo2/'.$this->input->post('client_id'));
@@ -76,6 +78,7 @@ class Programoptionscontroller extends CI_Controller {
 		$this->db->set('importanttoconsider', $this->input->post('importanttoconsider'));
 		$this->db->set('migrationpathway', $this->input->post('migrationpathway'));
 		$this->db->set('client_id', $this->input->post('client_id'));
+		$this->db->set('others', $this->input->post('others'));
 		$this->db->where('poid', $this->input->post('poid'));
 		$this->db->update('programoptions');
 
@@ -228,4 +231,43 @@ class Programoptionscontroller extends CI_Controller {
 		redirect(base_url().'index.php/editprogramoptions/'.$this->input->post('podid'));
 	}
 
+	public function acceptpo() {
+		$this->db->set('status', 'Accepted');
+		$this->db->where('poid', $this->input->post('poid'));
+		$this->db->update('programoptions');
+
+		$this->posuccess('accepted', $this->input->post('poid'));
+	}
+
+	public function rejectpo($poid) {
+		$this->db->set('status', 'Rejected');
+		$this->db->where('poid', $poid);
+		$this->db->update('programoptions');
+
+		//redirect(base_url().'index.php/posuccess?result=reject&poid='.$this->input->post('poid'));
+		$this->posuccess('rejected', $poid);
+	}
+
+	public function posuccess($status, $poid) {
+		$data['poid'] = $poid;
+		$data['status'] = $status;
+
+		$asset_url = base_url()."assets/";
+		$data['title'] = "PO Response";
+		$data['asset_url'] = $asset_url;
+
+		$this->load->view('forms/posuccess', $data);;
+	}
+
+	public function saveclientfeedback() {
+		$this->db->set('clientfeedback', $this->input->post('feedback'));
+		$this->db->where('poid', $this->input->post('poid'));
+		$this->db->update('programoptions');
+
+		$asset_url = base_url()."assets/";
+		$data['title'] = "Success Feedback";
+		$data['asset_url'] = $asset_url;
+
+		$this->load->view('forms/clientfeedbacksuccess', $data);
+	}
 }

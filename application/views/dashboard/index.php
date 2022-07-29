@@ -219,10 +219,10 @@
           <div class="col-lg-3 col-6">
             <div class="small-box bg-default">
               <div class="inner">
-                <h3><?php echo $activeclients; ?></h3>
-                <p>ACTIVE VIEWABLE CLIENTS</p>
+                <h3>0</h3>
+                <p>CLIENTS WITH VISA EXPIRING DATES FOR THE NEXT 3 MONTHS</p>
               </div>
-              <a href="customerinfo" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <div class="col-lg-3 col-6">
@@ -248,18 +248,6 @@
               <div class="inner">
                 <h3>0</h3>
                 <p>CLIENTS WITH VISA CRITICAL DATES FOR THE NEXT 3 MONTHS</p>
-              </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-lg-3 col-6">
-            <div class="small-box bg-default">
-              <div class="inner">
-                <h3>0</h3>
-                <p>CLIENTS WITH VISA EXPIRING DATES FOR THE NEXT 3 MONTHS</p>
               </div>
               <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>

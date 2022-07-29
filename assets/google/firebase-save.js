@@ -37,6 +37,7 @@ document.getElementById("savefiletofirebase").onclick = function() {
 			var baseurl = document.getElementById("baseurl1").value;
 			var client_id = document.getElementById("client_id1").value;
 			var documentype = document.getElementById("documentype").value;
+			var documenalias = document.getElementById("documenalias").value;
 
 			var today = new Date();
 			var datetoday = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
@@ -68,7 +69,8 @@ document.getElementById("savefiletofirebase").onclick = function() {
 			    	client_id: client_id, 
 			    	document_type: documentype, 
 			    	document_name: ImageName, 
-			    	document_link: url
+			    	document_link: url,
+			    	alias: documenalias
 			    },
 			    success: function(data) {
 			        var obj = JSON.parse(data);
@@ -137,16 +139,16 @@ function setDocumentsTable2() {
 	      for(var i = 0; i < obj.length; i++) {
 		  	var modi = i % 5;
 		  	if (i > 0 && modi == 0) {
-		  		tabledata += "<div class='col'><center><input type='checkbox' class='deleteselect' value='"+obj[i].fbid+"'><a href='" + obj[i].document_link + "'><img src='" + imageasseturl2 + "' style='width: 70px; width: 65px;'><br><b>" + obj[i].document_type + "</b><br><label style='font-size: 12px;'>" + obj[i].document_name + "</label></a></center></div></div><div class='row'>";
+		  		tabledata += "<div class='col'><center><input type='checkbox' class='deleteselect' value='"+obj[i].fbid+"'><a href='" + obj[i].document_link + "'><img src='" + imageasseturl2 + "' style='width: 70px; width: 65px;'><br><b>" + obj[i].document_type + "</b><br><b style='font-size: 12px;'>" + obj[i].alias + "</b>(<label style='font-size: 12px;'>" + obj[i].document_name + "</label>)</a></center></div></div><div class='row'>";
 		  	} 
 		  	else if (i == 0) {
-		  		tabledata += "<div class='row'><div class='col'><center><input type='checkbox' class='deleteselect' value='"+obj[i].fbid+"'><a href='" + obj[i].document_link + "'><img src='" + imageasseturl2 + "' style='width: 70px; width: 65px;'><br><b>" + obj[i].document_type + "</b><br><label style='font-size: 12px;'>" + obj[i].document_name + "</label></a></center></div>"
+		  		tabledata += "<div class='row'><div class='col'><center><input type='checkbox' class='deleteselect' value='"+obj[i].fbid+"'><a href='" + obj[i].document_link + "'><img src='" + imageasseturl2 + "' style='width: 70px; width: 65px;'><br><b>" + obj[i].document_type + "</b><br><b style='font-size: 12px;'>" + obj[i].alias + "</b>(<label style='font-size: 12px;'>" + obj[i].document_name + "</label>)</a></center></div>"
 		  	}
 		  	else if (i == (obj.length-1)) {
-		  		tabledata += "<div class='col'><center><input type='checkbox' class='deleteselect' value='"+obj[i].fbid+"'><a href='" + obj[i].document_link + "'><img src='" + imageasseturl2 + "' style='width: 70px; width: 65px;'><br><b>" + obj[i].document_type + "</b><br><label style='font-size: 12px;'>" + obj[i].document_name + "</label></a></center></div></div>"
+		  		tabledata += "<div class='col'><center><input type='checkbox' class='deleteselect' value='"+obj[i].fbid+"'><a href='" + obj[i].document_link + "'><img src='" + imageasseturl2 + "' style='width: 70px; width: 65px;'><br><b>" + obj[i].document_type + "</b><br><b style='font-size: 12px;'>" + obj[i].alias + "</b>(<label style='font-size: 12px;'>" + obj[i].document_name + "</label>)</a></center></div></div>"
 		  	}
 		  	else {
-		  		tabledata += "<div class='col'><center><input type='checkbox' class='deleteselect' value='"+obj[i].fbid+"'><a href='" + obj[i].document_link + "'><img src='" + imageasseturl2 + "' style='width: 70px; width: 65px;'><br><b>" + obj[i].document_type + "</b><br><label style='font-size: 12px;'>" + obj[i].document_name + "</label></a></center></div>";
+		  		tabledata += "<div class='col'><center><input type='checkbox' class='deleteselect' value='"+obj[i].fbid+"'><a href='" + obj[i].document_link + "'><img src='" + imageasseturl2 + "' style='width: 70px; width: 65px;'><br><b>" + obj[i].document_type + "</b><br><b style='font-size: 12px;'>" + obj[i].alias + "</b>(<label style='font-size: 12px;'>" + obj[i].document_name + "</label>)</a></center></div>";
 		  	}
 		  }
 		  document.getElementById("documentrow1").innerHTML = tabledata;

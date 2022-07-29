@@ -237,9 +237,11 @@ img{ max-width:100%;}
                         if($row->senderid == $this->session->officer_id) {
                           echo $row->receivername;
                           $othername = $row->receivername;
+                          echo "<input type='hidden' value='' id='inqreceiverid_".$thread_index."'>";
                         } elseif($row->receiverid == $this->session->officer_id) {
                           echo $row->sendername;
                           $othername = $row->sendername;
+                          echo "<input type='hidden' value='' id='inqreceiverid_".$thread_index."'>";
                         }
                       } else {
                         if($row->senderid == $this->session->officer_id) {
@@ -337,6 +339,12 @@ img{ max-width:100%;}
             <option value="Student requirement">Student requirement</option>
             <option value="Visa application requirement">Visa application requirement</option>
             <option value="Sponsor requirement">Sponsor requirement</option>
+          </select><br>
+          Document Alias<select id="documentalias" class="form-control">
+            <option>Select Alias</option>
+            <option value="Passport">Passport</option>
+            <option value="Birth certificate">Birth certificate</option>
+            <option value="1x1 photo">1x1 photo</option>
           </select><br>
           <button id="savetoclientdocuments" style="background: #05728f; border: none; color: white;">Save to Client Documents</button>
         </div>
@@ -553,6 +561,7 @@ img{ max-width:100%;}
         var filename = document.getElementById("filename").value;
         var documentype = document.getElementById("documentype").value;
         var baseurl3 = document.getElementById("baseurl").value;
+        var documentalias = document.getElementById("documentalias").value;
         $.ajax({
             type: "POST",
             url: baseurl3 + "index.php/savetoclientdocuments",
@@ -560,7 +569,8 @@ img{ max-width:100%;}
               client_id: clientid, 
               document_type: documentype, 
               document_link: fileinput,
-              document_name: filename
+              document_name: filename,
+              alias: documentalias
             },
             success: function(data) {
                 var obj = JSON.parse(data);

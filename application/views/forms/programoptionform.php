@@ -84,7 +84,8 @@ label.radio input:checked+span {
                                 <div class="container mt-5 mb-5 d-flex justify-content-center">
     <div class="card px-1 py-4">
         <div class="card-body">
-        <form action="saveporesponse" method="POST">
+        <form action="<?php echo base_url().'index.php/' ?>acceptpo" method="POST">
+            <input type="hidden" name="poid" value="<?php echo $poid; ?>">
             <center><img src="<?php echo $asset_url; ?>images/logomain.png" alt="PSC Logo" width="200px"></center>
             <h1>Program Options Form</h1>
             <br>
@@ -162,7 +163,24 @@ label.radio input:checked+span {
                         </tbody>
                       </table>
             <br>
-            <input type="submit" value="Accept" class="btn btn-primary btn-block confirm-button" id="submitButton" style="width: 400px;"> <input type="submit" value="Reject" class="btn btn-default btn-block confirm-button" id="submitButton2" style="width: 400px;">
+            <table class="table table-bordered table-striped">
+                        <thead>
+                        <tr>
+                          <th>Others</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <?php
+                        foreach ($programoptions as $row) {
+                          echo "<tr>
+                            <td>".$row->others."</td>
+                          </tr>";
+                        }
+                        ?>
+                        </tbody>
+                      </table>
+            <br>
+            <input type="submit" value="Accept" class="btn btn-primary btn-block confirm-button" name="acceptButton" id="submitButton" style="width: 400px;"> <a href="<?php echo base_url().'index.php/'; ?>rejectpo/<?php echo $poid; ?>" class="btn btn-default btn-block confirm-button" name="rejectButton" style="width: 400px;">Reject</a>
             
         </form>
         </div>

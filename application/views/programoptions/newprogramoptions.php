@@ -258,19 +258,23 @@
                 </div>
                 <div class="mb-3">
                   <label for="amount" class="form-label">English Requirement</label>
-                  <input type="text" class="form-control" name="englishrequirement" placeholder="English Requirement"" required>
+                  <input type="text" class="form-control" name="englishrequirement" placeholder="English Requirement" required>
                 </div>
                 <div class="mb-3">
                   <label for="amount" class="form-label">Intake</label>
-                  <input type="text" class="form-control" name="intake" placeholder="Intake"" required>
+                  <input type="text" class="form-control" name="intake" placeholder="Intake" required>
                 </div>
                 <div class="mb-3">
                   <label for="amount" class="form-label">Important To Consider</label>
-                  <input type="text" class="form-control" name="importanttoconsider" placeholder="Important To Consider"" required>
+                  <input type="text" class="form-control" name="importanttoconsider" placeholder="Important To Consider" required>
                 </div>
                 <div class="mb-3">
-                  <label for="amount" class="form-label">Migration Pathway</label>
-                  <input type="text" class="form-control" name="migrationpathway" placeholder="Migration Pathway"" required>
+                  <label for="amount" class="form-label">Outcome</label>
+                  <input type="text" class="form-control" name="migrationpathway" placeholder="Outcome" required>
+                </div>
+                <div class="mb-3">
+                  <label for="amount" class="form-label">Others</label>
+                  <input type="text" class="form-control" name="others" placeholder="Others" required>
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
               </form>

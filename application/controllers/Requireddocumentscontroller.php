@@ -32,13 +32,15 @@ class Requireddocumentscontroller extends CI_Controller {
 		$document_type = $this->input->post('document_type');
 		$document_name = $this->input->post('document_name');
 		$document_link = $this->input->post('document_link');
+		$alias = $this->input->post('alias');
 
 		$data = array(
 					'client_id' => $client_id,
 					'document_type' => $document_type,
 					'document_link' => $document_link,
 					'date_uploaded' => date("Y-m-d"),
-					'document_name' => $document_name
+					'document_name' => $document_name,
+					'alias' => $alias
 				);
 		$this->db->insert('firebasefiles', $data);
 		echo json_encode("Successfully uploaded the document!");

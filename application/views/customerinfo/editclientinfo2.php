@@ -856,6 +856,15 @@
                 </select>
               </div>
               <div class="form-group">
+                <label for="documenalias">Document Alias</label>
+                <select id="documenalias" class="form-control">
+                  <option>Select Alias</option>
+                  <option value="Passport">Passport</option>
+                  <option value="Birth certificate">Birth certificate</option>
+                  <option value="1x1 photo">1x1 photo</option>
+                </select>
+              </div>
+              <div class="form-group">
                 <label for="documentfile">Document File</label>
                 <input type="file" class="form-control" id="documentfile">
               </div>

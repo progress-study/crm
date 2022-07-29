@@ -4,7 +4,7 @@
 <meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <link rel="icon" type="image/png" href="<?php echo $asset_url; ?>images/logo.png"/>
-<title>e-Client Form</title>
+<title><?php echo $title; ?></title>
 <link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css' rel='stylesheet'>
 <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet'>
 <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
@@ -86,8 +86,22 @@ label.radio input:checked+span {
         <div class="card-body">
             <center><img src="<?php echo $asset_url; ?>images/logomain.png" alt="PSC Logo" width="200px"></center><br><br>
             <center><img src="<?php echo $asset_url; ?>images/success-icon.png" alt="PSC Logo" width="90px"></center>
-            <center><h3>Thank you for signing up the form! You will receive an automated response from our website.</h3></center>
-            <center><a href="<?php echo base_url().'index.php/clientform'; ?>" class="btn btn-primary">Go Back</a></center>
+            <?php
+                if($status == "accepted") {
+            ?>
+                <center><h3>Thank you for your acceptance on Program Options offered by PSC!</h3></center>
+            <?php
+                } else {
+            ?>
+                <center><h3>Let us know your reason of rejection on the offer.</h3></center>
+                <form action="<?php echo base_url().'index.php/'; ?>saveclientfeedback" method="POST">
+                    <input type="hidden" name="poid" value="<?php echo $poid; ?>">
+                    <input type="text" class="form-control" name="feedback" placeholder="Enter your feedback here"> <input type="submit" class="btn btn-primary" value="Send">
+                </form>
+            <?php
+                }
+            ?>
+            
         </div>
     </div>
 </div>

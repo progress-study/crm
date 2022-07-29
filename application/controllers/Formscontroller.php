@@ -53,6 +53,7 @@ class Formscontroller extends CI_Controller {
         $data['programoptions'] = $programoptions;
         $data['programoptionsdetails'] = $programoptionsdetails;
         $data['scholarships'] = $scholarships;        
+        $data['poid'] = $poid; 
 
         $asset_url = base_url()."assets/";
 		$data['title'] = "Program Options Form";

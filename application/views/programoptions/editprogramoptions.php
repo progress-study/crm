@@ -275,8 +275,12 @@
                   <input type="text" class="form-control" name="importanttoconsider" value="<?php echo $row->importanttoconsider; ?>" placeholder="Important To Consider" required>
                 </div>
                 <div class="mb-3">
-                  <label for="amount" class="form-label">Migration Pathway</label>
-                  <input type="text" class="form-control" name="migrationpathway" value="<?php echo $row->migrationpathway; ?>" placeholder="Migration Pathway" required>
+                  <label for="amount" class="form-label">Outcome</label>
+                  <input type="text" class="form-control" name="migrationpathway" value="<?php echo $row->migrationpathway; ?>" placeholder="Outcome" required>
+                </div>
+                <div class="mb-3">
+                  <label for="amount" class="form-label">Others</label>
+                  <input type="text" class="form-control" name="others" placeholder="Others" value="<?php echo $row->others; ?>" required>
                 </div>
                 <?php
                     }
