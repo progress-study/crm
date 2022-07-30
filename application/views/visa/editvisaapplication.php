@@ -296,6 +296,7 @@
                       <option value="Discontinued">Discontinued</option>
                       <option value="EOI">EOI</option>
                       <option value="Submitted">Submitted</option>
+                      <option value="WIP">WIP</option>
                     </select>
                   </div>
                   <button type="submit" class="btn btn-primary">Submit</button>

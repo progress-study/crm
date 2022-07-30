@@ -170,7 +170,7 @@ class Applicationscontroller extends CI_Controller {
 					'studentapp_visa_status' => '',
 					'studentapp_documents_pending' => '',
 					'studentapp_comments' => '',
-					'studentapp_flag' => '',
+					'studentapp_flag' => 'Submitted',
 					'studentapp_invoice_processed_flag' => '',
 					'studentapp_student_no' => '',
 					'course_starting_date' => $this->input->post('startdate'),
@@ -222,6 +222,7 @@ class Applicationscontroller extends CI_Controller {
 		$this->db->set('studentapp_coe_day', $day3);
 		$this->db->set('studentapp_coe_month', $month3);
 		$this->db->set('studentapp_coe_year',$year3);
+		$this->db->set('studentapp_flag', $this->input->post('flag'));
 		$this->db->set('course_starting_date', $this->input->post('state'));
 		$this->db->set('course_ending_date', $this->input->post('startdate'));
 		$this->db->where('studentapp_id', $this->input->post('clientid'));

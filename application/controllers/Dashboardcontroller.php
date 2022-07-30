@@ -42,9 +42,18 @@ class Dashboardcontroller extends CI_Controller {
 		$query7 = $this->db->query($sql7);
 		$tasklist = $query7->result();
 
-		$sql8 = "SELECT * FROM visa_application";
+		$sql8 = "SELECT * FROM visa_application va INNER JOIN client c on c.client_id = va.client_id";
 		$query8 = $this->db->query($sql8);
 		$prapplicationforchecking = $query8->result();
+
+		// Dashboard card data
+		$sql9 = "SELECT * FROM student_application sa INNER JOIN client c ON sa.client_id = c.client_id WHERE studentapp_flag = 'WIP'";
+		$query9 = $this->db->query($sql9);
+		$safordashboarddata = $query9->result();
+
+		$sql10 = "SELECT * FROM visa_application va INNER JOIN client c ON va.client_id = c.client_id WHERE status = 'WIP'";
+		$query10 = $this->db->query($sql10);
+		$vafordashboarddata = $query10->result();
 
 		$data['title'] = "Dashboard";
 		$data['asset_url'] = $asset_url;
@@ -57,6 +66,8 @@ class Dashboardcontroller extends CI_Controller {
 		$data['inquiries'] = $inquiries;
 		$data['tasklist'] = $tasklist;
 		$data['prapplicationforchecking'] = $prapplicationforchecking;
+		$data['safordashboarddata'] = $safordashboarddata;
+		$data['vafordashboarddata'] = $vafordashboarddata;
 
 		$this->db->where('privilege_id', $this->session->officer_role_id);
         $query3 = $this->db->get('privilege');

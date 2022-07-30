@@ -235,7 +235,7 @@
                 <h3><?php echo $vedcounter; ?></h3>
                 <p>VISA EXPIRING DATES FOR THE NEXT 3 MONTHS</p>
               </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="#" class="small-box-footer" data-toggle='modal' data-target='#visaexpModal'>More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <div class="col-lg-3 col-6">
@@ -244,7 +244,7 @@
                 <h3><?php echo $student_application; ?></h3>
                 <p>STUDENT APPLICATIONS (WIP)</p>
               </div>
-              <a href="applications" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="#" class="small-box-footer" data-toggle='modal' data-target='#saWIPModal'>More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <div class="col-lg-3 col-6">
@@ -253,7 +253,7 @@
                 <h3><?php echo $pr_application; ?></h3>
                 <p>VISA APPLICATIONS (WIP)</p>
               </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="#" class="small-box-footer" data-toggle='modal' data-target='#vaWIPModal'>More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <?php
@@ -275,7 +275,7 @@
                 <h3><?php echo $vcdcounter; ?></h3>
                 <p>VISA CRITICAL DATES FOR THE NEXT 3 MONTHS</p>
               </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="#" class="small-box-footer" data-toggle='modal' data-target='#visacriticalModal'>More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
         </div>
@@ -779,6 +779,160 @@
       </div><!-- /.container-fluid -->
     </section>
     <!-- /.content -->
+    
+    <div class="modal fade" id="visaexpModal" tabindex="-1" role="dialog" aria-labelledby="visaexpModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Visa Expiration List (within less than 3 months)</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <table class="table table-bordered table-striped">
+              <thead>
+                <tr>
+                  <th>Client Visa ID</th>
+                  <th>Client</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php
+                  foreach ($prapplicationforchecking as $row1) {
+                      echo "<tr>";
+                      //$date1=date_create("2022-08-01");
+                      $date1=date_create(date("Y-m-d"));
+                      $date2=date_create($row1->visa_expiry_year."-".$row1->visa_expiry_month."-".$row1->visa_expiry_day);
+                      $diff=date_diff($date1,$date2);
+                      if((int) $diff->format("%a") < 92) {
+                        echo "<td>".$row1->client_visa_id."</td>";
+                        echo "<td>".$row1->client_surname.", ".$row1->client_firstname."</td>";
+                        echo "<td><a href='".base_url()."index.php/editvisaapplication/".$row1->client_visa_id."'>Details</a></td>";
+                      }
+                      echo "</tr>";
+                  }
+                ?>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="visacriticalModal" tabindex="-1" role="dialog" aria-labelledby="visacriticalModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Visa Critical List (within less than 3 months)</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <table class="table table-bordered table-striped">
+              <thead>
+                <tr>
+                  <th>Client Visa ID</th>
+                  <th>Client</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php
+                  foreach ($prapplicationforchecking as $row1) {
+                      echo "<tr>";
+                      //$date1=date_create("2022-08-01");
+                      $date1=date_create(date("Y-m-d"));
+                      $date2=date_create($row1->visa_critical_year."-".$row1->visa_critical_month."-".$row1->visa_critical_day);
+                      $diff=date_diff($date1,$date2);
+                      if((int) $diff->format("%a") < 92) {
+                        echo "<td>".$row1->client_visa_id."</td>";
+                        echo "<td>".$row1->client_surname.", ".$row1->client_firstname."</td>";
+                        echo "<td><a href='".base_url()."index.php/editvisaapplication/".$row1->client_visa_id."'>Details</a></td>";
+                      }
+                      echo "</tr>";
+                  }
+                ?>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="saWIPModal" tabindex="-1" role="dialog" aria-labelledby="saWIPModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Student Application in WIP Status</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <table class="table table-bordered table-striped">
+              <thead>
+                <tr>
+                  <th>Application ID</th>
+                  <th>Client</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php
+                  foreach ($safordashboarddata as $row1) {
+                      echo "<tr>";
+                      echo "<td>".$row1->studentapp_id."</td>";
+                      echo "<td>".$row1->client_surname.", ".$row1->client_firstname."</td>";
+                      echo "<td><a href='".base_url()."index.php/editapplication/".$row1->studentapp_id."'>Details</a></td>";
+                      echo "</tr>";
+                  }
+                ?>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="vaWIPModal" tabindex="-1" role="dialog" aria-labelledby="vaWIPModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Visa Expiration List (within less than 3 months)</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <table class="table table-bordered table-striped">
+              <thead>
+                <tr>
+                  <th>Client Visa ID</th>
+                  <th>Client</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php
+                  foreach ($vafordashboarddata as $row1) {
+                      echo "<tr>";
+                      echo "<td>".$row1->client_visa_id."</td>";
+                      echo "<td>".$row1->client_surname.", ".$row1->client_firstname."</td>";
+                      echo "<td><a href='".base_url()."index.php/editvisaapplication/".$row1->client_visa_id."'>Details</a></td>";
+                      echo "</tr>";
+                  }
+                ?>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
   </div>
   <!-- /.content-wrapper -->
   <footer class="main-footer">

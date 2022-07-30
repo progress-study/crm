@@ -261,6 +261,17 @@
                   <label for="amount" class="form-label">COE Date</label>
                   <input type="date" name="coedate" class="form-control" value="<?php echo $row->studentapp_coe_year.'-'.$row->studentapp_coe_month.'-'.$row->studentapp_coe_day; ?>">
                 </div>
+                <div class="mb-3">
+                    <label for="flag" class="form-label">Flag</label>
+                    <select class="form-control" name="flag">
+                      <option value="<?php echo $row->studentapp_flag; ?>"><?php echo $row->studentapp_flag; ?></option>
+                      <option value="Withdrawn">Withdrawn</option>
+                      <option value="Appealing">Completed</option>
+                      <option value="Discontinued">Discontinued</option>
+                      <option value="Submitted">Submitted</option>
+                      <option value="WIP">WIP</option>
+                    </select>
+                  </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
               </form>
               <?php
