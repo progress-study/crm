@@ -140,6 +140,14 @@ class Inquiriescontroller extends CI_Controller {
 					);
 			$this->db->insert('tasklist', $data);
 
+			$data = array(
+						'details' => $this->session->officer_name." approved ".$row->inquiries_firstname." ".$row->inquiries_middlename." ".$row->inquiries_surname."<br>as official client.",
+						'date_created' => date("Y-m-d"),
+						'officer_id' => $this->session->officer_id,
+						'seen' => 0
+					);
+			$this->db->insert('notifications', $data);
+
         }
 
 		redirect('inquiries');
