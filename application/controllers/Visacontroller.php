@@ -23,6 +23,29 @@ class Visacontroller extends CI_Controller {
 	    $this->db->where('privilege_id', $this->session->officer_role_id);
         $query3 = $this->db->get('privilege');
 
+        if($this->session->officer_role == "regional manager" || $this->session->officer_role == "admin") {
+			$officer_id_check = $this->session->officer_id;
+			$sql11 = "SELECT * FROM notifications WHERE seen = 0 ORDER BY notif_id DESC LIMIT 20";
+			$query11 = $this->db->query($sql11);
+			$notifnum = $query11->num_rows();
+
+			$sql12 = "SELECT * FROM notifications WHERE seen = 0 ORDER BY notif_id DESC LIMIT 20";
+			$query12 = $this->db->query($sql12);
+			$notif = $query12->result();
+		} else {
+			$officer_id_check = $this->session->officer_id;
+			$sql11 = "SELECT * FROM notifications WHERE seen = 0 AND officer_id = '$officer_id_check' ORDER BY notif_id DESC LIMIT 20";
+			$query11 = $this->db->query($sql11);
+			$notifnum = $query11->num_rows();
+
+			$sql12 = "SELECT * FROM notifications WHERE seen = 0 AND officer_id = '$officer_id_check' ORDER BY notif_id DESC LIMIT 20";
+			$query12 = $this->db->query($sql12);
+			$notif = $query12->result();
+		}
+
+		$data['notifnum'] = $notifnum;
+		$data['notif'] = $notif;
+
 		foreach ($query3->result() as $row3)
 		{
 		        $data['privilege_manage_providers'] = $row3->privilege_manage_providers;
@@ -56,6 +79,29 @@ class Visacontroller extends CI_Controller {
 	    $this->db->where('privilege_id', $this->session->officer_role_id);
         $query3 = $this->db->get('privilege');
 
+        if($this->session->officer_role == "regional manager" || $this->session->officer_role == "admin") {
+			$officer_id_check = $this->session->officer_id;
+			$sql11 = "SELECT * FROM notifications WHERE seen = 0 ORDER BY notif_id DESC LIMIT 20";
+			$query11 = $this->db->query($sql11);
+			$notifnum = $query11->num_rows();
+
+			$sql12 = "SELECT * FROM notifications WHERE seen = 0 ORDER BY notif_id DESC LIMIT 20";
+			$query12 = $this->db->query($sql12);
+			$notif = $query12->result();
+		} else {
+			$officer_id_check = $this->session->officer_id;
+			$sql11 = "SELECT * FROM notifications WHERE seen = 0 AND officer_id = '$officer_id_check' ORDER BY notif_id DESC LIMIT 20";
+			$query11 = $this->db->query($sql11);
+			$notifnum = $query11->num_rows();
+
+			$sql12 = "SELECT * FROM notifications WHERE seen = 0 AND officer_id = '$officer_id_check' ORDER BY notif_id DESC LIMIT 20";
+			$query12 = $this->db->query($sql12);
+			$notif = $query12->result();
+		}
+
+		$data['notifnum'] = $notifnum;
+		$data['notif'] = $notif;
+
 		foreach ($query3->result() as $row3)
 		{
 		        $data['privilege_manage_providers'] = $row3->privilege_manage_providers;
@@ -85,6 +131,29 @@ class Visacontroller extends CI_Controller {
 
 	    $this->db->where('privilege_id', $this->session->officer_role_id);
         $query3 = $this->db->get('privilege');
+
+        if($this->session->officer_role == "regional manager" || $this->session->officer_role == "admin") {
+			$officer_id_check = $this->session->officer_id;
+			$sql11 = "SELECT * FROM notifications WHERE seen = 0 ORDER BY notif_id DESC LIMIT 20";
+			$query11 = $this->db->query($sql11);
+			$notifnum = $query11->num_rows();
+
+			$sql12 = "SELECT * FROM notifications WHERE seen = 0 ORDER BY notif_id DESC LIMIT 20";
+			$query12 = $this->db->query($sql12);
+			$notif = $query12->result();
+		} else {
+			$officer_id_check = $this->session->officer_id;
+			$sql11 = "SELECT * FROM notifications WHERE seen = 0 AND officer_id = '$officer_id_check' ORDER BY notif_id DESC LIMIT 20";
+			$query11 = $this->db->query($sql11);
+			$notifnum = $query11->num_rows();
+
+			$sql12 = "SELECT * FROM notifications WHERE seen = 0 AND officer_id = '$officer_id_check' ORDER BY notif_id DESC LIMIT 20";
+			$query12 = $this->db->query($sql12);
+			$notif = $query12->result();
+		}
+
+		$data['notifnum'] = $notifnum;
+		$data['notif'] = $notif;
 
 		foreach ($query3->result() as $row3)
 		{
@@ -225,6 +294,29 @@ class Visacontroller extends CI_Controller {
 
 	    $data['visa_application'] = $visa_application;
 
+	    if($this->session->officer_role == "regional manager" || $this->session->officer_role == "admin") {
+			$officer_id_check = $this->session->officer_id;
+			$sql11 = "SELECT * FROM notifications WHERE seen = 0 ORDER BY notif_id DESC LIMIT 20";
+			$query11 = $this->db->query($sql11);
+			$notifnum = $query11->num_rows();
+
+			$sql12 = "SELECT * FROM notifications WHERE seen = 0 ORDER BY notif_id DESC LIMIT 20";
+			$query12 = $this->db->query($sql12);
+			$notif = $query12->result();
+		} else {
+			$officer_id_check = $this->session->officer_id;
+			$sql11 = "SELECT * FROM notifications WHERE seen = 0 AND officer_id = '$officer_id_check' ORDER BY notif_id DESC LIMIT 20";
+			$query11 = $this->db->query($sql11);
+			$notifnum = $query11->num_rows();
+
+			$sql12 = "SELECT * FROM notifications WHERE seen = 0 AND officer_id = '$officer_id_check' ORDER BY notif_id DESC LIMIT 20";
+			$query12 = $this->db->query($sql12);
+			$notif = $query12->result();
+		}
+
+		$data['notifnum'] = $notifnum;
+		$data['notif'] = $notif;
+
 	    $this->db->where('privilege_id', $this->session->officer_role_id);
         $query3 = $this->db->get('privilege');
 
@@ -256,6 +348,29 @@ class Visacontroller extends CI_Controller {
 	    $eoi = $query1->result();
 
 	    $data['eoi'] = $eoi;
+
+	    if($this->session->officer_role == "regional manager" || $this->session->officer_role == "admin") {
+			$officer_id_check = $this->session->officer_id;
+			$sql11 = "SELECT * FROM notifications WHERE seen = 0 ORDER BY notif_id DESC LIMIT 20";
+			$query11 = $this->db->query($sql11);
+			$notifnum = $query11->num_rows();
+
+			$sql12 = "SELECT * FROM notifications WHERE seen = 0 ORDER BY notif_id DESC LIMIT 20";
+			$query12 = $this->db->query($sql12);
+			$notif = $query12->result();
+		} else {
+			$officer_id_check = $this->session->officer_id;
+			$sql11 = "SELECT * FROM notifications WHERE seen = 0 AND officer_id = '$officer_id_check' ORDER BY notif_id DESC LIMIT 20";
+			$query11 = $this->db->query($sql11);
+			$notifnum = $query11->num_rows();
+
+			$sql12 = "SELECT * FROM notifications WHERE seen = 0 AND officer_id = '$officer_id_check' ORDER BY notif_id DESC LIMIT 20";
+			$query12 = $this->db->query($sql12);
+			$notif = $query12->result();
+		}
+
+		$data['notifnum'] = $notifnum;
+		$data['notif'] = $notif;
 
 	    $this->db->where('privilege_id', $this->session->officer_role_id);
         $query3 = $this->db->get('privilege');
@@ -289,6 +404,29 @@ class Visacontroller extends CI_Controller {
 
 	    $data['visa_accounts'] = $visa_accounts;
 	    $data['client_id'] = $client_id;
+
+	    if($this->session->officer_role == "regional manager" || $this->session->officer_role == "admin") {
+			$officer_id_check = $this->session->officer_id;
+			$sql11 = "SELECT * FROM notifications WHERE seen = 0 ORDER BY notif_id DESC LIMIT 20";
+			$query11 = $this->db->query($sql11);
+			$notifnum = $query11->num_rows();
+
+			$sql12 = "SELECT * FROM notifications WHERE seen = 0 ORDER BY notif_id DESC LIMIT 20";
+			$query12 = $this->db->query($sql12);
+			$notif = $query12->result();
+		} else {
+			$officer_id_check = $this->session->officer_id;
+			$sql11 = "SELECT * FROM notifications WHERE seen = 0 AND officer_id = '$officer_id_check' ORDER BY notif_id DESC LIMIT 20";
+			$query11 = $this->db->query($sql11);
+			$notifnum = $query11->num_rows();
+
+			$sql12 = "SELECT * FROM notifications WHERE seen = 0 AND officer_id = '$officer_id_check' ORDER BY notif_id DESC LIMIT 20";
+			$query12 = $this->db->query($sql12);
+			$notif = $query12->result();
+		}
+
+		$data['notifnum'] = $notifnum;
+		$data['notif'] = $notif;
 
 	    $this->db->where('privilege_id', $this->session->officer_role_id);
         $query3 = $this->db->get('privilege');

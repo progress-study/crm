@@ -26,6 +26,29 @@ class Customerinfocontroller extends CI_Controller {
 		$data['clients'] = $result;
 		$data['officer'] = $result2;
 
+		if($this->session->officer_role == "regional manager" || $this->session->officer_role == "admin") {
+			$officer_id_check = $this->session->officer_id;
+			$sql11 = "SELECT * FROM notifications WHERE seen = 0 ORDER BY notif_id DESC LIMIT 20";
+			$query11 = $this->db->query($sql11);
+			$notifnum = $query11->num_rows();
+
+			$sql12 = "SELECT * FROM notifications WHERE seen = 0 ORDER BY notif_id DESC LIMIT 20";
+			$query12 = $this->db->query($sql12);
+			$notif = $query12->result();
+		} else {
+			$officer_id_check = $this->session->officer_id;
+			$sql11 = "SELECT * FROM notifications WHERE seen = 0 AND officer_id = '$officer_id_check' ORDER BY notif_id DESC LIMIT 20";
+			$query11 = $this->db->query($sql11);
+			$notifnum = $query11->num_rows();
+
+			$sql12 = "SELECT * FROM notifications WHERE seen = 0 AND officer_id = '$officer_id_check' ORDER BY notif_id DESC LIMIT 20";
+			$query12 = $this->db->query($sql12);
+			$notif = $query12->result();
+		}
+
+		$data['notifnum'] = $notifnum;
+		$data['notif'] = $notif;
+
 		$this->db->where('privilege_id', $this->session->officer_role_id);
         $query3 = $this->db->get('privilege');
 
@@ -171,6 +194,29 @@ class Customerinfocontroller extends CI_Controller {
 		$asset_url = base_url()."assets/";
 		$data['title'] = "Edit/View Client Information";
 		$data['asset_url'] = $asset_url;
+
+		if($this->session->officer_role == "regional manager" || $this->session->officer_role == "admin") {
+			$officer_id_check = $this->session->officer_id;
+			$sql11 = "SELECT * FROM notifications WHERE seen = 0 ORDER BY notif_id DESC LIMIT 20";
+			$query11 = $this->db->query($sql11);
+			$notifnum = $query11->num_rows();
+
+			$sql12 = "SELECT * FROM notifications WHERE seen = 0 ORDER BY notif_id DESC LIMIT 20";
+			$query12 = $this->db->query($sql12);
+			$notif = $query12->result();
+		} else {
+			$officer_id_check = $this->session->officer_id;
+			$sql11 = "SELECT * FROM notifications WHERE seen = 0 AND officer_id = '$officer_id_check' ORDER BY notif_id DESC LIMIT 20";
+			$query11 = $this->db->query($sql11);
+			$notifnum = $query11->num_rows();
+
+			$sql12 = "SELECT * FROM notifications WHERE seen = 0 AND officer_id = '$officer_id_check' ORDER BY notif_id DESC LIMIT 20";
+			$query12 = $this->db->query($sql12);
+			$notif = $query12->result();
+		}
+
+		$data['notifnum'] = $notifnum;
+		$data['notif'] = $notif;
 
 		if($this->session->officer_role == "") {
 			redirect(base_url()."index.php/messages");
