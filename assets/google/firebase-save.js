@@ -1,11 +1,11 @@
 const firebaseConfig = {
-  apiKey: "AIzaSyDPzn9JlkbzeFNZIwJNqhWN9cXNmbHXisg",
-  authDomain: "progress-study-crm.firebaseapp.com",
-  projectId: "progress-study-crm",
-  storageBucket: "progress-study-crm.appspot.com",
-  messagingSenderId: "216552903831",
-  appId: "1:216552903831:web:0d5b77d9934b30e1ed05d2",
-  measurementId: "G-XPM35H733R"
+  apiKey: "AIzaSyDnLZvP1x2mn0U_txJbA02hT7sAR3s9FYQ",
+  authDomain: "psc-crm.firebaseapp.com",
+  projectId: "psc-crm",
+  storageBucket: "psc-crm.appspot.com",
+  messagingSenderId: "83524403626",
+  appId: "1:83524403626:web:563c081e590c5814832bd3",
+  measurementId: "G-91M3FJPV6M"
 };
 
 firebase.initializeApp(firebaseConfig);
