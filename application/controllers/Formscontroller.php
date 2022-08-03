@@ -359,7 +359,7 @@ class Formscontroller extends CI_Controller {
 		        $mail = $this->phpmailer_lib->load();
 	    
 	  
-			    //$mail->SMTPDebug = 1;
+			    $mail->SMTPDebug = 1;
 			    $mail->isSMTP();
 			    $mail->Host       = 'mail.progress-study.com';            
 			    $mail->SMTPAuth   = true;                                
@@ -375,7 +375,7 @@ class Formscontroller extends CI_Controller {
 				$mail->SMTPAutoTLS = false; 
 				$mail->Port = 25; 
    		*/
-		        $mail->setFrom("no-reply@progress-study.com");
+		        $mail->setFrom("no-reply@progress-study.com", "Progress Study Consultancy");
 		        //$mail->addReplyTo($sender, $this->session->userdata('companyname'));
 		        $mail->addAddress("ramirezkyl@gmail.com");
 		        $mail->Subject = 'New Inquiries';
