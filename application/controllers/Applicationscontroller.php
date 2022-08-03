@@ -251,7 +251,7 @@ class Applicationscontroller extends CI_Controller {
 					'studentapp_event_id' => 0
 				);
 		$this->db->insert('student_application', $data);
-		redirect('editclientinfo2/'.$this->input->post('client_id'));
+		redirect('editclientinfo2/'.$this->input->post('clientid'));
 	}
 
 	public function updateapplication()

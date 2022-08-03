@@ -199,7 +199,7 @@ left: 50px;
 		                <div class="col-sm-12">
 		                    <div class="form-group">
 		                        <label for="resume" class="form-label">Resume</label>
-		                        <input class="form-control" type="file" name="resume" required> 
+		                        <input class="form-control" type="file" name="resume"> 
 		                    </div>
 		                </div>
 		            </div>
