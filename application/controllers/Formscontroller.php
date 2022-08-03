@@ -148,6 +148,7 @@ class Formscontroller extends CI_Controller {
 	  
 	  
 			    //$mail->SMTPDebug = 1;
+			    /*
 			    $mail->isSMTP();
 			    $mail->Host       = 'mail.progress-study.com';            
 			    $mail->SMTPAuth   = true;                                
@@ -155,14 +156,15 @@ class Formscontroller extends CI_Controller {
 			    $mail->Password   = 'Welcome2PSC!';                     
 			    $mail->SMTPSecure = 'tls';      
 			    $mail->Port       = 587;   
-		
-			    /*
+				*/
+			    
+			    $mail->SMTPDebug = 1;
 			    $mail->isSMTP();
 				$mail->Host = 'localhost';
 				$mail->SMTPAuth = false;
 				$mail->SMTPAutoTLS = false; 
 				$mail->Port = 25; 
-				*/
+				
 		        $mail->setFrom("no-reply@progress-study.com");
 		        //$mail->addReplyTo($sender, $this->session->userdata('companyname'));
 		        $mail->addAddress($this->input->post('email'));
@@ -235,7 +237,7 @@ class Formscontroller extends CI_Controller {
 				$this->load->library('phpmailer_lib');
 		        $mail = $this->phpmailer_lib->load();
 	    
-	  
+	  			/*
 			    //$mail->SMTPDebug = 1;
 			    $mail->isSMTP();
 			    $mail->Host       = 'mail.progress-study.com';            
@@ -244,14 +246,14 @@ class Formscontroller extends CI_Controller {
 			    $mail->Password   = 'Welcome2PSC!';                     
 			    $mail->SMTPSecure = 'tls';      
 			    $mail->Port       = 587;    
-		
-				/*
+				*/ 
+				$mail->SMTPDebug = 1;
 			    $mail->isSMTP();
 				$mail->Host = 'localhost';
 				$mail->SMTPAuth = false;
 				$mail->SMTPAutoTLS = false; 
 				$mail->Port = 25; 
-  				*/ 
+  				
 		        $mail->setFrom("no-reply@progress-study.com");
 		        //$mail->addReplyTo($sender, $this->session->userdata('companyname'));
 		        $mail->addAddress($this->input->post('email'));
@@ -358,7 +360,7 @@ class Formscontroller extends CI_Controller {
 				$this->load->library('phpmailer_lib');
 		        $mail = $this->phpmailer_lib->load();
 	    
-	  
+	    /*
 			    $mail->SMTPDebug = 1;
 			    $mail->isSMTP();
 			    $mail->Host       = 'mail.progress-study.com';            
@@ -367,14 +369,16 @@ class Formscontroller extends CI_Controller {
 			    $mail->Password   = 'Welcome2PSC!';                     
 			    $mail->SMTPSecure = 'tls';      
 			    $mail->Port       = 587;   
-		
-		/*
+		*/
+				$mail->SMTPDebug = 1;
 			    $mail->isSMTP();
 				$mail->Host = 'localhost';
 				$mail->SMTPAuth = false;
 				$mail->SMTPAutoTLS = false; 
-				$mail->Port = 25; 
-   		*/
+				$mail->Port = 25;
+				$mail->Username   = 'no-reply@progress-study.com';            
+			    $mail->Password   = 'Welcome2PSC!'; 
+   		
 		        $mail->setFrom("no-reply@progress-study.com", "Progress Study Consultancy");
 		        //$mail->addReplyTo($sender, $this->session->userdata('companyname'));
 		        $mail->addAddress("ramirezkyl@gmail.com");
