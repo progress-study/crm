@@ -28,13 +28,20 @@
              border: 1px solid #ccc !important; 
          border-radius: 0px !important; 
     }
+
+    .select3-container .select3-selection--single{
+        height:34px !important;
+    }
+    .select3-container--default .select3-selection--single{
+             border: 1px solid #ccc !important; 
+         border-radius: 0px !important; 
+    }
   </style>
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
   <!-- Navbar -->
   <nav class="main-header navbar navbar-expand navbar-white navbar-light">
-    
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
       <!-- Notifications Dropdown Menu -->
@@ -112,7 +119,7 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item">
-            <a href="<?php echo base_url().'index.php/dashboard'; ?>" class="nav-link<?php if($title == 'Dashboard'){ echo ' active';} ?>">
+            <a href="dashboard" class="nav-link<?php if($title == 'Dashboard'){ echo ' active';} ?>">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
@@ -120,7 +127,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="<?php echo base_url().'index.php/customerinfo'; ?>" class="nav-link<?php if($title == 'Client Information'){ echo ' active';} ?>">
+            <a href="customerinfo" class="nav-link<?php if($title == 'Client Information'){ echo ' active';} ?>">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Client Information
@@ -128,7 +135,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="<?php echo base_url().'index.php/inquiries'; ?>" class="nav-link<?php if($title == 'Inquiries'){ echo ' active';} ?>">
+            <a href="inquiries" class="nav-link<?php if($title == 'Inquiries'){ echo ' active';} ?>">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Inquiries
@@ -136,10 +143,10 @@
             </a>
           </li>
           <?php
-            if ($privilege_manage_providers == "1") {
-          ?>
+  if ($privilege_manage_providers == "1") {
+?>
           <li class="nav-item">
-            <a href="<?php echo base_url().'index.php/schools'; ?>" class="nav-link<?php if($title == 'Schools and Programs'){ echo ' active';} ?>">
+            <a href="schools" class="nav-link<?php if($title == 'Schools and Programs'){ echo ' active';} ?>">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Schools and Programs
@@ -147,13 +154,13 @@
             </a>
           </li>
           <?php
-            }
-          ?>
+  }
+?>
           <?php
-            if ($privilege_manage_studentapps == "1") {
-          ?>
+  if ($privilege_manage_studentapps == "1") {
+?>
           <li class="nav-item">
-            <a href="<?php echo base_url().'index.php/applications'; ?>" class="nav-link<?php if($title == 'Applications'){ echo ' active';} ?>">
+            <a href="applications" class="nav-link<?php if($title == 'Applications'){ echo ' active';} ?>">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Applications
@@ -161,10 +168,10 @@
             </a>
           </li>
           <?php
-            }
-          ?>
+  }
+?>
           <li class="nav-item">
-            <a href="<?php echo base_url().'index.php/adminmaintenance'; ?>" class="nav-link<?php if($title == 'Admin Maintenance'){ echo ' active';} ?>">
+            <a href="adminmaintenance" class="nav-link<?php if($title == 'Admin Maintenance'){ echo ' active';} ?>">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Admin Maintenance
@@ -172,7 +179,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="<?php echo base_url().'index.php/scholarships'; ?>" class="nav-link<?php if($title == 'Scholarships'){ echo ' active';} ?>">
+            <a href="scholarships" class="nav-link<?php if($title == 'Scholarships'){ echo ' active';} ?>">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Scholarships
@@ -180,10 +187,10 @@
             </a>
           </li>
           <?php
-            if ($privilege_manage_reporting == "1") {
-          ?>
+  if ($privilege_manage_reporting == "1") {
+?>
           <li class="nav-item">
-            <a href="<?php echo base_url().'index.php/reports'; ?>" class="nav-link<?php if($title == 'Reports'){ echo ' active';} ?>">
+            <a href="reports" class="nav-link<?php if($title == 'Reports'){ echo ' active';} ?>">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Reports
@@ -191,8 +198,8 @@
             </a>
           </li>
           <?php
-            }
-          ?>
+  }
+?>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
@@ -229,77 +236,17 @@
             <div class="card-body">
               <input type="hidden" id="baseurl" value="<?php echo base_url(); ?>">
               <?php
-                foreach ($officer as $officerrow) {
+                foreach ($region as $regionrow) {
               ?>
-              <form action="<?php echo base_url(); ?>index.php/adminmaintenancecontroller/do_upload" method="post" enctype="multipart/form-data">
-                <input type="hidden" name="indicator" value="edit">
-                <input type="hidden" name="officerid" value="<?php echo $officerid; ?>">
-                <?php 
-                    if(isset($error)) {
-                ?>
-                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                  <?php echo $error; ?>
-                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <?php
-                    }
-                ?>
-                
+              <form action="<?php echo base_url(); ?>index.php/updateregion" method="post">
+                <input type="hidden" name="regionid" value="<?php echo $regionrow->region_id; ?>">
                 <div class="mb-3">
-                  <label for="amount" class="form-label">Name</label>
-                  <input type="text" class="form-control" name="name" placeholder="Full Name" value="<?php echo $officerrow->officer_name; ?>" required>
+                  <label for="amount" class="form-label">Region Name</label>
+                  <textarea class="form-control" name="regionname" placeholder="Region Name" required><?php echo $regionrow->region_name; ?></textarea>
                 </div>
                 <div class="mb-3">
-                  <label for="amount" class="form-label">Login Name</label>
-                  <input type="text" class="form-control" name="loginname" placeholder="Login Name" value="<?php echo $officerrow->officer_login_name; ?>" required>
-                </div>
-                <div class="mb-3">
-                  <label for="amount" class="form-label">Email</label>
-                  <input type="email" class="form-control" name="email" placeholder="Email" value="<?php echo $officerrow->email; ?>" required>
-                </div>
-                <div class="mb-3">
-                  <label for="amount" class="form-label">Password</label>
-                  <input type="password" class="form-control" name="password" placeholder="Password" value="<?php echo $officerrow->officer_password; ?>" required>
-                </div>
-                <div class="mb-3">
-                  <label for="payee" class="form-label">Office</label>
-                  <select class="form-control select2" name="office">
-                    <option value="<?php echo $officerrow->offices_id; ?>"><?php echo $officerrow->offices_code." - ".$officerrow->offices_address1; ?></option>
-                    <?php
-                    foreach ($offices as $row) {
-                      echo "<option value='".$row->offices_id."'>".$row->offices_code." - ".$row->offices_address1."</option>";
-                    }
-                    ?>
-                  </select>
-                </div>
-                <div class="mb-3">
-                  <label for="payee" class="form-label">Initial Region Assignment</label>
-                  <select class="form-control select2" name="region">
-                    <option value="<?php echo $officerrow->region_id; ?>"><?php echo $officerrow->region_name; ?></option>
-                    <?php
-                    foreach ($region as $row2) {
-                      echo "<option value='".$row2->region_id."'>".$row2->region_name."</option>";
-                    }
-                    ?>
-                  </select>
-                </div>
-                <div class="mb-3">
-                  <label for="payee" class="form-label">Role</label>
-                  <input type="hidden" name="roletext" id="roletext">
-                  <select class="form-control select2" name="role" id="role" required>
-                    <option value="<?php echo $officerrow->officer_role; ?>"><?php echo $officerrow->officer_role; ?></option>
-                    <?php
-                    foreach ($mastersetting as $row2) {
-                      echo "<option value='".$row2->id."'>".$row2->identity."</option>";
-                    }
-                    ?>
-                  </select>
-                </div>
-                <div class="mb-3">
-                  <label for="amount" class="form-label">Photo</label>
-                  <input type="file" class="form-control" name="userfile" placeholder="Photo">
+                  <label for="amount" class="form-label">Region Description</label>
+                  <textarea class="form-control" name="regiondescription" placeholder="Region Description" required><?php echo $regionrow->region_description; ?></textarea>
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
               </form>
@@ -354,13 +301,21 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 
 <script>
-
-  $('.select2').select2();
-
-  document.getElementById("role").onchange = function() {
-    var roletext = $("#role option:selected").text();
-    $("#roletext").val(roletext);
-  }
+  $(function () {
+    $("#example1").DataTable({
+      "responsive": true,
+      "autoWidth": false,
+    });
+    $('#example2').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false,
+      "responsive": true,
+    });
+  });
 
   function markasread() {
       var baseurl10 = document.getElementById("baseurl").value;

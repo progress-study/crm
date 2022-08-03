@@ -28,28 +28,44 @@
     <ul class="navbar-nav ml-auto">
       <!-- Notifications Dropdown Menu -->
       <li class="nav-item">
-        <a class="nav-link" href="<?php echo base_url(); ?>index.php/messages" title="Messages">
+        <a class="nav-link" href="<?php echo base_url(); ?>index.php/messages" title="Messages" target="_blank">
           <i class="far fa-comments" aria-hidden="true"></i>
         </a>
       </li>
       <li class="nav-item dropdown">
-        <a class="nav-link" data-toggle="dropdown" href="#" title="Notifications">
-          <i class="far fa-bell"></i>
-          <span class="badge badge-warning navbar-badge"><?php echo $notifnum; ?></span>
-        </a>
-        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-          <?php
-            foreach ($notif as $row) {
-          ?>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item"> 
-            <small><?php echo $row->details; ?></small>
-            <span class="float-right text-muted text-sm"><?php echo $row->date_created; ?></span>
-          </a>
-          <?php
-            }
-          ?>
-        </div>
+       <a class="nav-link" data-toggle="dropdown" href="#" title="Notifications" onclick="markasread();">
+         <i class="far fa-bell"></i>
+         <?php
+           if($notifnum != "0") {
+         ?>
+         <span class="badge badge-warning navbar-badge" id="notifnum"><?php echo $notifnum; ?></span>
+         <?php
+           }
+         ?>
+       </a>
+       <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+         <?php
+           foreach ($notif as $row) {
+             if ($row->seen == "0") {
+           ?>
+               <div class="dropdown-divider"></div>
+               <a href="#" class="dropdown-item"> 
+                 <small><b><?php echo $row->details; ?></b></small>
+                 <span class="float-right text-muted text-sm"><b><?php echo $row->date_created; ?></b></span>
+               </a>
+         <?php
+             } else {
+               ?>
+               <div class="dropdown-divider"></div>
+               <a href="#" class="dropdown-item"> 
+                 <small><?php echo $row->details; ?></small>
+                 <span class="float-right text-muted text-sm"><?php echo $row->date_created; ?></span>
+               </a>
+               <?php
+             }
+           }
+         ?>
+       </div>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="<?php echo base_url(); ?>index.php/signout">
@@ -194,6 +210,7 @@
 
     <!-- Main content -->
     <section class="content">
+      <input type="hidden" id="baseurl" value="<?php echo base_url(); ?>">
       <div class="row">
         <div class="col-12">
           <div class="card">
@@ -315,7 +332,7 @@
                           <td>".$row->region_name."</td>
                           <td>".$row->city."</td>
                           <td>".$row->datecreated."</td>
-                          <td><a href='editofficer/".$row->oaid."' class='btn btn-danger btn-xs'>Deactivate</a></td>
+                          <td><a href='editassignment/".$row->oaid."' class='btn btn-primary btn-xs'>Edit</a></td>
                         </tr>";
                       }
                       ?>
@@ -405,7 +422,7 @@
                           <td>".$row2->event_info."</td>
                           <td>".$row2->event_comments."</td>
                           <td>".$photo."</td>
-                          <td><a href='editregion/".$row2->event_id."' class='btn btn-primary btn-xs'>Edit</a></td>
+                          <td><a href='editevent/".$row2->event_id."' class='btn btn-primary btn-xs'>Edit</a></td>
                         </tr>";
                       }
                       ?>
@@ -757,7 +774,7 @@
                       ?>
                      </tbody>
                      </table><br>
-                     <button class="btn btn-primary" type="submit">Update</button>
+                     <button class="btn btn-primary" type="button" onclick="processPriviledge();">Update</button>
                     </form>
                   </div>
                   <!-- /.card-body -->
@@ -833,6 +850,203 @@
 </script>
 <script type="text/javascript">
     document.getElementsByClassName("maintenancetabs")[0].click();
+
+    function processPriviledge() {
+      var baseurl11 = document.getElementById("baseurl").value;
+
+      var privilege_id = "";
+      var privilege_manage_clients = "";
+      var privilege_manage_officers = "";
+      var privilege_manage_providers = "";
+      var privilege_manage_studentapps = "";
+      var privilege_manage_studentdocs = "";
+      var privilege_manage_commissions = "";
+      var privilege_manage_prapps = "";
+      var privilege_manage_prdocs = "";
+      var privilege_manage_prfeereceived = "";
+      var privilege_manage_prfeepaid = "";
+      var privilege_manage_reporting = "";
+      var privilege_manage_channel = "";
+      var privilege_manage_parameters = "";
+      var privilege_manage_privilege = "";
+      var privilege_manage_database = "";
+      var privilege_manage_offices = "";
+      var privilege_view_fees = "";
+      var privilege_staff_bonus = "";
+      var privilege_manage_events = "";
+
+      for(var i = 0; i < 5; i++) {
+
+          privilege_id = document.getElementsByName("privilege_id")[i].value;
+
+          if(document.getElementsByName("privilege_manage_clients")[i].checked == true) {
+            privilege_manage_clients = "1";
+          } else {
+            privilege_manage_clients = "0";
+          }
+
+          if(document.getElementsByName("privilege_manage_officers")[i].checked == true) {
+            privilege_manage_officers = "1";
+          } else {
+            privilege_manage_officers = "0";
+          }
+
+          if(document.getElementsByName("privilege_manage_providers")[i].checked == true) {
+            privilege_manage_providers = "1";
+          } else {
+            privilege_manage_providers = "0";
+          }
+
+          if(document.getElementsByName("privilege_manage_studentapps")[i].checked == true) {
+            privilege_manage_studentapps = "1";
+          } else {
+            privilege_manage_studentapps = "0";
+          }
+
+          if(document.getElementsByName("privilege_manage_studentdocs")[i].checked == true) {
+            privilege_manage_studentdocs = "1";
+          } else {
+            privilege_manage_studentdocs = "0";
+          }
+
+          if(document.getElementsByName("privilege_manage_commissions")[i].checked == true) {
+            privilege_manage_commissions = "1";
+          } else {
+            privilege_manage_commissions = "0";
+          }
+
+          if(document.getElementsByName("privilege_manage_prapps")[i].checked == true) {
+            privilege_manage_prapps = "1";
+          } else {
+            privilege_manage_prapps = "0";
+          }
+
+          if(document.getElementsByName("privilege_manage_prdocs")[i].checked == true) {
+            privilege_manage_prdocs = "1";
+          } else {
+            privilege_manage_prdocs = "0";
+          }
+
+          if(document.getElementsByName("privilege_manage_prfeereceived")[i].checked == true) {
+            privilege_manage_prfeereceived = "1";
+          } else {
+            privilege_manage_prfeereceived = "0";
+          }
+
+          if(document.getElementsByName("privilege_manage_prfeepaid")[i].checked == true) {
+            privilege_manage_prfeepaid = "1";
+          } else {
+            privilege_manage_prfeepaid = "0";
+          }
+
+          if(document.getElementsByName("privilege_manage_reporting")[i].checked == true) {
+            privilege_manage_reporting = "1";
+          } else {
+            privilege_manage_reporting = "0";
+          }
+
+          if(document.getElementsByName("privilege_manage_channel")[i].checked == true) {
+            privilege_manage_channel = "1";
+          } else {
+            privilege_manage_channel = "0";
+          }
+
+          if(document.getElementsByName("privilege_manage_parameters")[i].checked == true) {
+            privilege_manage_parameters = "1";
+          } else {
+            privilege_manage_parameters = "0";
+          }
+
+          if(document.getElementsByName("privilege_manage_privilege")[i].checked == true) {
+            privilege_manage_privilege = "1";
+          } else {
+            privilege_manage_privilege = "0";
+          }
+
+          if(document.getElementsByName("privilege_manage_database")[i].checked == true) {
+            privilege_manage_database = "1";
+          } else {
+            privilege_manage_database = "0";
+          }
+
+          if(document.getElementsByName("privilege_manage_offices")[i].checked == true) {
+            privilege_manage_offices = "1";
+          } else {
+            privilege_manage_offices = "0";
+          }
+
+          if(document.getElementsByName("privilege_view_fees")[i].checked == true) {
+            privilege_view_fees = "1";
+          } else {
+            privilege_view_fees = "0";
+          }
+
+          if(document.getElementsByName("privilege_staff_bonus")[i].checked == true) {
+            privilege_staff_bonus = "1";
+          } else {
+            privilege_staff_bonus = "0";
+          }
+
+          if(document.getElementsByName("privilege_manage_events")[i].checked == true) {
+            privilege_manage_events = "1";
+          } else {
+            privilege_manage_events = "0";
+          }
+
+          $.ajax({
+              type: "POST",
+              url: baseurl11 + "index.php/updatepriviledge",
+              data: {
+                privilege_id: privilege_id,
+                privilege_manage_clients: privilege_manage_clients,
+                privilege_manage_officers: privilege_manage_officers,
+                privilege_manage_providers: privilege_manage_providers,
+                privilege_manage_studentapps: privilege_manage_studentapps,
+                privilege_manage_studentdocs: privilege_manage_studentdocs,
+                privilege_manage_commissions: privilege_manage_commissions,
+                privilege_manage_prapps: privilege_manage_prapps,
+                privilege_manage_prdocs: privilege_manage_prdocs,
+                privilege_manage_prfeereceived: privilege_manage_prfeereceived,
+                privilege_manage_prfeepaid: privilege_manage_prfeepaid,
+                privilege_manage_reporting: privilege_manage_reporting,
+                privilege_manage_channel: privilege_manage_channel,
+                privilege_manage_parameters: privilege_manage_parameters,
+                privilege_manage_privilege: privilege_manage_privilege,
+                privilege_manage_database: privilege_manage_database,
+                privilege_manage_offices: privilege_manage_offices,
+                privilege_view_fees: privilege_view_fees,
+                privilege_staff_bonus: privilege_staff_bonus,
+                privilege_manage_events: privilege_manage_events
+              },
+              success: function(data) {
+                  var obj = JSON.parse(data);
+              },
+              error: function(error) {
+                alert("Error: "+error);
+                console.log(error);
+              }
+          });
+
+      }
+
+      alert("Successfully updated the privileges!");
+      location.reload();
+
+    }
+
+    function markasread() {
+      var baseurl10 = document.getElementById("baseurl").value;
+      $.ajax({
+          type: "GET",
+          url: baseurl10 + "index.php/markasread",
+          success: function(data) {
+              document.getElementById("notifnum").remove();
+          },
+          error: function(error) {
+            console.log(error);
+          }
+      });
+  }
 </script>
 </body>
 </html>

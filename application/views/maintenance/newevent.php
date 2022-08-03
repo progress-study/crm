@@ -236,6 +236,7 @@
             <div class="card-body">
               <input type="hidden" id="baseurl" value="<?php echo base_url(); ?>">
               <form action="<?php echo base_url().'index.php/eventscontroller/do_upload' ?>" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="indicator" value="add">
                 <div class="mb-3">
                   <label for="amount" class="form-label">Event Name</label>
                   <input type="text" class="form-control" name="event_name" placeholder="Event Name" required>

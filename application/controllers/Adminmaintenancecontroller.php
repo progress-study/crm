@@ -302,12 +302,11 @@ class Adminmaintenancecontroller extends CI_Controller {
 						$this->db->set('officer_login_name', $this->input->post('loginname'));
 						$this->db->set('officer_name', $this->input->post('name'));
 						$this->db->set('officer_password', $this->input->post('password'));
-						$this->db->set('officer_role', $this->input->post('roletext'));
+						$this->db->set('officer_role', $this->input->post('role'));
 						$this->db->set('officer_photo', '');
 						$this->db->set('officer_office_id', $this->input->post('office'));
 						$this->db->set('email', $this->input->post('email'));
 						$this->db->set('officer_region', $this->input->post('region'));
-						$this->db->set('user_role_id', $this->input->post('role'));
 						$this->db->where('officer_id', $this->input->post('officerid'));
 						$this->db->update('officer');
 
@@ -318,12 +317,11 @@ class Adminmaintenancecontroller extends CI_Controller {
 	                	$this->db->set('officer_login_name', $this->input->post('loginname'));
 						$this->db->set('officer_name', $this->input->post('name'));
 						$this->db->set('officer_password', $this->input->post('password'));
-						$this->db->set('officer_role', $this->input->post('roletext'));
+						$this->db->set('officer_role', $this->input->post('role'));
 						$this->db->set('officer_photo', $file_name);
 						$this->db->set('officer_office_id', $this->input->post('office'));
 						$this->db->set('email', $this->input->post('email'));
 						$this->db->set('officer_region', $this->input->post('region'));
-						$this->db->set('user_role_id', $this->input->post('role'));
 						$this->db->where('officer_id', $this->input->post('officerid'));
 						$this->db->update('officer');
 						
@@ -406,6 +404,73 @@ class Adminmaintenancecontroller extends CI_Controller {
 		redirect('adminmaintenance');
 	}
 
+	public function editassignment($oaid)
+	{
+		$asset_url = base_url()."assets/";
+		$data['title'] = "Edit Region Assignment";
+		$data['asset_url'] = $asset_url;
+
+		$sql1 = "SELECT * FROM officer";
+	    $query1 = $this->db->query($sql1);
+	    $officer = $query1->result();
+
+	    $sql2 = "SELECT * FROM region";
+	    $query2 = $this->db->query($sql2);
+	    $region = $query2->result();
+
+	    $data['officer'] = $officer;
+	    $data['region'] = $region;
+
+	    if($this->session->officer_role == "regional manager" || $this->session->officer_role == "admin") {
+			$officer_id_check = $this->session->officer_id;
+			$sql11 = "SELECT * FROM notifications WHERE seen = 0 ORDER BY notif_id DESC LIMIT 20";
+			$query11 = $this->db->query($sql11);
+			$notifnum = $query11->num_rows();
+
+			$sql12 = "SELECT * FROM notifications ORDER BY notif_id DESC LIMIT 20";
+			$query12 = $this->db->query($sql12);
+			$notif = $query12->result();
+		} else {
+			$officer_id_check = $this->session->officer_id;
+			$sql11 = "SELECT * FROM notifications WHERE seen = 0 AND officer_id = '$officer_id_check' ORDER BY notif_id DESC LIMIT 20";
+			$query11 = $this->db->query($sql11);
+			$notifnum = $query11->num_rows();
+
+			$sql12 = "SELECT * FROM notifications WHERE officer_id = '$officer_id_check' ORDER BY notif_id DESC LIMIT 20";
+			$query12 = $this->db->query($sql12);
+			$notif = $query12->result();
+		}
+
+		$data['notifnum'] = $notifnum;
+		$data['notif'] = $notif;
+
+		$sql4 = "SELECT * FROM officerassignment oa INNER JOIN officer o ON oa.oaid = o.officer_id INNER JOIN region r ON oa.region_id = r.region_id WHERE oa.oaid = $oaid";
+	    $query4 = $this->db->query($sql4);
+	    $officerassignment = $query4->result();
+
+	    $data['officerassignment'] = $officerassignment;
+
+	    $this->db->where('privilege_id', $this->session->officer_role_id);
+        $query3 = $this->db->get('privilege');
+
+		foreach ($query3->result() as $row3)
+		{
+		        $data['privilege_manage_providers'] = $row3->privilege_manage_providers;
+		        $data['privilege_manage_reporting'] = $row3->privilege_manage_reporting;
+		        $data['privilege_manage_studentapps'] = $row3->privilege_manage_studentapps;
+		}
+
+		if($this->session->officer_role == "") {
+			redirect(base_url()."index.php/messages");
+		} else {
+			if(isset($this->session->officer_name)) {
+				$this->load->view('maintenance/editassignment', $data);
+			} else {
+				redirect(base_url()."?error3=1");
+			}
+		}
+	}
+
 	public function saveemailcontent()
 	{
 		$this->db->set('iaremailheader', $this->input->post('iaremailheader'));
@@ -437,10 +502,12 @@ class Adminmaintenancecontroller extends CI_Controller {
 		$this->db->set('abn', $this->input->post('abn'));
 		$this->db->set('redeemable_point', $this->input->post('redeemable_point'));
 		$this->db->update('parameters');
+		redirect('adminmaintenance');
 	}
 
 	public function updatepriviledge()
 	{
+		
 		$this->db->set('privilege_manage_clients', $this->input->post('privilege_manage_clients'));
 		$this->db->set('privilege_manage_officers', $this->input->post('privilege_manage_officers'));
 		$this->db->set('privilege_manage_providers', $this->input->post('privilege_manage_providers'));
@@ -456,11 +523,14 @@ class Adminmaintenancecontroller extends CI_Controller {
 		$this->db->set('privilege_manage_parameters', $this->input->post('privilege_manage_parameters'));
 		$this->db->set('privilege_manage_privilege', $this->input->post('privilege_manage_privilege'));
 		$this->db->set('privilege_manage_database', $this->input->post('privilege_manage_database'));
-		$this->db->set('$privilege_manage_offices', $this->input->post('$privilege_manage_offices'));
-		$this->db->set('$privilege_view_fees', $this->input->post('$privilege_view_fees'));
-		$this->db->set('$privilege_staff_bonus', $this->input->post('$privilege_staff_bonus'));
+		$this->db->set('privilege_manage_offices', $this->input->post('privilege_manage_offices'));
+		$this->db->set('privilege_view_fees', $this->input->post('privilege_view_fees'));
+		$this->db->set('privilege_staff_bonus', $this->input->post('privilege_staff_bonus'));
 		$this->db->set('privilege_manage_events', $this->input->post('privilege_manage_events'));
+		$this->db->where('privilege_id', $this->input->post('privilege_id'));
 		$this->db->update('privilege');
+		//redirect('adminmaintenance');
+		echo json_encode("Success");
 	}
 
 	public function editofficer($officer_id) {
@@ -480,7 +550,7 @@ class Adminmaintenancecontroller extends CI_Controller {
 	    $query3 = $this->db->query($sql3);
 	    $mastersetting = $query3->result();
 
-	    $sql4 = "SELECT * FROM officer where officer_id = '$officer_id'";
+	    $sql4 = "SELECT * FROM officer ofr LEFT JOIN offices ofs ON ofr.officer_office_id = ofs.offices_id LEFT JOIN region r ON ofr.officer_region = r.region_id where officer_id = '$officer_id'";
 	    $query4 = $this->db->query($sql4);
 	    $officer = $query4->result();
 
@@ -534,5 +604,79 @@ class Adminmaintenancecontroller extends CI_Controller {
 		}
 	}
 
+	public function editregion($region_id)
+	{
+		$asset_url = base_url()."assets/";
+		$data['title'] = "Edit Region";
+		$data['asset_url'] = $asset_url;
+
+		if($this->session->officer_role == "regional manager" || $this->session->officer_role == "admin") {
+			$officer_id_check = $this->session->officer_id;
+			$sql11 = "SELECT * FROM notifications WHERE seen = 0 ORDER BY notif_id DESC LIMIT 20";
+			$query11 = $this->db->query($sql11);
+			$notifnum = $query11->num_rows();
+
+			$sql12 = "SELECT * FROM notifications ORDER BY notif_id DESC LIMIT 20";
+			$query12 = $this->db->query($sql12);
+			$notif = $query12->result();
+		} else {
+			$officer_id_check = $this->session->officer_id;
+			$sql11 = "SELECT * FROM notifications WHERE seen = 0 AND officer_id = '$officer_id_check' ORDER BY notif_id DESC LIMIT 20";
+			$query11 = $this->db->query($sql11);
+			$notifnum = $query11->num_rows();
+
+			$sql12 = "SELECT * FROM notifications WHERE officer_id = '$officer_id_check' ORDER BY notif_id DESC LIMIT 20";
+			$query12 = $this->db->query($sql12);
+			$notif = $query12->result();
+		}
+
+		$data['notifnum'] = $notifnum;
+		$data['notif'] = $notif;
+
+		$sql4 = "SELECT * FROM region WHERE region_id = '$region_id'";
+		$query4 = $this->db->query($sql4);
+		$region = $query4->result();
+
+		$data['region'] = $region;
+
+		$this->db->where('privilege_id', $this->session->officer_role_id);
+        $query3 = $this->db->get('privilege');
+
+		foreach ($query3->result() as $row3)
+		{
+		        $data['privilege_manage_providers'] = $row3->privilege_manage_providers;
+		        $data['privilege_manage_reporting'] = $row3->privilege_manage_reporting;
+		        $data['privilege_manage_studentapps'] = $row3->privilege_manage_studentapps;
+		}
+
+		if($this->session->officer_role == "") {
+			redirect(base_url()."index.php/messages");
+		} else {
+			if(isset($this->session->officer_name)) {
+			$this->load->view('maintenance/editregion', $data);
+			} else {
+				redirect(base_url()."?error3=1");
+			}
+		}
+	}
+
+	public function updateregion()
+	{
+		$this->db->set('region_name', $this->input->post('regionname'));
+		$this->db->set('region_description', $this->input->post('regiondescription'));
+		$this->db->where('region_id', $this->input->post('regionid'));
+		$this->db->update('region');
+		redirect('adminmaintenance');
+	}
+
+	public function updateassignment()
+	{
+		$this->db->set('officer_id', $this->input->post('officer'));
+		$this->db->set('region_id', $this->input->post('region'));
+		$this->db->set('city', $this->input->post('city'));
+		$this->db->where('oaid', $this->input->post('oaid'));
+		$this->db->update('officerassignment');
+		redirect('adminmaintenance');
+	}
 
 }
