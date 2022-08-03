@@ -162,9 +162,9 @@ class Formscontroller extends CI_Controller {
 				$mail->SMTPAutoTLS = false; 
 				$mail->Port = 25; 
 
-		        $mail->setFrom("ramirezkyl@gmail.com");
+		        $mail->setFrom("no-reply@progress-study.com");
 		        //$mail->addReplyTo($sender, $this->session->userdata('companyname'));
-		        $mail->addAddress("ramirezkyl@gmail.com");
+		        $mail->addAddress($this->input->post('email'));
 		        $mail->Subject = 'New Inquiries';
 		        $mail->isHTML(true);
 		        $mailContent = $message;
@@ -250,9 +250,9 @@ class Formscontroller extends CI_Controller {
 				$mail->SMTPAutoTLS = false; 
 				$mail->Port = 25; 
    
-		        $mail->setFrom("ramirezkyl@gmail.com");
+		        $mail->setFrom("no-reply@progress-study.com");
 		        //$mail->addReplyTo($sender, $this->session->userdata('companyname'));
-		        $mail->addAddress("ramirezkyl@gmail.com");
+		        $mail->addAddress($this->input->post('email'));
 		        $mail->Subject = 'New Inquiries';
 		        $mail->isHTML(true);
 		        $mailContent = $message;
