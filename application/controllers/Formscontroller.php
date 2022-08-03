@@ -157,7 +157,7 @@ class Formscontroller extends CI_Controller {
 		*/
 
 			    $mail->isSMTP();
-				$mail->Host = 'localhost';
+				$mail->Host = 'relay-hosting.secureserver.net';
 				$mail->SMTPAuth = false;
 				$mail->SMTPAutoTLS = false; 
 				$mail->Port = 25; 
@@ -245,7 +245,7 @@ class Formscontroller extends CI_Controller {
 		*/
 
 			    $mail->isSMTP();
-				$mail->Host = 'localhost';
+				$mail->Host = 'relay-hosting.secureserver.net';
 				$mail->SMTPAuth = false;
 				$mail->SMTPAutoTLS = false; 
 				$mail->Port = 25; 
@@ -366,7 +366,7 @@ class Formscontroller extends CI_Controller {
 		*/
 
 			    $mail->isSMTP();
-				$mail->Host = 'localhost';
+				$mail->Host = 'relay-hosting.secureserver.net';
 				$mail->SMTPAuth = false;
 				$mail->SMTPAutoTLS = false; 
 				$mail->Port = 25; 
