@@ -124,6 +124,7 @@ class Formscontroller extends CI_Controller {
 						);
 				$this->db->insert('inquiries', $data);
 
+				$message = "";
 				$emailquery = $this->db->query("SELECT * FROM `emailcontents`");
 				$iaremailheader = $emailquery->row()->iaremailheader;
 				$iaremailbody = $emailquery->row()->iaremailbody;
@@ -212,6 +213,7 @@ class Formscontroller extends CI_Controller {
 						);
 				$this->db->insert('inquiries', $data);
 
+				$message = "";
 				$emailquery = $this->db->query("SELECT * FROM `emailcontents`");
 				$iaremailheader = $emailquery->row()->iaremailheader;
 				$iaremailbody = $emailquery->row()->iaremailbody;
@@ -333,6 +335,8 @@ class Formscontroller extends CI_Controller {
 
 	public function sendemail()
 	{
+		$message = "";
+
 		$emailquery = $this->db->query("SELECT * FROM `emailcontents`");
 				$iaremailheader = $emailquery->row()->iaremailheader;
 				$iaremailbody = $emailquery->row()->iaremailbody;
