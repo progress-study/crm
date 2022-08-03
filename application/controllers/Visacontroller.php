@@ -175,41 +175,83 @@ class Visacontroller extends CI_Controller {
 
 	public function savevisaapplication()
 	{
-		$visaexpirydate = DateTime::createFromFormat("Y-m-d", $this->input->post('visaexpirydate'));
-    	$visaexpirydateyear = $visaexpirydate->format("Y");
-    	$visaexpirydatemonth = $visaexpirydate->format("m");
-    	$visaexpirydateday = $visaexpirydate->format("d");
+		if($this->input->post('visaexpirydate') == "") {
+			$visaexpirydateyear = "1900";
+	    	$visaexpirydatemonth = "01";
+	    	$visaexpirydateday = "01";
+		} else {
+			$visaexpirydate = DateTime::createFromFormat("Y-m-d", $this->input->post('visaexpirydate'));
+	    	$visaexpirydateyear = $visaexpirydate->format("Y");
+	    	$visaexpirydatemonth = $visaexpirydate->format("m");
+	    	$visaexpirydateday = $visaexpirydate->format("d");
+		}
+		
+		if($this->input->post('visaexpirydate') == "") {
+			$visaafplodgeddateyear = "1900";
+	    	$visaafplodgeddatemonth = "01";
+	    	$visaafplodgeddateday = "01";
+		} else {
+			$visaafplodgeddate = DateTime::createFromFormat("Y-m-d", $this->input->post('visaafplodgeddate'));
+	    	$visaafplodgeddateyear = $visaafplodgeddate->format("Y");
+	    	$visaafplodgeddatemonth = $visaafplodgeddate->format("m");
+	    	$visaafplodgeddateday = $visaafplodgeddate->format("d");
+		}
+    	
+    	if($this->input->post('visaexpirydate') == "") {
+			$visalodgeddateyear = "1900";
+	    	$visalodgeddatemonth = "01";
+	    	$visalodgeddateday = "01";
+		} else {
+			$visalodgeddate = DateTime::createFromFormat("Y-m-d", $this->input->post('visalodgeddate'));
+	    	$visalodgeddateyear = $visalodgeddate->format("Y");
+	    	$visalodgeddatemonth = $visalodgeddate->format("m");
+	    	$visalodgeddateday = $visalodgeddate->format("d");
+		}
+    	
+    	if($this->input->post('visaexpirydate') == "") {
+			$visacriticaldateyear = "1900";
+	    	$visacriticaldatemonth = "01";
+	    	$visacriticaldateday = "01";
+		} else {
+			$visacriticaldate = DateTime::createFromFormat("Y-m-d", $this->input->post('visacriticaldate'));
+	    	$visacriticaldateyear = $visacriticaldate->format("Y");
+	    	$visacriticaldatemonth = $visacriticaldate->format("m");
+	    	$visacriticaldateday = $visacriticaldate->format("d");
+		}
 
-    	$visaafplodgeddate = DateTime::createFromFormat("Y-m-d", $this->input->post('visaafplodgeddate'));
-    	$visaafplodgeddateyear = $visaafplodgeddate->format("Y");
-    	$visaafplodgeddatemonth = $visaafplodgeddate->format("m");
-    	$visaafplodgeddateday = $visaafplodgeddate->format("d");
+    	if($this->input->post('visaexpirydate') == "") {
+			$skillassessmentlodgeddateyear = "1900";
+	    	$skillassessmentlodgeddatemonth = "01";
+	    	$skillassessmentlodgeddateday = "01";
+		} else {
+			$skillassessmentlodgeddate = DateTime::createFromFormat("Y-m-d", $this->input->post('skillassessmentlodgeddate'));
+	    	$skillassessmentlodgeddateyear = $skillassessmentlodgeddate->format("Y");
+	    	$skillassessmentlodgeddatemonth = $skillassessmentlodgeddate->format("m");
+	    	$skillassessmentlodgeddateday = $skillassessmentlodgeddate->format("d");
+		}
 
-    	$visalodgeddate = DateTime::createFromFormat("Y-m-d", $this->input->post('visalodgeddate'));
-    	$visalodgeddateyear = $visalodgeddate->format("Y");
-    	$visalodgeddatemonth = $visalodgeddate->format("m");
-    	$visalodgeddateday = $visalodgeddate->format("d");
+    	if($this->input->post('visaexpirydate') == "") {
+			$englishtestdateyear = "1900";
+	    	$englishtestdatemonth = "01";
+	    	$englishtestdateday = "01";
+		} else {
+			$englishtestdate = DateTime::createFromFormat("Y-m-d", $this->input->post('englishtestdate'));
+	    	$englishtestdateyear = $englishtestdate->format("Y");
+	    	$englishtestdatemonth = $englishtestdate->format("m");
+	    	$englishtestdateday = $englishtestdate->format("d");
+		}
 
-    	$visacriticaldate = DateTime::createFromFormat("Y-m-d", $this->input->post('visacriticaldate'));
-    	$visacriticaldateyear = $visacriticaldate->format("Y");
-    	$visacriticaldatemonth = $visacriticaldate->format("m");
-    	$visacriticaldateday = $visacriticaldate->format("d");
-
-    	$skillassessmentlodgeddate = DateTime::createFromFormat("Y-m-d", $this->input->post('skillassessmentlodgeddate'));
-    	$skillassessmentlodgeddateyear = $skillassessmentlodgeddate->format("Y");
-    	$skillassessmentlodgeddatemonth = $skillassessmentlodgeddate->format("m");
-    	$skillassessmentlodgeddateday = $skillassessmentlodgeddate->format("d");
-
-    	$englishtestdate = DateTime::createFromFormat("Y-m-d", $this->input->post('englishtestdate'));
-    	$englishtestdateyear = $englishtestdate->format("Y");
-    	$englishtestdatemonth = $englishtestdate->format("m");
-    	$englishtestdateday = $englishtestdate->format("d");
-
-    	$visadecisiondate = DateTime::createFromFormat("Y-m-d", $this->input->post('visadecisiondate'));
-    	$visadecisiondateyear = $visadecisiondate->format("Y");
-    	$visadecisiondatemonth = $visadecisiondate->format("m");
-    	$visadecisiondateday = $visadecisiondate->format("d");
-
+    	if($this->input->post('visaexpirydate') == "") {
+			$visadecisiondateyear = "1900";
+	    	$visadecisiondatemonth = "01";
+	    	$visadecisiondateday = "01";
+		} else {
+			$visadecisiondate = DateTime::createFromFormat("Y-m-d", $this->input->post('visadecisiondate'));
+	    	$visadecisiondateyear = $visadecisiondate->format("Y");
+	    	$visadecisiondatemonth = $visadecisiondate->format("m");
+	    	$visadecisiondateday = $visadecisiondate->format("d");
+		}
+    	
 		$data = array(
 					'client_id' => $this->input->post('clientid'),
 					'new_Visa_subclass' => $this->input->post('visasubclass'),
@@ -248,6 +290,30 @@ class Visacontroller extends CI_Controller {
 
 	public function savevisaeoi()
 	{
+		if($this->input->post('preferreddate') == "") {
+			$preferreddate = "1900-01-01";
+		} else {
+			$preferreddate = $this->input->post('preferreddate');
+		}
+
+		if($this->input->post('skillassessmentdate') == "") {
+			$skillassessmentdate = "1900-01-01";
+		} else {
+			$skillassessmentdate = $this->input->post('skillassessmentdate');
+		}
+
+		if($this->input->post('pycompletiondate') == "") {
+			$pycompletiondate = "1900-01-01";
+		} else {
+			$pycompletiondate = $this->input->post('pycompletiondate');
+		}
+
+		if($this->input->post('englishcompetencytestdate') == "") {
+			$englishcompetencytestdate = "1900-01-01";
+		} else {
+			$englishcompetencytestdate = $this->input->post('englishcompetencytestdate');
+		}
+
 		$data = array(
 					'client_id' => $this->input->post('clientid'),
 					'eoi_number' => $this->input->post('eoinumber'),
@@ -255,10 +321,10 @@ class Visacontroller extends CI_Controller {
 					'visa_subclasses' => $this->input->post('visasubclass'),
 					'eoi_created_date' => date("Y-m-d"),
 					'eoi_submitted_date' => date("Y-m-d"),
-					'preferred_date' => $this->input->post('preferreddate'),
-					'skill_assessment_date' => $this->input->post('skillassessmentdate'),
-					'py_completion_date' => $this->input->post('pycompletiondate'),
-					'english_competency_test_date' => $this->input->post('englishcompetencytestdate'),
+					'preferred_date' => $preferreddate,
+					'skill_assessment_date' => $skillassessmentdate,
+					'py_completion_date' => $pycompletiondate,
+					'english_competency_test_date' => $englishcompetencytestdate,
 					'english_competency_level' => $this->input->post('englishcompetencylevel'),
 					'notes' => $this->input->post('notes'),
 					'flag' => $this->input->post('flag')
@@ -269,13 +335,25 @@ class Visacontroller extends CI_Controller {
 
 	public function savevisaaccount()
 	{
+		if($this->input->post('receiveddate') == "") {
+			$receiveddate = "1900-01-01";
+		} else {
+			$receiveddate = $this->input->post('receiveddate');
+		}
+
+		if($this->input->post('disburseddate') == "") {
+			$disburseddate = "1900-01-01";
+		} else {
+			$disburseddate = $this->input->post('disburseddate');
+		}
+
 		$data = array(
 					'client_visa_id' => $this->input->post('clientvisaid'),
 					'description' => $this->input->post('description'),
-					'received_date' => $this->input->post('receiveddate'),
+					'received_date' => $receiveddate,
 					'received_amount_ex_gst' => $this->input->post('receivedamountexgst'),
 					'received_gst' => $this->input->post('receivedgst'),
-					'disbursed_date' => $this->input->post('disburseddate'),
+					'disbursed_date' => $disburseddate,
 					'disbursed_amount_ex_gst' => $this->input->post('disbursedamountexgst'),
 					'disbursed_gst' => $this->input->post('dispursedgst')
 				);
