@@ -33,7 +33,7 @@ class Programoptionscontroller extends CI_Controller {
 			$query11 = $this->db->query($sql11);
 			$notifnum = $query11->num_rows();
 
-			$sql12 = "SELECT * FROM notifications WHERE seen = 0 ORDER BY notif_id DESC LIMIT 20";
+			$sql12 = "SELECT * FROM notifications ORDER BY notif_id DESC LIMIT 20";
 			$query12 = $this->db->query($sql12);
 			$notif = $query12->result();
 		} else {
@@ -42,7 +42,7 @@ class Programoptionscontroller extends CI_Controller {
 			$query11 = $this->db->query($sql11);
 			$notifnum = $query11->num_rows();
 
-			$sql12 = "SELECT * FROM notifications WHERE seen = 0 AND officer_id = '$officer_id_check' ORDER BY notif_id DESC LIMIT 20";
+			$sql12 = "SELECT * FROM notifications WHERE officer_id = '$officer_id_check' ORDER BY notif_id DESC LIMIT 20";
 			$query12 = $this->db->query($sql12);
 			$notif = $query12->result();
 		}
@@ -140,7 +140,7 @@ class Programoptionscontroller extends CI_Controller {
 			$query11 = $this->db->query($sql11);
 			$notifnum = $query11->num_rows();
 
-			$sql12 = "SELECT * FROM notifications WHERE seen = 0 ORDER BY notif_id DESC LIMIT 20";
+			$sql12 = "SELECT * FROM notifications ORDER BY notif_id DESC LIMIT 20";
 			$query12 = $this->db->query($sql12);
 			$notif = $query12->result();
 		} else {
@@ -149,7 +149,7 @@ class Programoptionscontroller extends CI_Controller {
 			$query11 = $this->db->query($sql11);
 			$notifnum = $query11->num_rows();
 
-			$sql12 = "SELECT * FROM notifications WHERE seen = 0 AND officer_id = '$officer_id_check' ORDER BY notif_id DESC LIMIT 20";
+			$sql12 = "SELECT * FROM notifications WHERE officer_id = '$officer_id_check' ORDER BY notif_id DESC LIMIT 20";
 			$query12 = $this->db->query($sql12);
 			$notif = $query12->result();
 		}
@@ -199,7 +199,7 @@ class Programoptionscontroller extends CI_Controller {
 			$query11 = $this->db->query($sql11);
 			$notifnum = $query11->num_rows();
 
-			$sql12 = "SELECT * FROM notifications WHERE seen = 0 ORDER BY notif_id DESC LIMIT 20";
+			$sql12 = "SELECT * FROM notifications ORDER BY notif_id DESC LIMIT 20";
 			$query12 = $this->db->query($sql12);
 			$notif = $query12->result();
 		} else {
@@ -208,7 +208,7 @@ class Programoptionscontroller extends CI_Controller {
 			$query11 = $this->db->query($sql11);
 			$notifnum = $query11->num_rows();
 
-			$sql12 = "SELECT * FROM notifications WHERE seen = 0 AND officer_id = '$officer_id_check' ORDER BY notif_id DESC LIMIT 20";
+			$sql12 = "SELECT * FROM notifications WHERE officer_id = '$officer_id_check' ORDER BY notif_id DESC LIMIT 20";
 			$query12 = $this->db->query($sql12);
 			$notif = $query12->result();
 		}
@@ -268,7 +268,7 @@ class Programoptionscontroller extends CI_Controller {
 			$query11 = $this->db->query($sql11);
 			$notifnum = $query11->num_rows();
 
-			$sql12 = "SELECT * FROM notifications WHERE seen = 0 ORDER BY notif_id DESC LIMIT 20";
+			$sql12 = "SELECT * FROM notifications ORDER BY notif_id DESC LIMIT 20";
 			$query12 = $this->db->query($sql12);
 			$notif = $query12->result();
 		} else {
@@ -277,7 +277,7 @@ class Programoptionscontroller extends CI_Controller {
 			$query11 = $this->db->query($sql11);
 			$notifnum = $query11->num_rows();
 
-			$sql12 = "SELECT * FROM notifications WHERE seen = 0 AND officer_id = '$officer_id_check' ORDER BY notif_id DESC LIMIT 20";
+			$sql12 = "SELECT * FROM notifications WHERE officer_id = '$officer_id_check' ORDER BY notif_id DESC LIMIT 20";
 			$query12 = $this->db->query($sql12);
 			$notif = $query12->result();
 		}

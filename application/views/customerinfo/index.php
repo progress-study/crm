@@ -36,6 +36,7 @@
           <div class="card">
             <!-- /.card-header -->
             <div class="card-body">
+              <input type="hidden" id="baseurl" value="<?php echo base_url(); ?>">
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
                 <tr>

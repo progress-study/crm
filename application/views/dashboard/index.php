@@ -39,25 +39,41 @@
       
       <!-- Notifications Dropdown Menu -->
       <li class="nav-item">
-        <a class="nav-link" href="<?php echo base_url(); ?>index.php/messages" title="Messages">
+        <a class="nav-link" href="<?php echo base_url(); ?>index.php/messages" title="Messages" target="_blank">
           <i class="far fa-comments" aria-hidden="true"></i>
         </a>
       </li>
       <li class="nav-item dropdown">
-        <a class="nav-link" data-toggle="dropdown" href="#" title="Notifications">
+        <a class="nav-link" data-toggle="dropdown" href="#" title="Notifications" onclick="markasread();">
           <i class="far fa-bell"></i>
-          <span class="badge badge-warning navbar-badge"><?php echo $notifnum; ?></span>
+          <?php
+            if($notifnum != "0") {
+          ?>
+          <span class="badge badge-warning navbar-badge" id="notifnum"><?php echo $notifnum; ?></span>
+          <?php
+            }
+          ?>
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
           <?php
             foreach ($notif as $row) {
-          ?>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item"> 
-            <small><?php echo $row->details; ?></small>
-            <span class="float-right text-muted text-sm"><?php echo $row->date_created; ?></span>
-          </a>
+              if ($row->seen == "0") {
+            ?>
+                <div class="dropdown-divider"></div>
+                <a href="#" class="dropdown-item"> 
+                  <small><b><?php echo $row->details; ?></b></small>
+                  <span class="float-right text-muted text-sm"><b><?php echo $row->date_created; ?></b></span>
+                </a>
           <?php
+              } else {
+                ?>
+                <div class="dropdown-divider"></div>
+                <a href="#" class="dropdown-item"> 
+                  <small><?php echo $row->details; ?></small>
+                  <span class="float-right text-muted text-sm"><?php echo $row->date_created; ?></span>
+                </a>
+                <?php
+              }
             }
           ?>
         </div>
@@ -288,7 +304,7 @@
 
               ?>
                 <tr>
-                  <td style='width: 80%;'><input type="checkbox" id="tasklistdata_<?php echo $i; ?>" class="tasklistdata" value="<?php echo $row->tlid;?>"> &nbsp;<?php echo $row->details; ?> <small><b>started <?php echo $row->datetime_created; ?></b></small></td>
+                  <td style='width: 80%;'> <input type="checkbox" id="tasklistdata_<?php echo $i; ?>" class="tasklistdata" value="<?php echo $row->tlid;?>"> &nbsp; &nbsp;  <a href="enterclientinfo/<?php echo $row->client_id; ?>" class="btn btn-primary btn-xs"><i class="fas fa-eye" aria-hidden="true"></i></a> &nbsp;<?php echo $row->details; ?> <small><b>started <?php echo $row->datetime_created; ?></b></small></td>
                   <?php
                     if($row->status == 'Created') {
                       echo "<td style='width: 20%;'><span class='badge badge-success'>".$row->status."</span></td>";
@@ -315,7 +331,7 @@
               ?>
                 <tr>
                   <td style='width: 80%;'><?php echo $row->inquiries_firstname." ".$row->inquiries_middlename." ".$row->inquiries_surname; ?></td>
-                  <td style='width: 20%;'><a href="transferinquirytoclient/<?php echo $row->inquiries_id; ?>" class='btn btn-primary btn-xs'>Approve as Client</a></td>
+                  <td style='width: 20%;'><a href="transferinquirytoclientfromdashboard/<?php echo $row->inquiries_id; ?>" class='btn btn-primary btn-xs'>Approve as Client</a></td>
                 <tr>
               <?php
                 }
@@ -1025,6 +1041,21 @@
           }
       }
   }
+
+  function markasread() {
+      var baseurl = document.getElementById("baseurl").value;
+      $.ajax({
+          type: "GET",
+          url: baseurl + "index.php/markasread",
+          success: function(data) {
+              document.getElementById("notifnum").remove();
+          },
+          error: function(error) {
+            console.log(error);
+          }
+      });
+  }
+
 </script>
 
 </body>

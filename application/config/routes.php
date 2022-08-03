@@ -21,6 +21,7 @@ $route['editclientinfo/(:any)'] = 'customerinfocontroller/editclientinfo/$1';
 $route['editclientinfo2/(:any)'] = 'customerinfocontroller/editclientinfo2/$1';
 $route['savefirebasefile'] = 'customerinfocontroller/savefirebasefile';
 $route['assignofficer'] = 'customerinfocontroller/assignofficer';
+$route['enterclientinfo/(:any)'] = 'customerinfocontroller/enterclientinfo/$1';
 
 // Payment routes
 $route['newpayment/(:any)'] = 'paymentscontroller/newpayment/$1';
@@ -109,6 +110,7 @@ $route['inquiries'] = 'inquiriescontroller/index';
 $route['deleteinquiry/(:any)'] = 'inquiriescontroller/deleteinquiry/$1';
 $route['transferinquirytoclient/(:any)'] = 'inquiriescontroller/transferinquirytoclient/$1';
 $route['getsingleinquiry/(:any)'] = 'inquiriescontroller/getsingleinquiry/$1';
+$route['transferinquirytoclientfromdashboard/(:any)'] = 'inquiriescontroller/transferinquirytoclientfromdashboard/$1';
 
 // Program Options routes
 $route['newprogramoption/(:any)'] = 'programoptionscontroller/newprogramoption/$1';
@@ -146,3 +148,4 @@ $route['clientsignout'] = 'clientlogincontroller/clientsignout';
 // Dashboard routes
 $route['archivetasklist/(:any)'] = 'dashboardcontroller/archivetasklist/$1';
 $route['donetasklist/(:any)'] = 'dashboardcontroller/donetasklist/$1';
+$route['markasread'] = 'dashboardcontroller/markasread';

@@ -51,6 +51,20 @@
     document.getElementById('clientid').value = stringArray[1];
   }
 
+  function markasread() {
+      var baseurl10 = document.getElementById("baseurl").value;
+      $.ajax({
+          type: "GET",
+          url: baseurl10 + "index.php/markasread",
+          success: function(data) {
+              document.getElementById("notifnum").remove();
+          },
+          error: function(error) {
+            console.log(error);
+          }
+      });
+  }
+
   
 </script>
 </body>

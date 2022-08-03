@@ -51,23 +51,39 @@
         </a>
       </li>
       <li class="nav-item dropdown">
-        <a class="nav-link" data-toggle="dropdown" href="#" title="Notifications">
-          <i class="far fa-bell"></i>
-          <span class="badge badge-warning navbar-badge"><?php echo $notifnum; ?></span>
-        </a>
-        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-          <?php
-            foreach ($notif as $row) {
-          ?>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item"> 
-            <small><?php echo $row->details; ?></small>
-            <span class="float-right text-muted text-sm"><?php echo $row->date_created; ?></span>
-          </a>
-          <?php
-            }
-          ?>
-        </div>
+       <a class="nav-link" data-toggle="dropdown" href="#" title="Notifications" onclick="markasread();">
+         <i class="far fa-bell"></i>
+         <?php
+           if($notifnum != "0") {
+         ?>
+         <span class="badge badge-warning navbar-badge" id="notifnum"><?php echo $notifnum; ?></span>
+         <?php
+           }
+         ?>
+       </a>
+       <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+         <?php
+           foreach ($notif as $row) {
+             if ($row->seen == "0") {
+           ?>
+               <div class="dropdown-divider"></div>
+               <a href="#" class="dropdown-item"> 
+                 <small><b><?php echo $row->details; ?></b></small>
+                 <span class="float-right text-muted text-sm"><b><?php echo $row->date_created; ?></b></span>
+               </a>
+         <?php
+             } else {
+               ?>
+               <div class="dropdown-divider"></div>
+               <a href="#" class="dropdown-item"> 
+                 <small><?php echo $row->details; ?></small>
+                 <span class="float-right text-muted text-sm"><?php echo $row->date_created; ?></span>
+               </a>
+               <?php
+             }
+           }
+         ?>
+       </div>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="<?php echo base_url(); ?>index.php/signout">
@@ -367,7 +383,20 @@
       });
   }
   
-
+  function markasread() {
+      var baseurl10 = document.getElementById("baseurl").value;
+      $.ajax({
+          type: "GET",
+          url: baseurl10 + "index.php/markasread",
+          success: function(data) {
+              document.getElementById("notifnum").remove();
+          },
+          error: function(error) {
+            console.log(error);
+          }
+      });
+  }
+  
 </script>
 
 </body>

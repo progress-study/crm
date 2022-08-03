@@ -145,23 +145,23 @@ class Formscontroller extends CI_Controller {
 				$this->load->library('phpmailer_lib');
 		        $mail = $this->phpmailer_lib->load();
 	  
-	  /*
-			    $mail->SMTPDebug = 1;
+	  
+			    //$mail->SMTPDebug = 1;
 			    $mail->isSMTP();
-			    $mail->Host       = 'ssl://smtp.gmail.com';            
+			    $mail->Host       = 'mail.progress-study.com';            
 			    $mail->SMTPAuth   = true;                                
-			    $mail->Username   = 'servicezeronoisemarketing@gmail.com';            
-			    $mail->Password   = 'lgbnxidtxswccfzr';                     
-			    $mail->SMTPSecure = 'ssl';      
-			    $mail->Port       = 465;   
-		*/
-
+			    $mail->Username   = 'no-reply@progress-study.com';            
+			    $mail->Password   = 'Welcome2PSC!';                     
+			    $mail->SMTPSecure = 'tls';      
+			    $mail->Port       = 587;   
+		
+			    /*
 			    $mail->isSMTP();
-				$mail->Host = 'relay-hosting.secureserver.net';
+				$mail->Host = 'localhost';
 				$mail->SMTPAuth = false;
 				$mail->SMTPAutoTLS = false; 
 				$mail->Port = 25; 
-
+				*/
 		        $mail->setFrom("no-reply@progress-study.com");
 		        //$mail->addReplyTo($sender, $this->session->userdata('companyname'));
 		        $mail->addAddress($this->input->post('email'));
@@ -233,23 +233,23 @@ class Formscontroller extends CI_Controller {
 				$this->load->library('phpmailer_lib');
 		        $mail = $this->phpmailer_lib->load();
 	    
-	  /*
-			    $mail->SMTPDebug = 1;
+	  
+			    //$mail->SMTPDebug = 1;
 			    $mail->isSMTP();
-			    $mail->Host       = 'ssl://smtp.gmail.com';            
+			    $mail->Host       = 'mail.progress-study.com';            
 			    $mail->SMTPAuth   = true;                                
-			    $mail->Username   = 'servicezeronoisemarketing@gmail.com';            
-			    $mail->Password   = 'lgbnxidtxswccfzr';                     
-			    $mail->SMTPSecure = 'ssl';      
-			    $mail->Port       = 465;   
-		*/
-
+			    $mail->Username   = 'no-reply@progress-study.com';            
+			    $mail->Password   = 'Welcome2PSC!';                     
+			    $mail->SMTPSecure = 'tls';      
+			    $mail->Port       = 587;    
+		
+				/*
 			    $mail->isSMTP();
-				$mail->Host = 'relay-hosting.secureserver.net';
+				$mail->Host = 'localhost';
 				$mail->SMTPAuth = false;
 				$mail->SMTPAutoTLS = false; 
 				$mail->Port = 25; 
-   
+  				*/ 
 		        $mail->setFrom("no-reply@progress-study.com");
 		        //$mail->addReplyTo($sender, $this->session->userdata('companyname'));
 		        $mail->addAddress($this->input->post('email'));
@@ -354,24 +354,24 @@ class Formscontroller extends CI_Controller {
 				$this->load->library('phpmailer_lib');
 		        $mail = $this->phpmailer_lib->load();
 	    
-	  /*
-			    $mail->SMTPDebug = 1;
+	  
+			    //$mail->SMTPDebug = 1;
 			    $mail->isSMTP();
-			    $mail->Host       = 'ssl://smtp.gmail.com';            
+			    $mail->Host       = 'mail.progress-study.com';            
 			    $mail->SMTPAuth   = true;                                
-			    $mail->Username   = 'servicezeronoisemarketing@gmail.com';            
-			    $mail->Password   = 'lgbnxidtxswccfzr';                     
-			    $mail->SMTPSecure = 'ssl';      
-			    $mail->Port       = 465;   
-		*/
-
+			    $mail->Username   = 'no-reply@progress-study.com';            
+			    $mail->Password   = 'Welcome2PSC!';                     
+			    $mail->SMTPSecure = 'tls';      
+			    $mail->Port       = 587;   
+		
+		/*
 			    $mail->isSMTP();
-				$mail->Host = 'relay-hosting.secureserver.net';
+				$mail->Host = 'localhost';
 				$mail->SMTPAuth = false;
 				$mail->SMTPAutoTLS = false; 
 				$mail->Port = 25; 
-   
-		        $mail->setFrom("ramirezkyl@gmail.com");
+   		*/
+		        $mail->setFrom("no-reply@progress-study.com");
 		        //$mail->addReplyTo($sender, $this->session->userdata('companyname'));
 		        $mail->addAddress("ramirezkyl@gmail.com");
 		        $mail->Subject = 'New Inquiries';

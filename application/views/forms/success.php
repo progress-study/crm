@@ -87,7 +87,7 @@ label.radio input:checked+span {
             <center><img src="<?php echo $asset_url; ?>images/logomain.png" alt="PSC Logo" width="200px"></center><br><br>
             <center><img src="<?php echo $asset_url; ?>images/success-icon.png" alt="PSC Logo" width="90px"></center>
             <center><h3>Thank you for signing up the form! You will receive an automated response from our website.</h3></center>
-            <center><a href="<?php echo base_url().'index.php/clientform'; ?>" class="btn btn-primary">Go Back</a></center>
+            <center><a href="<?php echo base_url().'index.php/clientlogin'; ?>" class="btn btn-primary">Go Back</a></center>
         </div>
     </div>
 </div>
