@@ -66,4 +66,9 @@ class ClientLoginController extends CI_Controller {
 
 	}
 
+	public function clientsignout() {
+		$this->session->unset_userdata('officer_name','officer_role','officer_status','officer_id','email');
+		redirect(base_url()."index.php/clientlogin");
+	}
+
 }

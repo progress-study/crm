@@ -141,6 +141,7 @@ $route['savetoclientdocuments'] = 'messagescontroller/savetoclientdocuments';
 // Client routes
 $route['clientlogin'] = 'clientlogincontroller/index';
 $route['clientlogintypical'] = 'clientlogincontroller/clientlogintypical';
+$route['clientsignout'] = 'clientlogincontroller/clientsignout';
 
 // Dashboard routes
 $route['archivetasklist/(:any)'] = 'dashboardcontroller/archivetasklist/$1';

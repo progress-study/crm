@@ -197,7 +197,7 @@ img{ max-width:100%;}
               <?php
                 if ($this->session->officer_role == "") {
               ?>
-              <a href="signout">Sign out</a>
+              <a href="clientsignout">Sign out</a>
               <?php
                 }
               ?>
