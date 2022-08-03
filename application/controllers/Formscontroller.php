@@ -373,7 +373,7 @@ class Formscontroller extends CI_Controller {
 				$mail->SMTPDebug = 1;
 			    $mail->isSMTP();
 				$mail->Host = 'localhost';
-				$mail->SMTPAuth = false;
+				$mail->SMTPAuth = true;
 				$mail->SMTPAutoTLS = false; 
 				$mail->Port = 25;
 				$mail->Username   = 'no-reply@progress-study.com';            
