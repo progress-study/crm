@@ -331,4 +331,54 @@ class Formscontroller extends CI_Controller {
 		$this->load->view('forms/success', $data);
 	}
 
+	public function sendemail()
+	{
+		$emailquery = $this->db->query("SELECT * FROM `emailcontents`");
+				$iaremailheader = $emailquery->row()->iaremailheader;
+				$iaremailbody = $emailquery->row()->iaremailbody;
+				$iaremailfooter = $emailquery->row()->iaremailfooter;
+
+				$message .= "<!DOCTYPE html>
+							 <html>
+							 <body>";
+			    $message .= "<p>".$iaremailheader."</p>";
+			    $message .= "<br>";
+				$message .= "<p>".$iaremailbody."</p>";
+				$message .= "<br>";
+				$message .= "<p>".$iaremailfooter."</p>";
+				$message .= "</body>
+							 </html>
+							";
+				$sender = "ramirezkyl@gmail.com";
+			
+				$this->load->library('phpmailer_lib');
+		        $mail = $this->phpmailer_lib->load();
+	    
+	  /*
+			    $mail->SMTPDebug = 1;
+			    $mail->isSMTP();
+			    $mail->Host       = 'ssl://smtp.gmail.com';            
+			    $mail->SMTPAuth   = true;                                
+			    $mail->Username   = 'servicezeronoisemarketing@gmail.com';            
+			    $mail->Password   = 'lgbnxidtxswccfzr';                     
+			    $mail->SMTPSecure = 'ssl';      
+			    $mail->Port       = 465;   
+		*/
+
+			    $mail->isSMTP();
+				$mail->Host = 'localhost';
+				$mail->SMTPAuth = false;
+				$mail->SMTPAutoTLS = false; 
+				$mail->Port = 25; 
+   
+		        $mail->setFrom("ramirezkyl@gmail.com");
+		        //$mail->addReplyTo($sender, $this->session->userdata('companyname'));
+		        $mail->addAddress("ramirezkyl@gmail.com");
+		        $mail->Subject = 'New Inquiries';
+		        $mail->isHTML(true);
+		        $mailContent = $message;
+		        $mail->Body = $mailContent;
+		        $mail->send();
+	}
+
 }

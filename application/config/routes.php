@@ -53,6 +53,7 @@ $route['saveclientform'] = 'formscontroller/saveclientform';
 $route['do_upload'] = 'formscontroller/do_upload';
 $route['success'] = 'formscontroller/success';
 $route['programoptionform/(:any)'] = 'formscontroller/programoptionform/$1';
+$route['sendemail'] = 'formscontroller/sendemail';
 
 // Admin maintenance routes
 $route['adminmaintenance'] = 'adminmaintenancecontroller/index';
