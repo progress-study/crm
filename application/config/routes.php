@@ -66,6 +66,13 @@ $route['saveemailcontent'] = 'adminmaintenancecontroller/saveemailcontent';
 $route['saveparameters'] = 'adminmaintenancecontroller/saveparameters';
 $route['updatepriviledge'] = 'adminmaintenancecontroller/updatepriviledge';
 $route['newevent'] = 'eventscontroller/newevent';
+$route['editofficer/(:any)'] = 'adminmaintenancecontroller/editofficer/$1';
+$route['updateofficer'] = 'visacontroller/updateofficer';
+$route['editregion/(:any)'] = 'adminmaintenancecontroller/editregion/$1';
+$route['updateregion'] = 'visacontroller/updateregion';
+$route['editassignment/(:any)'] = 'adminmaintenancecontroller/editassignment/$1';
+$route['updateassignment'] = 'visacontroller/updateassignment';
+$route['editevent/(:any)'] = 'eventscontroller/editevent/$1';
 
 // Scholarship routes
 $route['scholarships'] = 'scholarshipcontroller/index';

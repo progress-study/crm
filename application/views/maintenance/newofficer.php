@@ -213,6 +213,7 @@
             <div class="card-body">
               
               <form action="Adminmaintenancecontroller/do_upload" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="indicator" value="add">
                 <?php 
                     if(isset($error)) {
                 ?>
@@ -264,7 +265,9 @@
                 </div>
                 <div class="mb-3">
                   <label for="payee" class="form-label">Role</label>
-                  <select class="form-control select2" name="role">
+                  <input type="hidden" name="roletext" id="roletext">
+                  <select class="form-control select2" name="role" id="role" required>
+                    <option value=''>Select role</option>
                     <?php
                     foreach ($mastersetting as $row2) {
                       echo "<option value='".$row2->id."'>".$row2->identity."</option>";
@@ -327,23 +330,14 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 
 <script>
-  $(function () {
-    $("#example1").DataTable({
-      "responsive": true,
-      "autoWidth": false,
-    });
-    $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": false,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false,
-      "responsive": true,
-    });
-  });
 
   $('.select2').select2();
+
+  document.getElementById("role").onchange = function() {
+    var roletext = $("#role option:selected").text();
+    $("#roletext").val(roletext);
+  }
+
 </script>
 
 </body>

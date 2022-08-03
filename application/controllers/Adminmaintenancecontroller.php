@@ -254,34 +254,82 @@ class Adminmaintenancecontroller extends CI_Controller {
 
                 $this->load->library('upload', $config);
 
-                if ( ! $this->upload->do_upload('userfile'))
-                {
-                        $data = array('error' => $this->upload->display_errors());
-                        $this->load->view('newofficer', $data);
-                }
-                else
-                {
-                	$upload_data = $this->upload->data();
-					$file_name = $upload_data['file_name'];
+                if($this->input->post('indicator') == "add") {
+                	if ( ! $this->upload->do_upload('userfile'))
+	                {
+	                    $data = array(
+									'officer_login_name' => $this->input->post('loginname'),
+				                	'officer_name' => $this->input->post('name'),
+				                	'officer_last_logged_date' => date("Y-m-d"),
+				                	'officer_password' => $this->input->post('password'),
+				                	'officer_role' => $this->input->post('roletext'),
+				                	'officer_status' => 'active',
+				                	'officer_photo' => '',
+				                	'officer_office_id' => $this->input->post('office'),
+				                	'email' => $this->input->post('email'),
+				                	'officer_region' => $this->input->post('region'),
+				                	'user_role_id' => $this->input->post('role')
+								);
 
-                	$data = array(
-								'officer_login_name' => $this->input->post('loginname'),
-			                	'officer_name' => $this->input->post('name'),
-			                	'officer_last_logged_date' => date("Y-m-d"),
-			                	'officer_password' => $this->input->post('password'),
-			                	'officer_role' => $this->input->post('role'),
-			                	'officer_status' => 'active',
-			                	'officer_photo' => $file_name,
-			                	'officer_office_id' => $this->input->post('office'),
-			                	'email' => $this->input->post('email'),
-			                	'officer_region' => $this->input->post('region'),
-			                	'user_role_id' => $this->input->post('role')
-							);
+						$this->db->insert('officer', $data);
+	                    redirect('adminmaintenance');
+	                }
+	                else
+	                {
+	                	$upload_data = $this->upload->data();
+						$file_name = $upload_data['file_name'];
 
-					$this->db->insert('officer', $data);
-                    redirect('adminmaintenance');
+	                	$data = array(
+									'officer_login_name' => $this->input->post('loginname'),
+				                	'officer_name' => $this->input->post('name'),
+				                	'officer_last_logged_date' => date("Y-m-d"),
+				                	'officer_password' => $this->input->post('password'),
+				                	'officer_role' => $this->input->post('roletext'),
+				                	'officer_status' => 'active',
+				                	'officer_photo' => $file_name,
+				                	'officer_office_id' => $this->input->post('office'),
+				                	'email' => $this->input->post('email'),
+				                	'officer_region' => $this->input->post('region'),
+				                	'user_role_id' => $this->input->post('role')
+								);
+
+						$this->db->insert('officer', $data);
+	                    redirect('adminmaintenance');
+	                }
+                } else {
+					if ( ! $this->upload->do_upload('userfile'))
+	                {
+						$this->db->set('officer_login_name', $this->input->post('loginname'));
+						$this->db->set('officer_name', $this->input->post('name'));
+						$this->db->set('officer_password', $this->input->post('password'));
+						$this->db->set('officer_role', $this->input->post('roletext'));
+						$this->db->set('officer_photo', '');
+						$this->db->set('officer_office_id', $this->input->post('office'));
+						$this->db->set('email', $this->input->post('email'));
+						$this->db->set('officer_region', $this->input->post('region'));
+						$this->db->set('user_role_id', $this->input->post('role'));
+						$this->db->where('officer_id', $this->input->post('officerid'));
+						$this->db->update('officer');
+
+	                    redirect('adminmaintenance');
+	                }
+	                else
+	                {
+	                	$this->db->set('officer_login_name', $this->input->post('loginname'));
+						$this->db->set('officer_name', $this->input->post('name'));
+						$this->db->set('officer_password', $this->input->post('password'));
+						$this->db->set('officer_role', $this->input->post('roletext'));
+						$this->db->set('officer_photo', $file_name);
+						$this->db->set('officer_office_id', $this->input->post('office'));
+						$this->db->set('email', $this->input->post('email'));
+						$this->db->set('officer_region', $this->input->post('region'));
+						$this->db->set('user_role_id', $this->input->post('role'));
+						$this->db->where('officer_id', $this->input->post('officerid'));
+						$this->db->update('officer');
+						
+	                    redirect('adminmaintenance');
+	                }
                 }
-                
         }
 
     public function newassignment()
@@ -415,7 +463,76 @@ class Adminmaintenancecontroller extends CI_Controller {
 		$this->db->update('privilege');
 	}
 
-	
+	public function editofficer($officer_id) {
+		$asset_url = base_url()."assets/";
+		$data['title'] = "Edit Officer";
+		$data['asset_url'] = $asset_url;
+
+		$sql1 = "SELECT * FROM offices";
+	    $query1 = $this->db->query($sql1);
+	    $offices = $query1->result();
+
+	    $sql2 = "SELECT * FROM region";
+	    $query2 = $this->db->query($sql2);
+	    $region = $query2->result();
+
+	    $sql3 = "SELECT * FROM mastersetting where details = 'for roles'";
+	    $query3 = $this->db->query($sql3);
+	    $mastersetting = $query3->result();
+
+	    $sql4 = "SELECT * FROM officer where officer_id = '$officer_id'";
+	    $query4 = $this->db->query($sql4);
+	    $officer = $query4->result();
+
+	    if($this->session->officer_role == "regional manager" || $this->session->officer_role == "admin") {
+			$officer_id_check = $this->session->officer_id;
+			$sql11 = "SELECT * FROM notifications WHERE seen = 0 ORDER BY notif_id DESC LIMIT 20";
+			$query11 = $this->db->query($sql11);
+			$notifnum = $query11->num_rows();
+
+			$sql12 = "SELECT * FROM notifications WHERE seen = 0 ORDER BY notif_id DESC LIMIT 20";
+			$query12 = $this->db->query($sql12);
+			$notif = $query12->result();
+		} else {
+			$officer_id_check = $this->session->officer_id;
+			$sql11 = "SELECT * FROM notifications WHERE seen = 0 AND officer_id = '$officer_id_check' ORDER BY notif_id DESC LIMIT 20";
+			$query11 = $this->db->query($sql11);
+			$notifnum = $query11->num_rows();
+
+			$sql12 = "SELECT * FROM notifications WHERE seen = 0 AND officer_id = '$officer_id_check' ORDER BY notif_id DESC LIMIT 20";
+			$query12 = $this->db->query($sql12);
+			$notif = $query12->result();
+		}
+
+		$data['notifnum'] = $notifnum;
+		$data['notif'] = $notif;
+
+	    $this->db->where('privilege_id', $this->session->officer_role_id);
+        $query3 = $this->db->get('privilege');
+
+		foreach ($query3->result() as $row3)
+		{
+		        $data['privilege_manage_providers'] = $row3->privilege_manage_providers;
+		        $data['privilege_manage_reporting'] = $row3->privilege_manage_reporting;
+		        $data['privilege_manage_studentapps'] = $row3->privilege_manage_studentapps;
+		}
+
+	    $data['offices'] = $offices;
+	    $data['region'] = $region;
+	    $data['mastersetting'] = $mastersetting;
+	    $data['officerid'] = $officer_id;
+	    $data['officer'] = $officer;
+
+		if($this->session->officer_role == "") {
+			redirect(base_url()."index.php/messages");
+		} else {
+			if(isset($this->session->officer_name)) {
+				$this->load->view('maintenance/editofficer', $data);
+			} else {
+				redirect(base_url()."?error3=1");
+			}
+		}
+	}
 
 
 }

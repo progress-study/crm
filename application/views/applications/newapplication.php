@@ -219,7 +219,7 @@
             <!-- /.card-header -->
             <div class="card-body">
               
-              <form action="saveapplication" method="post">
+              <form action="<?php echo base_url(); ?>index.php/saveapplication" method="post">
                 <div class="mb-3">
                   <label for="payee" class="form-label">Customer</label>
                   <?php

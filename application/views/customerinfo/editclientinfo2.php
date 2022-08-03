@@ -217,7 +217,7 @@
                     if ($privilege_manage_clients == "1") {
                   ?>
                   <li class="nav-item">
-                    <a class="nav-link active" id="clientinfo-tab" data-toggle="tab" href="#clientinfo" role="tab" aria-controls="clientinfo" aria-selected="true">Client Information</a>
+                    <a class="nav-link customerinfotabs" id="clientinfo-tab" data-toggle="tab" href="#clientinfo" role="tab" aria-controls="clientinfo" aria-selected="true">Client Information</a>
                   </li>
                   <?php
                     }
@@ -226,19 +226,19 @@
                     if ($privilege_manage_studentdocs == "1") {
                   ?>
                   <li class="nav-item">
-                    <a class="nav-link" id="documents-tab" data-toggle="tab" href="#documents" role="tab" aria-controls="documents" aria-selected="false">Documents</a>
+                    <a class="nav-link customerinfotabs" id="documents-tab" data-toggle="tab" href="#documents" role="tab" aria-controls="documents" aria-selected="false">Documents</a>
                   </li>
                   <?php
                     }
                   ?>
                   <li class="nav-item">
-                    <a class="nav-link" id="programoptions-tab" data-toggle="tab" href="#programoptions" role="tab" aria-controls="programoptions" aria-selected="false">Program Options</a>
+                    <a class="nav-link customerinfotabs" id="programoptions-tab" data-toggle="tab" href="#programoptions" role="tab" aria-controls="programoptions" aria-selected="false">Program Options</a>
                   </li>
                   <?php
                     if ($privilege_manage_studentapps == "1") {
                   ?>
                   <li class="nav-item">
-                    <a class="nav-link" id="studentapplication-tab" data-toggle="tab" href="#studentapplication" role="tab" aria-controls="studentapplication" aria-selected="false">Student Application</a>
+                    <a class="nav-link customerinfotabs" id="studentapplication-tab" data-toggle="tab" href="#studentapplication" role="tab" aria-controls="studentapplication" aria-selected="false">Student Application</a>
                   </li>
                   <?php
                     }
@@ -247,7 +247,7 @@
                     if ($privilege_manage_prapps == "1" && $privilege_manage_prdocs == "1") {
                   ?>
                   <li class="nav-item">
-                    <a class="nav-link" id="visaapplication-tab" data-toggle="tab" href="#visaapplication" role="tab" aria-controls="visaapplication" aria-selected="false">Visa Applications</a>
+                    <a class="nav-link customerinfotabs" id="visaapplication-tab" data-toggle="tab" href="#visaapplication" role="tab" aria-controls="visaapplication" aria-selected="false">Visa Applications</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" id="visaeoi-tab" data-toggle="tab" href="#visaeoi" role="tab" aria-controls="visaeoi" aria-selected="false">Visa EOI</a>
@@ -259,7 +259,7 @@
                     if ($privilege_manage_prfeereceived == "1" && $privilege_manage_prfeepaid == "1") {
                   ?>
                   <li class="nav-item">
-                    <a class="nav-link" id="visaaccount-tab" data-toggle="tab" href="#visaaccount" role="tab" aria-controls="visaaccount" aria-selected="false">Visa Accounts</a>
+                    <a class="nav-link customerinfotabs" id="visaaccount-tab" data-toggle="tab" href="#visaaccount" role="tab" aria-controls="visaaccount" aria-selected="false">Visa Accounts</a>
                   </li>
                   <?php
                     }
@@ -268,7 +268,7 @@
                     if ($privilege_manage_studentapps == "1") {
                   ?>
                   <li class="nav-item">
-                    <a class="nav-link" id="scholarshipallocation-tab" data-toggle="tab" href="#scholarshipallocation" role="tab" aria-controls="scholarshipallocation" aria-selected="false">Scholarship Allocation</a>
+                    <a class="nav-link customerinfotabs" id="scholarshipallocation-tab" data-toggle="tab" href="#scholarshipallocation" role="tab" aria-controls="scholarshipallocation" aria-selected="false">Scholarship Allocation</a>
                   </li>
                   <?php
                     }
@@ -280,7 +280,7 @@
                 <div class="tab-content" id="myTabContent">
                   <div class="tab-pane fade show active" id="clientinfo" role="tabpanel" aria-labelledby="clientinfo-tab">
                 <br>
-                <form action="<?php echo base_url().'index.php/customerinfocontroller/do_upload' ?>" method="post" enctype="multipart/form-data">
+                <form action="<?php echo base_url().'index.php/customerinfocontroller/do_upload' ?>" method="post"  onsubmit="validateData(event);" enctype="multipart/form-data">
                 <?php 
                     if(isset($error)) {
                 ?>
@@ -332,11 +332,11 @@
                       </div>
                       <div class="mb-3">
                         <label for="payee" class="form-label">Date of Birth</label>
-                        <input type="date" class="form-control" name="birthdate" value="<?php echo $dob; ?>">
+                        <input type="date" class="form-control" name="birthdate" id="birthdate" value="<?php echo $dob; ?>">
                       </div>
                       <div class="mb-3">
                         <label for="payee" class="form-label">Visa Expiry Date</label>
-                        <input type="date" class="form-control" name="vedate" value="<?php echo $ve; ?>">
+                        <input type="date" class="form-control" name="vedate" id="vedate" value="<?php echo $ve; ?>">
                       </div>
                       <div class="mb-3">
                         <label for="payee" class="form-label">Phone Number</label>
@@ -388,11 +388,20 @@
                         <label for="amount" class="form-label">Attended Event</label>
                         <div class="row">
                           <div class="col-6">
-                            <input type="text" class="form-control" name="event" value="<?php echo $row1->client_event_id; ?>" readonly>
+                            <?php
+                                $eventname = "";
+                                $this->db->where('event_id', $row1->client_event_id);
+                                $eventquery = $this->db->get('events');
+                                foreach ($eventquery->result() as $eventrow)
+                                {
+                                  $eventname = $eventrow->event_name;
+                                }
+                            ?>
+                            <input type="text" class="form-control" name="event" value="<?php echo $eventname; ?>" readonly>
                           </div>
                           <div class="col-6">
                             <select class="form-control" name="selectevent">
-                              <option value="0">Select Event</option>
+                              <option value="">Select Event</option>
                               <?php
                                 foreach($events as $row2) {
                               ?>
@@ -408,11 +417,20 @@
                         <label for="amount" class="form-label">Administering Office</label>
                         <div class="row">
                           <div class="col-6">
-                            <input type="text" class="form-control" name="office" value="<?php echo $row1->client_office_id; ?>" readonly>
+                            <?php
+                                $officescode = "";
+                                $this->db->where('offices_id', $row1->client_office_id);
+                                $officequery = $this->db->get('offices');
+                                foreach ($officequery->result() as $officerow)
+                                {
+                                  $officescode = $officerow->offices_code;
+                                }
+                            ?>
+                            <input type="text" class="form-control" name="office" value="<?php echo $officescode; ?>" readonly>
                           </div>
                           <div class="col-6">
                             <select class="form-control" name="selectoffice">
-                              <option value="0">Select Office</option>
+                              <option value="">Select Office</option>
                               <?php
                                 foreach($offices as $row2) {
                               ?>
@@ -453,7 +471,7 @@
 
                   <div class="tab-pane fade" id="studentapplication" role="tabpanel" aria-labelledby="studentapplication-tab">
                     <br>
-                    <a href="<?php echo base_url(); ?>index.php/newapplication/<?php echo $client_id; ?>" class="btn btn-primary">New Application</a>
+                    <a href="<?php echo base_url(); ?>index.php/newapplication/<?php echo $client_id; ?>" class="btn btn-primary" target="_blank">New Application</a>
                     <br><br>
                     <table id="example1" class="table table-bordered table-striped">
                       <thead>
@@ -519,7 +537,7 @@
                   
                   <div class="tab-pane fade" id="visaapplication" role="tabpanel" aria-labelledby="visaapplication-tab">
                       <br>
-                      <a href="<?php echo base_url(); ?>index.php/newvisaapplication/<?php echo $client_id; ?>" class="btn btn-primary">New Visa Application</a>
+                      <a href="<?php echo base_url(); ?>index.php/newvisaapplication/<?php echo $client_id; ?>" class="btn btn-primary" target="_blank">New Visa Application</a>
                       <br><br>
                       <table id="visaapplicationtable" class="table table-bordered table-striped">
                         <thead>
@@ -539,7 +557,7 @@
                             <td>".$row->new_Visa_subclass."</td>
                             <td>".$row->visa_critical_month."/".$row->visa_critical_day."/".$row->visa_critical_year."</td>
                             <td>".$row->status."</td>
-                            <td><a href='".base_url()."index.php/editvisaapplication/".$row->client_visa_id."' class='btn btn-primary btn-xs'>Edit</a> <a href='".base_url()."index.php/newvisaaccount/".$row->client_visa_id."/".$client_id."' class='btn btn-primary btn-xs'>New Visa Account</a></td>
+                            <td><a href='".base_url()."index.php/editvisaapplication/".$row->client_visa_id."' class='btn btn-primary btn-xs'>Edit</a> <a href='".base_url()."index.php/newvisaaccount/".$row->client_visa_id."/".$client_id."' class='btn btn-primary btn-xs' target='_blank'>New Visa Account</a></td>
                           </tr>";
                         }
                         ?>
@@ -557,7 +575,7 @@
                   </div>
                   <div class="tab-pane fade" id="visaeoi" role="tabpanel" aria-labelledby="visaeoi-tab">
                       <br>
-                      <a href="<?php echo base_url(); ?>index.php/newvisaeoi/<?php echo $client_id; ?>" class="btn btn-primary">New Visa EOI</a>
+                      <a href="<?php echo base_url(); ?>index.php/newvisaeoi/<?php echo $client_id; ?>" class="btn btn-primary" target="_blank">New Visa EOI</a>
                       <br><br>
                       <table id="visaeoitable" class="table table-bordered table-striped">
                         <thead>
@@ -669,7 +687,7 @@
                   </div>
                   <div class="tab-pane fade" id="scholarshipallocation" role="tabpanel" aria-labelledby="scholarshipallocation-tab">
                       <br>
-                      <a href="<?php echo base_url(); ?>index.php/newscholarshipallocation/<?php echo $client_id; ?>" class="btn btn-primary">New Scholarship Allocation</a>
+                      <a href="<?php echo base_url(); ?>index.php/newscholarshipallocation/<?php echo $client_id; ?>" class="btn btn-primary" target="_blank">New Scholarship Allocation</a>
                       <br><br>
                       <table id="scholarshipallocationtable" class="table table-bordered table-striped">
                         <thead>
@@ -750,7 +768,7 @@
                   </div>
                   <div class="tab-pane fade" id="programoptions" role="tabpanel" aria-labelledby="programoptions-tab">
                       <br>
-                      <a href="<?php echo base_url(); ?>index.php/newprogramoption/<?php echo $client_id; ?>" class="btn btn-primary">New Program Option</a>
+                      <a href="<?php echo base_url(); ?>index.php/newprogramoption/<?php echo $client_id; ?>" class="btn btn-primary" target="_blank">New Program Option</a>
                       <br><br>
                       <table id="programoptionstable" class="table table-bordered table-striped">
                         <thead>
@@ -852,9 +870,22 @@
                 <label for="documenalias">Document Alias</label>
                 <select id="documenalias" class="form-control">
                   <option>Select Alias</option>
+                  <option value="Resume">Resume</option>
                   <option value="Passport">Passport</option>
-                  <option value="Birth certificate">Birth certificate</option>
-                  <option value="1x1 photo">1x1 photo</option>
+                  <option value="English Test Result">English Test Result</option>
+                  <option value="Current Australian Visa">Current Australian Visa</option>
+                  <option value="Current OSHC Document">Current OSHC Document</option>
+                  <option value="Birth Certificate">Birth Certificate</option>
+                  <option value="Marriage Certificate">Marriage Certificate</option>
+                  <option value="Overseas Academic Transcript">Overseas Academic Transcript</option>
+                  <option value="Overseas Completion Letter">Overseas Completion Letter</option>
+                  <option value="All Australian Academic Transcript">All Australian Academic Transcript</option>
+                  <option value="All Australian Completion Letter">All Australian Completion Letter</option>
+                  <option value="Confirmation of Enrolment">Confirmation of Enrolment</option>
+                  <option value="Employment Certificate">Employment Certificate</option>
+                  <option value="Salary">Salary</option>
+                  <option value="Bank Certificate">Bank Certificate</option>
+                  <option value="Statement of Purpose - GTER">Statement of Purpose - GTER</option>
                 </select>
               </div>
               <div class="form-group">
@@ -972,6 +1003,24 @@ outlining your job title, responsibilities and duration of employment.</option>
 
   function ResetFile() {
     document.getElementById("documentForm").reset();
+  }
+
+  document.getElementsByClassName("customerinfotabs")[0].click();
+
+  function validateData(evt) {
+    if (document.getElementById("birthdate").value == "") {
+      alert("Birth date has wrong date format. Kindly replace with appropriate date.");
+      evt.preventDefault();
+      return false;
+    }
+    
+    if (document.getElementById("vedate").value == "") {
+      alert("Visa expiration date has wrong date format. Kindly replace with appropriate date.");
+      evt.preventDefault();
+      return false;
+    }
+
+    return true;
   }
 
 </script>

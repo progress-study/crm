@@ -114,7 +114,7 @@ left: 50px;
 
 		                            <div class="mb-3">
 		                              <label for="exampleFormControlInput1" class="form-label">Visa Expiration date</label>
-		                              <input type="date" name="visaexpdate" class="form-control" id="exampleFormControlInput1" required>
+		                              <input type="date" name="visaexpdate" class="form-control" id="exampleFormControlInput1">
 		                            </div>
 		                    </div>
 		                </div>

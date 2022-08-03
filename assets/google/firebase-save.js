@@ -139,16 +139,16 @@ function setDocumentsTable2() {
 	      for(var i = 0; i < obj.length; i++) {
 		  	var modi = i % 5;
 		  	if (i > 0 && modi == 0) {
-		  		tabledata += "<div class='col'><center><input type='checkbox' class='deleteselect' value='"+obj[i].fbid+"'><a href='" + obj[i].document_link + "' target='_blank'><img src='" + imageasseturl2 + "' style='width: 70px; width: 65px;'><br><b>" + obj[i].document_type + "</b><br><b style='font-size: 12px;'>" + obj[i].alias + "</b>(<label style='font-size: 12px;'>" + obj[i].document_name + "</label>)</a></center></div></div><div class='row'>";
+		  		tabledata += "<div class='col'><center><input type='checkbox' class='deleteselect' value='"+obj[i].fbid+"'><a href='" + obj[i].document_link + "' target='_blank'><img src='" + imageasseturl2 + "' style='width: 70px; width: 65px;'><br><b>" + obj[i].document_type + "</b><br><b style='font-size: 12px;'>" + obj[i].alias + "</b> - <label style='font-size: 12px;'>" + obj[i].document_name + "</label></a></center></div></div><div class='row'>";
 		  	} 
 		  	else if (i == 0) {
-		  		tabledata += "<div class='row'><div class='col'><center><input type='checkbox' class='deleteselect' value='"+obj[i].fbid+"'><a href='" + obj[i].document_link + "' target='_blank'><img src='" + imageasseturl2 + "' style='width: 70px; width: 65px;'><br><b>" + obj[i].document_type + "</b><br><b style='font-size: 12px;'>" + obj[i].alias + "</b>(<label style='font-size: 12px;'>" + obj[i].document_name + "</label>)</a></center></div>"
+		  		tabledata += "<div class='row'><div class='col'><center><input type='checkbox' class='deleteselect' value='"+obj[i].fbid+"'><a href='" + obj[i].document_link + "' target='_blank'><img src='" + imageasseturl2 + "' style='width: 70px; width: 65px;'><br><b>" + obj[i].document_type + "</b><br><b style='font-size: 12px;'>" + obj[i].alias + "</b> - <label style='font-size: 12px;'>" + obj[i].document_name + "</label></a></center></div>"
 		  	}
 		  	else if (i == (obj.length-1)) {
-		  		tabledata += "<div class='col'><center><input type='checkbox' class='deleteselect' value='"+obj[i].fbid+"'><a href='" + obj[i].document_link + "' target='_blank'><img src='" + imageasseturl2 + "' style='width: 70px; width: 65px;'><br><b>" + obj[i].document_type + "</b><br><b style='font-size: 12px;'>" + obj[i].alias + "</b>(<label style='font-size: 12px;'>" + obj[i].document_name + "</label>)</a></center></div></div>"
+		  		tabledata += "<div class='col'><center><input type='checkbox' class='deleteselect' value='"+obj[i].fbid+"'><a href='" + obj[i].document_link + "' target='_blank'><img src='" + imageasseturl2 + "' style='width: 70px; width: 65px;'><br><b>" + obj[i].document_type + "</b><br><b style='font-size: 12px;'>" + obj[i].alias + "</b> - <label style='font-size: 12px;'>" + obj[i].document_name + "</label></a></center></div></div>"
 		  	}
 		  	else {
-		  		tabledata += "<div class='col'><center><input type='checkbox' class='deleteselect' value='"+obj[i].fbid+"'><a href='" + obj[i].document_link + "' target='_blank'><img src='" + imageasseturl2 + "' style='width: 70px; width: 65px;'><br><b>" + obj[i].document_type + "</b><br><b style='font-size: 12px;'>" + obj[i].alias + "</b>(<label style='font-size: 12px;'>" + obj[i].document_name + "</label>)</a></center></div>";
+		  		tabledata += "<div class='col'><center><input type='checkbox' class='deleteselect' value='"+obj[i].fbid+"'><a href='" + obj[i].document_link + "' target='_blank'><img src='" + imageasseturl2 + "' style='width: 70px; width: 65px;'><br><b>" + obj[i].document_type + "</b><br><b style='font-size: 12px;'>" + obj[i].alias + "</b> - <label style='font-size: 12px;'>" + obj[i].document_name + "</label></a></center></div>";
 		  	}
 		  }
 		  document.getElementById("documentrow1").innerHTML = tabledata;

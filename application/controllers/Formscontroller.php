@@ -93,6 +93,9 @@ class Formscontroller extends CI_Controller {
         if (!$this->upload->do_upload('resume'))
         {
         	if ($this->input->post('password') == $this->input->post('password2')) {
+        		if ($this->input->post('visaexpdate') == "") {
+        			$visaexpdate = "1900-01-01";
+        		}
 	    		$data = array(
 							'inquiries_surname' => $this->input->post('lastname'),
 							'inquiries_firstname' => $this->input->post('firstname'),
@@ -116,7 +119,7 @@ class Formscontroller extends CI_Controller {
 							'inquiries_info_receiving_consent' => $confirm2,
 							'inquiries_status' => 'Created',
 							'inquiries_resume' => '',
-							'inquiries_visaexpdate' => $this->input->post('visaexpdate'),
+							'inquiries_visaexpdate' => $visaexpdate,
 							'inquiries_visaheld' => $this->input->post('visaheld')
 						);
 				$this->db->insert('inquiries', $data);
@@ -178,6 +181,9 @@ class Formscontroller extends CI_Controller {
 			$file_name = $upload_data['file_name'];
 
         	if ($this->input->post('password') == $this->input->post('password2')) {
+        		if ($this->input->post('visaexpdate') == "") {
+        			$visaexpdate = "1900-01-01";
+        		}
 	    		$data = array(
 							'inquiries_surname' => $this->input->post('lastname'),
 							'inquiries_firstname' => $this->input->post('firstname'),
@@ -201,7 +207,7 @@ class Formscontroller extends CI_Controller {
 							'inquiries_info_receiving_consent' => $confirm2,
 							'inquiries_status' => 'Created',
 							'inquiries_resume' => $file_name,
-							'inquiries_visaexpdate' => $this->input->post('visaexpdate'),
+							'inquiries_visaexpdate' => $visaexpdate,
 							'inquiries_visaheld' => $this->input->post('visaheld')
 						);
 				$this->db->insert('inquiries', $data);

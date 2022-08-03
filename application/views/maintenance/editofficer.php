@@ -11,18 +11,30 @@
   <link rel="stylesheet" href="<?php echo $asset_url; ?>plugins/fontawesome-free/css/all.min.css">
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- DataTables -->
+  <link rel="stylesheet" href="<?php echo $asset_url; ?>plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="<?php echo $asset_url; ?>plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="<?php echo $asset_url; ?>dist/css/adminlte.min.css">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-
-  <link rel="stylesheet" href="<?php echo $asset_url; ?>plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <style type="text/css">
+    .select2-container .select2-selection--single{
+        height:34px !important;
+    }
+    .select2-container--default .select2-selection--single{
+             border: 1px solid #ccc !important; 
+         border-radius: 0px !important; 
+    }
+  </style>
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
   <!-- Navbar -->
   <nav class="main-header navbar navbar-expand navbar-white navbar-light">
-
+    
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
       <!-- Notifications Dropdown Menu -->
@@ -68,7 +80,7 @@
 
     <!-- Sidebar -->
     <div class="sidebar">
-      <!-- Sidebar user (optional) -->
+      <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
           <img src="<?php echo $asset_url; ?>dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
@@ -108,8 +120,8 @@
             </a>
           </li>
           <?php
-  if ($privilege_manage_providers == "1") {
-?>
+            if ($privilege_manage_providers == "1") {
+          ?>
           <li class="nav-item">
             <a href="<?php echo base_url().'index.php/schools'; ?>" class="nav-link<?php if($title == 'Schools and Programs'){ echo ' active';} ?>">
               <i class="nav-icon fas fa-th"></i>
@@ -119,11 +131,11 @@
             </a>
           </li>
           <?php
-  }
-?>
+            }
+          ?>
           <?php
-  if ($privilege_manage_studentapps == "1") {
-?>
+            if ($privilege_manage_studentapps == "1") {
+          ?>
           <li class="nav-item">
             <a href="<?php echo base_url().'index.php/applications'; ?>" class="nav-link<?php if($title == 'Applications'){ echo ' active';} ?>">
               <i class="nav-icon fas fa-th"></i>
@@ -133,8 +145,8 @@
             </a>
           </li>
           <?php
-  }
-?>
+            }
+          ?>
           <li class="nav-item">
             <a href="<?php echo base_url().'index.php/adminmaintenance'; ?>" class="nav-link<?php if($title == 'Admin Maintenance'){ echo ' active';} ?>">
               <i class="nav-icon fas fa-th"></i>
@@ -152,8 +164,8 @@
             </a>
           </li>
           <?php
-  if ($privilege_manage_reporting == "1") {
-?>
+            if ($privilege_manage_reporting == "1") {
+          ?>
           <li class="nav-item">
             <a href="<?php echo base_url().'index.php/reports'; ?>" class="nav-link<?php if($title == 'Reports'){ echo ' active';} ?>">
               <i class="nav-icon fas fa-th"></i>
@@ -163,8 +175,8 @@
             </a>
           </li>
           <?php
-  }
-?>
+            }
+          ?>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
@@ -199,90 +211,77 @@
           <div class="card">
             <!-- /.card-header -->
             <div class="card-body">
+              
+              <form action="Adminmaintenancecontroller/do_upload" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="indicator" value="edit">
+                <input type="hidden" name="officerid" value="<?php echo $officerid; ?>">
+                <?php 
+                    if(isset($error)) {
+                ?>
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                  <?php echo $error; ?>
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <?php
+                    }
+                ?>
                 
-                <form action="<?php echo base_url().'index.php/savevisaapplication'; ?>" method="post">
-                  <div class="mb-3">
-                    <label for="clientname" class="form-label">Client Name</label>
+                <div class="mb-3">
+                  <label for="amount" class="form-label">Name</label>
+                  <input type="text" class="form-control" name="name" placeholder="Full Name" required>
+                </div>
+                <div class="mb-3">
+                  <label for="amount" class="form-label">Login Name</label>
+                  <input type="text" class="form-control" name="loginname" placeholder="Login Name" required>
+                </div>
+                <div class="mb-3">
+                  <label for="amount" class="form-label">Email</label>
+                  <input type="email" class="form-control" name="email" placeholder="Email" required>
+                </div>
+                <div class="mb-3">
+                  <label for="amount" class="form-label">Password</label>
+                  <input type="password" class="form-control" name="password" placeholder="Password" required>
+                </div>
+                <div class="mb-3">
+                  <label for="payee" class="form-label">Office</label>
+                  <select class="form-control select2" name="office">
                     <?php
-                      foreach ($singleclient as $row) {
+                    foreach ($offices as $row) {
+                      echo "<option value='".$row->offices_id."'>".$row->offices_code." - ".$row->offices_address1."</option>";
+                    }
                     ?>
-                        <input type="hidden" name="clientid" value="<?php echo $row->client_id; ?>">
-                        <input type="text" name="clientname" class="form-control" value="<?php echo $row->client_surname.', '.$row->client_firstname.' '.$row->client_middlename; ?>" readonly>
+                  </select>
+                </div>
+                <div class="mb-3">
+                  <label for="payee" class="form-label">Initial Region Assignment</label>
+                  <select class="form-control select2" name="region">
                     <?php
-                      }
+                    foreach ($region as $row2) {
+                      echo "<option value='".$row2->region_id."'>".$row2->region_name."</option>";
+                    }
                     ?>
-                  </div>
-                  <div class="mb-3">
-                    <label for="visasubclass" class="form-label">Visa Subclass</label>
-                    <input type="text" name="visasubclass" class="form-control">
-                  </div>
-                  <div class="mb-3">
-                    <label for="visasubclassheld" class="form-label">Current Visa Subclass Held</label>
-                    <input type="text" name="visasubclassheld" class="form-control">
-                  </div>
-                  <div class="mb-3">
-                    <label for="description" class="form-label">Visa Description</label>
-                    <input type="text" name="description" class="form-control">
-                  </div>
-                  <div class="mb-3">
-                    <label for="nameofdependents" class="form-label">Name of Dependents</label>
-                    <input type="text" name="nameofdependents" class="form-control">
-                  </div>
-                  <div class="mb-3">
-                    <label for="notes" class="form-label">Other Notes</label>
-                    <input type="text" name="notes" class="form-control">
-                  </div>
-                  <div class="mb-3">
-                    <label for="costagreementsigned" class="form-label">Cost Agreement Signed</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <input type="radio" name="costagreementsigned" id="costagreementsignedyes" value="yes"> Yes &nbsp;&nbsp; <input type="radio" name="costagreementsigned" id="costagreementsignedno" value="no"> No
-                  </div>
-                  <div class="mb-3">
-                    <label for="costagreementissued" class="form-label">Cost Agreement Issued</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <input type="radio" name="costagreementissued" id="costagreementissuedyes" value="yes"> Yes &nbsp;&nbsp; <input type="radio" name="costagreementissued" id="costagreementissuedno" value="no"> No
-                  </div>
-                  <div class="mb-3">
-                    <label for="visaexpirydate" class="form-label">Visa Expiry Date</label>
-                    <input type="date" class="form-control" name="visaexpirydate">
-                  </div>
-                  <div class="mb-3">
-                    <label for="visaafplodgeddate" class="form-label">Visa AFP Lodged Date</label>
-                    <input type="date" class="form-control" name="visaafplodgeddate">
-                  </div>
-                  <div class="mb-3">
-                    <label for="visalodgeddate" class="form-label">Visa Lodged Date</label>
-                    <input type="date" class="form-control" name="visalodgeddate">
-                  </div>
-                  <div class="mb-3">
-                    <label for="visacriticaldate" class="form-label">Visa Critical Date</label>
-                    <input type="date" class="form-control" name="visacriticaldate">
-                  </div>
-                  <div class="mb-3">
-                    <label for="skillassessmentlodgeddate" class="form-label">Skill Assessment Lodged Date</label>
-                    <input type="date" class="form-control" name="skillassessmentlodgeddate">
-                  </div>
-                  <div class="mb-3">
-                    <label for="englishtestdate" class="form-label">English Test Date</label>
-                    <input type="date" class="form-control" name="englishtestdate">
-                  </div>
-                  <div class="mb-3">
-                    <label for="visadecisiondate" class="form-label">Visa Decision Date</label>
-                    <input type="date" class="form-control" name="visadecisiondate">
-                  </div>
-                  <div class="mb-3">
-                    <label for="flag" class="form-label">Flag</label>
-                    <select class="form-control" name="flag">
-                      <option value="Withdrawn">Withdrawn</option>
-                      <option value="Granted">Granted</option>
-                      <option value="Refused">Refused</option>
-                      <option value="Appealing">Appealing</option>
-                      <option value="Discontinued">Discontinued</option>
-                      <option value="EOI">EOI</option>
-                      <option value="Submitted">Submitted</option>
-                      <option value="WIP">WIP</option>
-                    </select>
-                  </div>
-                  <button type="submit" class="btn btn-primary">Submit</button>
-                </form>
+                  </select>
+                </div>
+                <div class="mb-3">
+                  <label for="payee" class="form-label">Role</label>
+                  <input type="hidden" name="roletext" id="roletext">
+                  <select class="form-control select2" name="role" id="role" required>
+                    <option value=''>Select role</option>
+                    <?php
+                    foreach ($mastersetting as $row2) {
+                      echo "<option value='".$row2->id."'>".$row2->identity."</option>";
+                    }
+                    ?>
+                  </select>
+                </div>
+                <div class="mb-3">
+                  <label for="amount" class="form-label">Photo</label>
+                  <input type="file" class="form-control" name="userfile" placeholder="Photo" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </form>
 
             </div>
             <!-- /.card-body -->
@@ -316,60 +315,31 @@
 <script src="<?php echo $asset_url; ?>plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
 <script src="<?php echo $asset_url; ?>plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- bs-custom-file-input -->
-<script src="<?php echo $asset_url; ?>plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
-<!-- AdminLTE App -->
-<script src="<?php echo $asset_url; ?>dist/js/adminlte.min.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="<?php echo $asset_url; ?>dist/js/demo.js"></script>
 <!-- DataTables -->
 <script src="<?php echo $asset_url; ?>plugins/datatables/jquery.dataTables.min.js"></script>
 <script src="<?php echo $asset_url; ?>plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
 <script src="<?php echo $asset_url; ?>plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
 <script src="<?php echo $asset_url; ?>plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<!-- AdminLTE App -->
+<script src="<?php echo $asset_url; ?>dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="<?php echo $asset_url; ?>dist/js/demo.js"></script>
+<!-- page script -->
+
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 
 <script>
-  $(function () {
-
-    $("#example1").DataTable({
-      "responsive": true,
-      "autoWidth": false,
-    });
-    $("#studentapplicationtable").DataTable({
-      "responsive": true,
-      "autoWidth": false,
-    });
-    $("#visaapplicationtable").DataTable({
-      "responsive": true,
-      "autoWidth": false,
-    });
-    $("#visaeoitable").DataTable({
-      "responsive": true,
-      "autoWidth": false,
-    });
-    $("#visaaccounttable").DataTable({
-      "responsive": true,
-      "autoWidth": false,
-    });
-    $("#scholarshipallocationtable").DataTable({
-      "responsive": true,
-      "autoWidth": false,
-    });
-    $("#paymentstable").DataTable({
-      "responsive": true,
-      "autoWidth": false,
-    });
-
-  });
 
   $('.select2').select2();
 
+  document.getElementById("role").onchange = function() {
+    var roletext = $("#role option:selected").text();
+    $("#roletext").val(roletext);
+  }
+
 </script>
 
-<script type="text/javascript">
-$(document).ready(function () {
-  bsCustomFileInput.init();
-});
-</script>
 </body>
 </html>

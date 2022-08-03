@@ -198,18 +198,18 @@
         <div class="col-12">
           <div class="card">
             <div class="card-body">
-            <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <ul class="nav nav-tabs" id="MaintenanceTab" role="tablist">
                   <?php
                     if ($privilege_manage_officers == "1") {
                   ?>
                   <li class="nav-item">
-                    <a class="nav-link active" id="officer1-tab" data-toggle="tab" href="#officer1" role="tab" aria-controls="officer1" aria-selected="true">Officers</a>
+                    <a class="nav-link maintenancetabs" id="officer1-tab" data-toggle="tab" href="#officer1" role="tab" aria-controls="officer1" aria-selected="true">Officers</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" id="officerassignment-tab" data-toggle="tab" href="#officerassignment" role="tab" aria-controls="officerassignment" aria-selected="false">Officer Assignment</a>
+                    <a class="nav-link maintenancetabs" id="officerassignment-tab" data-toggle="tab" href="#officerassignment" role="tab" aria-controls="officerassignment" aria-selected="false">Officer Assignment</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" id="region1-tab" data-toggle="tab" href="#region1" role="tab" aria-controls="region1" aria-selected="false">Region</a>
+                    <a class="nav-link maintenancetabs" id="region1-tab" data-toggle="tab" href="#region1" role="tab" aria-controls="region1" aria-selected="false">Region</a>
                   </li>
                   <?php
                     }
@@ -218,7 +218,7 @@
                     if ($privilege_manage_events == "1") {
                   ?>
                   <li class="nav-item">
-                    <a class="nav-link" id="events-tab" data-toggle="tab" href="#events" role="tab" aria-controls="events" aria-selected="false">Events</a>
+                    <a class="nav-link maintenancetabs" id="events-tab" data-toggle="tab" href="#events" role="tab" aria-controls="events" aria-selected="false">Events</a>
                   </li>
                   <?php
                     }
@@ -227,7 +227,7 @@
                     if ($privilege_manage_privilege == "1") {
                   ?>
                   <li class="nav-item">
-                    <a class="nav-link" id="priviledges-tab" data-toggle="tab" href="#priviledges" role="tab" aria-controls="priviledges" aria-selected="false">Priviledges</a>
+                    <a class="nav-link maintenancetabs" id="priviledges-tab" data-toggle="tab" href="#priviledges" role="tab" aria-controls="priviledges" aria-selected="false">Priviledges</a>
                   </li>
                   <?php
                     }
@@ -236,10 +236,10 @@
                     if ($privilege_manage_parameters == "1") {
                   ?>
                   <li class="nav-item">
-                    <a class="nav-link" id="emailcontent-tab" data-toggle="tab" href="#emailcontent" role="tab" aria-controls="emailcontent" aria-selected="false">Email Contents</a>
+                    <a class="nav-link maintenancetabs" id="emailcontent-tab" data-toggle="tab" href="#emailcontent" role="tab" aria-controls="emailcontent" aria-selected="false">Email Contents</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" id="parameters-tab" data-toggle="tab" href="#parameters" role="tab" aria-controls="parameters" aria-selected="false">Parameters</a>
+                    <a class="nav-link maintenancetabs" id="parameters-tab" data-toggle="tab" href="#parameters" role="tab" aria-controls="parameters" aria-selected="false">Parameters</a>
                   </li>
                   <?php
                     }
@@ -248,7 +248,7 @@
             <div class="tab-content" id="myTabContent">
               <div class="tab-pane fade show" id="officer1" role="tabpanel" aria-labelledby="officer1-tab">
                   <div class="card-header">
-                    <h3 class="card-title"><a href="newofficer">Add New Officer</a></h3>
+                    <h3 class="card-title"><a href="newofficer" target="_blank">Add New Officer</a></h3>
                   </div>
                   <!-- /.card-header -->
                   <div class="card-body">
@@ -272,7 +272,7 @@
                           <td>".$row->officer_role."</td>
                           <td>".$row->officer_status."</td>
                           <td>".$row->officer_last_logged_date."</td>
-                          <td><a href='editofficer/".$row->officer_id."' class='btn btn-primary btn-xs'>Edit</a></td>
+                          <td><a href='editofficer/".$row->officer_id."' class='btn btn-primary btn-xs' target='_blank'>Edit</a></td>
                         </tr>";
                       }
                       ?>
@@ -293,7 +293,7 @@
               </div>
               <div class="tab-pane fade" id="officerassignment" role="tabpanel" aria-labelledby="officerassignment-tab">
                   <div class="card-header">
-                    <h3 class="card-title"><a href="newassignment">Add New Region Assignment</a></h3>
+                    <h3 class="card-title"><a href="newassignment" target="_blank">Add New Region Assignment</a></h3>
                   </div>
                   <!-- /.card-header -->
                   <div class="card-body">
@@ -334,7 +334,7 @@
               </div>
               <div class="tab-pane fade" id="region1" role="tabpanel" aria-labelledby="region1-tab">
                   <div class="card-header">
-                    <h3 class="card-title"><a href="newregion">Add Region</a></h3>
+                    <h3 class="card-title"><a href="newregion" target="_blank">Add Region</a></h3>
                   </div>
                   <!-- /.card-header -->
                   <div class="card-body">
@@ -370,7 +370,7 @@
               </div>
               <div class="tab-pane fade" id="events" role="tabpanel" aria-labelledby="events-tab">
                   <div class="card-header">
-                    <h3 class="card-title"><a href="newevent">Add Event</a></h3>
+                    <h3 class="card-title"><a href="newevent" target="_blank">Add Event</a></h3>
                   </div>
                   <!-- /.card-header -->
                   <div class="card-body">
@@ -830,6 +830,9 @@
       "responsive": true,
     });
   });
+</script>
+<script type="text/javascript">
+    document.getElementsByClassName("maintenancetabs")[0].click();
 </script>
 </body>
 </html>

@@ -320,21 +320,15 @@ class Customerinfocontroller extends CI_Controller {
 			    	$veday = $vedate->format("d");
 
 			    	if($this->input->post('selectevent') != "") {
-			    		$selectevent = $this->input->post('selectevent');
-			    	} else {
-			    		$selectevent = 0;
+			    		$this->db->set('client_event_id', $this->input->post('selectevent'));
 			    	}
 
 			    	if($this->input->post('selectoffice') != "") {
-			    		$selectoffice = $this->input->post('selectoffice');
-			    	} else {
-			    		$selectoffice = 0;
+			    		$this->db->set('client_office_id', $this->input->post('selectoffice'));
 			    	}
 
-			    	if($this->input->post('selectflag') != "") {
-			    		$selectflag = $this->input->post('selectflag');
-			    	} else {
-			    		$selectflag = "";
+			    	if($this->input->post('selectflag') != "" ) {
+			    		$this->db->set('client_flag', $this->input->post('selectflag'));
 			    	}
 
 					$this->db->set('client_surname', $this->input->post('lastname'));
@@ -352,15 +346,15 @@ class Customerinfocontroller extends CI_Controller {
 					$this->db->set('client_state', $this->input->post('state'));
 					$this->db->set('client_postcode', $this->input->post('postcode'));
 					$this->db->set('client_overseas_address', $this->input->post('overseasaddress'));
-					$this->db->set('client_flag', $selectflag);
+					
 					$this->db->set('locked_by_id', '');
 					$this->db->set('client_comments', $this->input->post('comment'));
 					$this->db->set('client_qualifications', $this->input->post('qualifications'));
-					$this->db->set('client_office_id', $selectoffice);
+					
 					$this->db->set('client_ve_day', $veday);
 					$this->db->set('client_ve_month', $vemonth);
 					$this->db->set('client_ve_year', $veyear);
-					$this->db->set('client_event_id', $selectevent);
+					
 					$this->db->where('client_id', $this->input->post('clientid'));
 					$this->db->update('client');
 
