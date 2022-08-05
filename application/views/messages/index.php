@@ -4,6 +4,7 @@
 <link rel="icon" type="image/png" href="<?php echo $asset_url; ?>images/logo.png"/>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" type="text/css" rel="stylesheet">
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
 <style type="text/css">
   .container{max-width:1170px; margin:auto;}
 img{ max-width:100%;}
@@ -180,6 +181,8 @@ img{ max-width:100%;}
 <input type="hidden" id="selectedthreadid">
 <input type="hidden" id="officer_id_session" value="<?php echo $this->session->officer_id; ?>">
 <input type="hidden" id="client_receiver_id">
+<input type="hidden" id="officer_role_session" value="<?php echo $this->session->officer_role; ?>">
+<input type="hidden" id="threadnumrows" value="<?php echo $threadnumrows; ?>">
 <div class="messaging">
       <div class="inbox_msg">
         <div class="inbox_people">
@@ -194,13 +197,29 @@ img{ max-width:100%;}
               <?php
                 }
               ?>
+
+              <?php
+                if ($this->session->officer_role == "") {
+                  if((int) $threadnumrows == 0) {
+              ?>
+              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" id="notifclick">
+                <i class="fa fa-info-circle" aria-hidden="true"></i>
+              </button>
+              <?php
+                  }
+                }
+              ?>
+
               <?php
                 if ($this->session->officer_role == "") {
               ?>
-              <a href="clientsignout">Sign out</a>
+              <a href="clientsignout" class="btn btn-primary"><i class="fa fa-power-off" aria-hidden="true"></i></a>
               <?php
                 }
               ?>
+              <br>
+              
+              
             </div>
             <div class="srch_bar">
               <div class="stylish-input-group">
@@ -352,6 +371,25 @@ img{ max-width:100%;}
     </div>
 
   </div> 
+
+  <!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Notification</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Kindly wait for an officer to be assigned to your case before you can initiate submission of documents.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Understood</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
@@ -594,3 +632,14 @@ img{ max-width:100%;}
 <script src="<?php echo $asset_url; ?>google/firebase-auth.js"></script>
 
 <script src="<?php echo $asset_url; ?>google/firebase-save2.js" type="module"></script>
+
+<script src="<?php echo $asset_url; ?>plugins/jquery/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+
+<script type="text/javascript">
+  if(document.getElementById("officer_role_session").value == "") {
+    if(document.getElementById("threadnumrows").value == "0") {
+      document.getElementById("notifclick").click();
+    }
+  }
+</script>

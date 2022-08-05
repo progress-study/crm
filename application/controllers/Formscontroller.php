@@ -131,15 +131,22 @@ class Formscontroller extends CI_Controller {
 				$iaremailfooter = $emailquery->row()->iaremailfooter;
 
 				$message .= "<!DOCTYPE html>
-							 <html>
-							 <body>";
-			    $message .= "<p>".$iaremailheader."</p>";
-			    $message .= "<br>";
-				$message .= "<p>".$iaremailbody."</p>";
-				$message .= "<br>";
-				$message .= "<p>".$iaremailfooter."</p>";
-				$message .= "</body>
-							 </html>
+							<html>
+							<head>
+								<title>PSC Auto-response</title>
+							</head>
+							<body style='background-color: #ECECEC;'>
+							<div style='background-image: url('https://crm.progress-study.com/assets/images/pscemailbackground.jpg'); background-size: 650px; background-repeat: no-repeat; margin-left: 250px; margin-right:250px; height: 1200px;'>
+								<br><br><br>
+								<div style='margin-left: 80px; margin-right: 80px;'>
+									<p style='text-align: right; font-size: 14px;'><a href='http://www.progress-study.com.au'>www.progress-study.com.au</a></p>";
+			    $message .= $iaremailheader;
+				$message .= $iaremailbody;
+				$message .= $iaremailfooter;
+				$message .= "</div>
+							</div>
+							</body>
+							</html>
 							";
 				$sender = "ramirezkyl@gmail.com";
 			
@@ -223,15 +230,22 @@ class Formscontroller extends CI_Controller {
 				$iaremailfooter = $emailquery->row()->iaremailfooter;
 
 				$message .= "<!DOCTYPE html>
-							 <html>
-							 <body>";
-			    $message .= "<p>".$iaremailheader."</p>";
-			    $message .= "<br>";
-				$message .= "<p>".$iaremailbody."</p>";
-				$message .= "<br>";
-				$message .= "<p>".$iaremailfooter."</p>";
-				$message .= "</body>
-							 </html>
+							<html>
+							<head>
+								<title>PSC Auto-response</title>
+							</head>
+							<body style='background-color: #ECECEC;'>
+							<div style='background-image: url('https://crm.progress-study.com/assets/images/pscemailbackground.jpg'); background-size: 650px; background-repeat: no-repeat; margin-left: 250px; margin-right:250px; height: 1200px;'>
+								<br><br><br>
+								<div style='margin-left: 80px; margin-right: 80px;'>
+									<p style='text-align: right; font-size: 14px;'><a href='http://www.progress-study.com.au'>www.progress-study.com.au</a></p>";
+			    $message .= $iaremailheader;
+				$message .= $iaremailbody;
+				$message .= $iaremailfooter;
+				$message .= "</div>
+							</div>
+							</body>
+							</html>
 							";
 				$sender = "ramirezkyl@gmail.com";
 			
@@ -348,15 +362,22 @@ class Formscontroller extends CI_Controller {
 				$iaremailfooter = $emailquery->row()->iaremailfooter;
 
 				$message .= "<!DOCTYPE html>
-							 <html>
-							 <body>";
-			    $message .= "<p>".$iaremailheader."</p>";
-			    $message .= "<br>";
-				$message .= "<p>".$iaremailbody."</p>";
-				$message .= "<br>";
-				$message .= "<p>".$iaremailfooter."</p>";
-				$message .= "</body>
-							 </html>
+							<html>
+							<head>
+								<title>PSC Auto-response</title>
+							</head>
+							<body style='background-color: #ECECEC;'>
+							<div style='background-image: url('https://crm.progress-study.com/assets/images/pscemailbackground.jpg'); background-size: 650px; background-repeat: no-repeat; margin-left: 250px; margin-right:250px; height: 1200px;'>
+								<br><br><br>
+								<div style='margin-left: 80px; margin-right: 80px;'>
+									<p style='text-align: right; font-size: 14px;'><a href='http://www.progress-study.com.au'>www.progress-study.com.au</a></p>";
+			    $message .= $iaremailheader;
+				$message .= $iaremailbody;
+				$message .= $iaremailfooter;
+				$message .= "</div>
+							</div>
+							</body>
+							</html>
 							";
 				$sender = "ramirezkyl@gmail.com";
 			

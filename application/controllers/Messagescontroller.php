@@ -44,12 +44,37 @@ class Messagescontroller extends CI_Controller {
         $query2 = $this->db->query($sql2);
         $thread = $query2->result();
 
+        $sql3 = "SELECT th.thread_id, 
+	        th.created_date,
+	        th.chattype,
+	    	off1.officer_id as senderid,
+	    	off1.officer_name as sendername,
+	    	off2.officer_name as receivername,
+	    	off2.officer_id as receiverid,
+	    	inq1.client_id as inqsenderid,
+	    	CONCAT(inq1.client_firstname, ' ', inq1.client_surname) as inqsendername,
+	    	inq2.client_id as inqreceiverid,
+	    	CONCAT(inq2.client_firstname, ' ', inq2.client_surname) as inqreceivername,
+	    	(SELECT message FROM thread_conversations WHERE thread_id = th.thread_id ORDER BY thread_convo_id DESC LIMIT 1) as recentmessage,
+	    	(SELECT message_from FROM thread_conversations WHERE thread_id = th.thread_id ORDER BY thread_convo_id DESC LIMIT 1) as recentmessagefrom,
+	    	(SELECT message_date_time FROM thread_conversations WHERE thread_id = th.thread_id ORDER BY thread_convo_id DESC LIMIT 1) as recentmessagedatetime
+	    	FROM thread th 
+	    	LEFT JOIN officer off1 ON th.sender_id = off1.officer_id 
+	    	LEFT JOIN officer off2 ON th.receiver_id = off2.officer_id
+	    	LEFT JOIN client inq1 ON th.sender_id = inq1.client_id 
+	    	LEFT JOIN client inq2 ON th.receiver_id = inq2.client_id 
+	    	WHERE (th.sender_id = '$officer_id' OR th.receiver_id = '$officer_id')
+	    	ORDER BY recentmessagedatetime DESC";
+        $query3 = $this->db->query($sql3);
+        $threadnumrows = $query3->num_rows();
+
 		$asset_url = base_url()."assets/";
 		$data['title'] = "Admin Maintenance";
 		$data['asset_url'] = $asset_url;
 
 		$data['officer'] = $officer;
 		$data['thread'] = $thread;
+		$data['threadnumrows'] = $threadnumrows;
 
 		if(isset($this->session->officer_name)) {
 			$this->load->view('messages/index', $data);
