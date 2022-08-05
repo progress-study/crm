@@ -55,6 +55,7 @@ $route['do_upload'] = 'formscontroller/do_upload';
 $route['success'] = 'formscontroller/success';
 $route['programoptionform/(:any)'] = 'formscontroller/programoptionform/$1';
 $route['sendemail'] = 'formscontroller/sendemail';
+$route['checkexistingemail/(:any)'] = 'formscontroller/checkexistingemail/$1';
 
 // Admin maintenance routes
 $route['adminmaintenance'] = 'adminmaintenancecontroller/index';

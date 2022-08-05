@@ -154,7 +154,7 @@ class Formscontroller extends CI_Controller {
 		        $mail = $this->phpmailer_lib->load();
 	  
 	  
-			    //$mail->SMTPDebug = 1;
+			    $mail->SMTPDebug = 1;
 			    /*
 			    $mail->isSMTP();
 			    $mail->Host       = 'mail.progress-study.com';            
@@ -182,7 +182,7 @@ class Formscontroller extends CI_Controller {
 		        $mail->Body = $mailContent;
 		        $mail->send();
 
-		        redirect('success');
+		        //redirect('success');
 				//$this->load->view('forms/success');
 	    	} else {
 	    		echo "<script>alert('Passwords are not matched!');</script>";
@@ -262,7 +262,7 @@ class Formscontroller extends CI_Controller {
 			    $mail->SMTPSecure = 'tls';      
 			    $mail->Port       = 587;    
 				*/ 
-				//$mail->SMTPDebug = 1;
+				$mail->SMTPDebug = 1;
 			    $mail->isSMTP();
 				$mail->Host = 'localhost';
 				$mail->SMTPAuth = false;
@@ -280,7 +280,7 @@ class Formscontroller extends CI_Controller {
 		        $mail->Body = $mailContent;
 		        $mail->send();
 
-		        redirect('success');
+		        //redirect('success');
 				//$this->load->view('forms/success');
 	    	} else {
 	    		echo "<script>alert('Passwords are not matched!');</script>";
@@ -411,6 +411,20 @@ class Formscontroller extends CI_Controller {
 		        $mailContent = $message;
 		        $mail->Body = $mailContent;
 		        $mail->send();
+	}
+
+	public function checkexistingemail($email) {
+		$sql3 = "SELECT * FROM client c WHERE c.client_email = '$email'";
+	    $query3 = $this->db->query($sql3);
+	    $client = $query3->result();
+
+	    $sql4 = "SELECT * FROM inquiries i WHERE i.inquiries_email = '$email'";
+	    $query4 = $this->db->query($sql4);
+	    $inquiries = $query4->result();
+
+	    $array = array($client, $inquiries);
+
+	    echo json_encode($array);
 	}
 
 }

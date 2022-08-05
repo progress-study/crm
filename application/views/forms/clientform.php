@@ -85,6 +85,7 @@ label.radio input:checked+span {
     <div class="card px-1 py-4">
         <div class="card-body">
         <form action="do_upload" method="POST" onsubmit="checkConfirmed(event)" enctype="multipart/form-data">
+            <input type="hidden" id="baseurl" value="<?php echo base_url(); ?>">
             <center><img src="<?php echo $asset_url; ?>images/logomain.png" alt="PSC Logo" width="200px"></center>
             <h6 class="information mt-4">Please provide following information</h6>
             <div class="row">
@@ -115,7 +116,7 @@ label.radio input:checked+span {
             <div class="row">
                 <div class="col-sm-12">
                     <div class="form-group">
-                        <div class="input-group"> <input class="form-control" type="text" name="email" placeholder="Email Address" required> </div>
+                        <div class="input-group"> <input class="form-control" type="text" name="email" id="email" placeholder="Email Address" required> </div>
                     </div>
                 </div>
             </div>
@@ -242,7 +243,7 @@ label.radio input:checked+span {
  <input id="textBox" type="text" class="form-control" name="captcha" placeholder="Enter CAPTCHA Here"> <button id="refreshButton" type="button" class="btn btn-primary btn-block confirm-button">Refresh</button>
  <span id="output"></span>
 <br><br>
-<button class="btn btn-primary btn-block confirm-button" type="submit" id="submitButton">Submit</button>
+<button class="btn btn-primary btn-block confirm-button" type="button" onclick="checkConfirmed2();" id="submitButton">Submit</button>
         </form>
         </div>
     </div>
@@ -266,6 +267,8 @@ label.radio input:checked+span {
      }
     });
 
+    
+
 /*
         if (document.getElementById('confirm2').checked != true) {
                 alert("Please confirm on consent checks!");
@@ -273,6 +276,21 @@ label.radio input:checked+span {
         }
 */
     }
+
+    function checkConfirmed2() {
+        var baseurl10 = document.getElementById("baseurl").value;
+        $.ajax({
+            type: "GET",
+            url: baseurl10 + "index.php/checkexistingemail"+document.getElementById("email").value,
+            success: function(data) {
+                console.log(data);
+            },
+            error: function(error) {
+              console.log(error);
+            }
+        });
+    }
+    
 
 </script>
 <script type='text/javascript' src='<?php echo $asset_url; ?>js/captcha_script.js'></script>

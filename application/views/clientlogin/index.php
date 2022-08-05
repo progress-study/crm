@@ -40,6 +40,8 @@ left: 50px;
 				</video>
 				</center>
 				<form action="do_upload" method="POST" onsubmit="checkConfirmed(event)" enctype="multipart/form-data">
+					<input type="hidden" id="baseurl" value="<?php echo base_url(); ?>">
+					<input type="hidden" id="checkemailvalue">
 		            <center><h3 class="information mt-4">Register</h3></center><br/>
 		            <div class="row">
 		            	<div class="col-sm-12">
@@ -52,7 +54,7 @@ left: 50px;
 		            <div class="row">
 		                <div class="col-sm-12">
 		                    <div class="form-group">
-		                        <!-- <label for="name">Name</label> --> <input class="form-control" type="text" name="firstname" placeholder="First Name"> </div>
+		                        <!-- <label for="name">Name</label> --> <input class="form-control" type="text" name="firstname" placeholder="First Name" required> </div>
 		                </div>
 		            </div>
 		            <div class="row">
@@ -77,7 +79,7 @@ left: 50px;
 		            <div class="row">
 		                <div class="col-sm-12">
 		                    <div class="form-group">
-		                        <div class="input-group"> <input class="form-control" type="text" name="email" placeholder="Email Address" required> </div>
+		                        <div class="input-group"> <input class="form-control" type="text" id="email" name="email" placeholder="Email Address" onfocusout="checkexistingemail();" required> </div>
 		                    </div>
 		                </div>
 		            </div>
@@ -278,6 +280,18 @@ left: 50px;
 					</div>
 					
 				</form>
+				<form onsubmit="submitForm(event)">
+				    <input type="text">
+				    <input type="submit" value="Submit">
+				</form>
+
+				<script type="text/javascript">
+
+				    function submitForm(event){
+				        event.preventDefault();
+
+				    }
+				</script>
 			</div>
 		</div><br>
 	</div>
@@ -294,26 +308,45 @@ left: 50px;
 	<script type='text/Javascript'>
     function checkConfirmed(e) {
         if (document.getElementById('confirm1').checked != true) {
-                alert("Please confirm on policy checks!");
-                e.preventDefault();
-        } 
+		    alert("Please confirm on policy checks!");
+		    e.preventDefault();
+		    return false;
+		}
 
-    let submitButton = document.querySelector('#submitButton');
-    submitButton.addEventListener('click', function() {
-     if (userText.value === c) {
-     output.classList.add("correctCaptcha");
-     output.innerHTML = "Correct!";
-     } else {
-     output.classList.add("incorrectCaptcha");
-     output.innerHTML = "Incorrect, please try again";
-     }
-    });
-/*
-        if (document.getElementById('confirm2').checked != true) {
-                alert("Please confirm on consent checks!");
-                e.preventDefault();
-        }
-*/
+		if(document.getElementById("checkemailvalue").value == "1") {
+			alert("Email already existing!");
+			e.preventDefault();
+			return false;
+		}
+
+		if (userText.value !== c) {
+		    //output.classList.add("correctCaptcha");
+		    //output.innerHTML = "Correct!";
+		    alert("Incorrect CAPTCHA entry!");
+			e.preventDefault();
+			return false;
+		}
+
+    }
+
+    function checkexistingemail() {
+        var baseurl10 = document.getElementById("baseurl").value;
+        var email = document.getElementById("email").value;
+        $.ajax({
+            type: "GET",
+            url: baseurl10 + "index.php/checkexistingemail/"+email,
+            success: function(data) {
+            	var obj = JSON.parse(data);
+            	if(obj[0].length > 0 || obj[1].length > 0) {
+            		document.getElementById("checkemailvalue").value = "1";
+            	} else {
+            		document.getElementById("checkemailvalue").value = "0";
+            	}
+            },
+            error: function(error) {
+              console.log(error);
+            }
+        });     	
     }
 
 </script>
