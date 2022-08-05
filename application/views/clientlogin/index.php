@@ -223,7 +223,7 @@ left: 50px;
 			</div>
 			
 			<div class="login">
-				<form class="login100-form validate-form" action="clientlogintypical" method="post">
+				<form class="login100-form validate-form" action="<?php echo base_url(); ?>index.php/clientlogintypical" method="post">
 					<br>
 					<span class="login100-form-title p-b-43">
 						<h3>Login</h3><br><br>

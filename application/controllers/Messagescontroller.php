@@ -79,7 +79,7 @@ class Messagescontroller extends CI_Controller {
 		if(isset($this->session->officer_name)) {
 			$this->load->view('messages/index', $data);
 		} else {
-			redirect(base_url()."?error3=1");
+			redirect(base_url()."index.php/clientlogin?error3=1");
 		}
 	}
 
