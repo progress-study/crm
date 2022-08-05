@@ -171,6 +171,31 @@ class Inquiriescontroller extends CI_Controller {
 					);
 			$this->db->insert('notifications', $data);
 
+			$sql2 = "SELECT * FROM client where client_inquiries_id = '$inquiry_id'";
+		    $query2 = $this->db->query($sql2);
+		    $client_inquiries_id = $query2->result();
+
+		    foreach ($client_inquiries_id as $row2) {
+		    	$data = array(
+							'client_id' => $client_inquiries_id->client_id,
+							'document_type' => 'Student requirement',
+							'document_link' => base_url()."assets/resume/".$inquiries->inquiries_resume,
+							'date_uploaded' => date("Y-m-d"),
+							'document_name' => $inquiries->inquiries_resume,
+							'alias' => 'Resume'
+						);
+				$this->db->insert('firebasefiles', $data);
+
+				$data = array(
+							'sender_id' => $this->session->officer_id,
+							'receiver_id' => $client_inquiries_id->client_id,
+							'created_date' => date("Y-m-d"),
+							'status' => 'active',
+							'chattype' => 'managerclient'
+						);
+				$this->db->insert('thread', $data);
+		    }
+
         }
 
 		redirect('inquiries');
@@ -264,6 +289,31 @@ class Inquiriescontroller extends CI_Controller {
 						'seen' => 0
 					);
 			$this->db->insert('notifications', $data);
+
+			$sql2 = "SELECT * FROM client where client_inquiries_id = '$inquiry_id'";
+		    $query2 = $this->db->query($sql2);
+		    $client_inquiries_id = $query2->result();
+
+		    foreach ($client_inquiries_id as $row2) {
+		    	$data = array(
+							'client_id' => $row2->client_id,
+							'document_type' => 'Student requirement',
+							'document_link' => base_url()."assets/resume/".$row->inquiries_resume,
+							'date_uploaded' => date("Y-m-d"),
+							'document_name' => $row->inquiries_resume,
+							'alias' => 'Resume'
+						);
+				$this->db->insert('firebasefiles', $data);
+
+				$data = array(
+							'sender_id' => $this->session->officer_id,
+							'receiver_id' => $row2->client_id,
+							'created_date' => date("Y-m-d"),
+							'status' => 'active',
+							'chattype' => 'managerclient'
+						);
+				$this->db->insert('thread', $data);
+		    }
 
         }
 
