@@ -29,6 +29,13 @@
 
   <script src="<?php echo $asset_url; ?>google/firebase-save.js" type="module"></script>
 
+  <style type="text/css">
+    .dropdown-menu-lg {
+      max-width: 550px !important;
+      min-width: 450px !important;
+    }
+  </style>
+
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -320,8 +327,9 @@
                     <a href="<?php echo base_url().'index.php/customerinfo' ?>"><i class="nav-icon fas fa-chevron-left"></i> Back</a>
                   </div>
                   <div class="col-3">
-                    <label for="amount" class="form-label">Update Photo:</label>
-                        <input type="file" class="form-control" name="userfile">
+                    <label for="amount" class="form-label">Update Photo:</label> <a class='btn btn-primary btn-xs' href="<?php echo base_url(); ?>index.php/resetphoto/<?php echo $row1->client_id; ?>">Reset Photo</a>
+                        <input type="file" class="form-control" name="userfile" id="userfile">
+                        <small style="color: red;">Photo must be at maximum size of<br> 200px X 200px</small>
                   </div>
                   <div class="col-3">
                     <!--<img src="<?php echo $asset_url; ?>images/<?php echo $row1->client_photo; ?>" style="width: 150px; height: 150px;">-->
@@ -480,12 +488,12 @@
                     }
                   ?>
 
-                <button type="submit" class="btn btn-primary">Submit</button> 
+                <button type="submit" class="btn btn-primary" id="clientinfosubmit">Submit</button> 
               </form>
 
                   </div>
 
-                  <div class="tab-pane fade" id="studentapplication" role="tabpanel" aria-labelledby="studentapplication-tab">
+                  <div class="tab-pane fade" id="studentapplication" role="tabpanel" aria-labelledby="studentapplication-tab" style="overflow-x: scroll;">
                     <br>
                     <a href="<?php echo base_url(); ?>index.php/newapplication/<?php echo $client_id; ?>" class="btn btn-primary" target="_blank">New Application</a>
                     <br><br>
@@ -507,7 +515,7 @@
                                 <td>".$row->provider_name."</td>
                                 <td>".$row->studentapp_course_name."</td>
                                 <td>".$row->studentapp_record_created_date."</td>
-                                <td><a href='".base_url()."index.php/editapplication/".$row->studentapp_id."' class='btn btn-primary btn-xs'>Edit</a></td>
+                                <td><a href='".base_url()."index.php/editapplication/".$row->studentapp_id."' class='btn btn-primary btn-xs'>Edit</a>  <a href='".base_url()."index.php/deleteapplicationfromcinfo/".$row->studentapp_id."/".$row->client_id."' class='btn btn-danger btn-xs'>Delete</a></td>
                               </tr>";
                       }
                       ?>
@@ -551,7 +559,7 @@
                       </div>
                   </div>
                   
-                  <div class="tab-pane fade" id="visaapplication" role="tabpanel" aria-labelledby="visaapplication-tab">
+                  <div class="tab-pane fade" id="visaapplication" role="tabpanel" aria-labelledby="visaapplication-tab" style="overflow-x: scroll;">
                       <br>
                       <a href="<?php echo base_url(); ?>index.php/newvisaapplication/<?php echo $client_id; ?>" class="btn btn-primary" target="_blank">New Visa Application</a>
                       <br><br>
@@ -589,7 +597,7 @@
                         </tfoot>
                       </table>
                   </div>
-                  <div class="tab-pane fade" id="visaeoi" role="tabpanel" aria-labelledby="visaeoi-tab">
+                  <div class="tab-pane fade" id="visaeoi" role="tabpanel" aria-labelledby="visaeoi-tab" style="overflow-x: scroll;">
                       <br>
                       <a href="<?php echo base_url(); ?>index.php/newvisaeoi/<?php echo $client_id; ?>" class="btn btn-primary" target="_blank">New Visa EOI</a>
                       <br><br>
@@ -639,7 +647,7 @@
                         </tfoot>
                       </table>
                   </div>
-                  <div class="tab-pane fade" id="visaaccount" role="tabpanel" aria-labelledby="visaaccount-tab">
+                  <div class="tab-pane fade" id="visaaccount" role="tabpanel" aria-labelledby="visaaccount-tab" style="overflow-x: scroll;">
                       <br>
                       <table id="visaaccounttable" class="table table-bordered table-striped">
                         <thead>
@@ -701,7 +709,7 @@
                         </tfoot>
                       </table>
                   </div>
-                  <div class="tab-pane fade" id="scholarshipallocation" role="tabpanel" aria-labelledby="scholarshipallocation-tab">
+                  <div class="tab-pane fade" id="scholarshipallocation" role="tabpanel" aria-labelledby="scholarshipallocation-tab" style="overflow-x: scroll;">
                       <br>
                       <a href="<?php echo base_url(); ?>index.php/newscholarshipallocation/<?php echo $client_id; ?>" class="btn btn-primary" target="_blank">New Scholarship Allocation</a>
                       <br><br>
@@ -741,7 +749,7 @@
                         </tfoot>
                       </table>
                   </div>
-                  <div class="tab-pane fade" id="payments" role="tabpanel" aria-labelledby="payments-tab">
+                  <div class="tab-pane fade" id="payments" role="tabpanel" aria-labelledby="payments-tab" style="overflow-x: scroll;">
                       <br>
                       <a href="<?php echo base_url(); ?>index.php/newpayment/<?php echo $client_id; ?>" class="btn btn-primary">New Payment Entry</a>
                       <br><br>
@@ -782,7 +790,7 @@
                         </tfoot>
                       </table>
                   </div>
-                  <div class="tab-pane fade" id="programoptions" role="tabpanel" aria-labelledby="programoptions-tab">
+                  <div class="tab-pane fade" id="programoptions" role="tabpanel" aria-labelledby="programoptions-tab" style="overflow-x: scroll;">
                       <br>
                       <a href="<?php echo base_url(); ?>index.php/newprogramoption/<?php echo $client_id; ?>" class="btn btn-primary" target="_blank">New Program Option</a>
                       <br><br>
@@ -1052,6 +1060,39 @@ outlining your job title, responsibilities and duration of employment.</option>
           }
       });
   }
+
+  const fileSelector = document.getElementById('userfile');
+  var fileList = 0;
+  fileSelector.addEventListener('change', (event) => {
+      fileList = event.target.files;
+
+      var reader = new FileReader();
+
+      //Read the contents of Image File.
+      reader.readAsDataURL(fileList[0]);
+      reader.onload = function (e) {
+
+        //Initiate the JavaScript Image object.
+        var image = new Image();
+
+        //Set the Base64 string return from FileReader as source.
+        image.src = e.target.result;
+
+        //Validate the File Height and Width.
+        image.onload = function () {
+          var height = this.height;
+          var width = this.width;
+          if (height > 200 || width > 200) {
+            alert("Photo size must not exceed 200px X 200px!");
+            document.getElementById("clientinfosubmit").disabled = true;
+          } else {
+            alert("Photo size valid! Photo added.");
+            document.getElementById("clientinfosubmit").disabled = false;
+          }
+        };
+      };
+
+  });
 
 </script>
 </body>

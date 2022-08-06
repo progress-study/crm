@@ -28,6 +28,10 @@
              border: 1px solid #ccc !important; 
          border-radius: 0px !important; 
     }
+    .dropdown-menu-lg {
+      max-width: 550px !important;
+      min-width: 450px !important;
+    }
   </style>
 </head>
 <body class="hold-transition sidebar-mini">

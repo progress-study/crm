@@ -18,6 +18,12 @@
   <link rel="stylesheet" href="<?php echo $asset_url; ?>dist/css/adminlte.min.css">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <style type="text/css">
+    .dropdown-menu-lg {
+      max-width: 550px !important;
+      min-width: 450px !important;
+    }
+  </style>
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -259,7 +265,7 @@
                             <td>".$row->provider_name."</td>
                             <td>".$row->program."</td>
                             <td>".$status."</td>
-                            <td><a href='deactivatescholarshipallocation/".$row->scholarshipid."' class='btn btn-primary btn-xs'>Deactivate</a></td>
+                            <td><a href='deactivateschofile/".$row->scholarshipid."' class='btn btn-primary btn-xs'>Deactivate</a></td>
                           </tr>";
                         }
                         ?>
@@ -302,7 +308,7 @@
                             <td>".$row->client_surname.", ".$row->client_firstname."</td>
                             <td>".$row->description."</td>
                             <td>".$status."</td>
-                            <td><a href='deactivatescholarshipallocation/".$row->csid."' class='btn btn-primary btn-xs'>Deactivate</a></td>
+                            <td><a href='deactivateschoallo/".$row->csid."' class='btn btn-primary btn-xs'>Deactivate</a></td>
                           </tr>";
                         }
                         ?>

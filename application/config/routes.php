@@ -22,6 +22,7 @@ $route['editclientinfo2/(:any)'] = 'customerinfocontroller/editclientinfo2/$1';
 $route['savefirebasefile'] = 'customerinfocontroller/savefirebasefile';
 $route['assignofficer'] = 'customerinfocontroller/assignofficer';
 $route['enterclientinfo/(:any)'] = 'customerinfocontroller/enterclientinfo/$1';
+$route['resetphoto/(:any)'] = 'customerinfocontroller/resetphoto/$1';
 
 // Payment routes
 $route['newpayment/(:any)'] = 'paymentscontroller/newpayment/$1';
@@ -47,6 +48,8 @@ $route['getprogramfromschool/(:any)'] = 'applicationscontroller/getprogramfromsc
 $route['saveapplication'] = 'applicationscontroller/saveapplication';
 $route['editapplication/(:any)'] = 'applicationscontroller/editapplication/$1';
 $route['updateapplication'] = 'applicationscontroller/updateapplication';
+$route['deleteapplication/(:any)'] = 'applicationscontroller/deleteapplication/$1';
+$route['deleteapplicationfromcinfo/(:any)/(:any)'] = 'applicationscontroller/deleteapplicationfromcinfo/$1/$2';
 
 // Forms routes
 $route['clientform'] = 'formscontroller/clientform';
@@ -82,6 +85,8 @@ $route['newscholarshipfile'] = 'scholarshipcontroller/newscholarshipfile';
 $route['savescholarshipfile'] = 'scholarshipcontroller/savescholarshipfile';
 $route['newscholarshipallocation/(:any)'] = 'scholarshipcontroller/newscholarshipallocation/$1';
 $route['savescholarshipallocation'] = 'scholarshipcontroller/savescholarshipallocation';
+$route['deactivateschofile/(:any)'] = 'scholarshipcontroller/deactivateschofile/$1';
+$route['deactivateschoallo/(:any)'] = 'scholarshipcontroller/deactivateschoallo/$1';
 
 // Visa routes
 $route['newvisaapplication/(:any)'] = 'visacontroller/newvisaapplication/$1';

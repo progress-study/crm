@@ -11,11 +11,11 @@ class Scholarshipcontroller extends CI_Controller {
 
 	public function index()
 	{
-		$sql1 = "SELECT * FROM clientscholarship cs inner join client c on c.client_id = cs.clientid inner join scholarships s on s.scholarshipid = cs.scholarshipid";
+		$sql1 = "SELECT * FROM clientscholarship cs inner join client c on c.client_id = cs.clientid inner join scholarships s on s.scholarshipid = cs.scholarshipid WHERE cs.bactive = 1";
 	    $query1 = $this->db->query($sql1);
 	    $clientscholarship = $query1->result();
 
-	    $sql2 = "SELECT s.scholarshipid,s.description,s.type,m.identity,s.amount,s.datecreated,ep.provider_name,sp.program,s.bactive FROM scholarships s inner join mastersetting m on s.paymenttype = m.id inner join education_provider ep on s.school = ep.provider_id inner join schoolprograms sp on s.program = sp.spid";
+	    $sql2 = "SELECT s.scholarshipid,s.description,s.type,m.identity,s.amount,s.datecreated,ep.provider_name,sp.program,s.bactive FROM scholarships s inner join mastersetting m on s.paymenttype = m.id inner join education_provider ep on s.school = ep.provider_id inner join schoolprograms sp on s.program = sp.spid WHERE s.bactive = 1";
 	    $query2 = $this->db->query($sql2);
 	    $scholarships = $query2->result();
 
@@ -232,6 +232,24 @@ class Scholarshipcontroller extends CI_Controller {
 				);
 		$this->db->insert('clientscholarship', $data);
 		redirect('scholarships');
+	}
+
+	public function deactivateschofile($scholarship_id)
+	{
+		$this->db->set('bactive', '0');
+		$this->db->where('scholarshipid', $scholarship_id);
+		$this->db->update('scholarships');
+		//echo json_encode("Successfully done reset!");
+		redirect(base_url()."index.php/scholarships");
+	}
+
+	public function deactivateschoallo($clientscholarship_id)
+	{
+		$this->db->set('bactive', '0');
+		$this->db->where('csid', $clientscholarship_id);
+		$this->db->update('clientscholarship');
+		//echo json_encode("Successfully done reset!");
+		redirect(base_url()."index.php/scholarships");
 	}
 
 }

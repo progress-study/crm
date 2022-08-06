@@ -27,6 +27,12 @@
   <link rel="stylesheet" type="text/css" href="<?php echo $asset_url; ?>plugins/summernote/summernote-bs4.css">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" type="text/css" rel="stylesheet">
+  <style type="text/css">
+    .dropdown-menu-lg {
+      max-width: 550px !important;
+      min-width: 450px !important;
+    }
+  </style>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">

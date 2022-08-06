@@ -12,7 +12,7 @@ class Customerinfocontroller extends CI_Controller {
 	public function index()
 	{
 
-		$sql = "SELECT * FROM client";
+		$sql = "SELECT * FROM client c LEFT JOIN officer o ON c.client_officer_id = o.officer_id";
         $query = $this->db->query($sql);
         $result = $query->result();
 
@@ -458,6 +458,15 @@ class Customerinfocontroller extends CI_Controller {
 		$this->db->update('client');
 
 		redirect(base_url()."index.php/customerinfo?success1=1");
+	}
+
+	public function resetphoto($client_id)
+	{
+		$this->db->set('client_photo', 'avatar5.png');
+		$this->db->where('client_id', $client_id);
+		$this->db->update('client');
+		//echo json_encode("Successfully done reset!");
+		redirect(base_url()."index.php/editclientinfo2/".$client_id);
 	}
 
 

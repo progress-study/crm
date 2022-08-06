@@ -18,6 +18,12 @@
   <link rel="stylesheet" href="<?php echo $asset_url; ?>dist/css/adminlte.min.css">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <style type="text/css">
+    .dropdown-menu-lg {
+      max-width: 550px !important;
+      min-width: 450px !important;
+    }
+  </style>
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -237,7 +243,7 @@
                     <td>".$row->provider_name."</td>
                     <td>".$row->studentapp_course_name."</td>
                     <td>".$row->studentapp_record_created_date."</td>
-                    <td><a href='".base_url()."index.php/editapplication/".$row->studentapp_id."' class='btn btn-primary btn-xs'>Edit</a></td>
+                    <td><a href='".base_url()."index.php/editapplication/".$row->studentapp_id."' class='btn btn-primary btn-xs'>Edit</a> <a href='".base_url()."index.php/deleteapplication/".$row->studentapp_id."' class='btn btn-danger btn-xs'>Delete</a></td>
                   </tr>";
                 }
                 ?>

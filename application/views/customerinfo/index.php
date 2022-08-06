@@ -46,8 +46,7 @@
                   <th>Phone Number</th>
                   <th>Qualifications</th>
                   <th>Address</th>
-                  <th>Suburb</th>
-                  <th>State</th>
+                  <th>Assigned Officer</th>
                   <th></th>
                 </tr>
                 </thead>
@@ -62,8 +61,7 @@
                     <td>".$row->client_phoneno."</td>
                     <td>".$row->client_qualifications."</td>
                     <td>".$row->client_address."</td>
-                    <td>".$row->client_suburb."</td>
-                    <td>".$row->client_state."</td>
+                    <td>".$row->officer_name."</td>
                     <td><a href='editclientinfo2/".$row->client_id."' class='btn btn-primary btn-xs'>Details</a><a href='#' class='btn btn-primary btn-xs' data-toggle='modal' data-target='#assignModal' id='client_".$row->client_id."' onclick='putClientId(event)'>Assign</a></td>
                   </tr>";
                 }
@@ -79,8 +77,7 @@
                   <th>Phone Number</th>
                   <th>Qualifications</th>
                   <th>Address</th>
-                  <th>Suburb</th>
-                  <th>State</th>
+                  <th>Assigned Officer</th>
                   <th></th>
                 </tr>
                 </tfoot>

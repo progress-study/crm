@@ -300,4 +300,20 @@ class Applicationscontroller extends CI_Controller {
 		redirect('editclientinfo2/'.$this->input->post('clientid'));
 	}
 
+	public function deleteapplication($app_id)
+	{
+		$this->db->where('studentapp_id', $app_id);
+		$this->db->delete('student_application');
+		
+		redirect('applications');
+	}
+
+	public function deleteapplicationfromcinfo($app_id, $client_id)
+	{
+		$this->db->where('studentapp_id', $app_id);
+		$this->db->delete('student_application');
+		
+		redirect('editclientinfo2/'.$client_id);
+	}
+
 }
