@@ -18,7 +18,24 @@
   <link rel="stylesheet" href="<?php echo $asset_url; ?>dist/css/adminlte.min.css">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
   <style type="text/css">
+    .select2-container .select2-selection--single{
+        height:34px !important;
+    }
+    .select2-container--default .select2-selection--single{
+             border: 1px solid #ccc !important; 
+         border-radius: 0px !important; 
+    }
+
+    .select3-container .select3-selection--single{
+        height:34px !important;
+    }
+    .select3-container--default .select3-selection--single{
+             border: 1px solid #ccc !important; 
+         border-radius: 0px !important; 
+    }
     .dropdown-menu-lg {
       max-width: 550px !important;
       min-width: 450px !important;
@@ -205,9 +222,8 @@
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="dashboard">Home</a></li>
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
               <li class="breadcrumb-item active"><?php echo $title; ?></li>
-              <li class="breadcrumb-item active"><a href="programs">Programs</a></li>
             </ol>
           </div>
         </div>
@@ -218,55 +234,65 @@
     <section class="content">
       <div class="row">
         <div class="col-12">
-          <input type="hidden" id="baseurl" value="<?php echo base_url(); ?>">
+    
           <div class="card">
-            <div class="card-header">
-              <h3 class="card-title"><a href="newschool">Add New School</a></h3>
-            </div>
             <!-- /.card-header -->
             <div class="card-body">
-              <table id="example1" class="table table-bordered table-striped">
-                <thead>
-                <tr>
-                  <th>School</th>
-                  <th>Marketing Contact Name</th>
-                  <th>Admin Contact Name</th>
-                  <th>Finance Contact Name</th>
-                  <th>Mailing Address</th>
-                  <th>Actions</th>
-                </tr>
-                </thead>
-                <tbody>
-                <?php
-                foreach ($schools as $row) {
-                  if($this->session->officer_role == "regional manager" || $this->session->officer_role == "admin" || $this->session->officer_role == "manager") {
-                      $deleteschools = "<a href='".base_url()."index.php/deleteschool/".$row->provider_id."' class='btn btn-danger btn-xs'><i class='fa fa-trash' aria-hidden='true'></i></a>";
-                  } else {
-                      $deleteschools = "";
+              <input type="hidden" id="baseurl" value="<?php echo base_url(); ?>">
+              <?php
+                    foreach ($scholarships as $row) {
+              ?>
+              <form action="<?php echo base_url(); ?>index.php/updatescholarshipfile" method="post">
+                <div class="mb-3">
+                  <label for="program" class="form-label">Payment Type</label>
+                  <select class="form-control select2" name="paymenttype" required>
+                    <option value="<?php echo $row->paymenttype; ?>"><?php echo $row->identity; ?></option>
+                    <?php
+                    foreach ($mastersetting as $row2) {
+                      echo "<option value='".$row2->id."'>".$row2->identity."</option>";
+                    }
+                    ?>
+                  </select>
+                </div>
+                <div class="mb-3">
+                  <label for="program" class="form-label">School</label>
+                  <select class="form-control select2" name="school" required>
+                    <option value="<?php echo $row->provider_id; ?>"><?php echo $row->provider_name; ?></option>
+                    <?php
+                    foreach ($education_provider as $row3) {
+                      echo "<option value='".$row3->provider_id."'>".$row3->provider_name."</option>";
+                    }
+                    ?>
+                  </select>
+                </div>
+                <div class="mb-3">
+                  <label for="program" class="form-label">Program</label>
+                  <select class="form-control select2" name="program" required>
+                    <option value="<?php echo $row->spid; ?>"><?php echo $row->program; ?></option>
+                    <?php
+                    foreach ($schoolprograms as $row4) {
+                      echo "<option value='".$row4->spid."'>".$row4->program."</option>";
+                    }
+                    ?>
+                  </select>
+                </div>
+                <div class="mb-3">
+                  <label for="amount" class="form-label">Description</label>
+                  <textarea class="form-control" name="description" placeholder="Description" required><?php echo $row->description; ?></textarea>
+                </div>
+                <div class="mb-3">
+                  <label for="amount" class="form-label">Scholarship Type</label>
+                  <textarea class="form-control" name="scholarshiptype" placeholder="Scholarship Type" required><?php echo $row->type; ?></textarea>
+                </div>
+                <div class="mb-3">
+                  <label for="amount" class="form-label">Amount/Percentage</label>
+                  <input type="number" class="form-control" name="amount" placeholder="Amount/Percentage" value="<?php echo $row->amount; ?>" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </form>
+              <?php
                   }
-
-                  echo "<tr>
-                    <td>".$row->provider_name."</td>
-                    <td>".$row->provider_marketing_contact_name."</td>
-                    <td>".$row->provider_admin_contact_name."</td>
-                    <td>".$row->provider_finance_contact_name."</td>
-                    <td>".$row->provider_mailing_address."</td>
-                    <td><a href='editschool/".$row->provider_id."' class='btn btn-primary btn-xs'><i class='fa fa-edit' aria-hidden='true'></i></a> ".$deleteschools."</td>
-                  </tr>";
-                }
-                ?>
-                </tbody>
-                <tfoot>
-                <tr>
-                  <th>School</th>
-                  <th>Marketing Contact Name</th>
-                  <th>Admin Contact Name</th>
-                  <th>Finance Contact Name</th>
-                  <th>Mailing Address</th>
-                  <th>Actions</th>
-                </tr>
-                </tfoot>
-              </table>
+              ?>
             </div>
             <!-- /.card-body -->
           </div>
@@ -309,6 +335,11 @@
 <!-- AdminLTE for demo purposes -->
 <script src="<?php echo $asset_url; ?>dist/js/demo.js"></script>
 <!-- page script -->
+
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+
 <script>
   $(function () {
     $("#example1").DataTable({
@@ -340,5 +371,6 @@
       });
   }
 </script>
+
 </body>
 </html>

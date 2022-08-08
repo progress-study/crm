@@ -12,7 +12,7 @@ class Applicationscontroller extends CI_Controller {
 	public function index()
 	{
 
-		$sql = "SELECT * FROM student_application sa inner join education_provider s on sa.provider_id = s.provider_id inner join client c on c.client_id = sa.client_id";
+		$sql = "SELECT * FROM student_application sa inner join education_provider s on sa.provider_id = s.provider_id inner join client c on c.client_id = sa.client_id left join schoolprograms sp on sa.studentapp_course_name = sp.spid";
         $query = $this->db->query($sql);
         $result = $query->result();
 
@@ -217,6 +217,11 @@ class Applicationscontroller extends CI_Controller {
         $query = $this->db->query($sql);
         $programs = $query->result();
 
+        foreach($programs as $programrows) {
+        	$programname = $programrows->spid;
+        	$programtype = $programrows->programtype;
+        }
+
 		$data = array(
 					'client_id' => $this->input->post('clientid'),
 					'officer_id' => $this->session->userdata('officer_id'),
@@ -228,8 +233,8 @@ class Applicationscontroller extends CI_Controller {
 					'studentapp_course_end_day' => $day2,
 					'studentapp_course_end_month' => $month2,
 					'studentapp_course_end_year' => $year2,
-					'studentapp_course_name' => $programs->program,
-					'studentapp_course_level' => $programs->program_type,
+					'studentapp_course_name' => $programname,
+					'studentapp_course_level' => $programtype,
 					'studentapp_coe_day' => $day3,
 					'studentapp_coe_month' => $month3,
 					'studentapp_coe_year' => $year3,
@@ -251,6 +256,7 @@ class Applicationscontroller extends CI_Controller {
 					'studentapp_event_id' => 0
 				);
 		$this->db->insert('student_application', $data);
+
 		redirect('editclientinfo2/'.$this->input->post('clientid'));
 	}
 
@@ -279,6 +285,12 @@ class Applicationscontroller extends CI_Controller {
         $query = $this->db->query($sql);
         $programs = $query->result();
 
+        foreach($programs as $programrows) {
+        	$programname = $programrows->spid;
+        	$programtype = $programrows->programtype;
+        }
+
+
 		$this->db->set('provider_id', $this->input->post('school'));
 		$this->db->set('studentapp_course_starting_day', $day1);
 		$this->db->set('studentapp_course_starting_month', $month1);
@@ -286,15 +298,15 @@ class Applicationscontroller extends CI_Controller {
 		$this->db->set('studentapp_course_end_day', $day2);
 		$this->db->set('studentapp_course_end_month', $month2);
 		$this->db->set('studentapp_course_end_year', $year2);
-		$this->db->set('studentapp_course_name', $programs->program);
-		$this->db->set('studentapp_course_level', $programs->program_type);
+		$this->db->set('studentapp_course_name', $programname);
+		$this->db->set('studentapp_course_level', $programtype);
 		$this->db->set('studentapp_coe_day', $day3);
 		$this->db->set('studentapp_coe_month', $month3);
 		$this->db->set('studentapp_coe_year',$year3);
 		$this->db->set('studentapp_flag', $this->input->post('flag'));
 		$this->db->set('course_starting_date', $this->input->post('state'));
 		$this->db->set('course_ending_date', $this->input->post('startdate'));
-		$this->db->where('studentapp_id', $this->input->post('clientid'));
+		$this->db->where('studentapp_id', $this->input->post('studentapp_id'));
 		$this->db->update('student_application');
 
 		redirect('editclientinfo2/'.$this->input->post('clientid'));

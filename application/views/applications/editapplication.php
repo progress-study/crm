@@ -244,6 +244,7 @@
                     foreach ($application as $row) {
                   ?>
               <form action="<?php echo base_url(); ?>index.php/updateapplication" method="post">
+                <input type="hidden" name="studentapp_id" value="<?php echo $row->studentapp_id; ?>">
                 <div class="mb-3">
                   <label for="payee" class="form-label">Customer</label>
                       <input type="hidden" name="clientid" value="<?php echo $row->client_id; ?>">
@@ -389,7 +390,7 @@
               var obj = JSON.parse(data);
               //alert(obj[0].program);
               for(var i = 0; i < obj.length; i++) {
-                $("#programlist").append("<option value=" + obj[i].program + ">" + obj[i].program + "</option>");
+                $("#programlist").append("<option value=" + obj[i].spid + ">" + obj[i].program + "</option>");
               }
           },
           error: function(error) {

@@ -141,11 +141,11 @@ class Customerinfocontroller extends CI_Controller {
         $query3 = $this->db->query($sql3);
         $events = $query3->result();
 
-        $sql4 = "SELECT * FROM student_application sa inner join education_provider s on sa.provider_id = s.provider_id inner join client c on c.client_id = sa.client_id where sa.client_id = $client_id";
+        $sql4 = "SELECT * FROM student_application sa inner join education_provider s on sa.provider_id = s.provider_id inner join client c on c.client_id = sa.client_id inner join schoolprograms sp on sa.studentapp_course_name = sp.spid where sa.client_id = $client_id";
         $query4 = $this->db->query($sql4);
         $student_application = $query4->result();
 
-        $sql5 = "SELECT * FROM clientscholarship cs inner join client c on c.client_id = cs.clientid inner join scholarships s on s.scholarshipid = cs.scholarshipid where cs.clientid = '$client_id'";
+        $sql5 = "SELECT * FROM clientscholarship cs inner join client c on c.client_id = cs.clientid inner join scholarships s on s.scholarshipid = cs.scholarshipid where cs.clientid = '$client_id' and cs.bactive = 1";
 	    $query5 = $this->db->query($sql5);
 	    $clientscholarship = $query5->result();
 
@@ -303,7 +303,7 @@ class Customerinfocontroller extends CI_Controller {
 		$this->db->where('client_id', $this->input->post('clientid'));
 		$this->db->update('client');
 
-		redirect('applications');
+		redirect(base_url()."index.php/editclientinfo2/".$this->input->post('clientid'));
 	}
 
 	public function do_upload()
@@ -457,6 +457,23 @@ class Customerinfocontroller extends CI_Controller {
 		$this->db->where('client_id', $this->input->post('clientid'));
 		$this->db->update('client');
 
+		$officerthreadid = $this->input->post('officer');
+		$clientthreadid = $this->input->post('clientid');
+		$threadsql = "SELECT * FROM thread WHERE sender_id = '$officerthreadid' and receiver_id = '$clientthreadid'";
+		$threadquery = $this->db->query($threadsql);
+		$threadrows = $threadquery->num_rows();
+
+		if ($threadrows == 0) {
+			$data = array(
+					'sender_id' => $this->input->post('officer'),
+					'receiver_id' => $this->input->post('clientid'),
+					'created_date' => date("Y-m-d"),
+					'status' => 'active',
+					'chattype' => 'managerclient'
+					);
+			$this->db->insert('thread', $data);
+		}
+
 		redirect(base_url()."index.php/customerinfo?success1=1");
 	}
 
@@ -467,6 +484,15 @@ class Customerinfocontroller extends CI_Controller {
 		$this->db->update('client');
 		//echo json_encode("Successfully done reset!");
 		redirect(base_url()."index.php/editclientinfo2/".$client_id);
+	}
+
+	public function deactivateclient($client_id)
+	{
+		$this->db->set('client_flag', 'inactive');
+		$this->db->where('client_id', $client_id);
+		$this->db->update('client');
+		//echo json_encode("Successfully done reset!");
+		redirect(base_url()."index.php/customerinfo");
 	}
 
 

@@ -242,6 +242,12 @@
                 <tbody>
                 <?php
                 foreach ($programs as $row) {
+                  if($this->session->officer_role == "regional manager" || $this->session->officer_role == "admin" || $this->session->officer_role == "manager") {
+                      $deleteprogram = "<a href='".base_url()."index.php/deleteprogram/".$row->spid."' class='btn btn-danger btn-xs'><i class='fa fa-trash' aria-hidden='true'></i></a>";
+                  } else {
+                      $deleteprogram = "";
+                  }
+
                   echo "<tr>
                     <td>".$row->program."</td>
                     <td>".$row->provider_name."</td>
@@ -251,7 +257,7 @@
                     <td>".$row->costofliving."</td>
                     <td>".$row->currency."</td>
                     <td>".$row->commission." on net tuition</td>
-                    <td><a href='editprogram/".$row->spid."' class='btn btn-primary btn-xs'>Edit</a></td>
+                    <td><a href='editprogram/".$row->spid."' class='btn btn-primary btn-xs'><i class='fa fa-edit' aria-hidden='true'></i></a> ".$deleteprogram."</td>
                   </tr>";
                 }
                 ?>

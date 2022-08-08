@@ -18,7 +18,16 @@
   <link rel="stylesheet" href="<?php echo $asset_url; ?>dist/css/adminlte.min.css">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
   <style type="text/css">
+    .select2-container .select2-selection--single{
+        height:34px !important;
+    }
+    .select2-container--default .select2-selection--single{
+             border: 1px solid #ccc !important; 
+         border-radius: 0px !important; 
+    }
     .dropdown-menu-lg {
       max-width: 550px !important;
       min-width: 450px !important;
@@ -106,7 +115,7 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item">
-            <a href="dashboard" class="nav-link<?php if($title == 'Dashboard'){ echo ' active';} ?>">
+            <a href="<?php echo base_url().'index.php/dashboard'; ?>" class="nav-link<?php if($title == 'Dashboard'){ echo ' active';} ?>">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
@@ -114,7 +123,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="customerinfo" class="nav-link<?php if($title == 'Client Information'){ echo ' active';} ?>">
+            <a href="<?php echo base_url().'index.php/customerinfo'; ?>" class="nav-link<?php if($title == 'Client Information'){ echo ' active';} ?>">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Client Information
@@ -122,7 +131,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="inquiries" class="nav-link<?php if($title == 'Inquiries'){ echo ' active';} ?>">
+            <a href="<?php echo base_url().'index.php/inquiries'; ?>" class="nav-link<?php if($title == 'Inquiries'){ echo ' active';} ?>">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Inquiries
@@ -133,7 +142,7 @@
   if ($privilege_manage_providers == "1") {
 ?>
           <li class="nav-item">
-            <a href="schools" class="nav-link<?php if($title == 'Schools and Programs'){ echo ' active';} ?>">
+            <a href="<?php echo base_url().'index.php/schools'; ?>" class="nav-link<?php if($title == 'Schools and Programs'){ echo ' active';} ?>">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Schools and Programs
@@ -147,7 +156,7 @@
   if ($privilege_manage_studentapps == "1") {
 ?>
           <li class="nav-item">
-            <a href="applications" class="nav-link<?php if($title == 'Applications'){ echo ' active';} ?>">
+            <a href="<?php echo base_url().'index.php/applications'; ?>" class="nav-link<?php if($title == 'Applications'){ echo ' active';} ?>">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Applications
@@ -158,7 +167,7 @@
   }
 ?>
           <li class="nav-item">
-            <a href="adminmaintenance" class="nav-link<?php if($title == 'Admin Maintenance'){ echo ' active';} ?>">
+            <a href="<?php echo base_url().'index.php/adminmaintenance'; ?>" class="nav-link<?php if($title == 'Admin Maintenance'){ echo ' active';} ?>">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Admin Maintenance
@@ -166,7 +175,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="scholarships" class="nav-link<?php if($title == 'Scholarships'){ echo ' active';} ?>">
+            <a href="<?php echo base_url().'index.php/scholarships'; ?>" class="nav-link<?php if($title == 'Scholarships'){ echo ' active';} ?>">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Scholarships
@@ -177,7 +186,7 @@
   if ($privilege_manage_reporting == "1") {
 ?>
           <li class="nav-item">
-            <a href="reports" class="nav-link<?php if($title == 'Reports'){ echo ' active';} ?>">
+            <a href="<?php echo base_url().'index.php/reports'; ?>" class="nav-link<?php if($title == 'Reports'){ echo ' active';} ?>">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Reports
@@ -205,9 +214,8 @@
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="dashboard">Home</a></li>
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
               <li class="breadcrumb-item active"><?php echo $title; ?></li>
-              <li class="breadcrumb-item active"><a href="programs">Programs</a></li>
             </ol>
           </div>
         </div>
@@ -218,55 +226,33 @@
     <section class="content">
       <div class="row">
         <div class="col-12">
-          <input type="hidden" id="baseurl" value="<?php echo base_url(); ?>">
+    
           <div class="card">
-            <div class="card-header">
-              <h3 class="card-title"><a href="newschool">Add New School</a></h3>
-            </div>
             <!-- /.card-header -->
             <div class="card-body">
-              <table id="example1" class="table table-bordered table-striped">
-                <thead>
-                <tr>
-                  <th>School</th>
-                  <th>Marketing Contact Name</th>
-                  <th>Admin Contact Name</th>
-                  <th>Finance Contact Name</th>
-                  <th>Mailing Address</th>
-                  <th>Actions</th>
-                </tr>
-                </thead>
-                <tbody>
-                <?php
-                foreach ($schools as $row) {
-                  if($this->session->officer_role == "regional manager" || $this->session->officer_role == "admin" || $this->session->officer_role == "manager") {
-                      $deleteschools = "<a href='".base_url()."index.php/deleteschool/".$row->provider_id."' class='btn btn-danger btn-xs'><i class='fa fa-trash' aria-hidden='true'></i></a>";
-                  } else {
-                      $deleteschools = "";
-                  }
+                <input type="hidden" id="baseurl" value="<?php echo base_url(); ?>">
+              <form action="<?php echo base_url().'index.php/savescholarshipallocation'; ?>" method="post">
+                <div class="mb-3">
+                  <label for="payee" class="form-label">Customer</label>
+                    <?php
+                    foreach ($client as $row) {
+                      echo "<input type='text' name='client_id' class='form-control' value='".$row->client_surname.", ".$row->client_firstname." ".$row->client_middlename."' readonly>
+                      <input type='hidden' name='client' value='".$row->client_id."'>";                   }
+                    ?>
+                </div>
+                <div class="mb-3">
+                  <label for="payee" class="form-label">Scholarship</label>
+                  <select class="form-control select2" name="scholarship">
+                    <?php
+                    foreach ($scholarships as $row2) {
+                      echo "<option value='".$row2->scholarshipid."'>".$row2->description."</option>";
+                    }
+                    ?>
+                  </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </form>
 
-                  echo "<tr>
-                    <td>".$row->provider_name."</td>
-                    <td>".$row->provider_marketing_contact_name."</td>
-                    <td>".$row->provider_admin_contact_name."</td>
-                    <td>".$row->provider_finance_contact_name."</td>
-                    <td>".$row->provider_mailing_address."</td>
-                    <td><a href='editschool/".$row->provider_id."' class='btn btn-primary btn-xs'><i class='fa fa-edit' aria-hidden='true'></i></a> ".$deleteschools."</td>
-                  </tr>";
-                }
-                ?>
-                </tbody>
-                <tfoot>
-                <tr>
-                  <th>School</th>
-                  <th>Marketing Contact Name</th>
-                  <th>Admin Contact Name</th>
-                  <th>Finance Contact Name</th>
-                  <th>Mailing Address</th>
-                  <th>Actions</th>
-                </tr>
-                </tfoot>
-              </table>
             </div>
             <!-- /.card-body -->
           </div>
@@ -309,6 +295,11 @@
 <!-- AdminLTE for demo purposes -->
 <script src="<?php echo $asset_url; ?>dist/js/demo.js"></script>
 <!-- page script -->
+
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+
 <script>
   $(function () {
     $("#example1").DataTable({
@@ -326,7 +317,9 @@
     });
   });
 
-  function markasread() {
+  $('.select2').select2();
+
+   function markasread() {
       var baseurl10 = document.getElementById("baseurl").value;
       $.ajax({
           type: "GET",
@@ -340,5 +333,6 @@
       });
   }
 </script>
+
 </body>
 </html>

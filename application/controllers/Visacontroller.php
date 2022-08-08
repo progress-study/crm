@@ -634,5 +634,29 @@ class Visacontroller extends CI_Controller {
 		redirect('editclientinfo2/'.$this->input->post('clientid'));
 	}
 
+	public function deletevisaapplication($vapid, $client_id)
+	{
+		$this->db->where('client_visa_id', $vapid);
+		$this->db->delete('visa_application');
+		//echo json_encode("Successfully done reset!");
+		redirect(base_url()."index.php/editclientinfo2/".$client_id);
+	}
+
+	public function deletevisaeoi($eoiid, $client_id)
+	{
+		$this->db->where('eoi_id', $eoiid);
+		$this->db->delete('expression_of_interest');
+		//echo json_encode("Successfully done reset!");
+		redirect(base_url()."index.php/editclientinfo2/".$client_id);
+	}
+
+	public function deletevisaaccount($vacid, $client_id)
+	{
+		$this->db->where('visa_account_id', $vacid);
+		$this->db->delete('visa_accounts');
+		//echo json_encode("Successfully done reset!");
+		redirect(base_url()."index.php/editclientinfo2/".$client_id);
+	}
+
 
 }

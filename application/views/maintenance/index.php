@@ -289,13 +289,19 @@
                       <tbody>
                       <?php
                       foreach ($officer as $row) {
+                        if($this->session->officer_role == "regional manager" || $this->session->officer_role == "admin" || $this->session->officer_role == "manager") {
+                              $deleteofficer = "<a href='".base_url()."index.php/deactivateofficer/".$row->officer_id."' class='btn btn-danger btn-xs'><i class='fa fa-trash' aria-hidden='true'></i></a>";
+                        } else {
+                              $deleteofficer = "";
+                        }
+
                         echo "<tr>
                           <td>".$row->officer_name."</td>
                           <td>".$row->email."</td>
                           <td>".$row->officer_role."</td>
                           <td>".$row->officer_status."</td>
                           <td>".$row->officer_last_logged_date."</td>
-                          <td><a href='editofficer/".$row->officer_id."' class='btn btn-primary btn-xs' target='_blank'>Edit</a></td>
+                          <td><a href='editofficer/".$row->officer_id."' class='btn btn-primary btn-xs' target='_blank'><i class='fa fa-edit' aria-hidden='true'></i></a> ".$deleteofficer."</td>
                         </tr>";
                       }
                       ?>
@@ -333,12 +339,18 @@
                       <tbody>
                       <?php
                       foreach ($officerassignment as $row) {
+                        if($this->session->officer_role == "regional manager" || $this->session->officer_role == "admin" || $this->session->officer_role == "manager") {
+                              $deleteoa = "<a href='".base_url()."index.php/deactivateassignment/".$row->oaid."' class='btn btn-danger btn-xs'><i class='fa fa-trash' aria-hidden='true'></i></a>";
+                        } else {
+                              $deleteoa = "";
+                        }
+
                         echo "<tr>
                           <td>".$row->officer_name."</td>
                           <td>".$row->region_name."</td>
                           <td>".$row->city."</td>
                           <td>".$row->datecreated."</td>
-                          <td><a href='editassignment/".$row->oaid."' class='btn btn-primary btn-xs'>Edit</a></td>
+                          <td><a href='editassignment/".$row->oaid."' class='btn btn-primary btn-xs'><i class='fa fa-edit' aria-hidden='true'></i></a> ".$deleteoa."</td>
                         </tr>";
                       }
                       ?>
@@ -372,10 +384,16 @@
                       <tbody>
                       <?php
                       foreach ($region as $row2) {
+                        if($this->session->officer_role == "regional manager" || $this->session->officer_role == "admin" || $this->session->officer_role == "manager") {
+                              $deleteregion = "<a href='".base_url()."index.php/deleteregion/".$row2->region_id."' class='btn btn-danger btn-xs'><i class='fa fa-trash' aria-hidden='true'></i></a>";
+                        } else {
+                              $deleteregion = "";
+                        }
+
                         echo "<tr>
                           <td>".$row2->region_name."</td>
                           <td>".$row2->region_description."</td>
-                          <td><a href='editregion/".$row2->region_id."' class='btn btn-primary btn-xs'>Edit</a></td>
+                          <td><a href='editregion/".$row2->region_id."' class='btn btn-primary btn-xs'><i class='fa fa-edit' aria-hidden='true'></i></a> ".$deleteregion."</td>
                         </tr>";
                       }
                       ?>
@@ -414,6 +432,12 @@
                       <tbody>
                       <?php
                       foreach ($events as $row2) {
+                        if($this->session->officer_role == "regional manager" || $this->session->officer_role == "admin" || $this->session->officer_role == "manager") {
+                              $deleteevent = "<a href='".base_url()."index.php/deleteevent/".$row2->event_id."' class='btn btn-danger btn-xs'><i class='fa fa-trash' aria-hidden='true'></i></a>";
+                        } else {
+                              $deleteevent = "";
+                        }
+
                         if ($row2->event_photo != "") {
                           $photo = "<img src='".$asset_url."images/".$row2->event_photo."' width='150px'>";
                         } else {
@@ -428,7 +452,7 @@
                           <td>".$row2->event_info."</td>
                           <td>".$row2->event_comments."</td>
                           <td>".$photo."</td>
-                          <td><a href='editevent/".$row2->event_id."' class='btn btn-primary btn-xs'>Edit</a></td>
+                          <td><a href='editevent/".$row2->event_id."' class='btn btn-primary btn-xs'><i class='fa fa-edit' aria-hidden='true'></i></a> ".$deleteevent."</td>
                         </tr>";
                       }
                       ?>

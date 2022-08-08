@@ -238,12 +238,18 @@
                 <tbody>
                 <?php
                 foreach ($applications as $row) {
+                  if($this->session->officer_role == "regional manager" || $this->session->officer_role == "admin" || $this->session->officer_role == "manager") {
+                        $deleteapplication = "<a href='".base_url()."index.php/deleteapplication/".$row->studentapp_id."' class='btn btn-danger btn-xs'><i class='fa fa-trash' aria-hidden='true'></i></a>";
+                    } else {
+                        $deleteapplication = "";
+                    }
+
                   echo "<tr>
                     <td>".$row->client_surname.", ".$row->client_firstname."</td>
                     <td>".$row->provider_name."</td>
-                    <td>".$row->studentapp_course_name."</td>
+                    <td>".$row->program."</td>
                     <td>".$row->studentapp_record_created_date."</td>
-                    <td><a href='".base_url()."index.php/editapplication/".$row->studentapp_id."' class='btn btn-primary btn-xs'>Edit</a> <a href='".base_url()."index.php/deleteapplication/".$row->studentapp_id."' class='btn btn-danger btn-xs'>Delete</a></td>
+                    <td><a href='".base_url()."index.php/editapplication/".$row->studentapp_id."' class='btn btn-primary btn-xs'><i class='fa fa-edit' aria-hidden='true'></i></a> ".$deleteapplication."</td>
                   </tr>";
                 }
                 ?>

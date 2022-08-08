@@ -245,7 +245,7 @@
                   if($row->inquiries_status == "Transferred") {
                     $transferbutton = "";
                   } else {
-                    $transferbutton = "<a href='transferinquirytoclient/".$row->inquiries_id."' class='btn btn-primary btn-xs'>Approve as Client</a>";
+                    $transferbutton = "<a href='transferinquirytoclient/".$row->inquiries_id."' class='btn btn-primary btn-xs' title='Approve ".$row->inquiries_surname.", ".$row->inquiries_firstname." ".$row->inquiries_middlename." as Client'><i class='fa fa-check' aria-hidden='true'></i></a>";
                   }
 
                   if($row->inquiries_resume != "") {
@@ -262,7 +262,7 @@
                     <td>".$row->inquiries_address."</td>
                     <td>".$row->inquiries_status."</td>
                     <td>".$filedata."</td>
-                    <td><a href='#' class='btn btn-primary btn-xs' data-toggle='modal' data-target='#viewInquiryModal' data-inquiriesid='".$row->inquiries_id."'>View</a> ".$transferbutton." <a href='deleteinquiry/".$row->inquiries_id."' class='btn btn-danger btn-xs'>Delete</a></td>
+                    <td><a href='#' class='btn btn-primary btn-xs' data-toggle='modal' data-target='#viewInquiryModal' data-inquiriesid='".$row->inquiries_id."' title='View Inquiry'><i class='fa fa-eye' aria-hidden='true'></i></a> ".$transferbutton." <a href='deleteinquiry/".$row->inquiries_id."' class='btn btn-danger btn-xs' title='Delete Inquiry'><i class='fa fa-trash' aria-hidden='true'></i></a></td>
                     </tr>";
                 }
                 ?>

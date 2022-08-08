@@ -265,7 +265,7 @@
                             <td>".$row->provider_name."</td>
                             <td>".$row->program."</td>
                             <td>".$status."</td>
-                            <td><a href='deactivateschofile/".$row->scholarshipid."' class='btn btn-primary btn-xs'>Deactivate</a></td>
+                            <td><a href='editscholarshipfile/".$row->scholarshipid."' class='btn btn-primary btn-xs'><i class='fa fa-edit' aria-hidden='true'></i></a> <a href='deactivateschofile/".$row->scholarshipid."' class='btn btn-danger btn-xs'><i class='fa fa-trash' aria-hidden='true'></i></a></td>
                           </tr>";
                         }
                         ?>
@@ -308,7 +308,7 @@
                             <td>".$row->client_surname.", ".$row->client_firstname."</td>
                             <td>".$row->description."</td>
                             <td>".$status."</td>
-                            <td><a href='deactivateschoallo/".$row->csid."' class='btn btn-primary btn-xs'>Deactivate</a></td>
+                            <td><a href='deactivateschoallo/".$row->csid."' class='btn btn-danger btn-xs'><i class='fa fa-trash' aria-hidden='true'></i></a></td>
                           </tr>";
                         }
                         ?>

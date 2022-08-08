@@ -46,7 +46,8 @@
   });
 
   function putClientId(event) {
-    var string1 = event.target.id;
+    var string1 = event.target.className;
+    alert(string1);
     const stringArray = string1.split("_");
     document.getElementById('clientid').value = stringArray[1];
   }

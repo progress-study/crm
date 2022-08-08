@@ -361,7 +361,7 @@
               var obj = JSON.parse(data);
               //alert(obj[0].program);
               for(var i = 0; i < obj.length; i++) {
-                $("#programlist").append("<option value=" + obj[i].program + ">" + obj[i].program + "</option>");
+                $("#programlist").append("<option value=" + obj[i].spid + ">" + obj[i].program + "</option>");
               }
           },
           error: function(error) {
@@ -380,7 +380,7 @@
               var obj = JSON.parse(data);
               //alert(obj[0].program);
               for(var i = 0; i < obj.length; i++) {
-                $("#programlist").append("<option value=" + obj[i].program + ">" + obj[i].program + "</option>");
+                $("#programlist").append("<option value=" + obj[i].spid + ">" + obj[i].program + "</option>");
               }
           },
           error: function(error) {

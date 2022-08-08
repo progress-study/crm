@@ -337,7 +337,7 @@
               ?>
                 <tr>
                   <td style='width: 80%;'><?php echo $row->inquiries_firstname." ".$row->inquiries_middlename." ".$row->inquiries_surname; ?></td>
-                  <td style='width: 20%;'><a href="transferinquirytoclientfromdashboard/<?php echo $row->inquiries_id; ?>" class='btn btn-primary btn-xs'>Approve as Client</a></td>
+                  <td style='width: 20%;'><a href="transferinquirytoclientfromdashboard/<?php echo $row->inquiries_id; ?>" class="btn btn-primary btn-xs" title="<?php echo 'Approve '.$row->inquiries_firstname.' '.$row->inquiries_middlename.' '.$row->inquiries_surname." as Client" ?>"><i class="fa fa-check" aria-hidden="true"></i></a></td>
                 <tr>
               <?php
                 }

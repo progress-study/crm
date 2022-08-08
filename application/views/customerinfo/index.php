@@ -43,8 +43,6 @@
                   <th>Name</th>
                   <th>Email</th>
                   <th>Mobile Number</th>
-                  <th>Phone Number</th>
-                  <th>Qualifications</th>
                   <th>Address</th>
                   <th>Assigned Officer</th>
                   <th></th>
@@ -54,15 +52,19 @@
                 <?php
                 
                 foreach ($clients as $row) {
+                  if($this->session->officer_role == "regional manager" || $this->session->officer_role == "admin" || $this->session->officer_role == "manager") {
+                      $deletecustomer = "<a href='deactivateclient/".$row->client_id."' class='btn btn-danger btn-xs' title='Deactivate ".$row->client_surname.", ".$row->client_firstname." ".$row->client_middlename."'><i class='fa fa-trash' aria-hidden='true'></i></a>";
+                  } else {
+                      $deletecustomer = "";
+                  }
+
                   echo "<tr>
                     <td>".$row->client_surname.", ".$row->client_firstname." ".$row->client_middlename."</td>
                     <td>".$row->client_email."</td>
                     <td>".$row->client_mobileno."</td>
-                    <td>".$row->client_phoneno."</td>
-                    <td>".$row->client_qualifications."</td>
                     <td>".$row->client_address."</td>
                     <td>".$row->officer_name."</td>
-                    <td><a href='editclientinfo2/".$row->client_id."' class='btn btn-primary btn-xs'>Details</a><a href='#' class='btn btn-primary btn-xs' data-toggle='modal' data-target='#assignModal' id='client_".$row->client_id."' onclick='putClientId(event)'>Assign</a></td>
+                    <td><a href='editclientinfo2/".$row->client_id."' class='btn btn-primary btn-xs' title='Details'><i class='fa fa-edit' aria-hidden='true'></i></a> <a href='#' class='btn btn-primary btn-xs client_".$row->client_id."' data-toggle='modal' data-target='#assignModal' id='client_".$row->client_id."' onclick='putClientId(event)' title='Assign Officer to ".$row->client_surname.", ".$row->client_firstname." ".$row->client_middlename."'><i class='fa fa-user client_".$row->client_id."' aria-hidden='true'></i></a> ".$deletecustomer."</td>
                   </tr>";
                 }
 
@@ -74,8 +76,6 @@
                   <th>Name</th>
                   <th>Email</th>
                   <th>Mobile Number</th>
-                  <th>Phone Number</th>
-                  <th>Qualifications</th>
                   <th>Address</th>
                   <th>Assigned Officer</th>
                   <th></th>

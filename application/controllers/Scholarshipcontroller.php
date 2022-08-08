@@ -143,6 +143,78 @@ class Scholarshipcontroller extends CI_Controller {
 		}
 	}
 
+	public function editscholarshipfile($scholarshipid)
+	{
+
+        $asset_url = base_url()."assets/";
+		$data['title'] = "Edit Scholarship File";
+		$data['asset_url'] = $asset_url;
+
+		$sql3 = "SELECT * FROM scholarships s INNER JOIN education_provider ep ON s.school = ep.provider_id INNER JOIN schoolprograms sp ON s.program = sp.spid INNER JOIN mastersetting m on s.paymenttype = m.id WHERE scholarshipid = '$scholarshipid'";
+	    $query3 = $this->db->query($sql3);
+	    $scholarships = $query3->result();
+
+	    $sql3 = "SELECT * FROM education_provider";
+	    $query3 = $this->db->query($sql3);
+	    $education_provider = $query3->result();
+
+	    $sql3 = "SELECT * FROM schoolprograms";
+	    $query3 = $this->db->query($sql3);
+	    $schoolprograms = $query3->result();
+
+		$sql2 = "SELECT * FROM mastersetting WHERE details = 'For scholarship payment type'";
+	    $query2 = $this->db->query($sql2);
+	    $mastersetting = $query2->result();
+
+	    $data['mastersetting'] = $mastersetting;
+	    $data['education_provider'] = $education_provider;
+		$data['schoolprograms'] = $schoolprograms;
+		$data['scholarships'] = $scholarships;
+
+		if($this->session->officer_role == "regional manager" || $this->session->officer_role == "admin") {
+			$officer_id_check = $this->session->officer_id;
+			$sql11 = "SELECT * FROM notifications WHERE seen = 0 ORDER BY notif_id DESC LIMIT 20";
+			$query11 = $this->db->query($sql11);
+			$notifnum = $query11->num_rows();
+
+			$sql12 = "SELECT * FROM notifications ORDER BY notif_id DESC LIMIT 20";
+			$query12 = $this->db->query($sql12);
+			$notif = $query12->result();
+		} else {
+			$officer_id_check = $this->session->officer_id;
+			$sql11 = "SELECT * FROM notifications WHERE seen = 0 AND officer_id = '$officer_id_check' ORDER BY notif_id DESC LIMIT 20";
+			$query11 = $this->db->query($sql11);
+			$notifnum = $query11->num_rows();
+
+			$sql12 = "SELECT * FROM notifications WHERE officer_id = '$officer_id_check' ORDER BY notif_id DESC LIMIT 20";
+			$query12 = $this->db->query($sql12);
+			$notif = $query12->result();
+		}
+
+		$data['notifnum'] = $notifnum;
+		$data['notif'] = $notif;
+
+		$this->db->where('privilege_id', $this->session->officer_role_id);
+        $query3 = $this->db->get('privilege');
+
+		foreach ($query3->result() as $row3)
+		{
+		        $data['privilege_manage_providers'] = $row3->privilege_manage_providers;
+		        $data['privilege_manage_reporting'] = $row3->privilege_manage_reporting;
+		        $data['privilege_manage_studentapps'] = $row3->privilege_manage_studentapps;
+		}
+
+		if($this->session->officer_role == "") {
+			redirect(base_url()."index.php/messages");
+		} else {
+			if(isset($this->session->officer_name)) {
+				$this->load->view('scholarship/editscholarshipfile', $data);
+			} else {
+				redirect(base_url()."?error3=1");
+			}
+		}
+	}
+
 	public function savescholarshipfile()
 	{
 
@@ -157,6 +229,21 @@ class Scholarshipcontroller extends CI_Controller {
 					'bactive' => 1
 				);
 		$this->db->insert('scholarships', $data);
+		redirect('scholarships');
+	}
+
+	public function updatescholarshipfile()
+	{
+
+		$this->db->set('description', $this->input->post('description'));
+		$this->db->set('type', $this->input->post('scholarshiptype'));
+		$this->db->set('paymenttype', $this->input->post('paymenttype'));
+		$this->db->set('amount', $this->input->post('amount'));
+		$this->db->set('school', $this->input->post('school'));
+		$this->db->set('program', $this->input->post('program'));
+		$this->db->where('scholarshipid', $scholarship_id);
+		$this->db->update('scholarships');
+
 		redirect('scholarships');
 	}
 

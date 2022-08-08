@@ -510,12 +510,18 @@
                       <tbody>
                       <?php
                       foreach ($student_application as $row) {
+                        if($this->session->officer_role == "regional manager" || $this->session->officer_role == "admin" || $this->session->officer_role == "manager") {
+                            $deleteapplication = "<a href='".base_url()."index.php/deleteapplicationfromcinfo/".$row->studentapp_id."/".$row->client_id."' class='btn btn-danger btn-xs'><i class='fa fa-trash' aria-hidden='true'></i></a>";
+                        } else {
+                            $deleteapplication = "";
+                        }
+
                         echo "<tr>
                                 <td>".$row->client_surname.", ".$row->client_firstname."</td>
                                 <td>".$row->provider_name."</td>
-                                <td>".$row->studentapp_course_name."</td>
+                                <td>".$row->program."</td>
                                 <td>".$row->studentapp_record_created_date."</td>
-                                <td><a href='".base_url()."index.php/editapplication/".$row->studentapp_id."' class='btn btn-primary btn-xs'>Edit</a>  <a href='".base_url()."index.php/deleteapplicationfromcinfo/".$row->studentapp_id."/".$row->client_id."' class='btn btn-danger btn-xs'>Delete</a></td>
+                                <td><a href='".base_url()."index.php/editapplication/".$row->studentapp_id."' class='btn btn-primary btn-xs'><i class='fa fa-edit' aria-hidden='true'></i></a> ".$deleteapplication."</td>
                               </tr>";
                       }
                       ?>
@@ -576,12 +582,18 @@
                         <tbody>
                         <?php
                         foreach ($visa_application as $row) {
+                          if($this->session->officer_role == "regional manager" || $this->session->officer_role == "admin" || $this->session->officer_role == "manager") {
+                              $deletevap = "<a href='".base_url()."index.php/deletevisaapplication/".$row->client_visa_id."/".$client_id."' class='btn btn-danger btn-xs'><i class='fa fa-trash' aria-hidden='true'></i></a>";
+                          } else {
+                              $deletevap = "";
+                          }
+
                           echo "<tr>
                             <td>".$row->client_surname.", ".$row->client_firstname."</td>
                             <td>".$row->new_Visa_subclass."</td>
                             <td>".$row->visa_critical_month."/".$row->visa_critical_day."/".$row->visa_critical_year."</td>
                             <td>".$row->status."</td>
-                            <td><a href='".base_url()."index.php/editvisaapplication/".$row->client_visa_id."' class='btn btn-primary btn-xs'>Edit</a> <a href='".base_url()."index.php/newvisaaccount/".$row->client_visa_id."/".$client_id."' class='btn btn-primary btn-xs' target='_blank'>New Visa Account</a></td>
+                            <td><a href='".base_url()."index.php/editvisaapplication/".$row->client_visa_id."' class='btn btn-primary btn-xs'><i class='fa fa-edit' aria-hidden='true'></i></a> ".$deletevap." <a href='".base_url()."index.php/newvisaaccount/".$row->client_visa_id."/".$client_id."' class='btn btn-primary btn-xs' target='_blank'>New Visa Account</a></td>
                           </tr>";
                         }
                         ?>
@@ -618,6 +630,12 @@
                         <tbody>
                         <?php
                         foreach ($eoi as $row) {
+                          if($this->session->officer_role == "regional manager" || $this->session->officer_role == "admin" || $this->session->officer_role == "manager") {
+                              $deleteeoi = "<a href='".base_url()."index.php/deletevisaeoi/".$row->eoi_id."/".$client_id."' class='btn btn-danger btn-xs'><i class='fa fa-trash' aria-hidden='true'></i></a>";
+                          } else {
+                              $deleteeoi = "";
+                          }
+
                           echo "<tr>
                             <td>".$row->client_surname.", ".$row->client_firstname."</td>
                             <td>".$row->eoi_number."</td>
@@ -627,7 +645,7 @@
                             <td>".$row->skill_assessment_date."</td>
                             <td>".$row->py_completion_date."</td>
                             <td>".$row->english_competency_test_date."</td>
-                            <td><a href='".base_url()."index.php/editvisaeoi/".$row->eoi_id."' class='btn btn-primary btn-xs'>Edit</a></td>
+                            <td><a href='".base_url()."index.php/editvisaeoi/".$row->eoi_id."' class='btn btn-primary btn-xs'><i class='fa fa-edit' aria-hidden='true'></i></a> ".$deleteeoi."</td>
                           </tr>";
                         }
                         ?>
@@ -668,6 +686,11 @@
                         <tbody>
                         <?php
                         foreach ($visa_accounts as $row) {
+                          if($this->session->officer_role == "regional manager" || $this->session->officer_role == "admin" || $this->session->officer_role == "manager") {
+                              $deletevac = "<a href='".base_url()."index.php/deletevisaaccount/".$row->visa_account_id."/".$client_id."' class='btn btn-danger btn-xs'><i class='fa fa-trash' aria-hidden='true'></i></a>";
+                          } else {
+                              $deletevac = "";
+                          }
                           
                           $received_amount_ex_gst = (int) $row->received_amount_ex_gst;
                           $received_gst = (int) $row->received_gst;
@@ -687,7 +710,7 @@
                             <td>".$row->disbursed_date."</td>
                             <td>".$row->disbursed_amount_ex_gst."</td>
                             <td>".$row->disbursed_gst."</td>
-                            <td><a href='".base_url()."index.php/editvisaaccount/".$row->visa_account_id."/".$client_id."' class='btn btn-primary btn-xs'>Edit</a></td>
+                            <td><a href='".base_url()."index.php/editvisaaccount/".$row->visa_account_id."/".$client_id."' class='btn btn-primary btn-xs'><i class='fa fa-edit' aria-hidden='true'></i></a> ".$deletevac."</td>
                           </tr>";
                         }
                         ?>
@@ -725,6 +748,12 @@
                         <tbody>
                         <?php
                         foreach ($clientscholarship as $row) {
+                          if($this->session->officer_role == "regional manager" || $this->session->officer_role == "admin" || $this->session->officer_role == "manager") {
+                              $deletecs = "<a href='".base_url()."index.php/deactivateschoallo/".$row->csid."' class='btn btn-danger btn-xs'><i class='fa fa-trash' aria-hidden='true'></i></a>";
+                          } else {
+                              $deletecs = "";
+                          }
+
                           if($row->bactive == 1) {
                             $status = "Active";
                           } else {
@@ -734,7 +763,7 @@
                             <td>".$row->client_surname.", ".$row->client_firstname."</td>
                             <td>".$row->description."</td>
                             <td>".$status."</td>
-                            <td><a href='deactivatescholarshipallocation/".$row->csid."' class='btn btn-primary btn-xs'>Deactivate</a></td>
+                            <td>".$deletecs."</td>
                           </tr>";
                         }
                         ?>
@@ -814,6 +843,12 @@
                         <?php
                         
                         foreach ($programoptions as $row) {
+                          if($this->session->officer_role == "regional manager" || $this->session->officer_role == "admin" || $this->session->officer_role == "manager") {
+                              $deleteprogramoption = "<a href='".base_url()."index.php/deletepo/".$row->poid."/".$client_id."' class='btn btn-danger btn-xs'><i class='fa fa-trash' aria-hidden='true'></i></a>";
+                          } else {
+                              $deleteprogramoption = "";
+                          }
+
                           echo "<tr>
                             <td>".$row->provider_name."</td>
                             <td>".$row->program."</td>
@@ -825,7 +860,7 @@
                             <td>".$row->importanttoconsider."</td>
                             <td>".$row->migrationpathway."</td>
                             <td><a href='".base_url()."index.php/programoptionform/".$row->poid."' target='_blank'>".base_url()."index.php/programoptionform/".$row->poid."</a></td>
-                            <td><a href='".base_url()."index.php/editprogramoptions/".$row->poid."' class='btn btn-primary btn-xs'>Edit</a></td>
+                            <td><a href='".base_url()."index.php/editprogramoptions/".$row->poid."' class='btn btn-primary btn-xs'><i class='fa fa-edit' aria-hidden='true'></i></a> ".$deleteprogramoption."</td>
                           </tr>";
                         }
                         

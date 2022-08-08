@@ -305,14 +305,23 @@ class Inquiriescontroller extends CI_Controller {
 						);
 				$this->db->insert('firebasefiles', $data);
 
-				$data = array(
+				$sessionofficerid = $this->session->officer_id;
+				$clientthreadid = $row2->client_id;
+				$threadsql = "SELECT * FROM thread WHERE sender_id = '$sessionofficerid' and receiver_id = '$clientthreadid'";
+				$threadquery = $this->db->query($threadsql);
+				$threadrows = $threadquery->num_rows();
+
+				if ($threadrows == 0) {
+					$data = array(
 							'sender_id' => $this->session->officer_id,
 							'receiver_id' => $row2->client_id,
 							'created_date' => date("Y-m-d"),
 							'status' => 'active',
 							'chattype' => 'managerclient'
-						);
-				$this->db->insert('thread', $data);
+							);
+					$this->db->insert('thread', $data);
+				}
+
 		    }
 
         }

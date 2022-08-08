@@ -679,4 +679,38 @@ class Adminmaintenancecontroller extends CI_Controller {
 		redirect('adminmaintenance');
 	}
 
+	public function deactivateofficer($officer_id)
+	{
+		$this->db->set('officer_status', 'inactive');
+		$this->db->where('officer_id', $officer_id);
+		$this->db->update('officer');
+		//echo json_encode("Successfully done reset!");
+		redirect(base_url()."index.php/adminmaintenance");
+	}
+
+	public function deactivateassignment($assignment_id)
+	{
+		$this->db->set('bactive', '0');
+		$this->db->where('oaid', $assignment_id);
+		$this->db->update('officerassignment');
+		//echo json_encode("Successfully done reset!");
+		redirect(base_url()."index.php/adminmaintenance");
+	}
+
+	public function deleteregion($region_id)
+	{
+		$this->db->where('region_id', $region_id);
+		$this->db->delete('region');
+		//echo json_encode("Successfully done reset!");
+		redirect(base_url()."index.php/adminmaintenance");
+	}
+
+	public function deleteevent($event_id)
+	{
+		$this->db->where('event_id', $event_id);
+		$this->db->delete('events');
+		//echo json_encode("Successfully done reset!");
+		redirect(base_url()."index.php/adminmaintenance");
+	}
+
 }

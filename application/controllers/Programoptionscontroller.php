@@ -328,6 +328,68 @@ class Programoptionscontroller extends CI_Controller {
 		$this->db->where('poid', $this->input->post('poid'));
 		$this->db->update('programoptions');
 
+		$this->db->where('poid', $this->input->post('poid'));
+        $poquery = $this->db->get('programoptions');
+
+		foreach ($poquery->result() as $porow)
+		{
+		        $this->db->where('sender_id', $porow->prepby);
+		        $this->db->where('receiver_id', $porow->client_id);
+		        $poquery = $this->db->get('thread');
+
+				foreach ($threadquery->result() as $threadrow)
+				{
+					$data = array(
+						'thread_id' => $threadrow->thread_id,
+						'message' => 'Hello! Thank you for accepting the PO, please download and fill-up the following files and send it back to us once done. Thank you!',
+						'message_from' => $porow->prepby,
+						'message_type' => 'text',
+						'message_status' => 'Sent',
+						'message_date' => date("Y-m-d"),
+						'message_time' => date("H:i:s"),
+						'message_date_time' => date("Y-m-d H:i:s")
+					);
+					$this->db->insert('thread_conversations', $data);
+
+					$data = array(
+						'thread_id' => $threadrow->thread_id,
+						'message' => "<a href='".base_url()."assets/forms/956_Form.pdf'>956_Form.pdf<a>",
+						'message_from' => $porow->prepby,
+						'message_type' => 'file',
+						'message_status' => 'Sent',
+						'message_date' => date("Y-m-d"),
+						'message_time' => date("H:i:s"),
+						'message_date_time' => date("Y-m-d H:i:s")
+					);
+					$this->db->insert('thread_conversations', $data);
+
+					$data = array(
+						'thread_id' => $threadrow->thread_id,
+						'message' => "<a href='".base_url()."assets/forms/PROGRESS_ADMISSION_FORMS.docx'>PROGRESS_ADMISSION_FORMS.docx<a>",
+						'message_from' => $porow->prepby,
+						'message_type' => 'text',
+						'message_status' => 'Sent',
+						'message_date' => date("Y-m-d"),
+						'message_time' => date("H:i:s"),
+						'message_date_time' => date("Y-m-d H:i:s")
+					);
+					$this->db->insert('thread_conversations', $data);
+
+					$data = array(
+						'thread_id' => $threadrow->thread_id,
+						'message' => "<a href='".base_url()."assets/forms/PROGRESS_STUDY_VISA_APPLICATION_FORM.docx'>PROGRESS_STUDY_VISA_APPLICATION_FORM.docx<a>",
+						'message_from' => $porow->prepby,
+						'message_type' => 'text',
+						'message_status' => 'Sent',
+						'message_date' => date("Y-m-d"),
+						'message_time' => date("H:i:s"),
+						'message_date_time' => date("Y-m-d H:i:s")
+					);
+					$this->db->insert('thread_conversations', $data);
+
+				}
+		}
+
 		$this->posuccess('accepted', $this->input->post('poid'));
 	}
 
@@ -361,5 +423,13 @@ class Programoptionscontroller extends CI_Controller {
 		$data['asset_url'] = $asset_url;
 
 		$this->load->view('forms/clientfeedbacksuccess', $data);
+	}
+
+	public function deletepo($poid, $client_id)
+	{
+		$this->db->where('poid', $poid);
+		$this->db->delete('programoptions');
+		//echo json_encode("Successfully done reset!");
+		redirect(base_url()."index.php/editclientinfo2/".$client_id);
 	}
 }

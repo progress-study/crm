@@ -40,6 +40,8 @@ $route['editschool/(:any)'] = 'schoolsprogramscontroller/editschool/$1';
 $route['updateschool'] = 'schoolsprogramscontroller/updateschool';
 $route['editprogram/(:any)'] = 'schoolsprogramscontroller/editprogram/$1';
 $route['updateprogram'] = 'schoolsprogramscontroller/updateprogram';
+$route['deleteschool/(:any)'] = 'schoolsprogramscontroller/deleteschool/$1';
+$route['deleteprogram/(:any)'] = 'schoolsprogramscontroller/deleteprogram/$1';
 
 // Applications routes
 $route['applications'] = 'applicationscontroller/index';
@@ -78,6 +80,10 @@ $route['updateregion'] = 'adminmaintenancecontroller/updateregion';
 $route['editassignment/(:any)'] = 'adminmaintenancecontroller/editassignment/$1';
 $route['updateassignment'] = 'adminmaintenancecontroller/updateassignment';
 $route['editevent/(:any)'] = 'eventscontroller/editevent/$1';
+$route['deactivateofficer/(:any)'] = 'adminmaintenancecontroller/deactivateofficer/$1';
+$route['deactivateassignment/(:any)'] = 'adminmaintenancecontroller/deactivateassignment/$1';
+$route['deleteregion/(:any)'] = 'adminmaintenancecontroller/deleteregion/$1';
+$route['deleteevent/(:any)'] = 'adminmaintenancecontroller/deleteevent/$1';
 
 // Scholarship routes
 $route['scholarships'] = 'scholarshipcontroller/index';
@@ -87,6 +93,8 @@ $route['newscholarshipallocation/(:any)'] = 'scholarshipcontroller/newscholarshi
 $route['savescholarshipallocation'] = 'scholarshipcontroller/savescholarshipallocation';
 $route['deactivateschofile/(:any)'] = 'scholarshipcontroller/deactivateschofile/$1';
 $route['deactivateschoallo/(:any)'] = 'scholarshipcontroller/deactivateschoallo/$1';
+$route['editscholarshipfile/(:any)'] = 'scholarshipcontroller/editscholarshipfile/$1';
+$route['updatescholarshipfile'] = 'scholarshipcontroller/updatescholarshipfile';
 
 // Visa routes
 $route['newvisaapplication/(:any)'] = 'visacontroller/newvisaapplication/$1';
@@ -101,6 +109,9 @@ $route['editvisaaccount/(:any)/(:any)'] = 'visacontroller/editvisaaccount/$1/$2'
 $route['updatevisaapplication'] = 'visacontroller/updatevisaapplication';
 $route['updatevisaeoi'] = 'visacontroller/updatevisaeoi';
 $route['updatevisaaccount'] = 'visacontroller/updatevisaaccount';
+$route['deletevisaapplication/(:any)/(:any)'] = 'visacontroller/deletevisaapplication/$1/$2';
+$route['deletevisaeoi/(:any)/(:any)'] = 'visacontroller/deletevisaeoi/$1/$2';
+$route['deletevisaaccount/(:any)/(:any)'] = 'visacontroller/deletevisaaccount/$1/$2';
 
 // Reports routes
 $route['reports'] = 'reportscontroller/index';
@@ -130,6 +141,7 @@ $route['acceptpo'] = 'programoptionscontroller/acceptpo';
 $route['rejectpo/(:any)'] = 'programoptionscontroller/rejectpo/$1';
 $route['posuccess'] = 'programoptionscontroller/posuccess';
 $route['saveclientfeedback'] = 'programoptionscontroller/saveclientfeedback';
+$route['deletepo/(:any)/(:any)'] = 'programoptionscontroller/deletepo/$1/$2';
 
 // Required documents routes
 $route['adddocuments'] = 'requireddocumentscontroller/adddocuments';

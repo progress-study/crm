@@ -453,4 +453,20 @@ class Schoolsprogramscontroller extends CI_Controller {
 		redirect('programs');
 	}
 
+	public function deleteschool($sid)
+	{
+		$this->db->where('provider_id', $sid);
+		$this->db->delete('education_provider');
+		//echo json_encode("Successfully done reset!");
+		redirect("schools");
+	}
+
+	public function deleteprogram($spid)
+	{
+		$this->db->where('spid', $spid);
+		$this->db->delete('schoolprograms');
+		//echo json_encode("Successfully done reset!");
+		redirect("programs");
+	}
+
 }
