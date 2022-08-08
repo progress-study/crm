@@ -123,7 +123,7 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item">
-            <a href="<?php echo base_url().'index.php/dashboard'; ?>" class="nav-link<?php if($title == 'Dashboard'){ echo ' active';} ?>">
+            <a href="<?php echo base_url(); ?>index.php/dashboard" class="nav-link<?php if($title == 'Dashboard'){ echo ' active';} ?>">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
@@ -131,7 +131,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="<?php echo base_url().'index.php/customerinfo'; ?>" class="nav-link<?php if($title == 'Client Information'){ echo ' active';} ?>">
+            <a href="<?php echo base_url(); ?>index.php/customerinfo" class="nav-link<?php if($title == 'Client Information'){ echo ' active';} ?>">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Client Information
@@ -139,7 +139,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="<?php echo base_url().'index.php/inquiries'; ?>" class="nav-link<?php if($title == 'Inquiries'){ echo ' active';} ?>">
+            <a href="<?php echo base_url(); ?>index.php/inquiries" class="nav-link<?php if($title == 'Inquiries'){ echo ' active';} ?>">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Inquiries
@@ -150,7 +150,7 @@
             if ($privilege_manage_providers == "1") {
           ?>
           <li class="nav-item">
-            <a href="<?php echo base_url().'index.php/schools'; ?>" class="nav-link<?php if($title == 'Schools and Programs'){ echo ' active';} ?>">
+            <a href="<?php echo base_url(); ?>index.php/schools" class="nav-link<?php if($title == 'Schools and Programs'){ echo ' active';} ?>">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Schools and Programs
@@ -164,7 +164,7 @@
             if ($privilege_manage_studentapps == "1") {
           ?>
           <li class="nav-item">
-            <a href="<?php echo base_url().'index.php/applications'; ?>" class="nav-link<?php if($title == 'Applications'){ echo ' active';} ?>">
+            <a href="<?php echo base_url(); ?>index.php/applications" class="nav-link<?php if($title == 'Applications'){ echo ' active';} ?>">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Applications
@@ -175,7 +175,7 @@
             }
           ?>
           <li class="nav-item">
-            <a href="<?php echo base_url().'index.php/adminmaintenance'; ?>" class="nav-link<?php if($title == 'Admin Maintenance'){ echo ' active';} ?>">
+            <a href="<?php echo base_url(); ?>index.php/adminmaintenance" class="nav-link<?php if($title == 'Admin Maintenance'){ echo ' active';} ?>">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Admin Maintenance
@@ -183,7 +183,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="<?php echo base_url().'index.php/scholarships'; ?>" class="nav-link<?php if($title == 'Scholarships'){ echo ' active';} ?>">
+            <a href="<?php echo base_url(); ?>index.php/scholarships" class="nav-link<?php if($title == 'Scholarships'){ echo ' active';} ?>">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Scholarships
@@ -194,7 +194,7 @@
             if ($privilege_manage_reporting == "1") {
           ?>
           <li class="nav-item">
-            <a href="<?php echo base_url().'index.php/reports'; ?>" class="nav-link<?php if($title == 'Reports'){ echo ' active';} ?>">
+            <a href="<?php echo base_url(); ?>index.php/reports" class="nav-link<?php if($title == 'Reports'){ echo ' active';} ?>">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Reports
