@@ -12,7 +12,7 @@ class Customerinfocontroller extends CI_Controller {
 	public function index()
 	{
 
-		$sql = "SELECT * FROM client c LEFT JOIN officer o ON c.client_officer_id = o.officer_id";
+		$sql = "SELECT * FROM client c LEFT JOIN officer o ON c.client_officer_id = o.officer_id WHERE client_flag = 'active'";
         $query = $this->db->query($sql);
         $result = $query->result();
 

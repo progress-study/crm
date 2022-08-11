@@ -24,8 +24,8 @@ date_default_timezone_set('Australia/Sydney');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'http://localhost/crm/';
-//$config['base_url'] = 'https://crm.progress-study.com/';
+//$config['base_url'] = 'http://localhost/crm/';
+$config['base_url'] = 'https://crm.progress-study.com/';
 
 /*
 |--------------------------------------------------------------------------

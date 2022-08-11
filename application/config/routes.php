@@ -23,6 +23,7 @@ $route['savefirebasefile'] = 'customerinfocontroller/savefirebasefile';
 $route['assignofficer'] = 'customerinfocontroller/assignofficer';
 $route['enterclientinfo/(:any)'] = 'customerinfocontroller/enterclientinfo/$1';
 $route['resetphoto/(:any)'] = 'customerinfocontroller/resetphoto/$1';
+$route['deactivateclient/(:any)'] = 'customerinfocontroller/deactivateclient/$1';
 
 // Payment routes
 $route['newpayment/(:any)'] = 'paymentscontroller/newpayment/$1';

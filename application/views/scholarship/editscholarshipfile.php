@@ -243,6 +243,7 @@
                     foreach ($scholarships as $row) {
               ?>
               <form action="<?php echo base_url(); ?>index.php/updatescholarshipfile" method="post">
+                <input type="hidden" name="scholarshipid" value="<?php echo $row->scholarshipid; ?>">
                 <div class="mb-3">
                   <label for="program" class="form-label">Payment Type</label>
                   <select class="form-control select2" name="paymenttype" required>

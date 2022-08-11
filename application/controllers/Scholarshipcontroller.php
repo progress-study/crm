@@ -241,7 +241,7 @@ class Scholarshipcontroller extends CI_Controller {
 		$this->db->set('amount', $this->input->post('amount'));
 		$this->db->set('school', $this->input->post('school'));
 		$this->db->set('program', $this->input->post('program'));
-		$this->db->where('scholarshipid', $scholarship_id);
+		$this->db->where('scholarshipid', $this->input->post('scholarshipid'));
 		$this->db->update('scholarships');
 
 		redirect('scholarships');
@@ -254,7 +254,7 @@ class Scholarshipcontroller extends CI_Controller {
 		$data['title'] = "New Scholarship Allocation";
 		$data['asset_url'] = $asset_url;
 
-		$sql2 = "SELECT * FROM scholarships";
+		$sql2 = "SELECT * FROM scholarships where bactive = 1";
 	    $query2 = $this->db->query($sql2);
 	    $scholarships = $query2->result();
 

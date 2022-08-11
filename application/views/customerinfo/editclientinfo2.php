@@ -511,7 +511,7 @@
                       <?php
                       foreach ($student_application as $row) {
                         if($this->session->officer_role == "regional manager" || $this->session->officer_role == "admin" || $this->session->officer_role == "manager") {
-                            $deleteapplication = "<a href='".base_url()."index.php/deleteapplicationfromcinfo/".$row->studentapp_id."/".$row->client_id."' class='btn btn-danger btn-xs'><i class='fa fa-trash' aria-hidden='true'></i></a>";
+                            $deleteapplication = "<a href='".base_url()."index.php/deleteapplicationfromcinfo/".$row->studentapp_id."/".$row->client_id."' class='btn btn-danger btn-xs confirmation'><i class='fa fa-trash' aria-hidden='true'></i></a>";
                         } else {
                             $deleteapplication = "";
                         }
@@ -542,6 +542,7 @@
                       <br>
                       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#documentModal">Upload New Document</button> <button type="button" class="btn btn-danger" id="deletedocumentfile">Delete Document</button>
                       <input type="hidden" id="client_id2" value="<?php echo $client_id; ?>">
+                      <input type="hidden" id="documentbaseurl" value="<?php echo base_url(); ?>">
                       <input type="hidden" id="imageasseturl2" value="<?php echo $asset_url.'images/fileicon.png'; ?>"><br><br>
                       <!--<table id="documentstable" style="font-size: 14px;">
                         <thead>
@@ -583,7 +584,7 @@
                         <?php
                         foreach ($visa_application as $row) {
                           if($this->session->officer_role == "regional manager" || $this->session->officer_role == "admin" || $this->session->officer_role == "manager") {
-                              $deletevap = "<a href='".base_url()."index.php/deletevisaapplication/".$row->client_visa_id."/".$client_id."' class='btn btn-danger btn-xs'><i class='fa fa-trash' aria-hidden='true'></i></a>";
+                              $deletevap = "<a href='".base_url()."index.php/deletevisaapplication/".$row->client_visa_id."/".$client_id."' class='btn btn-danger btn-xs confirmation'><i class='fa fa-trash' aria-hidden='true'></i></a>";
                           } else {
                               $deletevap = "";
                           }
@@ -631,7 +632,7 @@
                         <?php
                         foreach ($eoi as $row) {
                           if($this->session->officer_role == "regional manager" || $this->session->officer_role == "admin" || $this->session->officer_role == "manager") {
-                              $deleteeoi = "<a href='".base_url()."index.php/deletevisaeoi/".$row->eoi_id."/".$client_id."' class='btn btn-danger btn-xs'><i class='fa fa-trash' aria-hidden='true'></i></a>";
+                              $deleteeoi = "<a href='".base_url()."index.php/deletevisaeoi/".$row->eoi_id."/".$client_id."' class='btn btn-danger btn-xs confirmation'><i class='fa fa-trash' aria-hidden='true'></i></a>";
                           } else {
                               $deleteeoi = "";
                           }
@@ -687,7 +688,7 @@
                         <?php
                         foreach ($visa_accounts as $row) {
                           if($this->session->officer_role == "regional manager" || $this->session->officer_role == "admin" || $this->session->officer_role == "manager") {
-                              $deletevac = "<a href='".base_url()."index.php/deletevisaaccount/".$row->visa_account_id."/".$client_id."' class='btn btn-danger btn-xs'><i class='fa fa-trash' aria-hidden='true'></i></a>";
+                              $deletevac = "<a href='".base_url()."index.php/deletevisaaccount/".$row->visa_account_id."/".$client_id."' class='btn btn-danger btn-xs confirmation'><i class='fa fa-trash' aria-hidden='true'></i></a>";
                           } else {
                               $deletevac = "";
                           }
@@ -749,7 +750,7 @@
                         <?php
                         foreach ($clientscholarship as $row) {
                           if($this->session->officer_role == "regional manager" || $this->session->officer_role == "admin" || $this->session->officer_role == "manager") {
-                              $deletecs = "<a href='".base_url()."index.php/deactivateschoallo/".$row->csid."' class='btn btn-danger btn-xs'><i class='fa fa-trash' aria-hidden='true'></i></a>";
+                              $deletecs = "<a href='".base_url()."index.php/deactivateschoallo/".$row->csid."' class='btn btn-danger btn-xs confirmation'><i class='fa fa-trash' aria-hidden='true'></i></a>";
                           } else {
                               $deletecs = "";
                           }
@@ -844,7 +845,7 @@
                         
                         foreach ($programoptions as $row) {
                           if($this->session->officer_role == "regional manager" || $this->session->officer_role == "admin" || $this->session->officer_role == "manager") {
-                              $deleteprogramoption = "<a href='".base_url()."index.php/deletepo/".$row->poid."/".$client_id."' class='btn btn-danger btn-xs'><i class='fa fa-trash' aria-hidden='true'></i></a>";
+                              $deleteprogramoption = "<a href='".base_url()."index.php/deletepo/".$row->poid."/".$client_id."' class='btn btn-danger btn-xs confirmation'><i class='fa fa-trash' aria-hidden='true'></i></a>";
                           } else {
                               $deleteprogramoption = "";
                           }
@@ -1128,6 +1129,14 @@ outlining your job title, responsibilities and duration of employment.</option>
       };
 
   });
+
+  var elems = document.getElementsByClassName('confirmation');
+  var confirmIt = function (e) {
+      if (!confirm('Are you sure to delete the entry?')) e.preventDefault();
+  };
+  for (var i = 0, l = elems.length; i < l; i++) {
+      elems[i].addEventListener('click', confirmIt, false);
+  }
 
 </script>
 </body>

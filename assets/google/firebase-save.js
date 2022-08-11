@@ -168,11 +168,12 @@ setDocumentsTable2();
 
 document.getElementById("deletedocumentfile").onclick = function() {
 	var deletefile = document.getElementsByClassName("deleteselect");
+	var baseurl = document.getElementById("documentbaseurl").value;
 	for(var i = 0; i < deletefile.length; i++) {
 		if(deletefile[i].checked == true) {
 			$.ajax({
 			    type: "GET",
-			    url: "http://localhost/progress-study-crm/index.php/deletedocuments/" + deletefile[i].value,
+			    url: baseurl + "index.php/deletedocuments/" + deletefile[i].value,
 			    success: function(data) {
 			    },
 			    error: function(error) {

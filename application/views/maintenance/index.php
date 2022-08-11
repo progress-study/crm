@@ -290,7 +290,7 @@
                       <?php
                       foreach ($officer as $row) {
                         if($this->session->officer_role == "regional manager" || $this->session->officer_role == "admin" || $this->session->officer_role == "manager") {
-                              $deleteofficer = "<a href='".base_url()."index.php/deactivateofficer/".$row->officer_id."' class='btn btn-danger btn-xs'><i class='fa fa-trash' aria-hidden='true'></i></a>";
+                              $deleteofficer = "<a href='".base_url()."index.php/deactivateofficer/".$row->officer_id."' class='btn btn-danger btn-xs confirmation'><i class='fa fa-trash' aria-hidden='true'></i></a>";
                         } else {
                               $deleteofficer = "";
                         }
@@ -340,7 +340,7 @@
                       <?php
                       foreach ($officerassignment as $row) {
                         if($this->session->officer_role == "regional manager" || $this->session->officer_role == "admin" || $this->session->officer_role == "manager") {
-                              $deleteoa = "<a href='".base_url()."index.php/deactivateassignment/".$row->oaid."' class='btn btn-danger btn-xs'><i class='fa fa-trash' aria-hidden='true'></i></a>";
+                              $deleteoa = "<a href='".base_url()."index.php/deactivateassignment/".$row->oaid."' class='btn btn-danger btn-xs confirmation'><i class='fa fa-trash' aria-hidden='true'></i></a>";
                         } else {
                               $deleteoa = "";
                         }
@@ -385,7 +385,7 @@
                       <?php
                       foreach ($region as $row2) {
                         if($this->session->officer_role == "regional manager" || $this->session->officer_role == "admin" || $this->session->officer_role == "manager") {
-                              $deleteregion = "<a href='".base_url()."index.php/deleteregion/".$row2->region_id."' class='btn btn-danger btn-xs'><i class='fa fa-trash' aria-hidden='true'></i></a>";
+                              $deleteregion = "<a href='".base_url()."index.php/deleteregion/".$row2->region_id."' class='btn btn-danger btn-xs confirmation'><i class='fa fa-trash' aria-hidden='true'></i></a>";
                         } else {
                               $deleteregion = "";
                         }
@@ -433,7 +433,7 @@
                       <?php
                       foreach ($events as $row2) {
                         if($this->session->officer_role == "regional manager" || $this->session->officer_role == "admin" || $this->session->officer_role == "manager") {
-                              $deleteevent = "<a href='".base_url()."index.php/deleteevent/".$row2->event_id."' class='btn btn-danger btn-xs'><i class='fa fa-trash' aria-hidden='true'></i></a>";
+                              $deleteevent = "<a href='".base_url()."index.php/deleteevent/".$row2->event_id."' class='btn btn-danger btn-xs confirmation'><i class='fa fa-trash' aria-hidden='true'></i></a>";
                         } else {
                               $deleteevent = "";
                         }
@@ -1076,6 +1076,14 @@
             console.log(error);
           }
       });
+  }
+
+  var elems = document.getElementsByClassName('confirmation');
+  var confirmIt = function (e) {
+      if (!confirm('Are you sure to delete the entry?')) e.preventDefault();
+  };
+  for (var i = 0, l = elems.length; i < l; i++) {
+      elems[i].addEventListener('click', confirmIt, false);
   }
 </script>
 </body>

@@ -254,6 +254,12 @@
                     $filedata = "";
                   }
 
+                  if($this->session->officer_role == "regional manager" || $this->session->officer_role == "admin" || $this->session->officer_role == "manager") {
+                      $deleteinquiry = "<a href='deleteinquiry/".$row->inquiries_id."' class='btn btn-danger btn-xs confirmation' title='Delete Inquiry'><i class='fa fa-trash' aria-hidden='true'></i></a>";
+                  } else {
+                      $deleteinquiry = "";
+                  }
+
                   echo "<tr>
                     <td>".$row->inquiries_surname.", ".$row->inquiries_firstname." ".$row->inquiries_middlename."</td>
                     <td>".$row->inquiries_dob_month."/".$row->inquiries_dob_day."/".$row->inquiries_dob_year."</td>
@@ -262,7 +268,7 @@
                     <td>".$row->inquiries_address."</td>
                     <td>".$row->inquiries_status."</td>
                     <td>".$filedata."</td>
-                    <td><a href='#' class='btn btn-primary btn-xs' data-toggle='modal' data-target='#viewInquiryModal' data-inquiriesid='".$row->inquiries_id."' title='View Inquiry'><i class='fa fa-eye' aria-hidden='true'></i></a> ".$transferbutton." <a href='deleteinquiry/".$row->inquiries_id."' class='btn btn-danger btn-xs' title='Delete Inquiry'><i class='fa fa-trash' aria-hidden='true'></i></a></td>
+                    <td><a href='#' class='btn btn-primary btn-xs' data-toggle='modal' data-target='#viewInquiryModal' data-inquiriesid='".$row->inquiries_id."' title='View Inquiry'><i class='fa fa-eye' aria-hidden='true'></i></a> ".$transferbutton." ".$deleteinquiry."</td>
                     </tr>";
                 }
                 ?>
@@ -418,6 +424,14 @@
             console.log(error);
           }
       });
+  }
+
+  var elems = document.getElementsByClassName('confirmation');
+  var confirmIt = function (e) {
+      if (!confirm('Are you sure to delete the entry?')) e.preventDefault();
+  };
+  for (var i = 0, l = elems.length; i < l; i++) {
+      elems[i].addEventListener('click', confirmIt, false);
   }
 
 </script>

@@ -237,7 +237,6 @@
                       <table id="example2" class="table table-bordered table-striped">
                         <thead>
                         <tr>
-                          <th>Description</th>
                           <th>Scholarship Type</th>
                           <th>Payment Type</th>
                           <th>Amount</th>
@@ -251,13 +250,18 @@
                         <tbody>
                         <?php
                         foreach ($scholarships as $row) {
+                          if($this->session->officer_role == "regional manager" || $this->session->officer_role == "admin" || $this->session->officer_role == "manager") {
+                              $deleteschofile = "<a href='deactivateschofile/".$row->scholarshipid."' class='btn btn-danger btn-xs'><i class='fa fa-trash confirmation' aria-hidden='true'></i></a>";
+                          } else {
+                              $deleteschofile = "";
+                          }
+
                           if($row->bactive == 1) {
                             $status = "Active";
                           } else {
                             $status = "Inactive";
                           }
                           echo "<tr>
-                            <td>".$row->description."</td>
                             <td>".$row->type."</td>
                             <td>".$row->identity."</td>
                             <td>".$row->amount."</td>
@@ -265,14 +269,13 @@
                             <td>".$row->provider_name."</td>
                             <td>".$row->program."</td>
                             <td>".$status."</td>
-                            <td><a href='editscholarshipfile/".$row->scholarshipid."' class='btn btn-primary btn-xs'><i class='fa fa-edit' aria-hidden='true'></i></a> <a href='deactivateschofile/".$row->scholarshipid."' class='btn btn-danger btn-xs'><i class='fa fa-trash' aria-hidden='true'></i></a></td>
+                            <td><a href='editscholarshipfile/".$row->scholarshipid."' class='btn btn-primary btn-xs'><i class='fa fa-edit' aria-hidden='true'></i></a> ".$deleteschofile."</td>
                           </tr>";
                         }
                         ?>
                         </tbody>
                         <tfoot>
                         <tr>
-                          <th>Description</th>
                           <th>Scholarship Type</th>
                           <th>Payment Type</th>
                           <th>Amount</th>
@@ -299,6 +302,12 @@
                         <tbody>
                         <?php
                         foreach ($clientscholarship as $row) {
+                          if($this->session->officer_role == "regional manager" || $this->session->officer_role == "admin" || $this->session->officer_role == "manager") {
+                              $deleteschoallo = "<a href='deactivateschoallo/".$row->csid."' class='btn btn-danger btn-xs'><i class='fa fa-trash confirmation' aria-hidden='true'></i></a>";
+                          } else {
+                              $deleteschoallo = "";
+                          }
+
                           if($row->bactive == 1) {
                             $status = "Active";
                           } else {
@@ -308,7 +317,7 @@
                             <td>".$row->client_surname.", ".$row->client_firstname."</td>
                             <td>".$row->description."</td>
                             <td>".$status."</td>
-                            <td><a href='deactivateschoallo/".$row->csid."' class='btn btn-danger btn-xs'><i class='fa fa-trash' aria-hidden='true'></i></a></td>
+                            <td>".$deleteschoallo."</td>
                           </tr>";
                         }
                         ?>
@@ -397,6 +406,14 @@
             console.log(error);
           }
       });
+  }
+
+  var elems = document.getElementsByClassName('confirmation');
+  var confirmIt = function (e) {
+      if (!confirm('Are you sure to deactivate the entry?')) e.preventDefault();
+  };
+  for (var i = 0, l = elems.length; i < l; i++) {
+      elems[i].addEventListener('click', confirmIt, false);
   }
 </script>
 </body>

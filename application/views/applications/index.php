@@ -239,7 +239,7 @@
                 <?php
                 foreach ($applications as $row) {
                   if($this->session->officer_role == "regional manager" || $this->session->officer_role == "admin" || $this->session->officer_role == "manager") {
-                        $deleteapplication = "<a href='".base_url()."index.php/deleteapplication/".$row->studentapp_id."' class='btn btn-danger btn-xs'><i class='fa fa-trash' aria-hidden='true'></i></a>";
+                        $deleteapplication = "<a href='".base_url()."index.php/deleteapplication/".$row->studentapp_id."' class='btn btn-danger btn-xs confirmation'><i class='fa fa-trash' aria-hidden='true'></i></a>";
                     } else {
                         $deleteapplication = "";
                     }
@@ -335,6 +335,14 @@
             console.log(error);
           }
       });
+  }
+
+  var elems = document.getElementsByClassName('confirmation');
+  var confirmIt = function (e) {
+      if (!confirm('Are you sure to delete the entry?')) e.preventDefault();
+  };
+  for (var i = 0, l = elems.length; i < l; i++) {
+      elems[i].addEventListener('click', confirmIt, false);
   }
 </script>
 </body>

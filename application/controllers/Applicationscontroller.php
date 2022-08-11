@@ -186,7 +186,7 @@ class Applicationscontroller extends CI_Controller {
 	}
 
 	public function getprogramfromschool($schoolid) {
-		$sql3 = "SELECT * FROM schoolprograms where spid = $schoolid";
+		$sql3 = "SELECT * FROM schoolprograms where provider_id = $schoolid";
 	    $query3 = $this->db->query($sql3);
 	    $program = $query3->result();
 	    echo json_encode($program);
