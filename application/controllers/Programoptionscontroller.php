@@ -246,7 +246,7 @@ class Programoptionscontroller extends CI_Controller {
 
 		//$poidnew = 0;
 
-		$sql7 = "SELECT * FROM programoptionsdetails pod where poid = '$podid'";
+		$sql7 = "SELECT * FROM programoptionsdetails pod where podid = '$podid'";
         $query7 = $this->db->query($sql7);
         $programoptionsdetails = $query7->result();
 
