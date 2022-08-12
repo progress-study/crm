@@ -411,6 +411,7 @@ class Formscontroller extends CI_Controller {
 		        $mailContent = $message;
 		        $mail->Body = $mailContent;
 		        $mail->send();
+		        echo "Successfully sent email";
 	}
 
 	public function checkexistingemail($email) {
