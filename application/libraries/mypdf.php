@@ -11,7 +11,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 //use fpdf\fpdf;
 //require 'fpdf/fpdf.php';
 
-class mypdf {
+class Mypdf {
 	public function __construct() {
 		include APPPATH . 'third_party/fpdf/fpdf.php';
 	}
