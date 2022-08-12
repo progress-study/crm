@@ -182,7 +182,7 @@ class Formscontroller extends CI_Controller {
 		        $mail->Body = $mailContent;
 		        $mail->send();
 
-		        //redirect('success');
+		        redirect('success');
 				//$this->load->view('forms/success');
 	    	} else {
 	    		echo "<script>alert('Passwords are not matched!');</script>";
@@ -280,7 +280,7 @@ class Formscontroller extends CI_Controller {
 		        $mail->Body = $mailContent;
 		        $mail->send();
 
-		        //redirect('success');
+		        redirect('success');
 				//$this->load->view('forms/success');
 	    	} else {
 	    		echo "<script>alert('Passwords are not matched!');</script>";
