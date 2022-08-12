@@ -164,7 +164,7 @@ class Reportscontroller extends CI_Controller {
 
         $datenow = date("Y-m-d");
 
-		$this->load->library('mypdf');
+		$this->load->library('Mypdf');
 		$pdf = new FPDF();
 		$pdf->AddPage();
 		$pdf->SetFont('Arial','B',14);
@@ -233,7 +233,7 @@ class Reportscontroller extends CI_Controller {
 
         $datenow = date("Y-m-d");
 
-		$this->load->library('mypdf');
+		$this->load->library('Mypdf');
 		$pdf = new FPDF();
 		$pdf->AddPage();
 		$pdf->SetFont('Arial','B',14);
@@ -299,7 +299,7 @@ class Reportscontroller extends CI_Controller {
 
         $datenow = date("Y-m-d");
 
-		$this->load->library('mypdf');
+		$this->load->library('Mypdf');
 		$pdf = new FPDF();
 		$pdf->AddPage();
 		$pdf->SetFont('Arial','B',14);
