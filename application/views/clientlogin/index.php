@@ -21,11 +21,19 @@ position: relative;
 border: 1px solid black;
 padding: 10px 10px 10px 10px;
 height: 450px;
+width: 350px;
 border-radius: 25px;
 background: #F4F4F4;
 top: 200px;
 left: 50px;
 }
+
+@media (min-width: 300px) {
+  .col-6 {
+    max-width: 100%;
+  }
+}
+
 </style>
 
 </head>
@@ -280,20 +288,8 @@ left: 50px;
 					</div>
 					
 				</form>
-				<form onsubmit="submitForm(event)">
-				    <input type="text">
-				    <input type="submit" value="Submit">
-				</form>
-
-				<script type="text/javascript">
-
-				    function submitForm(event){
-				        event.preventDefault();
-
-				    }
-				</script>
 			</div>
-		</div><br>
+		</div><br><br><br>
 	</div>
 	
 	<script src="<?php echo base_url(); ?>assets/vendor/jquery/jquery-3.2.1.min.js"></script>

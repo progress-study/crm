@@ -946,6 +946,7 @@
                   <option value="Salary">Salary</option>
                   <option value="Bank Certificate">Bank Certificate</option>
                   <option value="Statement of Purpose - GTER">Statement of Purpose - GTER</option>
+                  <option value="Statement of Purpose - GTER">Other</option>
                 </select>
               </div>
               <div class="form-group">
