@@ -384,6 +384,7 @@
                           <div class="col-6">
                             <?php
                                 $officescode = "";
+                                $officername = "";
                                 $this->db->where('officer_id', $row1->client_officer_id);
                                 $officerquery = $this->db->get('officer');
                                 foreach ($officerquery->result() as $officerrow)
