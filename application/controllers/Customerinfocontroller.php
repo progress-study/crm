@@ -169,6 +169,10 @@ class Customerinfocontroller extends CI_Controller {
         $query10 = $this->db->query($sql10);
         $programoptions = $query10->result();
 
+        $sql11 = "SELECT * FROM officer";
+        $query11 = $this->db->query($sql11);
+        $officer = $query11->result();
+
         $this->db->where('privilege_id', $this->session->officer_role_id);
         $query3 = $this->db->get('privilege');
 
@@ -190,6 +194,7 @@ class Customerinfocontroller extends CI_Controller {
 	    $data['client_id'] = $client_id;
         $data['client'] = $client;
         $data['offices'] = $offices;
+        $data['officer'] = $officer;
 		$data['events'] = $events;
 		$data['student_application'] = $student_application;
 		$data['clientscholarship'] = $clientscholarship;
@@ -263,11 +268,19 @@ class Customerinfocontroller extends CI_Controller {
     		$selectoffice = 0;
     	}
 
+    	if($this->input->post('selectofficer') != "") {
+    		$selectofficer = $this->input->post('selectofficer');
+    	} else {
+    		$selectofficer = 0;
+    	}
+
     	if($this->input->post('selectflag') != "") {
     		$selectflag = $this->input->post('selectflag');
     	} else {
     		$selectflag = "";
     	}
+
+    	echo $selectofficer;
 
 		$this->db->set('client_surname', $this->input->post('lastname'));
 		$this->db->set('client_firstname', $this->input->post('firstname'));
@@ -290,6 +303,7 @@ class Customerinfocontroller extends CI_Controller {
 		$this->db->set('client_qualifications', $this->input->post('qualifications'));
 		$this->db->set('client_photo', '');
 		$this->db->set('client_office_id', $selectoffice);
+		$this->db->set('client_officer_id', $selectofficer);
 		$this->db->set('client_ve_day', $veday);
 		$this->db->set('client_ve_month', $vemonth);
 		$this->db->set('client_ve_year', $veyear);
@@ -341,6 +355,10 @@ class Customerinfocontroller extends CI_Controller {
 			    		$this->db->set('client_flag', $this->input->post('selectflag'));
 			    	}
 
+			    	if($this->input->post('selectofficer') != "") {
+			    		$this->db->set('client_officer_id', $this->input->post('selectofficer'));
+			    	}
+
 					$this->db->set('client_surname', $this->input->post('lastname'));
 					$this->db->set('client_firstname', $this->input->post('firstname'));
 					$this->db->set('client_middlename', $this->input->post('middlename'));
@@ -386,21 +404,19 @@ class Customerinfocontroller extends CI_Controller {
 			    	$veday = $vedate->format("d");
 
 			    	if($this->input->post('selectevent') != "") {
-			    		$selectevent = $this->input->post('selectevent');
-			    	} else {
-			    		$selectevent = 0;
+			    		$this->db->set('client_event_id', $this->input->post('selectevent'));
 			    	}
 
 			    	if($this->input->post('selectoffice') != "") {
-			    		$selectoffice = $this->input->post('selectoffice');
-			    	} else {
-			    		$selectoffice = 0;
+			    		$this->db->set('client_office_id', $this->input->post('selectoffice'));
 			    	}
 
-			    	if($this->input->post('selectflag') != "") {
-			    		$selectflag = $this->input->post('selectflag');
-			    	} else {
-			    		$selectflag = "";
+			    	if($this->input->post('selectflag') != "" ) {
+			    		$this->db->set('client_flag', $this->input->post('selectflag'));
+			    	}
+
+			    	if($this->input->post('selectofficer') != "") {
+			    		$this->db->set('client_officer_id', $this->input->post('selectofficer'));
 			    	}
 
 					$this->db->set('client_surname', $this->input->post('lastname'));
@@ -418,16 +434,16 @@ class Customerinfocontroller extends CI_Controller {
 					$this->db->set('client_state', $this->input->post('state'));
 					$this->db->set('client_postcode', $this->input->post('postcode'));
 					$this->db->set('client_overseas_address', $this->input->post('overseasaddress'));
-					$this->db->set('client_flag', $selectflag);
+					
 					$this->db->set('locked_by_id', '');
 					$this->db->set('client_comments', $this->input->post('comment'));
 					$this->db->set('client_qualifications', $this->input->post('qualifications'));
 					$this->db->set('client_photo', $file_name);
-					$this->db->set('client_office_id', $selectoffice);
+					
 					$this->db->set('client_ve_day', $veday);
 					$this->db->set('client_ve_month', $vemonth);
 					$this->db->set('client_ve_year', $veyear);
-					$this->db->set('client_event_id', $selectevent);
+					
 					$this->db->where('client_id', $this->input->post('clientid'));
 					$this->db->update('client');
 

@@ -335,7 +335,7 @@ class Programoptionscontroller extends CI_Controller {
 		{
 		        $this->db->where('sender_id', $porow->prepby);
 		        $this->db->where('receiver_id', $porow->client_id);
-		        $poquery = $this->db->get('thread');
+		        $threadquery = $this->db->get('thread');
 
 				foreach ($threadquery->result() as $threadrow)
 				{

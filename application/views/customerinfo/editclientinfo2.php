@@ -378,6 +378,35 @@
                         <label for="amount" class="form-label">Email Address</label>
                         <input type="email" class="form-control" name="email" value="<?php echo $row1->client_email; ?>">
                       </div>
+                      <div class="mb-3">
+                        <label for="amount" class="form-label">Assigned Officer</label>
+                        <div class="row">
+                          <div class="col-6">
+                            <?php
+                                $officescode = "";
+                                $this->db->where('officer_id', $row1->client_officer_id);
+                                $officerquery = $this->db->get('officer');
+                                foreach ($officerquery->result() as $officerrow)
+                                {
+                                  $officername = $officerrow->officer_name;
+                                }
+                            ?>
+                            <input type="text" class="form-control" name="office" value="<?php echo $officername; ?>" readonly>
+                          </div>
+                          <div class="col-6">
+                            <select class="form-control" name="selectofficer">
+                              <option value="">Select Officer</option>
+                              <?php
+                                foreach($officer as $row2) {
+                              ?>
+                                <option value="<?php echo $row2->officer_id; ?>"><?php echo $row2->officer_name; ?></option>
+                              <?php
+                              }
+                              ?>
+                            </select>
+                          </div>
+                        </div>
+                      </div> 
                   </div>
                   <div class="col-6">
                       <div class="mb-3">
