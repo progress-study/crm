@@ -249,10 +249,8 @@
                   <select name="expensestype" class="form-control" required>
                     <?php echo "<option>".$row->expensestype."</option>"; ?>
                     <option>Select Expenses Type</option>
-                    <option option="Travel">Travel</option>
-                    <option option="Tuition">Tuition</option>
-                    <option option="Living">Living</option>
-                    <option option="Health Insurance">Health Insurance</option>
+                    <option value="Visa Application">Visa Application</option>
+                    <option value="Financial Capacity">Financial Capacity</option>
                   </select>
                 </div>
                 <div class="mb-3">

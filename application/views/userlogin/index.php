@@ -39,7 +39,11 @@
 					?>
 					    <div class="alert alert-danger" role="alert">Please login first to CRM!</div>
 					<?php
-					}
+					} else if (isset($_GET['success1'])) {
+                    ?>
+                        <div class="alert alert-success" role="alert">Password successfully changed!</div>
+                    <?php
+                    }
 					?>
 					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
 						<input class="input100" type="text" name="email">
@@ -63,7 +67,7 @@
 						</div>
 
 						<div>
-							<a href="#" class="txt1">
+							<a href="<?php echo base_url(); ?>index.php/forgotpassword" class="txt1">
 								Forgot Password?
 							</a>
 						</div>

@@ -245,10 +245,8 @@
                   <label for="payee" class="form-label">Expenses Type</label>
                   <select name="expensestype" class="form-control" required>
                     <option>Select Expenses Type</option>
-                    <option option="Travel">Travel</option>
-                    <option option="Tuition">Tuition</option>
-                    <option option="Living">Living</option>
-                    <option option="Health Insurance">Health Insurance</option>
+                    <option value="Visa Application">Visa Application</option>
+                    <option value="Financial Capacity">Financial Capacity</option>
                   </select>
                 </div>
                 <div class="mb-3">

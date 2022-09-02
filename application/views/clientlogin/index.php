@@ -233,12 +233,20 @@ left: 50px;
 			</div>
 			
 			<div class="login">
+				
 				<form class="login100-form validate-form" action="<?php echo base_url(); ?>index.php/clientlogintypical" method="post">
 					<br>
 					<span class="login100-form-title p-b-43">
-						<h3>Login</h3><br><br>
-						<h3>Already a PSC member? Login Here</h3>
+						<h3>Login</h3>
+						<h4>Already a PSC member? Login Here</h4>
 					</span><br>
+					<?php
+                    if (isset($_GET['success1'])) {
+                    ?>
+                        <div class="alert alert-success" role="alert">Password successfully changed!</div>
+                    <?php
+                    }
+                    ?>
 					<?php 
 					if (isset($_GET['error1'])) {
 					?>
@@ -274,7 +282,7 @@ left: 50px;
 						</div>
 
 						<div>
-							<a href="#" class="txt1">
+							<a href="<?php echo base_url(); ?>index.php/clientforgotpassword" class="txt1">
 								Forgot Password?
 							</a>
 						</div>

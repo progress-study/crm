@@ -71,4 +71,35 @@ class ClientLoginController extends CI_Controller {
 		redirect(base_url()."index.php/clientlogin");
 	}
 
+	public function clientforgotpassword() {
+		$asset_url = base_url()."assets/";
+		$data['title'] = "Client Forgot Password";
+		$data['asset_url'] = $asset_url;
+		$this->load->view('clientlogin/clientforgotpassword',$data);
+	}
+
+	public function clientforgotpasswordsend() {
+		$email = $this->input->post('email');
+		$password1 = $this->input->post('password1');
+		$password2 = $this->input->post('password2');
+
+		if($password1 == $password2) {
+			$this->db->select('*');
+	        $this->db->from('client');
+	        $this->db->where('client_email', $email);
+	        $query = $this->db->get();
+	        $row = $query->row();
+
+	        $this->db->set('client_password', $password1);
+			$this->db->where('client_id', $row->client_id);
+			$this->db->update('client');
+
+	        redirect(base_url()."index.php/clientlogin?success1=1");
+
+		} else {
+			redirect(base_url()."index.php/clientlogin??error4=1");
+		}
+
+	}
+
 }

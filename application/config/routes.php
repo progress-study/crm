@@ -14,7 +14,8 @@ $route['requireddocuments'] = 'requireddocumentscontroller/index';
 // Userlogin routes
 $route['logintypical'] = 'userlogincontroller/logintypical';
 $route['signout'] = 'userlogincontroller/signout';
-
+$route['forgotpassword'] = 'userlogincontroller/forgotpassword';
+$route['forgotpasswordsend'] = 'userlogincontroller/forgotpasswordsend';
 
 // Client Information
 $route['editclientinfo/(:any)'] = 'customerinfocontroller/editclientinfo/$1';
@@ -162,6 +163,8 @@ $route['savetoclientdocuments'] = 'messagescontroller/savetoclientdocuments';
 $route['clientlogin'] = 'clientlogincontroller/index';
 $route['clientlogintypical'] = 'clientlogincontroller/clientlogintypical';
 $route['clientsignout'] = 'clientlogincontroller/clientsignout';
+$route['clientforgotpassword'] = 'clientlogincontroller/clientforgotpassword';
+$route['clientforgotpasswordsend'] = 'clientlogincontroller/clientforgotpasswordsend';
 
 // Dashboard routes
 $route['archivetasklist/(:any)'] = 'dashboardcontroller/archivetasklist/$1';

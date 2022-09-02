@@ -154,7 +154,7 @@ class Formscontroller extends CI_Controller {
 		        $mail = $this->phpmailer_lib->load();
 	  
 	  
-			    $mail->SMTPDebug = 1;
+			    //$mail->SMTPDebug = 1;
 			    /*
 			    $mail->isSMTP();
 			    $mail->Host       = 'mail.progress-study.com';            
@@ -182,8 +182,14 @@ class Formscontroller extends CI_Controller {
 		        $mail->Body = $mailContent;
 		        $mail->send();
 
-		        redirect('success');
+		        //redirect('success');
 				//$this->load->view('forms/success');
+				$asset_url = base_url()."assets/";
+				$data['title'] = "Client Form";
+				$data['asset_url'] = $asset_url;
+
+				$this->load->view('forms/success', $data);
+				
 	    	} else {
 	    		echo "<script>alert('Passwords are not matched!');</script>";
 	    	}
@@ -262,7 +268,7 @@ class Formscontroller extends CI_Controller {
 			    $mail->SMTPSecure = 'tls';      
 			    $mail->Port       = 587;    
 				*/ 
-				$mail->SMTPDebug = 1;
+				//$mail->SMTPDebug = 1;
 			    $mail->isSMTP();
 				$mail->Host = 'localhost';
 				$mail->SMTPAuth = false;
@@ -280,8 +286,14 @@ class Formscontroller extends CI_Controller {
 		        $mail->Body = $mailContent;
 		        $mail->send();
 
-		        redirect('success');
+		        //redirect('success');
 				//$this->load->view('forms/success');
+				$asset_url = base_url()."assets/";
+				$data['title'] = "Client Form";
+				$data['asset_url'] = $asset_url;
+
+				$this->load->view('forms/success', $data);
+
 	    	} else {
 	    		echo "<script>alert('Passwords are not matched!');</script>";
 	    	}
