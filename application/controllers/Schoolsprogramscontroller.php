@@ -269,7 +269,7 @@ class Schoolsprogramscontroller extends CI_Controller {
 					'program' => $this->input->post('program'),
 					'applicationfee' => $this->input->post('applicationfee'),
 					'programtype' => $this->input->post('programlevel'),
-					'commission' => $this->input->post('commission'),
+					'commission' => '0',
 					'provider_id' => $this->input->post('school'),
 					'description' => $this->input->post('description'),
 					'tuition' => $this->input->post('tuitionfee'),
@@ -441,7 +441,7 @@ class Schoolsprogramscontroller extends CI_Controller {
 		$this->db->set('program', $this->input->post('program'));
 		$this->db->set('applicationfee', $this->input->post('applicationfee'));
 		$this->db->set('programtype', $this->input->post('programlevel'));
-		$this->db->set('commission', $this->input->post('commission'));
+		$this->db->set('commission', '0');
 		$this->db->set('provider_id', $this->input->post('school'));
 		$this->db->set('description', $this->input->post('description'));
 		$this->db->set('tuition', $this->input->post('tuitionfee'));

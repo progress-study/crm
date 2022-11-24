@@ -72,7 +72,7 @@ class Programoptionscontroller extends CI_Controller {
 		$data = array(
 					'provider_id' => $this->input->post('provider_id'),
 					'sp_id' => $this->input->post('sp_id'),
-					'indicativeannualcost' => $this->input->post('indicativeannualcost'),
+					'indicativeannualcost' => str_replace(",","", str_replace(" ","",$this->input->post('indicativeannualcost'))),
 					'duration' => $this->input->post('duration'),
 					'location' => $this->input->post('location'),
 					'englishrequirement' => $this->input->post('englishrequirement'),
@@ -93,7 +93,7 @@ class Programoptionscontroller extends CI_Controller {
 	public function updateprogramoptions() {
 		$this->db->set('provider_id', $this->input->post('provider_id'));
 		$this->db->set('sp_id', $this->input->post('sp_id'));
-		$this->db->set('indicativeannualcost', $this->input->post('indicativeannualcost'));
+		$this->db->set('indicativeannualcost', str_replace(",","", str_replace(" ","",$this->input->post('indicativeannualcost'))));
 		$this->db->set('duration', $this->input->post('duration'));
 		$this->db->set('location', $this->input->post('location'));
 		$this->db->set('englishrequirement', $this->input->post('englishrequirement'));
@@ -300,11 +300,11 @@ class Programoptionscontroller extends CI_Controller {
 		$data = array(
 					'poid' => $this->input->post('poid'),
 					'expensestype' => $this->input->post('expensestype'),
-					'perperson' => $this->input->post('perperson'),
-					'amountrequired' => $this->input->post('amountrequired'),
-					'numberoffamily' => $this->input->post('numberoffamily'),
-					'amounttoaccess' => $this->input->post('amounttoaccess'),
-					'confirmaccesstofunds' => $this->input->post('confirmaccesstofunds')
+					'perperson' => str_replace(",","", str_replace(" ","",$this->input->post('perperson'))),
+					'amountrequired' => str_replace(",","", str_replace(" ","",$this->input->post('amountrequired'))),
+					'numberoffamily' => str_replace(",","", str_replace(" ","",$this->input->post('numberoffamily'))),
+					'amounttoaccess' => str_replace(",","", str_replace(" ","",$this->input->post('amounttoaccess'))),
+					'confirmaccesstofunds' => str_replace(",","", str_replace(" ","",$this->input->post('confirmaccesstofunds')))
 				);
 		$this->db->insert('programoptionsdetails', $data);
 		redirect(base_url().'index.php/editprogramoptions/'.$this->input->post('poid'));
@@ -312,11 +312,11 @@ class Programoptionscontroller extends CI_Controller {
 
 	public function updateprogramoptiondetails() {
 		$this->db->set('expensestype', $this->input->post('expensestype'));
-		$this->db->set('perperson', $this->input->post('perperson'));
-		$this->db->set('amountrequired', $this->input->post('amountrequired'));
-		$this->db->set('numberoffamily', $this->input->post('numberoffamily'));
-		$this->db->set('amounttoaccess', $this->input->post('amounttoaccess'));
-		$this->db->set('confirmaccesstofunds', $this->input->post('confirmaccesstofunds'));
+		$this->db->set('perperson', str_replace(",","", str_replace(" ","",$this->input->post('perperson'))));
+		$this->db->set('amountrequired', str_replace(",","", str_replace(" ","",$this->input->post('amountrequired'))));
+		$this->db->set('numberoffamily', str_replace(",","", str_replace(" ","",$this->input->post('numberoffamily'))));
+		$this->db->set('amounttoaccess', str_replace(",","", str_replace(" ","",$this->input->post('amounttoaccess'))));
+		$this->db->set('confirmaccesstofunds', str_replace(",","", str_replace(" ","",$this->input->post('confirmaccesstofunds'))));
 		$this->db->where('podid', $this->input->post('podid'));
 		$this->db->update('programoptionsdetails');
 

@@ -250,7 +250,7 @@
                   </select>
                 </div>
                 <div class="mb-3">
-                  <label for="payee" class="form-label">Rer Person</label>
+                  <label for="payee" class="form-label">Per Person</label>
                   <input type="text" class="form-control" name="perperson" placeholder="Rer Person" required>
                 </div>
                 <div class="mb-3">

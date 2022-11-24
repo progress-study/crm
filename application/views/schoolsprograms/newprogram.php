@@ -269,10 +269,6 @@
                   </select>
                 </div>
                 <div class="mb-3">
-                  <label for="amount" class="form-label">% Commision</label>
-                  <input type="number" class="form-control" name="commission" placeholder="% Commision" step=".1" required>
-                </div>
-                <div class="mb-3">
                   <label for="amount" class="form-label">Currency</label>
                   <select class="form-control select2" name="currency" required>
                     <?php

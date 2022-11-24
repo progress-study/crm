@@ -235,7 +235,6 @@
                   <th>Tuition Fee</th>
                   <th>Cost of Living</th>
                   <th>Currency</th>
-                  <th>Commission</th>
                   <th></th>
                 </tr>
                 </thead>
@@ -256,7 +255,6 @@
                     <td>".$row->tuition."</td>
                     <td>".$row->costofliving."</td>
                     <td>".$row->currency."</td>
-                    <td>".$row->commission." on net tuition</td>
                     <td><a href='editprogram/".$row->spid."' class='btn btn-primary btn-xs'><i class='fa fa-edit' aria-hidden='true'></i></a> ".$deleteprogram."</td>
                   </tr>";
                 }
