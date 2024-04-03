@@ -91,6 +91,12 @@ class Programoptionscontroller extends CI_Controller {
 	}
 
 	public function updateprogramoptions() {
+		if($this->input->post('birthday') == "") {
+			$birthday = NULL;
+		} else {
+			$birthday = $this->input->post('birthday');
+		}
+
 		$this->db->set('provider_id', $this->input->post('provider_id'));
 		$this->db->set('sp_id', $this->input->post('sp_id'));
 		$this->db->set('indicativeannualcost', str_replace(",","", str_replace(" ","",$this->input->post('indicativeannualcost'))));
@@ -102,6 +108,10 @@ class Programoptionscontroller extends CI_Controller {
 		$this->db->set('migrationpathway', $this->input->post('migrationpathway'));
 		$this->db->set('client_id', $this->input->post('client_id'));
 		$this->db->set('others', $this->input->post('others'));
+		$this->db->set('programlink', $this->input->post('programlink'));
+		$this->db->set('birthday', $birthday);
+		$this->db->set('cricoscode', $this->input->post('cricoscode'));
+		$this->db->set('englishtestresult', $this->input->post('englishtestresult'));
 		$this->db->where('poid', $this->input->post('poid'));
 		$this->db->update('programoptions');
 
@@ -121,12 +131,32 @@ class Programoptionscontroller extends CI_Controller {
         $query6 = $this->db->query($sql6);
         $programoptions = $query6->result();
 
-        $sql7 = "SELECT * FROM programoptionsdetails pod where poid = '$poid'";
-        $query7 = $this->db->query($sql7);
-        $programoptionsdetails = $query7->result();
+        // $sql7 = "SELECT * FROM programoptionsdetails pod where poid = '$poid'";
+        // $query7 = $this->db->query($sql7);
+        // $programoptionsdetails = $query7->result();
+
+        $sql9 = "SELECT * FROM programoptionsdetaileipwithdependent where poid = '$poid'";
+        $query9 = $this->db->query($sql9);
+        $programoptionsdetaileipwithdependent = $query9->result();
+
+        $sql9 = "SELECT * FROM programoptionsdetaileipwithoutdependent where poid = '$poid'";
+        $query9 = $this->db->query($sql9);
+        $programoptionsdetaileipwithoutdependent = $query9->result();
+
+        $sql9 = "SELECT * FROM programoptionsdetailwithdependent where poid = '$poid'";
+        $query9 = $this->db->query($sql9);
+        $programoptionsdetailwithdependent = $query9->result();
+
+        $sql9 = "SELECT * FROM programoptionsdetailwithoutdependent where poid = '$poid'";
+        $query9 = $this->db->query($sql9);
+        $programoptionsdetailwithoutdependent = $query9->result();
 
         $data['programoptions'] = $programoptions;
-        $data['programoptionsdetails'] = $programoptionsdetails;
+        // $data['programoptionsdetails'] = $programoptionsdetails;
+        $data['programoptionsdetaileipwithdependent'] = $programoptionsdetaileipwithdependent;
+        $data['programoptionsdetaileipwithoutdependent'] = $programoptionsdetaileipwithoutdependent;
+        $data['programoptionsdetailwithdependent'] = $programoptionsdetailwithdependent;
+        $data['programoptionsdetailwithoutdependent'] = $programoptionsdetailwithoutdependent; 
 
 		$sql = "SELECT * FROM education_provider";
 	    $query = $this->db->query($sql);

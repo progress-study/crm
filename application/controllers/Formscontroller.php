@@ -62,6 +62,57 @@ class Formscontroller extends CI_Controller {
 		$this->load->view('forms/programoptionform', $data);
 	}
 
+	public function programoptionform2($poid)
+	{
+		$sql6 = "SELECT * FROM programoptions po inner join education_provider s on po.provider_id = s.provider_id inner join schoolprograms sp on sp.spid = po.sp_id inner join client c on po.client_id = c.client_id where po.poid = '$poid'";
+        $query6 = $this->db->query($sql6);
+        $programoptions = $query6->result();
+
+        $sql7 = "SELECT * FROM programoptionsdetails pod where poid = '$poid'";
+        $query7 = $this->db->query($sql7);
+        $programoptionsdetails = $query7->result();
+
+        $sql8 = "SELECT * FROM programoptions po inner join client c on po.client_id = c.client_id inner join clientscholarship csc on c.client_id = csc.clientid inner join scholarships s on s.scholarshipid = csc.scholarshipid inner join mastersetting m on s.paymenttype = m.id where po.poid = '$poid'";
+        $query8 = $this->db->query($sql8);
+        $scholarships = $query8->result();
+
+        $sql9 = "SELECT * FROM programoptionscostbasisvariables";
+        $query9 = $this->db->query($sql9);
+        $programoptionscostbasisvariables = $query9->result();
+
+        $sql9 = "SELECT * FROM programoptionsdetaileipwithdependent where poid = '$poid'";
+        $query9 = $this->db->query($sql9);
+        $programoptionsdetaileipwithdependent = $query9->result();
+
+        $sql9 = "SELECT * FROM programoptionsdetaileipwithoutdependent where poid = '$poid'";
+        $query9 = $this->db->query($sql9);
+        $programoptionsdetaileipwithoutdependent = $query9->result();
+
+        $sql9 = "SELECT * FROM programoptionsdetailwithdependent where poid = '$poid'";
+        $query9 = $this->db->query($sql9);
+        $programoptionsdetailwithdependent = $query9->result();
+
+        $sql9 = "SELECT * FROM programoptionsdetailwithoutdependent where poid = '$poid'";
+        $query9 = $this->db->query($sql9);
+        $programoptionsdetailwithoutdependent = $query9->result();
+
+        $data['programoptions'] = $programoptions;
+        $data['programoptionsdetails'] = $programoptionsdetails;
+        $data['scholarships'] = $scholarships;        
+        $data['poid'] = $poid; 
+        $data['programoptionscostbasisvariables'] = $programoptionscostbasisvariables;
+        $data['programoptionsdetaileipwithdependent'] = $programoptionsdetaileipwithdependent;
+        $data['programoptionsdetaileipwithoutdependent'] = $programoptionsdetaileipwithoutdependent;
+        $data['programoptionsdetailwithdependent'] = $programoptionsdetailwithdependent;
+        $data['programoptionsdetailwithoutdependent'] = $programoptionsdetailwithoutdependent; 
+
+        $asset_url = base_url()."assets/";
+		$data['title'] = "Program Options Form";
+		$data['asset_url'] = $asset_url;
+
+		$this->load->view('forms/programoptionform', $data);
+	}
+
 	public function do_upload() 
 	{
 		$message = "";

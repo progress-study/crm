@@ -170,3 +170,17 @@ $route['clientforgotpasswordsend'] = 'clientlogincontroller/clientforgotpassword
 $route['archivetasklist/(:any)'] = 'dashboardcontroller/archivetasklist/$1';
 $route['donetasklist/(:any)'] = 'dashboardcontroller/donetasklist/$1';
 $route['markasread'] = 'dashboardcontroller/markasread';
+
+$route['programoptionform2/(:any)'] = 'formscontroller/programoptionform2/$1';
+$route['newprogramoptiondetailwithoutdependent/(:any)'] = 'programoptionscontroller/newprogramoptiondetailwithoutdependent/$1';
+$route['saveprogramoptiondetailwithoutdependent'] = 'programoptionscontroller/saveprogramoptiondetailwithoutdependent';
+$route['deleteprogramoptiondetailwithoutdependent/(:any)/(:any)'] = 'programoptionscontroller/deleteprogramoptiondetailwithoutdependent/$1/$2';
+$route['newprogramoptiondetailwithdependent/(:any)'] = 'programoptionscontroller/newprogramoptiondetailwithdependent/$1';
+$route['saveprogramoptiondetailwithdependent'] = 'programoptionscontroller/saveprogramoptiondetailwithdependent';
+$route['deleteprogramoptiondetailwithdependent/(:any)/(:any)'] = 'programoptionscontroller/deleteprogramoptiondetailwithdependent/$1/$2';
+$route['newprogramoptiondetaileipwithoutdependent/(:any)'] = 'programoptionscontroller/newprogramoptiondetaileipwithoutdependent/$1';
+$route['saveprogramoptiondetaileipwithoutdependent'] = 'programoptionscontroller/saveprogramoptiondetaileipwithoutdependent';
+$route['deleteprogramoptiondetaileipwithoutdependent/(:any)/(:any)'] = 'programoptionscontroller/deleteprogramoptiondetaileipwithoutdependent/$1/$2';
+$route['newprogramoptiondetaileipwithdependent/(:any)'] = 'programoptionscontroller/newprogramoptiondetaileipwithdependent/$1';
+$route['saveprogramoptiondetaileipwithdependent'] = 'programoptionscontroller/saveprogramoptiondetaileipwithdependent';
+$route['deleteprogramoptiondetaileipwithdependent/(:any)/(:any)'] = 'programoptionscontroller/deleteprogramoptiondetaileipwithdependent/$1/$2';
