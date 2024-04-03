@@ -264,6 +264,10 @@
                   </select>
                 </div>
                 <div class="mb-3">
+                  <label for="amount" class="form-label">Program Link/URL</label>
+                  <input type="text" class="form-control" name="programlink" placeholder="Others" value="<?php echo $row->programlink; ?>">
+                </div>
+                <div class="mb-3">
                   <label for="payee" class="form-label">Indicative Annual Cost</label>
                   <input type="text" class="form-control" name="indicativeannualcost" value="<?php echo $row->indicativeannualcost; ?>" placeholder="Indicative Annual Cost" required>
                 </div>
@@ -293,15 +297,169 @@
                 </div>
                 <div class="mb-3">
                   <label for="amount" class="form-label">Others</label>
-                  <input type="text" class="form-control" name="others" placeholder="Others" value="<?php echo $row->others; ?>" required>
+                  <input type="text" class="form-control" name="others" placeholder="Others" value="<?php echo $row->others; ?>">
+                </div>
+                <div class="mb-3">
+                  <label for="amount" class="form-label">Birthday</label>
+                  <input type="date" class="form-control" name="birthday" placeholder="Others" value="<?php echo $row->birthday; ?>">
+                </div>
+                <div class="mb-3">
+                  <label for="amount" class="form-label">CRICOS Code</label>
+                  <input type="text" class="form-control" name="cricoscode" placeholder="Others" value="<?php echo $row->cricoscode; ?>">
+                </div>
+                <div class="mb-3">
+                  <label for="amount" class="form-label">English Test Result</label>
+                  <input type="text" class="form-control" name="englishtestresult" placeholder="Others" value="<?php echo $row->englishtestresult; ?>">
                 </div>
                 <?php
                     }
                 ?>
                 <button type="submit" class="btn btn-primary">Submit</button>
-                <br>
+                <br><br>
                 <h3>Expenses Details</h3>
-                <a href="<?php echo base_url(); ?>index.php/newprogramoptiondetails/<?php echo $poid; ?>">Add New Program Option Details</a>
+                <br>
+                <h4>Without Dependent</h4>
+                <a href="<?php echo base_url(); ?>index.php/newprogramoptiondetailwithoutdependent/<?php echo $poid; ?>">Add New Program Option Details Without Dependent</a>
+                      <table class="table table-bordered table-striped">
+                        <thead>
+                        <tr>
+                          <th>Category</th>
+                          <th>Expenses Type</th>
+                          <th>Without Scholarship</th>
+                          <th>With Scholarship</th>
+                          <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <?php
+                        
+                        foreach ($programoptionsdetailwithoutdependent as $row) {
+                          echo "<tr>
+                            <td>".$row->category."</td>
+                            <td>".$row->type."</td>
+                            <td>".$row->woscholarship."</td>
+                            <td>".$row->wscholarship."</td>
+                            <td><a href='".base_url()."index.php/deleteprogramoptiondetailwithoutdependent/".$poid."/".$row->id."' class='btn btn-danger btn-xs'>Delete</a></td>
+                          </tr>";
+                        }
+                        ?>
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                          <th>Category</th>
+                          <th>Expenses Type</th>
+                          <th>Without Scholarship</th>
+                          <th>With Scholarship</th>
+                          <th></th>
+                        </tr>
+                        </tfoot>
+                      </table>
+                <br>
+                <h4>Estimated Initial Payment</h4>
+                <a href="<?php echo base_url(); ?>index.php/newprogramoptiondetaileipwithoutdependent/<?php echo $poid; ?>">Add New Estimated Initial Payment Without Dependent</a>
+                      <table class="table table-bordered table-striped">
+                        <thead>
+                        <tr>
+                          <th>Expenses Type</th>
+                          <th>Without Scholarship</th>
+                          <th>With Scholarship</th>
+                          <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <?php
+                        
+                        foreach ($programoptionsdetaileipwithoutdependent as $row) {
+                          echo "<tr>
+                            <td>".$row->type."</td>
+                            <td>".$row->woscholarship."</td>
+                            <td>".$row->wscholarship."</td>
+                            <td><a href='".base_url()."index.php/deleteprogramoptiondetaileipwithoutdependent/".$row->id."' class='btn btn-danger btn-xs'>Delete</a></td>
+                          </tr>";
+                        }
+                        ?>
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                          <th>Expenses Type</th>
+                          <th>Without Scholarship</th>
+                          <th>With Scholarship</th>
+                          <th></th>
+                        </tr>
+                        </tfoot>
+                      </table>
+                <br>
+                <h4>With Dependent</h4>
+                <a href="<?php echo base_url(); ?>index.php/newprogramoptiondetailwithdependent/<?php echo $poid; ?>">Add New Program Option Details With Dependent</a>
+                      <table class="table table-bordered table-striped">
+                        <thead>
+                        <tr>
+                          <th>Category</th>
+                          <th>Expenses Type</th>
+                          <th>Without Scholarship</th>
+                          <th>With Scholarship</th>
+                          <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <?php
+                        
+                        foreach ($programoptionsdetailwithdependent as $row) {
+                          echo "<tr>
+                            <td>".$row->category."</td>
+                            <td>".$row->type."</td>
+                            <td>".$row->woscholarship."</td>
+                            <td>".$row->wscholarship."</td>
+                            <td><a href='".base_url()."index.php/deleteprogramoptiondetailwithdependent/".$poid."/".$row->id."' class='btn btn-danger btn-xs'>Delete</a></td>
+                          </tr>";
+                        }
+                        ?>
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                          <th>Category</th>
+                          <th>Expenses Type</th>
+                          <th>Without Scholarship</th>
+                          <th>With Scholarship</th>
+                          <th></th>
+                        </tr>
+                        </tfoot>
+                      </table>
+                <br>
+                <h4>Estimated Initial Payment</h4>
+                <a href="<?php echo base_url(); ?>index.php/newprogramoptiondetaileipwithdependent/<?php echo $poid; ?>">Add New Estimated Initial Payment With Dependent</a>
+                      <table class="table table-bordered table-striped">
+                        <thead>
+                        <tr>
+                          <th>Expenses Type</th>
+                          <th>Without Scholarship</th>
+                          <th>With Scholarship</th>
+                          <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <?php
+                        
+                        foreach ($programoptionsdetaileipwithdependent as $row) {
+                          echo "<tr>
+                            <td>".$row->type."</td>
+                            <td>".$row->woscholarship."</td>
+                            <td>".$row->wscholarship."</td>
+                            <td><a href='".base_url()."index.php/deleteprogramoptiondetaileipwithdependent/".$row->id."' class='btn btn-danger btn-xs'>Delete</a></td>
+                          </tr>";
+                        }
+                        ?>
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                          <th>Expenses Type</th>
+                          <th>Without Scholarship</th>
+                          <th>With Scholarship</th>
+                          <th></th>
+                        </tr>
+                        </tfoot>
+                      </table>
+                <!-- <a href="<?php echo base_url(); ?>index.php/newprogramoptiondetails/<?php echo $poid; ?>">Add New Program Option Details</a>
                       <table class="table table-bordered table-striped">
                         <thead>
                         <tr>
@@ -341,7 +499,7 @@
                           <th></th>
                         </tr>
                         </tfoot>
-                      </table>
+                      </table> -->
 
               </form>
 
