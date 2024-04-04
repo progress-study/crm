@@ -890,7 +890,7 @@
                             <td>".$row->intake."</td>
                             <td>".$row->importanttoconsider."</td>
                             <td>".$row->migrationpathway."</td>
-                            <td><a href='".base_url()."index.php/programoptionform/".$row->poid."' target='_blank'>".base_url()."index.php/programoptionform/".$row->poid."</a></td>
+                            <td><a href='".base_url()."index.php/programoptionform2/".$row->poid."' target='_blank'>".base_url()."index.php/programoptionform/".$row->poid."</a></td>
                             <td><a href='".base_url()."index.php/editprogramoptions/".$row->poid."' class='btn btn-primary btn-xs'><i class='fa fa-edit' aria-hidden='true'></i></a> ".$deleteprogramoption."</td>
                           </tr>";
                         }
