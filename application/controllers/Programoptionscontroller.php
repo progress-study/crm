@@ -472,4 +472,191 @@ class Programoptionscontroller extends CI_Controller {
 		//echo json_encode("Successfully done reset!");
 		redirect(base_url()."index.php/editclientinfo2/".$client_id);
 	}
+
+	public function newprogramoptiondetailwithoutdependent($poid)
+	{
+		$asset_url = base_url()."assets/";
+		$data['title'] = "New Program Option Detail Without Dependent for PO #".$poid;
+		$data['asset_url'] = $asset_url;
+		$data['poid'] = $poid;
+
+	    $this->db->where('privilege_id', $this->session->officer_role_id);
+        $query3 = $this->db->get('privilege');
+
+		foreach ($query3->result() as $row3)
+		{
+		        $data['privilege_manage_providers'] = $row3->privilege_manage_providers;
+		        $data['privilege_manage_reporting'] = $row3->privilege_manage_reporting;
+		        $data['privilege_manage_studentapps'] = $row3->privilege_manage_studentapps;
+		}
+		
+		if($this->session->officer_role == "") {
+			redirect(base_url()."index.php/messages");
+		} else {
+			if(isset($this->session->officer_name)) {
+				$this->load->view('programoptions/newprogramoptiondetailwithoutdependent', $data);
+			} else {
+				redirect(base_url()."?error3=1");
+			}
+		}
+	}
+
+	public function saveprogramoptiondetailwithoutdependent() {
+		$data = array(
+					'poid' => $this->input->post('poid'),
+					'category' => $this->input->post('category'),
+					'type' => $this->input->post('type'),
+					'woscholarship' => $this->input->post('woscholarship'),
+					'wscholarship' => $this->input->post('wscholarship')
+				);
+		$this->db->insert('programoptionsdetailwithoutdependent', $data);
+		redirect(base_url().'index.php/editprogramoptions/'.$this->input->post('poid'));
+	}
+
+	public function deleteprogramoptiondetailwithoutdependent($poid, $id)
+	{
+		$this->db->where('id', $id);
+		$this->db->delete('programoptionsdetailwithoutdependent');
+		redirect(base_url().'index.php/editprogramoptions/'.$poid);
+	}
+
+	public function newprogramoptiondetailwithdependent($poid)
+	{
+		$asset_url = base_url()."assets/";
+		$data['title'] = "New Program Option Detail With Dependent for PO #".$poid;
+		$data['asset_url'] = $asset_url;
+		$data['poid'] = $poid;
+
+	    $this->db->where('privilege_id', $this->session->officer_role_id);
+        $query3 = $this->db->get('privilege');
+
+		foreach ($query3->result() as $row3)
+		{
+		        $data['privilege_manage_providers'] = $row3->privilege_manage_providers;
+		        $data['privilege_manage_reporting'] = $row3->privilege_manage_reporting;
+		        $data['privilege_manage_studentapps'] = $row3->privilege_manage_studentapps;
+		}
+		
+		if($this->session->officer_role == "") {
+			redirect(base_url()."index.php/messages");
+		} else {
+			if(isset($this->session->officer_name)) {
+				$this->load->view('programoptions/newprogramoptiondetailwithdependent', $data);
+			} else {
+				redirect(base_url()."?error3=1");
+			}
+		}
+	}
+
+	public function saveprogramoptiondetailwithdependent() {
+		$data = array(
+					'poid' => $this->input->post('poid'),
+					'category' => $this->input->post('category'),
+					'type' => $this->input->post('type'),
+					'woscholarship' => $this->input->post('woscholarship'),
+					'wscholarship' => $this->input->post('wscholarship')
+				);
+		$this->db->insert('programoptionsdetailwithdependent', $data);
+		redirect(base_url().'index.php/editprogramoptions/'.$this->input->post('poid'));
+	}
+
+	public function deleteprogramoptiondetailwithdependent($poid, $id)
+	{
+		$this->db->where('id', $id);
+		$this->db->delete('programoptionsdetailwithdependent');
+		redirect(base_url().'index.php/editprogramoptions/'.$poid);
+	}
+
+	public function newprogramoptiondetaileipwithoutdependent($poid)
+	{
+		$asset_url = base_url()."assets/";
+		$data['title'] = "New Estimated Initial Payment Without Dependent for PO #".$poid;
+		$data['asset_url'] = $asset_url;
+		$data['poid'] = $poid;
+
+	    $this->db->where('privilege_id', $this->session->officer_role_id);
+        $query3 = $this->db->get('privilege');
+
+		foreach ($query3->result() as $row3)
+		{
+		        $data['privilege_manage_providers'] = $row3->privilege_manage_providers;
+		        $data['privilege_manage_reporting'] = $row3->privilege_manage_reporting;
+		        $data['privilege_manage_studentapps'] = $row3->privilege_manage_studentapps;
+		}
+		
+		if($this->session->officer_role == "") {
+			redirect(base_url()."index.php/messages");
+		} else {
+			if(isset($this->session->officer_name)) {
+				$this->load->view('programoptions/newprogramoptiondetaileipwithoutdependent', $data);
+			} else {
+				redirect(base_url()."?error3=1");
+			}
+		}
+	}
+
+	public function saveprogramoptiondetaileipwithoutdependent() {
+		$data = array(
+					'poid' => $this->input->post('poid'),
+					'type' => $this->input->post('type'),
+					'woscholarship' => $this->input->post('woscholarship'),
+					'wscholarship' => $this->input->post('wscholarship')
+				);
+		$this->db->insert('programoptionsdetaileipwithoutdependent', $data);
+		redirect(base_url().'index.php/editprogramoptions/'.$this->input->post('poid'));
+	}
+
+	public function deleteprogramoptiondetaileipwithoutdependent($poid, $id)
+	{
+		$this->db->where('id', $id);
+		$this->db->delete('programoptionsdetaileipwithoutdependent');
+		redirect(base_url().'index.php/editprogramoptions/'.$poid);
+	}
+
+	public function newprogramoptiondetaileipwithdependent($poid)
+	{
+		$asset_url = base_url()."assets/";
+		$data['title'] = "New Estimated Initial Payment With Dependent for PO #".$poid;
+		$data['asset_url'] = $asset_url;
+		$data['poid'] = $poid;
+
+	    $this->db->where('privilege_id', $this->session->officer_role_id);
+        $query3 = $this->db->get('privilege');
+
+		foreach ($query3->result() as $row3)
+		{
+		        $data['privilege_manage_providers'] = $row3->privilege_manage_providers;
+		        $data['privilege_manage_reporting'] = $row3->privilege_manage_reporting;
+		        $data['privilege_manage_studentapps'] = $row3->privilege_manage_studentapps;
+		}
+		
+		if($this->session->officer_role == "") {
+			redirect(base_url()."index.php/messages");
+		} else {
+			if(isset($this->session->officer_name)) {
+				$this->load->view('programoptions/newprogramoptiondetaileipwithdependent', $data);
+			} else {
+				redirect(base_url()."?error3=1");
+			}
+		}
+	}
+
+	public function saveprogramoptiondetaileipwithdependent() {
+		$data = array(
+					'poid' => $this->input->post('poid'),
+					'type' => $this->input->post('type'),
+					'woscholarship' => $this->input->post('woscholarship'),
+					'wscholarship' => $this->input->post('wscholarship')
+				);
+		$this->db->insert('programoptionsdetaileipwithdependent', $data);
+		redirect(base_url().'index.php/editprogramoptions/'.$this->input->post('poid'));
+	}
+
+	public function deleteprogramoptiondetaileipwithdependent($poid, $id)
+	{
+		$this->db->where('id', $id);
+		$this->db->delete('programoptionsdetaileipwithdependent');
+		redirect(base_url().'index.php/editprogramoptions/'.$poid);
+	}
+	
 }
