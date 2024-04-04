@@ -90,7 +90,7 @@ class Programoptionscontroller extends CI_Controller {
 					'client_id' => $this->input->post('client_id'),
 					'status' => 'Created',
 					'others' => $this->input->post('others'),
-					'clientfeedback' => ''
+					'clientfeedback' => '',
 					'birthday' => $birthday,
 					'programlink' => $this->input->post('programlink'),
 					'cricoscode' => $this->input->post('cricoscode'),
