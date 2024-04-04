@@ -258,6 +258,10 @@
                   </select>
                 </div>
                 <div class="mb-3">
+                  <label for="amount" class="form-label">Program Link/URL</label>
+                  <input type="text" class="form-control" name="programlink" placeholder="Program Link/URL">
+                </div>
+                <div class="mb-3">
                   <label for="payee" class="form-label">Indicative Annual Cost</label>
                   <input type="text" class="form-control" name="indicativeannualcost" placeholder="Indicative Annual Cost" required>
                 </div>
@@ -288,6 +292,18 @@
                 <div class="mb-3">
                   <label for="amount" class="form-label">Others</label>
                   <input type="text" class="form-control" name="others" placeholder="Others" required>
+                </div>
+                <div class="mb-3">
+                  <label for="amount" class="form-label">Birthday</label>
+                  <input type="date" class="form-control" name="birthday" placeholder="Birthday">
+                </div>
+                <div class="mb-3">
+                  <label for="amount" class="form-label">CRICOS Code</label>
+                  <input type="text" class="form-control" name="cricoscode" placeholder="CRICOS Code">
+                </div>
+                <div class="mb-3">
+                  <label for="amount" class="form-label">English Test Result</label>
+                  <input type="text" class="form-control" name="englishtestresult" placeholder="English Test Result">
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
               </form>

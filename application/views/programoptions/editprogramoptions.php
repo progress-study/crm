@@ -265,7 +265,7 @@
                 </div>
                 <div class="mb-3">
                   <label for="amount" class="form-label">Program Link/URL</label>
-                  <input type="text" class="form-control" name="programlink" placeholder="Others" value="<?php echo $row->programlink; ?>">
+                  <input type="text" class="form-control" name="programlink" placeholder="Program Link/URL" value="<?php echo $row->programlink; ?>">
                 </div>
                 <div class="mb-3">
                   <label for="payee" class="form-label">Indicative Annual Cost</label>
@@ -301,15 +301,15 @@
                 </div>
                 <div class="mb-3">
                   <label for="amount" class="form-label">Birthday</label>
-                  <input type="date" class="form-control" name="birthday" placeholder="Others" value="<?php echo $row->birthday; ?>">
+                  <input type="date" class="form-control" name="birthday" placeholder="Birthday" value="<?php echo $row->birthday; ?>">
                 </div>
                 <div class="mb-3">
                   <label for="amount" class="form-label">CRICOS Code</label>
-                  <input type="text" class="form-control" name="cricoscode" placeholder="Others" value="<?php echo $row->cricoscode; ?>">
+                  <input type="text" class="form-control" name="cricoscode" placeholder="CRICOS Code" value="<?php echo $row->cricoscode; ?>">
                 </div>
                 <div class="mb-3">
                   <label for="amount" class="form-label">English Test Result</label>
-                  <input type="text" class="form-control" name="englishtestresult" placeholder="Others" value="<?php echo $row->englishtestresult; ?>">
+                  <input type="text" class="form-control" name="englishtestresult" placeholder="English Test Result" value="<?php echo $row->englishtestresult; ?>">
                 </div>
                 <?php
                     }

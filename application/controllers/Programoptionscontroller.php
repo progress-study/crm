@@ -69,6 +69,12 @@ class Programoptionscontroller extends CI_Controller {
 	}
 
 	public function saveprogramoptions() {
+		if($this->input->post('birthday') == "") {
+			$birthday = NULL;
+		} else {
+			$birthday = $this->input->post('birthday');
+		}
+
 		$data = array(
 					'provider_id' => $this->input->post('provider_id'),
 					'sp_id' => $this->input->post('sp_id'),
@@ -85,6 +91,10 @@ class Programoptionscontroller extends CI_Controller {
 					'status' => 'Created',
 					'others' => $this->input->post('others'),
 					'clientfeedback' => ''
+					'birthday' => $birthday,
+					'programlink' => $this->input->post('programlink'),
+					'cricoscode' => $this->input->post('cricoscode'),
+					'englishtestresult' => $this->input->post('englishtestresult')
 				);
 		$this->db->insert('programoptions', $data);
 		redirect('editclientinfo2/'.$this->input->post('client_id'));
