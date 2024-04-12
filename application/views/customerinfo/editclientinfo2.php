@@ -339,6 +339,10 @@
                 <div class="row">
                   <div class="col-6">
                       <div class="mb-3">
+                        <input type="hidden" id="profilelink" value="<?php echo base_url()."index.php/profile/".$row1->client_id; ?>">
+                        <button type="button" id="copyaction" class="btn btn-primary" title="Share/view <?php echo $row1->client_firstname." ".$row1->client_surname ?>'s profile"><i class="nav-icon fas fa-share-alt"></i></button> <label id="copynotif" style="display: none;">Profile link copied!</label>
+                      </div>
+                      <div class="mb-3">
                         <label for="amount" class="form-label">Client ID</label>
                         <input type="text" class="form-control" name="clientid" value="<?php echo $row1->client_id; ?>" readonly>
                       </div>
@@ -1167,6 +1171,17 @@ outlining your job title, responsibilities and duration of employment.</option>
   };
   for (var i = 0, l = elems.length; i < l; i++) {
       elems[i].addEventListener('click', confirmIt, false);
+  }
+
+  document.getElementById("copyaction").onclick = function() {
+    navigator.clipboard.writeText(document.getElementById("profilelink").value).then(
+        function () {
+            document.getElementById("copynotif").style.display = "block";
+        },
+        function (error) {
+            console.log("Something went wrong.");
+        }
+    );
   }
 
 </script>

@@ -184,3 +184,4 @@ $route['deleteprogramoptiondetaileipwithoutdependent/(:any)/(:any)'] = 'programo
 $route['newprogramoptiondetaileipwithdependent/(:any)'] = 'programoptionscontroller/newprogramoptiondetaileipwithdependent/$1';
 $route['saveprogramoptiondetaileipwithdependent'] = 'programoptionscontroller/saveprogramoptiondetaileipwithdependent';
 $route['deleteprogramoptiondetaileipwithdependent/(:any)/(:any)'] = 'programoptionscontroller/deleteprogramoptiondetaileipwithdependent/$1/$2';
+$route['profile/(:any)'] = 'customerinfocontroller/profile/$1';

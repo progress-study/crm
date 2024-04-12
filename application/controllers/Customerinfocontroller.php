@@ -377,7 +377,7 @@ class Customerinfocontroller extends CI_Controller {
 					
 					$this->db->set('locked_by_id', '');
 					$this->db->set('client_comments', $this->input->post('comment'));
-					$this->db->set('client_qualifications', $this->input->post('qualifications'));
+					$this->db->set('client_qualifications', $this->input->post('qualification'));
 					
 					$this->db->set('client_ve_day', $veday);
 					$this->db->set('client_ve_month', $vemonth);
@@ -437,7 +437,7 @@ class Customerinfocontroller extends CI_Controller {
 					
 					$this->db->set('locked_by_id', '');
 					$this->db->set('client_comments', $this->input->post('comment'));
-					$this->db->set('client_qualifications', $this->input->post('qualifications'));
+					$this->db->set('client_qualifications', $this->input->post('qualification'));
 					$this->db->set('client_photo', $file_name);
 					
 					$this->db->set('client_ve_day', $veday);
@@ -509,6 +509,51 @@ class Customerinfocontroller extends CI_Controller {
 		$this->db->update('client');
 		//echo json_encode("Successfully done reset!");
 		redirect(base_url()."index.php/customerinfo");
+	}
+
+	public function profile($client_id)
+	{
+		$sql1 = "SELECT * FROM client WHERE client_id = '$client_id'";
+	        $query1 = $this->db->query($sql1);
+	        $client = $query1->result();
+
+	        $sql2 = "SELECT * FROM offices";
+	        $query2 = $this->db->query($sql2);
+	        $offices = $query2->result();
+
+	        $sql3 = "SELECT * FROM events";
+	        $query3 = $this->db->query($sql3);
+	        $events = $query3->result();
+
+	        $sql4 = "SELECT * FROM student_application sa inner join education_provider s on sa.provider_id = s.provider_id inner join client c on c.client_id = sa.client_id where sa.client_id = $client_id";
+	        $query4 = $this->db->query($sql4);
+	        $student_application = $query4->result();
+
+	        $sql5 = "SELECT * FROM clientscholarship cs inner join client c on c.client_id = cs.clientid inner join scholarships s on s.scholarshipid = cs.scholarshipid";
+		    $query5 = $this->db->query($sql5);
+		    $clientscholarship = $query5->result();
+
+		    $sql6 = "SELECT * FROM programoptions po inner join education_provider s on po.provider_id = s.provider_id inner join schoolprograms sp on sp.spid = po.sp_id where po.client_id = '$client_id'";
+	        $query6 = $this->db->query($sql6);
+	        $programoptions = $query6->result();
+
+	        $data['client'] = $client;
+	        $data['offices'] = $offices;
+		$data['events'] = $events;
+		$data['student_application'] = $student_application;
+		$data['clientscholarship'] = $clientscholarship;
+		$data['programoptions'] = $programoptions;
+		$fullname = "";
+
+		foreach($client as $row) {
+			$fullname = $row->client_firstname."".$row->client_surname;
+		}
+
+		$asset_url = base_url()."assets/";
+		$data['title'] = $fullname;
+		$data['asset_url'] = $asset_url;
+
+		$this->load->view('customerinfo/profile', $data);
 	}
 
 
